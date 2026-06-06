@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Zen Theme Demo</title>
-		<link>http://localhost:1313/</link>
+		<link>https://0ishtar0.github.io/</link>
 		<description>Recent content on Zen Theme Demo</description>
 		<generator>Hugo</generator>
 		<language>en-US</language>
@@ -12,19 +12,19 @@
 		
 			<lastBuildDate>Thu, 28 Aug 2025 10:00:00 +0800</lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://0ishtar0.github.io/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Setting Up a Hugo Multilingual Site</title>
-				<link>http://localhost:1313/posts/setting-up-hugo-multilingual-site/</link>
+				<link>https://0ishtar0.github.io/posts/setting-up-hugo-multilingual-site/</link>
 				<pubDate>Thu, 28 Aug 2025 10:00:00 +0800</pubDate>
-				<guid>http://localhost:1313/posts/setting-up-hugo-multilingual-site/</guid>
+				<guid>https://0ishtar0.github.io/posts/setting-up-hugo-multilingual-site/</guid>
 				<description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Setting up a multilingual website with Hugo can be a powerful way to reach a broader audience. In this article, we&amp;rsquo;ll explore how to configure Hugo for multiple languages and ensure a smooth user experience.&lt;/p&gt;&#xA;&lt;h2 id=&#34;why-multilingual-websites-matter&#34;&gt;Why Multilingual Websites Matter&lt;/h2&gt;&#xA;&lt;p&gt;In today&amp;rsquo;s globalized world, providing content in multiple languages can significantly increase your website&amp;rsquo;s reach and engagement. It shows respect for your international visitors and can improve your site&amp;rsquo;s SEO.&lt;/p&gt;</description>
 			</item>
 			<item>
 				<title>Exploring the Great Wall of China</title>
-				<link>http://localhost:1313/posts/exploring-great-wall-china/</link>
+				<link>https://0ishtar0.github.io/posts/exploring-great-wall-china/</link>
 				<pubDate>Wed, 27 Aug 2025 15:30:00 +0800</pubDate>
-				<guid>http://localhost:1313/posts/exploring-great-wall-china/</guid>
+				<guid>https://0ishtar0.github.io/posts/exploring-great-wall-china/</guid>
 				<description>&lt;h2 id=&#34;the-majesty-of-the-great-wall&#34;&gt;The Majesty of the Great Wall&lt;/h2&gt;&#xA;&lt;p&gt;The Great Wall of China stands as one of the world&amp;rsquo;s most impressive architectural achievements. Stretching over 13,000 miles, it represents centuries of human endeavor and ingenuity.&lt;/p&gt;&#xA;&lt;h2 id=&#34;planning-your-visit&#34;&gt;Planning Your Visit&lt;/h2&gt;&#xA;&lt;p&gt;Visiting the Great Wall requires some planning to ensure you have the best experience:&lt;/p&gt;&#xA;&lt;h3 id=&#34;best-sections-to-visit&#34;&gt;Best Sections to Visit&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;Badaling&lt;/strong&gt; - Most restored and accessible, but also most crowded&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Mutianyu&lt;/strong&gt; - Less crowded with beautiful scenery&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Jinshanling&lt;/strong&gt; - Great for hiking with partially restored sections&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Simatai&lt;/strong&gt; - Night tours available, less commercialized&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;when-to-go&#34;&gt;When to Go&lt;/h3&gt;&#xA;&lt;p&gt;The best times to visit are during spring (April-May) and autumn (September-October) when the weather is pleasant and the crowds are somewhat smaller.&lt;/p&gt;</description>
 			</item>
 	</channel>
