@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读5</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读5">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTA' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-06-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-07T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="论文阅读5">
+<meta name="twitter:description" content="论文阅读">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自两河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#on-the-learnability-of-test-time-adaptation">On the Learnability of Test-Time Adaptation</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#建模-tta-问题">建模 TTA 问题</a></li>
+            <li><a href="#建模非平稳测试流">建模非平稳测试流</a></li>
+            <li><a href="#竞争目标">竞争目标</a></li>
+            <li><a href="#恢复复杂度">恢复复杂度</a></li>
+            <li><a href="#恢复复杂度上下界">恢复复杂度上下界</a></li>
+            <li><a href="#从局部恢复到全局可学习性">从局部恢复到全局可学习性</a></li>
+            <li><a href="#与动态遗憾值的关系">与动态遗憾值的关系</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验结果">实验结果</a>
+          <ol>
+            <li><a href="#受控合成实验">受控合成实验</a></li>
+            <li><a href="#真实tta基准">真实TTA基准</a></li>
+          </ol>
+        </li>
+        <li><a href="#启发">启发</a></li>
+      </ol>
+    </li>
+    <li><a href="#monitoring-risks-in-test-time-adaptation">Monitoring Risks in Test-Time Adaptation</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a></li>
+        <li><a href="#实验结果-1">实验结果</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">论文阅读5</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-06-07T00:00:00Z'>2026-06-07</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#on-the-learnability-of-test-time-adaptation">On the Learnability of Test-Time Adaptation</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#建模-tta-问题">建模 TTA 问题</a></li>
+            <li><a href="#建模非平稳测试流">建模非平稳测试流</a></li>
+            <li><a href="#竞争目标">竞争目标</a></li>
+            <li><a href="#恢复复杂度">恢复复杂度</a></li>
+            <li><a href="#恢复复杂度上下界">恢复复杂度上下界</a></li>
+            <li><a href="#从局部恢复到全局可学习性">从局部恢复到全局可学习性</a></li>
+            <li><a href="#与动态遗憾值的关系">与动态遗憾值的关系</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验结果">实验结果</a>
+          <ol>
+            <li><a href="#受控合成实验">受控合成实验</a></li>
+            <li><a href="#真实tta基准">真实TTA基准</a></li>
+          </ol>
+        </li>
+        <li><a href="#启发">启发</a></li>
+      </ol>
+    </li>
+    <li><a href="#monitoring-risks-in-test-time-adaptation">Monitoring Risks in Test-Time Adaptation</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a></li>
+        <li><a href="#实验结果-1">实验结果</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><ol>
+<li>
+<p><a class="link" href="https://arxiv.org/pdf/2605.28057"  target="_blank" rel="noopener"
+    >On the Learnability of Test-Time Adaptation 【ICML 2026】</a>，南京大学，Yu-Feng Li组</p>
+</li>
+<li>
+<p><a class="link" href="https://arxiv.org/pdf/2507.08721"  target="_blank" rel="noopener"
+    >Monitoring Risks in Test-Time Adaptation 【NeurIPS 2025】</a>，University of Amsterdam，Eric Nalisnick组</p>
+</li>
+</ol>
+<h2 id="on-the-learnability-of-test-time-adaptation">On the Learnability of Test-Time Adaptation
+</h2><h3 id="研究动机">研究动机
+</h3><p>本文研究TTA的可学习性问题。</p>
+<p>针对现阶段TTA研究方法以经验为主，缺乏理论分析的情形，作者提出了以恢复复杂度为核心的理论框架，用来刻画当面临存在域偏移的变化数据流时，模型是否有恢复原先准确度的能力，以及需要的恢复时间。</p>
+<p>文章使用了许多在线学习和统计学习的工具，并将其和TTA的特殊限制（只能使用未标注数据和代理损失）结合起来，得到了一个较为完整的理论分析体系。</p>
+<hr>
+<h3 id="方法">方法
+</h3><p><img alt="理论框架图，左：测试流和有效批次建模，中：恢复复杂度，右：TTA可学习性" class="gallery-image" data-flex-basis="735px" data-flex-grow="306" height="472" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/image/index/1780763824049.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/image/index/1780763824049_hu_86e649e98a736252.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/image/index/1780763824049.png 1446w" width="1446"></p>
+<h4 id="建模-tta-问题">建模 TTA 问题
+</h4><p>测试流记为：</p>
+$$
+S={D_t}_{t=1}^{T}
+$$<p>每个批次 $D_t$ 来自时刻 $t$ 的联合分布 $P_t$。模型在测试时不能访问标签，只能利用无监督代理损失 $\psi$ 更新参数：</p>
+$$
+\theta_{t+1}=\theta_t-\eta \widehat{\nabla}\psi_t(\theta_t)
+$$<p>其中 $\ell$ 是真实任务损失，$\psi$ 是代理损失。</p>
+<p>TTA 能否成功，关键取决于代理损失和任务损失是否对齐。论文采用以下对齐假设：</p>
+$$
+\langle \nabla\psi_t(\theta),\nabla\ell_t(\theta)\rangle
+\ge
+\alpha|\nabla\ell_t(\theta)|^2-\zeta
+$$<p>其中：</p>
+<ul>
+<li>$\alpha>0$：代理梯度与任务梯度的对齐强度；</li>
+<li>$\zeta\ge 0$：代理损失和任务损失之间的错配程度。</li>
+</ul>
+<hr>
+<h4 id="建模非平稳测试流">建模非平稳测试流
+</h4><p>论文从两个维度刻画测试流。</p>
+<p>第一是  <strong>分布偏移</strong> 。作者使用 Wasserstein-1 距离度量相邻分布变化：</p>
+$$
+V_T=\sum_{t=1}^{T-1}W_1(P_t,P_{t+1})<\infty
+$$<p>然后用一个分段常数的近似流 $\widetilde P_t$ 替代原始连续变化的分布流，并保证：</p>
+$$
+\sup_t W_1(P_t,\widetilde P_t)\le \Delta_W/2
+$$<p>偏移次数满足：</p>
+$$
+\widetilde K_S(T)\le \left\lceil \frac{2V_T}{\Delta_W}\right\rceil
+$$<p>这样，复杂的非平稳流可以被拆成若干个近似平稳子流。</p>
+<p>第二是  <strong>时间相关性</strong> 。现实测试数据往往不是独立同分布的，比如视频连续帧高度相似。论文用 $\phi$-mixing 条件描述这种时间依赖，并指出时间相关性会降低有效 batch size：</p>
+$$
+B_{\mathrm{eff}}=\frac{B}{C_\phi}
+$$<p>其中：</p>
+$$
+C_\phi=1+\frac{4\sqrt{\varrho}}{1-\sqrt{\varrho}}
+$$<p>如果时间相关性越强，$\ C_\phi$ 越大，实际有效 batch size 越小，TTA 恢复越困难。</p>
+<hr>
+<h4 id="竞争目标">竞争目标
+</h4><p>由于 TTA 只能使用未标注数据，不能假设模型能达到真实任务最优。因此论文用无监督损失构建代理目标：</p>
+$$
+\theta_t^\star \in \arg\min_{\theta\in N_r(\theta_1)}\psi_t(\theta)
+$$<p>对应的竞争目标风险为：</p>
+$$
+R_t=\ell_t(\theta_t^\star)
+$$<p>模型当前的超额风险定义为：</p>
+$$
+E_t=\ell_t(\theta_t)-R_t
+$$<hr>
+<h4 id="恢复复杂度">恢复复杂度
+</h4><p>定义$(\epsilon,\delta)$-恢复复杂度，含义为分布偏移发生后，算法至少需要多少时间步，才能保证之后超额风险超过 $\epsilon$ 的概率不超过 $\delta$：</p>
+$$
+\tau(\epsilon,\delta)=\inf\left\lbrace t\in\mathbb{N}:\sup_{u\ge t}\Pr(E_u>\epsilon)\le\delta\right\rbrace
+$$
+    <blockquote>
+        <p>分布变化后，模型多久能恢复？</p>
+
+    </blockquote>
+<hr>
+<h4 id="恢复复杂度上下界">恢复复杂度上下界
+</h4><p>论文给出了恢复复杂度的极小极大下界：</p>
+$$
+\tau
+\ge
+\Omega\left(
+\frac{C_\phi}{B}
+\cdot
+\frac{1}{
+\alpha
+\left(
+\sqrt{\zeta+2\alpha\epsilon}
++
+\sqrt{\zeta}
+\right)^2
+}
+\right)
+$$<p>在理想对齐情况下，即 $\zeta=0$，该下界退化为：</p>
+$$
+\tau
+\ge
+\Omega\left(
+\frac{C_\phi}{B\alpha^2\epsilon}
+\right)
+$$<p>这说明恢复时间主要受到四个因素影响：</p>
+<ul>
+<li>$B$ 越大，恢复越快；</li>
+<li>$C_\phi$ 越大，时间相关性越强，恢复越慢；</li>
+<li>$\alpha$ 越大，代理任务对齐越好，恢复越快；</li>
+<li>$\epsilon$ 越小，目标越严格，恢复越慢。</li>
+</ul>
+<p>同时，论文分析了一个简单的 TTA 基线算法（单步SGD tent），并得到上界：</p>
+$$
+\tau
+\le
+O\left(
+\frac{C_\phi}{B\alpha^2\epsilon}
+\log\frac{\Delta_W+\epsilon}{\epsilon}
+\right)
+$$<p>上下界在主要量级上匹配，说明在该理论框架下，简单的代理梯度更新已经接近最优。</p>
+<hr>
+<h4 id="从局部恢复到全局可学习性">从局部恢复到全局可学习性
+</h4><p>论文进一步定义  <strong>$(\epsilon,\rho)$-TTA 可学习性</strong>，表示在整个测试流中，超额风险超过 $\epsilon$ 的时间比例最多为 $\rho$ ：</p>
+$$
+\frac{1}{T}
+\sum_{t=1}^{T}
+\mathbb P(\ell_t(\theta_t)-R_t>\epsilon)
+\le
+\rho
+$$<p>作者证明，如果每个分段平稳子流都能在 $\tau(\epsilon',\delta)$ 步内恢复，那么整体违反比例满足：</p>
+$$
+\rho
+\le
+\delta+
+\frac{
+(\widetilde K_S(T)+1)\tau(\epsilon',\delta)
+}{T}
+$$<p>其中：</p>
+$$
+\epsilon'=\epsilon-\Lambda\Delta_W
+$$<p>这说明：</p>
+
+    <blockquote>
+        <p>局部恢复越快，分布偏移次数越少，整个测试流上的长期可靠性越好。</p>
+
+    </blockquote>
+<hr>
+<h4 id="与动态遗憾值的关系">与动态遗憾值的关系
+</h4><p>论文还证明，如果 TTA 满足 ($\epsilon,\rho$)-可学习性，则动态遗憾值满足：</p>
+$$
+\mathrm{Reg}(T)
+\le
+T(\epsilon+M\rho)
+$$<hr>
+<h3 id="实验结果">实验结果
+</h3><h4 id="受控合成实验">受控合成实验
+</h4><p>作者构造了一个一维恢复问题：</p>
+$$
+\ell(\theta)=\frac{1}{2}(\theta-\theta^\star)^2
+$$<p>代理梯度设为：</p>
+$$
+\nabla\psi(\theta) = \alpha\nabla\ell(\theta)+b+\mathcal N(0,\sigma^2/B)
+$$<p>实验模拟分布偏移，将 $\theta^\star$ 从 0 移动到 $\Delta_W=3$，并统计恢复时间 $\tau$。</p>
+<p>结果表明：</p>
+<ul>
+<li>当改变 $\alpha$ 时，$\tau\cdot \alpha^2$ 基本保持稳定，验证了
+
+$$
+  \tau=O(1/\alpha^2)
+  $$</li>
+<li>当改变 batch size (B) 时，$\tau\cdot B$ 基本保持稳定，验证了
+
+$$
+  \tau=O(1/B)
+  $$</li>
+<li>实测恢复时间始终高于理论下界，并与算法上界保持相同变化趋势。</li>
+</ul>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>设置</th>
+					<th style="text-align: right">实测恢复时间 $\tau$</th>
+					<th>结论</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>$\alpha=0.05$</td>
+					<td style="text-align: right">322.0</td>
+					<td>对齐弱，恢复慢</td>
+			</tr>
+			<tr>
+					<td>$\alpha=0.20$</td>
+					<td style="text-align: right">19.0</td>
+					<td>对齐增强，恢复明显加快</td>
+			</tr>
+			<tr>
+					<td>$\alpha=0.50$</td>
+					<td style="text-align: right">4.0</td>
+					<td>对齐很强，恢复最快</td>
+			</tr>
+			<tr>
+					<td>$(B=1)$</td>
+					<td style="text-align: right">323.5</td>
+					<td>batch 小，恢复慢</td>
+			</tr>
+			<tr>
+					<td>$(B=16)$</td>
+					<td style="text-align: right">19.0</td>
+					<td>batch 增大，恢复加快</td>
+			</tr>
+			<tr>
+					<td>$(B=64)$</td>
+					<td style="text-align: right">6.0</td>
+					<td>batch 大，恢复更快</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h4 id="真实tta基准">真实TTA基准
+</h4><p>作者在 CIFAR-10-C、CIFAR-100-C 和 ImageNet-C 上测试标准 TTA 方法 Tent，并计算经验代理任务对齐指标：</p>
+$$
+\widetilde\alpha = 
+\frac{
+\langle \nabla \ell_{\mathrm{ent}},\nabla \ell_{\mathrm{ce}}\rangle
+}{|\nabla \ell_{\mathrm{ce}}|^2}
+$$<p>其中 $\ell_{\mathrm{ent}}$ 是 Tent 使用的熵最小化代理损失，$\ell_{\mathrm{ce}}$ 是真实交叉熵任务损失。</p>
+<p>实验结果：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>数据集</th>
+					<th style="text-align: right">$\widetilde\alpha$</th>
+					<th style="text-align: right">平均准确率提升</th>
+					<th style="text-align: right">提升的 corruption 数量</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>CIFAR-10-C</td>
+					<td style="text-align: right">+0.066</td>
+					<td style="text-align: right">+22.96%</td>
+					<td style="text-align: right">15/15</td>
+			</tr>
+			<tr>
+					<td>CIFAR-100-C</td>
+					<td style="text-align: right">+0.705</td>
+					<td style="text-align: right">+14.13%</td>
+					<td style="text-align: right">15/15</td>
+			</tr>
+			<tr>
+					<td>ImageNet-C</td>
+					<td style="text-align: right">+0.171</td>
+					<td style="text-align: right">+14.66%</td>
+					<td style="text-align: right">15/15</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>结论是：在这些标准 corruption benchmark 上，经验对齐指标均为正，Tent 在所有 corruption 上都提升了性能。
+作者进一步在 ImageNet-C 上构造不同强度的时间相关测试流。使用 Dirichlet 分布控制时间相关性，其中 $\beta$ 越小，时间相关性越强。</p>
+<p>结果如下：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>$\beta$</th>
+					<th>时间相关性强度</th>
+					<th style="text-align: right">$\widetilde\alpha$</th>
+					<th style="text-align: right">准确率变化</th>
+					<th style="text-align: right">改善数量</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>0.001</td>
+					<td>极强</td>
+					<td style="text-align: right">-0.028</td>
+					<td style="text-align: right">-12.65%</td>
+					<td style="text-align: right">0/15</td>
+			</tr>
+			<tr>
+					<td>0.01</td>
+					<td>较强</td>
+					<td style="text-align: right">+0.090</td>
+					<td style="text-align: right">+3.61%</td>
+					<td style="text-align: right">12/15</td>
+			</tr>
+			<tr>
+					<td>0.1</td>
+					<td>较弱</td>
+					<td style="text-align: right">+0.157</td>
+					<td style="text-align: right">+13.65%</td>
+					<td style="text-align: right">15/15</td>
+			</tr>
+			<tr>
+					<td>Uniform</td>
+					<td>最弱</td>
+					<td style="text-align: right">+0.171</td>
+					<td style="text-align: right">+14.66%</td>
+					<td style="text-align: right">15/15</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>当时间相关性极强时，经验对齐指标变为负数，Tent 不再提升性能</p>
+<h3 id="启发">启发
+</h3><ol>
+<li>
+<p>强时间相关性会削弱有效信息量，这表明在CTTA/bs1等长程适应场景中，通过调度来降低输入批次的时间相关性有一定理论基础</p>
+</li>
+<li>
+<p>标签噪声等场景也存在与TTA类似的代理损失和真实损失的错配问题，因此，这些领域中的一些研究或许可以借鉴。</p>
+</li>
+</ol>
+<h2 id="monitoring-risks-in-test-time-adaptation">Monitoring Risks in Test-Time Adaptation
+</h2><h3 id="研究动机-1">研究动机
+</h3><p>本文研究如何发现TTA过程中的模型崩溃风险，并且在没有测试标签的情况下，利用模型输出的代理信号来构建风险下界，从而实现无监督的风险监控。可以作为模型Reset的一种触发机制。</p>
+<hr>
+<h3 id="方法-1">方法
+</h3><p>源风险定义为：</p>
+$$R_0(p)=\mathbb{E}_{P_0}[l(p(x),y)]$$<p>其中 $P_0$ 是源分布，$l(\cdot)$ 是损失函数。</p>
+<p>在 TTA 场景中，模型不是固定的，而是随时间变化的：</p>
+$$p_1,p_2,\ldots,p_t$$<p>因此本文定义 TTA 下的运行测试风险为：</p>
+$$\bar{R}_t(p_{1:t})=\frac{1}{t}\sum_{k=1}^{t}R_k(p_k)$$<p>其中 $R_k(p_k)$ 表示模型 $p_k$ 在第 $k$ 个测试分布 $P_k$ 上的风险。</p>
+<p>本文要检验的是：</p>
+$$H_0^a:\bar{R}_t(p_{1:t})\leq R_0(p_0)+\varepsilon_{\mathrm{tol}},\quad \forall t\geq 1$$$$H_1^a:\exists t^*\geq 1,\quad \bar{R}_{t^*}(p_{1:t^*})>R_0(p_0)+\varepsilon_{\mathrm{tol}}$$<p>其中 $\varepsilon_{\mathrm{tol}}$ 是容忍度，表示模型相对于源风险 $R_0(p_0)$ 允许退化多少。</p>
+<p>在测试阶段，模型没有标签，因此引入损失代理，记为：</p>
+$$u_k=g(x_k,p_k)$$<p>其中 $g$ 只依赖测试输入 $x_k$ 和模型输出 $p_k(x_k)$，不依赖真实标签。</p>
+<p>作者设定一个损失阈值 $\tau$，用于区分低损失和高损失。若真实损失 $z_k$ 满足：</p>
+$$z_k\leq \tau$$<p>则表示低损失，否则表示高损失。</p>
+<p>同时设定代理阈值 $\lambda_k$，用：</p>
+$$u_k>\lambda_k$$<p>判断样本是否可能是高风险样本。</p>
+<p>假设代理 $u_k$ 对真实损失 $z_k$ 有一定区分能力：</p>
+$$
+\frac{1}{t}
+\sum_{k=1}^{t}
+\underbrace{
+\mathbb{P}_{P_k}
+\left(
+u_k > \lambda_k,\ z_k \leq \tau
+\right)
+}_{\mathrm{PFP}_k}
+\leq
+\underbrace{
+\mathbb{P}_{P_0}
+\left(
+u_0 > \lambda_0,\ z_0 \leq \tau
+\right)
+}_{\mathrm{PFP}_0}
++
+\frac{1}{t}
+\sum_{k=1}^{t}
+\underbrace{
+\mathbb{P}_{P_k}
+\left(
+u_k \leq \lambda_k,\ z_k > \tau
+\right)
+}_{\mathrm{PFN}_k}
+$$$$
+\text{测试阶段平均误报率}
+\leq
+\text{源域误报率}
++
+\text{测试阶段平均漏报率}
+$$<p>在该假设下，作者证明运行测试风险有如下无监督下界：</p>
+$$\bar{R}_t(p_{1:t})\geq \tau\left(\frac{1}{t}\sum_{k=1}^{t}-\Pr_{P_k}(u_k>\lambda_k)\Pr_{P_0}(u_0>\lambda_0,z_0\leq \tau)\right)$$<p>最终的无监督报警函数为：</p>
+$$\Phi_t^b=\mathbf{1}\left[L_t^b(u_{0:t},\lambda_{0:t},z_0,\tau)>U(z_0)+\varepsilon_{\mathrm{tol}}\right]$$<p>其中 $L_t^b$ 是基于代理损失构造出来的风险下置信界，$U(z_0)$ 是源风险的上置信界。</p>
+<h3 id="实验结果-1">实验结果
+</h3><img src="image/index/1780819817229.png" width="400" style="display:block;margin:0 auto;">
+蓝色点为正表示文中假设成立
+<p>Yearbook、FMoW-Time为时间漂移数据集。</p>
+<p><img alt="黑色虚线：源域风险上界；蓝色实线：预测风险下界；绿色实线：监督风险" class="gallery-image" data-flex-basis="267px" data-flex-grow="111" height="806" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/image/index/1780819135420.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/image/index/1780819135420_hu_fc5e22d6bfb8d1ce.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/image/index/1780819135420.png 899w" width="899"></p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tta/">TTA</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
