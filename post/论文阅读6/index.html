@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+    <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
 <title>论文阅读6</title>
 
 
-<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/">
+<link rel="canonical" href="https://0Ishtar0.github.io/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
@@ -14,12 +14,12 @@
 
 <link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读6">
 <meta property='og:description' content="论文阅读">
-<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/'>
+<meta property='og:url' content='https://0Ishtar0.github.io/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/'>
 <meta property='og:site_name' content='0Ishtar0'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTA' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-06-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-07T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTA' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-06-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-07T00:00:00&#43;00:00'/><meta property='og:image' content='https://0Ishtar0.github.io/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover.jpg' />
 <meta name="twitter:title" content="论文阅读6">
 <meta name="twitter:description" content="论文阅读"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover.jpg' />
+    <meta name="twitter:image" content='https://0Ishtar0.github.io/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover.jpg' />
     </head>
     <body class="
     article-page
@@ -435,10 +435,10 @@ d_{i y_i}=
 \right|_2^2
 \rightarrow 0.
 $$<p>文章通过实验表明，OOD的样本特征嵌入往往会偏离其类别对应的分类器权重，导致NC3+被破坏，这种情形在被错误分类的样本中尤其严重，因此文章提出通过约束样本特征与其伪标签对应分类器权重的方法。</p>
-<p>由于 TTA 工作在无标签场景下，无法直接计算 G-FCA 距离 $d_{i y_i}$。一种直接的替代方案是使用伪标签 $(\hat{y}*i)$ 作为 $y_i$ 的代理，并约束 P-FCA 距离 $d*{i\hat{y}_i}$。然而，在严重领域偏移下，伪标签会变得不可靠。为克服这一局限，NCTTA 将几何邻近性与预测置信度相结合：</p>
+<p>由于 TTA 工作在无标签场景下，无法直接计算 G-FCA 距离 $d_{i y_i}$。一种直接的替代方案是使用伪标签 $(\hat{y}_i)$ 作为 $y_i$ 的代理，并约束 P-FCA 距离 $d_{i\hat{y}_i}$。然而，在严重领域偏移下，伪标签会变得不可靠。为克服这一局限，NCTTA 将几何邻近性与预测置信度相结合：</p>
 $$
 \tilde{y}_i=(1-\alpha)\hat{d}_i+\alpha p_i,
-$$<p>其中，$(\hat{d}*i)$ 的获得方式为：首先对 $d_i$ 进行 Z-score 归一化，然后取负的归一化距离，并进一步进行 softmax 操作。这样可以确保较小的 FCA 距离对应较大的概率值。</p>
+$$<p>其中，$(\hat{d}_i)$ 的获得方式为：首先对 $d_i$ 进行 Z-score 归一化，然后取负的归一化距离，并进一步进行 softmax 操作。这样可以确保较小的 FCA 距离对应较大的概率值。</p>
 <p>同时，定义$T$为$\tilde{y}_i$最大的k个类别组成的集合：
 </p>
 $$
@@ -594,7 +594,7 @@ $$<p><img alt="方法概览" class="gallery-image" data-flex-basis="722px" data-
             </main>
         </div>
         
-<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+<script type="text/javascript" src="/ts/main.d00997a2f4a6ce525f496da0c3ae6ad392b0468b8a9024f23309fdfc75c67a35.js" defer></script>
 
 
     </body>
