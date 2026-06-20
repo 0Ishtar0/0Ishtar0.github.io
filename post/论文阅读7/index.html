@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读7</title>
+
+
+<link rel="canonical" href="https://0Ishtar0.github.io/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读7">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='https://0Ishtar0.github.io/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTA' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-06-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-19T00:00:00&#43;00:00'/><meta property='og:image' content='https://0Ishtar0.github.io/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover.jpg' />
+<meta name="twitter:title" content="论文阅读7">
+<meta name="twitter:description" content="论文阅读"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://0Ishtar0.github.io/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#talon-test-time-adaptive-learning-for-on-the-fly-category-discovery">TALON: Test-time Adaptive Learning for On-the-Fly Category Discovery</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#实验结果">实验结果</a></li>
+      </ol>
+    </li>
+    <li><a href="#prior-free-tabular-test-time-adaptation">Prior-Free Tabular Test-Time Adaptation</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#cpe类别先验估计与预测校准">CPE：类别先验估计与预测校准</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#hatp_tj-1">Norm
+\left(
+\hat{p}_T^{j-1}</a></li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#rfl鲁棒特征学习">RFL：鲁棒特征学习</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#heading">\frac{1}{2}
+\left[
+\log
+\frac{(\sigma_T^2)^j}{(\sigma_S^2)^j}
++
+\frac{
+(\mu_S^j-\mu_T^j)^2 + (\sigma_S^2)^j
+}{
+(\sigma_T^2)^j
+}</a></li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">
+            <img alt="Featured image of post 论文阅读7" height="1844" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_35e4cd672e5eb6bc.jpg 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_d0dcbe07d9e8cddb.jpg 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_a9d65a2fd85c23fb.jpg 2400w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover.jpg 4096w" width="4096">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">论文阅读7</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-06-19T00:00:00Z'>2026-06-19</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#talon-test-time-adaptive-learning-for-on-the-fly-category-discovery">TALON: Test-time Adaptive Learning for On-the-Fly Category Discovery</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#实验结果">实验结果</a></li>
+      </ol>
+    </li>
+    <li><a href="#prior-free-tabular-test-time-adaptation">Prior-Free Tabular Test-Time Adaptation</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#cpe类别先验估计与预测校准">CPE：类别先验估计与预测校准</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#hatp_tj-1">Norm
+\left(
+\hat{p}_T^{j-1}</a></li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#rfl鲁棒特征学习">RFL：鲁棒特征学习</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#heading">\frac{1}{2}
+\left[
+\log
+\frac{(\sigma_T^2)^j}{(\sigma_S^2)^j}
++
+\frac{
+(\mu_S^j-\mu_T^j)^2 + (\sigma_S^2)^j
+}{
+(\sigma_T^2)^j
+}</a></li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    
+    <blockquote>
+        <p>封面图摄于6.13，美丽的霓虹</p>
+
+    </blockquote>
+<h2 id="文章列表">文章列表
+</h2><p>1.<a class="link" href="https://arxiv.org/pdf/2603.08075"  target="_blank" rel="noopener"
+    >TALON: Test-time Adaptive Learning for On-the-Fly Category Discovery【CVPR 2026】</a>，中国农业大学，Zhenbo Li组</p>
+<p>2.<a class="link" href="https://openreview.net/pdf?id=BgSDPE24pa"  target="_blank" rel="noopener"
+    >PRIOR-FREE TABULAR TEST-TIME ADAPTATION【ICLR 2026】</a>，香港理工大学，Jieming Shi组</p>
+<hr>
+<h2 id="talon-test-time-adaptive-learning-for-on-the-fly-category-discovery">TALON: Test-time Adaptive Learning for On-the-Fly Category Discovery
+</h2><h3 id="研究动机">研究动机
+</h3><p>OCD 的目标是：模型使用已知类的有标签数据训练，但在测试阶段会遇到一个连续到来的无标签样本流。模型需要同时完成两件事：</p>
+<ol>
+<li>识别已知类；</li>
+<li>发现并区分未知的新类。</li>
+</ol>
+<p>形式化地，训练集和测试流可写为：</p>
+<p>此前主流 OCD 方法，如 SMILE、PHE 等，通常采用如下流程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">离线训练特征提取器
+</span></span><span class="line"><span class="cl">→ 测试时冻结特征提取器
+</span></span><span class="line"><span class="cl">→ 将特征量化成二进制 hash code
+</span></span><span class="line"><span class="cl">→ 用 hash code 或 hash prototype 判断旧类/新类
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此前思路在测试时不更新模型参数，面对新类时进依靠哈希编码，表达能力不足，同时容易出现类别爆炸问题，因此引入TTA的思想，在测试时更新类别原型和模型参数是有必要的。</p>
+<hr>
+<p><img class="gallery-image" data-flex-basis="576px" data-flex-grow="240" height="376" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781954487292.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781954487292_hu_8b1fc28781e88907.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781954487292.png 903w" width="903"></p>
+<h3 id="方法">方法
+</h3><p>训练阶段，采用交叉熵损失与对比损失的组合，训练得到已知类别分离度较大，且同类样本更紧凑的特征空间。离线训练完成后，文章方法构建已知类的原型库。对于已知类 $c$，其原型为该类所有样本特征的均值$\mu_c$，
+初始原型库为：</p>
+$$
+P = \{(c, \mu_c)\}_{c \in Y_S}
+$$<p>测试时，给定新样本 $x$，编码器得到归一化特征 $\tilde{z}$，然后计算它与所有原型的余弦相似度：</p>
+$$
+s_c = \tilde{z}^\top \mu_c, \quad (c,\mu_c) \in P
+$$<p>找到最大相似度对应的类别：</p>
+$$
+c^* = \arg\max_c s_c
+$$$$
+s_{max} = s_{c^*}
+$$<p>如果最大相似度高于阈值 $\tau$：</p>
+$$
+s_{max} \geq \tau
+$$<p>则认为样本属于已有类别：</p>
+$$
+\hat{y} = c^*
+$$<p>如果：</p>
+$$
+s_{max} < \tau
+$$<p>则认为样本属于一个新类，并创建新原型：</p>
+$$
+\mu_{c_{new}} \leftarrow \tilde{z}
+$$$$
+P \leftarrow P \cup \{(c_{new}, \mu_{c_{new}})\}
+$$$$
+\hat{y} = c_{new}
+$$<p>为了让类别原型随测试数据流动态更新，TALON 对每个原型维护被分配到该类的样本集合：</p>
+$$
+S_j = \{\tilde{z}_1, \tilde{z}_2, \dots, \tilde{z}_{n_j}\}
+$$<p>先计算该类样本的平均特征：</p>
+$$
+\bar{z}_j =
+normalize
+\left(
+\frac{1}{n_j}
+\sum_{i=1}^{n_j}
+\tilde{z}_i
+\right)
+$$<p>再计算该类分配的置信度（集中度）：</p>
+$$
+conf_j =
+\frac{1}{n_j}
+\sum_{i=1}^{n_j}
+\tilde{z}_i^\top \mu_j
+$$<p>然后使用置信度控制的 EMA 更新原型：</p>
+$$
+\mu_j
+\leftarrow
+normalize
+\left(
+(1-\alpha_j)\mu_j + \alpha_j \bar{z}_j
+\right)
+$$<p>其中自适应步长为：</p>
+$$
+\alpha_j =
+\eta \cdot conf_j \cdot \frac{n_j}{n_j+\kappa}
+$$<p>除了更新原型，TALON 还周期性地用测试流无标签样本更新编码器参数。</p>
+<p>使用特征-原型对齐损失：</p>
+<h1 id="mathcall_align">$$
+\mathcal{L}_{align}
+</h1><p>-\frac{1}{|P|}
+\sum_l
+\bar{z}_l^\top \mu_l
+$$</p>
+<p>其中，$\bar{z}_l$ 是被分到类别 $l$ 的样本平均特征。</p>
+<p>类别分离项：</p>
+<h1 id="mathcall_sep">$$
+\mathcal{L}_{sep}
+</h1><p>\sum_{l \neq m}
+\left(
+1 - \bar{z}_l^\top \bar{z}_m
+\right)
+$$</p>
+<p>最终测试时自适应目标为：</p>
+<h1 id="mathcall_tta">$$
+\mathcal{L}_{TTA}
+</h1><p>\mathcal{L}<em>{ent}
++
+\beta_1 \mathcal{L}</em>{align}
++
+\beta_2 \mathcal{L}_{sep}
+$$</p>
+<p>更新编码器最后几个Transformer层的仿射参数。</p>
+<hr>
+<h3 id="实验结果">实验结果
+</h3><p>论文在 7 个 OCD 基准数据集上实验：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>数据集</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>粗粒度分类</td>
+					<td>CIFAR10, CIFAR100, ImageNet-100</td>
+			</tr>
+			<tr>
+					<td>细粒度分类</td>
+					<td>CUB-200-2011, Stanford Cars, Oxford-IIIT Pets, Food101</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>例子：
+CIFAR-10 总类别：10 类
+Seen / Old classes：5 类
+Unseen / New classes：5 类</p>
+<p><img alt="主实验表" class="gallery-image" data-flex-basis="622px" data-flex-grow="259" height="676" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781955040450.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781955040450_hu_b3da6001d0053be6.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781955040450_hu_3234ccd637caa42c.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781955040450.png 1753w" width="1753"></p>
+<p><img alt="文章方法对类别爆炸现象的缓解效果，括号内为真实类别数" class="gallery-image" data-flex-basis="465px" data-flex-grow="194" height="438" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781955098664.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781955098664_hu_13a813dd91d94b88.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781955098664.png 850w" width="850"></p>
+<h2 id="prior-free-tabular-test-time-adaptation">Prior-Free Tabular Test-Time Adaptation
+</h2><h3 id="研究动机-1">研究动机
+</h3><p>大部分TTA方法都集中于图像分类，对于表格数据缺乏良好的，完全不依赖源域先验的TTA方法</p>
+<p>选择原因：AI4CNT项目中表格数据较多，或许有启发</p>
+<p>任务设定：用表格数据做分类</p>
+<hr>
+<p><img alt="1781957677492" class="gallery-image" data-flex-basis="557px" data-flex-grow="232" height="490" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781957677492.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781957677492_hu_5b3a25c5461b7f3.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781957677492.png 1138w" width="1138"></p>
+<h3 id="方法-1">方法
+</h3><h4 id="cpe类别先验估计与预测校准">CPE：类别先验估计与预测校准
+</h4><p>该方法假设源域与目标域存在label shift
+对于第 $j$ 个目标域 batch：</p>
+$$
+D_t^j
+$$<p>模型输出预测概率：</p>
+<h1 id="hatpi--ftheta_j-1x_i">$$
+\hat{p}<em>i = f</em>{\theta_{j-1}}(x_i)
+</h1><p>[\hat{p}_i^{(1)}, \hat{p}_i^{(2)}, \dots, \hat{p}_i^{(K)}]
+$$</p>
+<p>其中 $K$ 是类别数。</p>
+<p>用预测熵衡量模型不确定性，对当前 batch 做划分：</p>
+<h1 id="hats_j">$$
+\hat{S}_j
+</h1><p>{x_i \mid x_i \in D_t^j,\ H(\hat{p}_i) &lt; \epsilon}
+$$</p>
+<h1 id="hatt_j">$$
+\hat{T}_j
+</h1><p>{x_i \mid x_i \in D_t^j,\ H(\hat{p}_i) &gt; \epsilon}
+$$</p>
+<p>PFT3A 首先利用第一个目标 batch 估计源域和目标域类别先验。</p>
+<p>源域类别先验估计为：</p>
+<h1 id="hatp_s">$$
+\hat{p}_S
+</h1><p>\frac{1}{N_{\hat{S}<em>1}}
+\sum</em>{i \in \hat{S}_1}
+\hat{p}_i
+$$</p>
+<p>目标域类别先验初始估计为：</p>
+<h1 id="hatp_t1">$$
+\hat{p}_T^1
+</h1><p>\frac{1}{N_{\hat{T}<em>1}}
+\sum</em>{i \in \hat{T}_1}
+\hat{p}_i
+$$</p>
+<p>由于目标域类别先验会随着在线 batch 到来而逐步修正，作者进一步使用迭代更新：</p>
+<h1 id="hatp_tj">$$
+\hat{p}_T^j
+</h1><h2 id="hatp_tj-1">Norm
+\left(
+\hat{p}_T^{j-1}
+</h2><p>\hat{C}_j^{-1}
+\tilde{p}_S^j
+\right)
+$$</p>
+<p>其中：</p>
+<h1 id="tildep_sj">$$
+\tilde{p}_S^j
+</h1><p>\frac{1}{N_{\hat{S}<em>j}}
+\sum</em>{i \in \hat{S}_j}
+\hat{p}_i
+$$</p>
+<p>$\hat{C}_j$ 是由第 $j$ 个 batch 估计得到的校正矩阵，每一行为源域样本对应伪标签类别的预平均，用来去除源域偏见，$Norm(\cdot)$ 保证输出仍是一个和为 1 的分布。</p>
+<p>得到源域先验 $\hat{p}_S$ 和目标域先验 $\hat{p}_T^j$ 后，对模型预测进行校准：</p>
+<h1 id="tildefthetaj-1x_i">$$
+\tilde{f}<em>{\theta</em>{j-1}}(x_i)
+</h1><p>f_{\theta_{j-1}}(x_i)
+\circ
+\frac{\hat{p}_T^j}{\hat{p}_S}
+$$</p>
+<p>其中 $\circ$ 表示逐元素乘法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">如果某类在目标域中更常见，就提高该类预测概率
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h4 id="rfl鲁棒特征学习">RFL：鲁棒特征学习
+</h4><p>设特征提取器为：</p>
+$$
+g_{\phi_{j-1}}
+$$<p>对样本 $x_i$ 提取特征：</p>
+$$
+z_i = g_{\phi_{j-1}}(x_i) \in \mathbb{R}^d
+$$<p>对于 source-like set $\hat{S}_j$，target-like set $\hat{T}_j$，计算特征均值和方差$\mu_S^j，(\sigma_S^2)^j，\mu_T^j，(\sigma_T^2)^j$</p>
+<p>作者假设 source-like 和 target-like 的特征分布可以近似为高斯分布：</p>
+$$
+\mathcal{N}(\mu_S^j, (\sigma_S^2)^j)
+$$$$
+\mathcal{N}(\mu_T^j, (\sigma_T^2)^j)
+$$<p>然后最小化二者的 KL 散度：</p>
+<h1 id="mathcall_kl">$$
+\mathcal{L}_{KL}
+</h1><p>KL
+\left(
+\mathcal{N}(\mu_S^j,(\sigma_S^2)^j)
+\ |\
+\mathcal{N}(\mu_T^j,(\sigma_T^2)^j)
+\right)
+$$</p>
+<p>对角高斯情况下，可以写成：</p>
+<h1 id="mathcall_kl-1">$$
+\mathcal{L}_{KL}
+</h1><h2 id="heading">\frac{1}{2}
+\left[
+\log
+\frac{(\sigma_T^2)^j}{(\sigma_S^2)^j}
++
+\frac{
+(\mu_S^j-\mu_T^j)^2 + (\sigma_S^2)^j
+}{
+(\sigma_T^2)^j
+}
+</h2><p>1
+\right]
+$$</p>
+<p>表格数据常见问题是特征维度高、冗余多、有效维度稀疏，因此，PFT3A 先用PCA找一个代表性子空间。
+对 source-like 特征计算协方差矩阵：</p>
+<h1 id="sigma_sj">$$
+\Sigma_S^j
+</h1><p>\frac{1}{N_{\hat{S}<em>j}}
+\sum</em>{x_i \in \hat{S}_j}
+(z_i-\mu_S^j)(z_i-\mu_S^j)^T
+$$</p>
+<p>对 $\Sigma_S^j$ 做特征分解，得到特征向量和特征值：</p>
+$$
+V_S = [v_S^1, v_S^2, \dots]
+$$$$
+\lambda_S = [\lambda_S^1, \lambda_S^2, \dots]
+$$<p>选择最大的前 $m$ 个特征值对应的特征向量，构成投影矩阵：</p>
+<h1 id="v_sm">$$
+V_S^{(m)}
+</h1><p>[v_S^1, v_S^2, \dots, v_S^m]
+$$</p>
+<p>将原始特征投影到子空间：</p>
+<h1 id="z_iproj">$$
+z_i^{proj}
+</h1><p>V_S^{(m)} g_{\phi_{j-1}}(x_i)
+$$</p>
+<p>然后在投影后的子空间里重新计算 source-like 和 target-like 的均值、方差</p>
+<p>最终优化目标为：</p>
+<h1 id="mathcall_all">$$
+\mathcal{L}_{all}
+</h1><p>\beta_1 \mathcal{L}<em>{KL}
++
+\beta_2 \mathcal{L}</em>{ent}
+$$</p>
+<hr>
+<h3 id="实验">实验
+</h3><p>作者在 TableShift benchmark 的 5 个表格数据集上实验：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>数据集</th>
+					<th>任务/场景</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>HELOC</td>
+					<td>住房净值信用额度还款风险预测</td>
+			</tr>
+			<tr>
+					<td>ANES</td>
+					<td>美国总统选举投票行为预测</td>
+			</tr>
+			<tr>
+					<td>ASSIST</td>
+					<td>教育场景中学生答题正确性预测</td>
+			</tr>
+			<tr>
+					<td>Hypertension</td>
+					<td>高风险年龄段高血压诊断</td>
+			</tr>
+			<tr>
+					<td>Health Ins.</td>
+					<td>低收入人群非 Medicare 医保覆盖预测</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>使用 3 个深度表格模型作为 backbone：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">MLP
+</span></span><span class="line"><span class="cl">TabTransformer
+</span></span><span class="line"><span class="cl">FT-Transformer
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img alt="1781957748569" class="gallery-image" data-flex-basis="809px" data-flex-grow="337" height="415" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781957748569.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781957748569_hu_6b0c8a54c70baf28.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/image/index/1781957748569.png 1399w" width="1399"></p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tta/">TTA</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读5</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读6" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_bb0e2e06f704f4bf.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #4b4c5980 0%, #cdd0ddC0 100%);">
+            <h2 class="article-title">论文阅读6</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.d00997a2f4a6ce525f496da0c3ae6ad392b0468b8a9024f23309fdfc75c67a35.js" defer></script>
+
+
+    </body>
+</html>
