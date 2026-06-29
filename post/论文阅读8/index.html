@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读8</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读8">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTA' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-06-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-28T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover.jpg' />
+<meta name="twitter:title" content="论文阅读8">
+<meta name="twitter:description" content="论文阅读"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#in-place-test-time-training">In-Place Test-Time Training</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍ttt">背景介绍：TTT</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#理论分析">理论分析</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">
+            <img alt="Featured image of post 论文阅读8" height="1280" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_dcec9c5cf418cfee.jpg 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce95fe97cd2da4e0.jpg 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_f482b01f1da04571.jpg 2400w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover.jpg 2843w" width="2843">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">论文阅读8</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-06-28T00:00:00Z'>2026-06-28</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#in-place-test-time-training">In-Place Test-Time Training</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍ttt">背景介绍：TTT</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#理论分析">理论分析</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><p>1.<a class="link" href="https://arxiv.org/pdf/2604.06169"  target="_blank" rel="noopener"
+    >In-Place Test-Time Training【ICLR 2026 Oral】</a>，字节Seed，Tianle Cai组</p>
+<h2 id="in-place-test-time-training">In-Place Test-Time Training
+</h2><h3 id="研究动机">研究动机
+</h3><p>LLM在预训练阶段把知识写入参数，推理阶段只读取上下文，模型权重本身不再变化。面对长上下文、持续变化、流式输入等场景时，模型只能依赖 attention 在上下文窗口内检索信息，而 attention 的复杂度和上下文窗口大小限制了模型处理超长、持续演化任务的能力。</p>
+<p><strong>Test-Time Training, TTT</strong> 提供了另一种思路：在推理阶段更新一小部分参数，即 <strong>fast weights</strong>，让模型把当前上下文中的信息临时写入参数中。但是，已有 TTT 方法直接用于当前 LLM 生态时有三个主要障碍：</p>
+<ol>
+<li><strong>架构不兼容</strong>：许多 TTT 方法引入特殊 recurrent / memory layer，甚至试图替换 attention，难以直接从已有 LLM checkpoint warm start。</li>
+<li><strong>计算效率低</strong>：经典 TTT 往往逐 token 更新 fast weights，顺序依赖强，不适合大规模并行。</li>
+<li><strong>目标函数不适合语言建模</strong>：传统 TTT 常用重构当前输入表示的目标，但自回归 LLM 的核心目标是预测下一个 token，两者不完全对齐。</li>
+</ol>
+<p>本文目标：在不破坏现有 Transformer 主干的前提下，让 LLM 获得测试时动态适应能力。</p>
+<hr>
+<h3 id="背景介绍ttt">背景介绍：TTT
+</h3><p><a class="link" href="https://arxiv.org/pdf/2407.04620"  target="_blank" rel="noopener"
+    >Learning to (Learn at Test Time): RNNs with Expressive Hidden States 【ICML 2025】</a>
+此前应用于语言任务的 TTT 使用一组可快速更新的参数 \(W\)，也就是 fast weights。它们构成一个小型神经网络：</p>
+\[
+f_W(\cdot): \mathbb{R}^d \rightarrow \mathbb{R}^d
+\]<p>对于输入序列：</p>
+\[
+x = [x_1, x_2, \ldots, x_N]
+\]<p>每个 token 表示 \(x_i\) 会被投影成 query、key、value：</p>
+\[
+q_i,\quad k_i,\quad v_i
+\]<p>TTT采用重建损失，用当前 token 的 key-value 对更新 fast weights：</p>
+\[
+W_i \leftarrow W_{i-1} - \eta \nabla_W L\left(f_{W_{i-1}}(k_i), v_i\right)
+\]<p>其中\(L\)为自监督损失，常见选择是 MSE</p>
+<p>直观理解：这一步把 \((k_i, v_i)\) 这个关联写进 fast weights。</p>
+<p>更新后的 fast weights 被用来处理 query：</p>
+\[
+o_i = f_{W_i}(q_i)
+\]<p>输出 \(o_i\) 会被送回主干网络，影响后续隐状态和最终 token 预测。</p>
+
+    <blockquote>
+        <p>这种目标可以帮助模型存储上下文信息。</p>
+
+    </blockquote>
+<hr>
+<h3 id="方法">方法
+</h3><p><img alt="In-Place TTT 架构" class="gallery-image" data-flex-basis="555px" data-flex-grow="231" height="886" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734353733.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734353733_hu_9d63d3c16d4e2987.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734353733_hu_14064c24c60cb373.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734353733.png 2052w" width="2052">
+Transformer 中常见的 gated MLP 可以写成：</p>
+\[
+O = \phi(HW_{gate}^{\top}) \odot (HW_{up}^{\top}) W_{down}^{\top}
+\]<p>其中\(H \in \mathbb{R}^{n \times d_{model}}\)是输入的隐状态。</p>
+<p>记 MLP 的中间激活定义为：</p>
+\[
+Z = \phi(HW_{gate}^{\top}) \odot (HW_{up}^{\top})
+\]<p>MLP 输出为：</p>
+\[
+O = Z W_{down}^{\top}
+\]<p>文章将 \(W_{down}\)作为 fast weights，在推理时根据上下文动态更新。</p>
+<p>设序列被划分为多个 chunk，每个 chunk 大小为 \(C\) （1024）。</p>
+<p>对第 \(i\) 个 chunk，记：</p>
+\[
+Z_{[i]},\quad V_{[i]},\quad O_{[i]}
+\]<p>分别是该 chunk 的中间激活、目标 value 和输出。</p>
+<p>第 \(i\) 个 chunk 处理前的 fast weights 为：</p>
+\[
+W_{down}^{(i)}
+\]<p>先用当前 fast weights 计算该 chunk 的 MLP 输出：</p>
+\[
+O_{[i]} = Z_{[i]} \left(W_{down}^{(i)}\right)^{\top}
+\]<p>该输出进入 Transformer 主干，影响后续预测。</p>
+<p>再用该 chunk 的 \(Z_{[i]}\) 和 \(V_{[i]}\) 更新 \(W_{down}\)：</p>
+\[
+W_{down}^{(i+1)}=
+W_{down}^{(i)}-
+\eta \nabla_W
+L\left(
+Z_{[i]}\left(W_{down}^{(i)}\right)^{\top},
+V_{[i]}
+\right)
+\]<p>其中$Z_{[i]} \rightarrow V_{[i]}$可以看做当前 chunk 写入 fast weights 的 key-value 关联。</p>
+<p>本文认为传统重构目标不适合 LLM，因此设计了一个和 next-token prediction 对齐的目标。</p>
+<p>目标 value 定义为：</p>
+\[
+\hat V = \operatorname{Conv1D}(X_0) W_{target}
+\]<p>其中：</p>
+<ul>
+<li>\(X_0 \in \mathbb{R}^{n \times d_{model}}\)：输入 token embedding；</li>
+<li>\(\operatorname{Conv1D}(\cdot)\)：沿序列维度的一维卷积；</li>
+<li>\(W_{target} \in \mathbb{R}^{d_{model} \times d_{model}}\)：可训练投影矩阵。</li>
+</ul>
+<p>如果把 \(W_{target}\) 设置为恒等矩阵，并让 Conv1D 的卷积核只取下一个 token，那么：</p>
+\[
+\hat v_t = E_{x_{t+1}}
+\]<p>这就是最简单的 next-token target。实际实现中，Conv1D 和 \(W_{target}\) 可以学习一个局部未来 token 的组合，跟随模型训练，属于slow weights。</p>
+<p>本文采用负 Frobenius 内积作为损失，在这个损失下，chunk-wise 更新可简化为：</p>
+\[
+W_{down}^{(i)}=
+W_{down}^{(i-1)}+
+\eta \hat V_{[i]}^{\top} Z_{[i]}
+\]<h4 id="理论分析">理论分析
+</h4><p>假设前文出现 key-value 对：</p>
+\[
+(x_{t^*}, x_{t^*+1}) = (k^*, v^*)
+\]<p>后文查询位置 \(n\) 再次出现：</p>
+\[
+x_n = k^*
+\]<p>模型应该预测：</p>
+\[
+x_{n+1}=v^*
+\]<p>In-Place TTT 的 fast weight 更新为：</p>
+\[
+\Delta W_{down}=
+\eta \sum_{t \in \text{prior chunks}} V_t Z_t^{\top}
+\]<p>该更新对查询位置 \(n\) 上 token \(w\) 的 logit 改变量为：</p>
+\[
+\Delta l_n[w]=
+E_w^{\top} \Delta W_{down} Z_n
+\]<p>如果使用 LM-Aligned target：</p>
+\[
+V_{t^*}^{LM}=E_{x_{t^*+1}}=E_{v^*}
+\]<p>那么关键更新项近似为：</p>
+\[
+\Delta W_{down}
+\approx
+\eta E_{v^*} Z_{t^*}^{\top}
+\]<p>代入 logit 变化：</p>
+\[
+\Delta l_n[w]
+\approx
+\eta
+(E_w^{\top}E_{v^*})
+(Z_{t^*}^{\top}Z_n)
+\]<p>由于查询位置 \(x_n=k^*\) 与前文 key 位置 \(x_{t^*}=k^*\) 对齐，因此：</p>
+\[
+Z_{t^*}^{\top}Z_n > 0
+\]<p>对于正确 token \(w=v^*\)：</p>
+\[
+E_{v^*}^{\top}E_{v^*} = \|E_{v^*}\|^2
+\]<p>较大，因此正确 token 的 logit 会增加。</p>
+<p>对于错误 token \(w \neq v^*\)，若不同 token embedding 近似正交，则：</p>
+\[
+E_w^{\top}E_{v^*} \approx 0
+\]<p>因此其他 token 的 logit 基本不变。</p>
+<p>而传统重建损失写入的是：</p>
+\[
+V_{t^*}^{rec}=E_{x_{t^*}}=E_{k^*}
+\]<p>它会增强 \(k^*\) 自己，而不是增强 \(v^*\)，所以不能保证提高正确下一个 token 的 logit。
+<img class="gallery-image" data-flex-basis="997px" data-flex-grow="415" height="192" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782733811837.png" width="798"></p>
+<hr>
+<h3 id="实验">实验
+</h3><p><img class="gallery-image" data-flex-basis="998px" data-flex-grow="416" height="148" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734649480.png" width="616">
+<img alt="RULER数据集，文章方法在长上下文有显著提升，Qwen3-4B" class="gallery-image" data-flex-basis="2267px" data-flex-grow="944" height="67" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734616050.png" width="633"></p>
+<p><img alt="文章方法的时间与内存开销" class="gallery-image" data-flex-basis="759px" data-flex-grow="316" height="355" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734769153.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734769153_hu_be2bb377fb782f6b.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/image/index/1782734769153.png 1123w" width="1123"></p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tta/">TTA</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读7" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_157b6711eb9ae79e.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #49423880 0%, #b8b7b3C0 100%);">
+            <h2 class="article-title">论文阅读7</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读5</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读6" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_bb0e2e06f704f4bf.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #4b4c5980 0%, #cdd0ddC0 100%);">
+            <h2 class="article-title">论文阅读6</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
