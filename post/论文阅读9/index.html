@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读9</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读9">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTA' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-07-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-07-02T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover.jpg' />
+<meta name="twitter:title" content="论文阅读9">
+<meta name="twitter:description" content="论文阅读"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#test-time-adaptation-for-llm-agents-via-environment-interaction">Test-Time Adaptation for LLM Agents via Environment Interaction</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#语法对齐sa">语法对齐（SA）</a></li>
+            <li><a href="#动态语义落地dynamics-groundingdg">动态语义落地（Dynamics Grounding，DG）</a></li>
+          </ol>
+        </li>
+        <li><a href="#三实验">三、实验</a></li>
+      </ol>
+    </li>
+    <li><a href="#prototype-based-test-time-adaptation-of-vision-language-models-论文总结">Prototype-Based Test-Time Adaptation of Vision-Language Models 论文总结</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+      </ol>
+    </li>
+    <li><a href="#1783257884063">本文方法希望通过为每类维护原型，来解决上述问题 <img src="image/index/1783257884063.png" alt="1783257884063"></a>
+      <ol>
+        <li><a href="#方法-1">方法</a></li>
+      </ol>
+    </li>
+    <li><a href="#25-基于原型的预测">2.5 基于原型的预测</a>
+      <ol>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/">
+            <img alt="Featured image of post 论文阅读9" height="742" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_6405997bf965e921.jpg 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover.jpg 1527w" width="1527">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/">论文阅读9</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-07-02T00:00:00Z'>2026-07-02</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#test-time-adaptation-for-llm-agents-via-environment-interaction">Test-Time Adaptation for LLM Agents via Environment Interaction</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#语法对齐sa">语法对齐（SA）</a></li>
+            <li><a href="#动态语义落地dynamics-groundingdg">动态语义落地（Dynamics Grounding，DG）</a></li>
+          </ol>
+        </li>
+        <li><a href="#三实验">三、实验</a></li>
+      </ol>
+    </li>
+    <li><a href="#prototype-based-test-time-adaptation-of-vision-language-models-论文总结">Prototype-Based Test-Time Adaptation of Vision-Language Models 论文总结</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+      </ol>
+    </li>
+    <li><a href="#1783257884063">本文方法希望通过为每类维护原型，来解决上述问题 <img src="image/index/1783257884063.png" alt="1783257884063"></a>
+      <ol>
+        <li><a href="#方法-1">方法</a></li>
+      </ol>
+    </li>
+    <li><a href="#25-基于原型的预测">2.5 基于原型的预测</a>
+      <ol>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><p>1.<a class="link" href="https://arxiv.org/pdf/2511.04847"  target="_blank" rel="noopener"
+    >Test-Time Adaptation for LLM Agents via Environment Interaction【ICLR 2026】</a>，滑铁卢大学，Caiming Xiong组</p>
+<p>2.<a class="link" href="https://arxiv.org/pdf/2604.21360"  target="_blank" rel="noopener"
+    >Prototype-Based Test-Time Adaptation of Vision-Language Models 【ICML 2026】</a>厦门大学，Rongrong Ji组</p>
+<h2 id="test-time-adaptation-for-llm-agents-via-environment-interaction">Test-Time Adaptation for LLM Agents via Environment Interaction
+</h2><h3 id="研究动机">研究动机
+</h3><p>LLM 智能体虽然能够完成网页导航、工具使用和函数调用等任务，但部署到新环境后常常出现明显的泛化失败。</p>
+<ol>
+<li><strong>语法不匹配</strong>：模型不熟悉当前环境的观察格式、按钮名称、字段名称或函数调用格式。</li>
+<li><strong>语义不匹配</strong>：模型不了解当前环境的状态转移规律，无法预测一个动作执行后会产生什么结果。</li>
+</ol>
+<p>本文旨在研究如何让基于大语言模型的智能体在部署到从未见过的网站、API 或工具环境后，利用测试阶段与环境交互得到的信息快速适应，而不依赖人工标注数据或昂贵的重新训练。针对上述两类问题，论文分别提出：</p>
+<ul>
+<li><strong>语法对齐（Syntactic Alignment，SA）</strong>：在线更新一个轻量级适应向量，使模型输出分布快速贴合当前环境。</li>
+<li><strong>动态语义落地（Dynamics Grounding，DG）</strong>：正式执行任务前先自动探索环境，将状态转移总结成自然语言规则，作为上下文内世界模型供智能体使用。</li>
+</ul>
+<hr>
+<h3 id="方法">方法
+</h3><h4 id="语法对齐sa">语法对齐（SA）
+</h4><p><img alt="1783256862416" class="gallery-image" data-flex-basis="585px" data-flex-grow="244" height="690" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256862416.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256862416_hu_d47465caf6b5253f.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256862416_hu_64155df9d9aaa1da.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256862416.png 1684w" width="1684">
+SA 引入一个轻量级适应向量：</p>
+\[
+\delta \in \mathbb{R}^{d}
+\]<p>其中 \(d\) 是语言模型隐藏层维度。</p>
+<p>设模型最后一层隐藏表示为：</p>
+\[
+H \in \mathbb{R}^{n \times d}
+\]<p>适应向量作为加性偏置加入隐藏表示，得到调整后的输出：</p>
+\[
+\text{logits}'=(H+\delta)W_{\mathrm{LM}}^{T}
+\]<p>模型主体参数 \(\theta\) 保持冻结，只更新适应向量 \(\delta\)。系统使用当前输入上下文进行next token prediction，并执行一步梯度下降：</p>
+\[
+\delta_{\mathrm{new}}
+\leftarrow
+\delta_{\mathrm{old}}
+-\eta\nabla_{\delta}
+\mathcal{L}_{\mathrm{CE}}
+\left(
+f_{\theta,\delta}(I_{1:n-1}), I_{2:n}
+\right)
+\]<p>示例：</p>
+<p>假设网页观察中出现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[145] &lt;button&gt;Go
+</span></span><span class="line"><span class="cl">dest_field
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>未经适应时，模型可能受预训练先验影响，更倾向生成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">click(&#34;Search&#34;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>SA 在当前上下文上计算语言建模损失。由于 <code>Go</code> 和 <code>dest_field</code> 出现在上下文中，梯度更新会提高相关词元在模型输出中的倾向，使后续生成更可能变为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">click(&#34;Go&#34;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h4 id="动态语义落地dynamics-groundingdg">动态语义落地（Dynamics Grounding，DG）
+</h4><p><img alt="1783256887101" class="gallery-image" data-flex-basis="432px" data-flex-grow="180" height="919" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256887101.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256887101_hu_bcab641ea064eb0.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256887101_hu_b4a50b4c9e4eca98.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256887101.png 1656w" width="1656">
+DG 解决语义不匹配问题。它在正式接收用户任务前，对环境进行一次自动探索，学习“执行某个动作会发生什么”，并将这些状态转移规律总结为自然语言规则。</p>
+<p>这些规则在正式任务中被加入智能体上下文，形成一个临时的、上下文内的&quot;世界&quot;模型。</p>
+<p>探索成本只需支付一次，之后可以分摊到该环境中的所有任务。</p>
+<p>系统首先向 LLM 提供环境的高层描述，例如：</p>
+<ul>
+<li>网站用途；</li>
+<li>API 文档；</li>
+<li>可用工具及功能说明。</li>
+</ul>
+<p>LLM 据此生成多样化的探索用户画像或目标。例如：</p>
+
+    <blockquote>
+        <p>作为第一次使用该网站的用户，我想看看在没有选择日期时搜索航班会发生什么。</p>
+
+    </blockquote>
+<p>针对每个用户画像，探索智能体与环境交互，并尽量尝试新的动作。</p>
+<p>每执行一个动作，系统记录：</p>
+\[
+(\text{旧观察},\text{动作},\text{新观察})
+\]<p>然后由 LLM 将这一状态转移总结为人类可读的规则，例如：</p>
+
+    <blockquote>
+        <p>在主页执行 <code>click(&quot;Go&quot;)</code> 会弹出日期选择窗口。</p>
+
+    </blockquote>
+<p>新生成的规则会立即添加到探索智能体上下文中，以提醒它不要重复已经探索过的转移，促进发现更多新规律。</p>
+<p>全部探索完成后，系统得到原始规则集合：</p>
+\[
+E=\{e_i\}_{i=1}^{M}
+\]<p>然后使用推理模型过滤，得到清理后的规则集合：</p>
+\[
+E_{\text{clean}}
+\]<p>正式执行任务时，将环境动态规则加入原始输入：</p>
+\[
+I'=[I;E_{\text{clean}}]
+\]<p>LLM 利用上下文学习能力，根据这些规则预测动作后果并制定更加可靠的多步计划。</p>
+<hr>
+<h3 id="三实验">三、实验
+</h3><p>论文在三个现实智能体基准上进行评估：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>WebArena</th>
+					<th>网页导航</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>BFCLv3</td>
+					<td>函数调用</td>
+			</tr>
+			<tr>
+					<td>Tau-Bench</td>
+					<td>对话式函数调用</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<p>实验使用的主要模型包括：</p>
+<ul>
+<li>GPT-4.1；</li>
+<li>GPT-4o mini；</li>
+<li>Qwen2.5-14B-Instruct。</li>
+</ul>
+<p>与 WMA（World-Model-Augmented Agent）进行比较。</p>
+<p>WMA 需要：</p>
+<ol>
+<li>收集探索示范；</li>
+<li>训练一个 Llama-3.1-8B-Instruct 世界模型；</li>
+<li>在推理过程中预测动作对应的下一状态。
+<img alt="1783256522090" class="gallery-image" data-flex-basis="658px" data-flex-grow="274" height="601" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256522090.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256522090_hu_523191bec4fec404.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256522090_hu_ba9402e9cb2566bf.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783256522090.png 1648w" width="1648">
+文章提出的两种方法并不互补，论文测试了直接将DG与SA二者结合的方法，但结果并不稳定：</li>
+</ol>
+<ul>
+<li>WebArena：DG 为 20.0%，Hybrid 为 21.0%；</li>
+<li>BFCLv3：DG 为 22.0%，Hybrid 下降到 21.0%。</li>
+</ul>
+<h2 id="prototype-based-test-time-adaptation-of-vision-language-models-论文总结">Prototype-Based Test-Time Adaptation of Vision-Language Models 论文总结
+</h2><h3 id="研究动机-1">研究动机
+</h3><p>本文针对无需反向传播的VLM（CLIP）TTA，这类方法此前大多基于缓存，存在两个问题：</p>
+<ol>
+<li>
+<p><strong>推理效率下降</strong>  ：缓存的规模通常与类别数有关。类别越多，缓存越大，检索和维护缓存的成本越高。</p>
+</li>
+<li>
+<p><strong>性能依赖缓存状态</strong>  ：在测试流开始阶段，缓存为空或样本很少，方法很难发挥作用。同时，缓存方法通常只保留低熵或高置信度样本，可能丢弃有用样本，也可能保留错误样本，从而造成误差累积。</p>
+</li>
+</ol>
+<h2 id="1783257884063">本文方法希望通过为每类维护原型，来解决上述问题
+<img alt="1783257884063" class="gallery-image" data-flex-basis="698px" data-flex-grow="291" height="691" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063_hu_e8f42b82f306e580.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063_hu_af09a239d7842b6b.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063.png 2011w" width="2011">
+</h2><h3 id="方法-1">方法
+</h3><p>CLIP 包含视觉编码器和文本编码器：</p>
+<ul>
+<li>视觉编码器：\(E_V\)</li>
+<li>文本编码器：\(E_T\)</li>
+</ul>
+<p>给定测试图像 \(x\)，视觉编码器得到图像特征：</p>
+\[
+F_g = E_V(x) \in \mathbb{R}^d
+\]<p>通过文本编码器得到每个类别的文本特征：</p>
+\[
+\{F_t^c\}_{c=1}^{C}, \quad F_t^c \in \mathbb{R}^d
+\]<p>CLIP 根据图像特征和文本特征的余弦相似度计算类别概率：</p>
+\[
+p_{\text{CLIP}}(y_c|x) =
+\frac{\exp(\cos(F_g, F_t^c)/\tau)}{
+\sum_{c=1}^{C}\exp(\cos(F_g, F_t^c)/\tau)}
+\]<p>PTA 首先零初始化一组类别特定的知识原型：</p>
+\[
+P_t \in \mathbb{R}^{C \times d}
+\]<p>其中第 \(c\) 类的知识原型为：</p>
+\[
+P_t^c \in \mathbb{R}^d
+\]<p>给定测试样本 \(x\)，PTA 首先使用原始 CLIP 得到类别置信度：</p>
+\[
+s = p_{\text{CLIP}}(y|x)
+\]<p>其中 \(s_j\) 表示当前样本对类别 \(j\) 的贡献程度。</p>
+<p>如果一个样本被 CLIP 判断为更像某个类别，那么它对该类别原型的更新贡献就应该更大。</p>
+<p>直接使用原始置信度 \(s_j\) 作为更新权重可能导致早期高置信度样本过度主导原型。<br>
+因此，PTA 对置信度进行一个变换：</p>
+\[
+\beta_j = 1 - e^{-s_j/h}
+\]<p>PTA 使用EMA更新类别知识原型：</p>
+\[
+P_t^j \leftarrow (1-\beta_j)P_t^j + \beta_j F_g
+\]<hr>
+<p>仅使用视觉知识原型 \(P_t\) 可能会导致原型逐渐偏离 CLIP 原本的图文联合语义空间。<br>
+为了保持与文本语义空间的对齐，PTA 引入文本锚定原型 \(P_a\)。</p>
+<p>文本锚定原型初始化自 CLIP 的文本嵌入：</p>
+\[
+P_a^{(0)} = F_t
+\]<p>随后，通过插值方式将测试域视觉知识与文本语义锚点结合：</p>
+\[
+P_a^{(t)} = (1-w)P_t^{(t)} + wP_a^{(t-1)}
+\]<hr>
+<h2 id="25-基于原型的预测">2.5 基于原型的预测
+</h2><p>使用文本锚定原型 \(P_a\) 计算基于原型的预测概率：</p>
+\[
+p_{\text{Prototype}}(y_c|x) =
+\frac{\exp(\cos(F_g, P_a^c)/\tau)}{
+\sum_{c=1}^{C}\exp(\cos(F_g, P_a^c)/\tau)
+}
+\]<p>最后，PTA 将原始 CLIP 的零样本预测与基于原型的预测相加：</p>
+\[
+p_{\text{PTA}}(y|x)=
+p_{\text{CLIP}}(y|x)+
+p_{\text{Prototype}}(y|x)
+\]<hr>
+<h3 id="实验">实验
+</h3><p>论文在图像识别数据集（CLIP）和点云分类数据集（ULIP）上评估PTA。BoostAdapter、TDA、SCA 和 ADAPT均为缓存式方法。</p>
+<p><img alt="图像识别" class="gallery-image" data-flex-basis="575px" data-flex-grow="239" height="852" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257940514.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257940514_hu_d9322cb08005e259.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257940514_hu_14348bfa454c6942.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257940514.png 2044w" width="2044">
+<img alt="ModelNet-C and 3 corrupted variants of ScanObjectNN" class="gallery-image" data-flex-basis="634px" data-flex-grow="264" height="789" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783258087833.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783258087833_hu_c93088c1fb665492.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783258087833_hu_ef49965901e0ab3b.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783258087833.png 2085w" width="2085"></p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tta/">TTA</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读8" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_b3142fb8ae7cd5f6.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #bebcbf80 0%, #53383bC0 100%);">
+            <h2 class="article-title">论文阅读8</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读7" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_157b6711eb9ae79e.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #49423880 0%, #b8b7b3C0 100%);">
+            <h2 class="article-title">论文阅读7</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读5</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读6" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_bb0e2e06f704f4bf.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #4b4c5980 0%, #cdd0ddC0 100%);">
+            <h2 class="article-title">论文阅读6</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
