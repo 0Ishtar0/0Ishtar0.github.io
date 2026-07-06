@@ -236,15 +236,7 @@
     <li><a href="#prototype-based-test-time-adaptation-of-vision-language-models-论文总结">Prototype-Based Test-Time Adaptation of Vision-Language Models 论文总结</a>
       <ol>
         <li><a href="#研究动机-1">研究动机</a></li>
-      </ol>
-    </li>
-    <li><a href="#1783257884063">本文方法希望通过为每类维护原型，来解决上述问题 <img src="image/index/1783257884063.png" alt="1783257884063"></a>
-      <ol>
         <li><a href="#方法-1">方法</a></li>
-      </ol>
-    </li>
-    <li><a href="#25-基于原型的预测">2.5 基于原型的预测</a>
-      <ol>
         <li><a href="#实验">实验</a></li>
       </ol>
     </li>
@@ -360,15 +352,7 @@
     <li><a href="#prototype-based-test-time-adaptation-of-vision-language-models-论文总结">Prototype-Based Test-Time Adaptation of Vision-Language Models 论文总结</a>
       <ol>
         <li><a href="#研究动机-1">研究动机</a></li>
-      </ol>
-    </li>
-    <li><a href="#1783257884063">本文方法希望通过为每类维护原型，来解决上述问题 <img src="image/index/1783257884063.png" alt="1783257884063"></a>
-      <ol>
         <li><a href="#方法-1">方法</a></li>
-      </ol>
-    </li>
-    <li><a href="#25-基于原型的预测">2.5 基于原型的预测</a>
-      <ol>
         <li><a href="#实验">实验</a></li>
       </ol>
     </li>
@@ -544,9 +528,10 @@ I'=[I;E_{\text{clean}}]
 <p><strong>性能依赖缓存状态</strong>  ：在测试流开始阶段，缓存为空或样本很少，方法很难发挥作用。同时，缓存方法通常只保留低熵或高置信度样本，可能丢弃有用样本，也可能保留错误样本，从而造成误差累积。</p>
 </li>
 </ol>
-<h2 id="1783257884063">本文方法希望通过为每类维护原型，来解决上述问题
-<img alt="1783257884063" class="gallery-image" data-flex-basis="698px" data-flex-grow="291" height="691" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063_hu_e8f42b82f306e580.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063_hu_af09a239d7842b6b.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063.png 2011w" width="2011">
-</h2><h3 id="方法-1">方法
+<p>本文方法希望通过为每类维护原型，来解决上述问题</p>
+<p><img alt="1783257884063" class="gallery-image" data-flex-basis="698px" data-flex-grow="291" height="691" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063_hu_e8f42b82f306e580.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063_hu_af09a239d7842b6b.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/image/index/1783257884063.png 2011w" width="2011"></p>
+<hr>
+<h3 id="方法-1">方法
 </h3><p>CLIP 包含视觉编码器和文本编码器：</p>
 <ul>
 <li>视觉编码器：\(E_V\)</li>
@@ -591,8 +576,7 @@ P_a^{(0)} = F_t
 \[
 P_a^{(t)} = (1-w)P_t^{(t)} + wP_a^{(t-1)}
 \]<hr>
-<h2 id="25-基于原型的预测">2.5 基于原型的预测
-</h2><p>使用文本锚定原型 \(P_a\) 计算基于原型的预测概率：</p>
+<p>使用文本锚定原型 \(P_a\) 计算基于原型的预测概率：</p>
 \[
 p_{\text{Prototype}}(y_c|x) =
 \frac{\exp(\cos(F_g, P_a^c)/\tau)}{
