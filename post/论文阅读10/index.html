@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读10</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读10">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTT' /><meta property='article:tag' content='具身智能' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-07-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-07-11T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover.jpg' />
+<meta name="twitter:title" content="论文阅读10">
+<meta name="twitter:description" content="论文阅读"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#wam-ttt">WAM-TTT</a>
+      <ol>
+        <li><a href="#wam-背景介绍">WAM 背景介绍</a></li>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#wam-预训练">WAM 预训练</a></li>
+            <li><a href="#ttt-层结构">TTT 层结构</a></li>
+            <li><a href="#人类-机器人元训练">人类-机器人元训练</a></li>
+            <li><a href="#测试时训练">测试时训练</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+    <li><a href="#conga">CONGA</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a></li>
+        <li><a href="#实验-1">实验</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/">
+            <img alt="Featured image of post 论文阅读10" height="1280" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_333ccf67212b9cf6.jpg 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_2169d15b80e740c.jpg 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_5304af24422aba70.jpg 2400w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover.jpg 2843w" width="2843">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/">论文阅读10</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-07-11T00:00:00Z'>2026-07-11</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#wam-ttt">WAM-TTT</a>
+      <ol>
+        <li><a href="#wam-背景介绍">WAM 背景介绍</a></li>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#wam-预训练">WAM 预训练</a></li>
+            <li><a href="#ttt-层结构">TTT 层结构</a></li>
+            <li><a href="#人类-机器人元训练">人类-机器人元训练</a></li>
+            <li><a href="#测试时训练">测试时训练</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+    <li><a href="#conga">CONGA</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a></li>
+        <li><a href="#实验-1">实验</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><p>1.<a class="link" href="https://arxiv.org/pdf/2607.06988"  target="_blank" rel="noopener"
+    >WAM-TTT: Steering World-Action Models by  Watching Human Play at Test Time【ICML 2026】</a>，北京大学，He Wang组</p>
+<p>2.<a class="link" href="https://openreview.net/attachment?id=BeOkRax4pN&amp;name=pdf"  target="_blank" rel="noopener"
+    >CONGA: Confidence-and-Gradient-Aware Learning Rate Schedule for  Test-Time Adaptation 【ICML 2026】</a>电子科技大学，Jingjing Li组</p>
+<h2 id="wam-ttt">WAM-TTT
+</h2><h3 id="wam-背景介绍">WAM 背景介绍
+</h3><p>WAM 是 <strong>World-Action Model</strong>，即世界-动作模型。它不同于普通 VLA 模型。</p>
+<p>普通 VLA 通常学习：</p>
+$$
+(o_t, g) \rightarrow a_{t:t+k}
+$$<p>其中：</p>
+<ul>
+<li>$o_t$：当前视觉观测；</li>
+<li>$g$：语言指令或任务目标；</li>
+<li>$a_{t:t+k}$：未来一段机器人动作。</li>
+</ul>
+<p>WAM 则进一步建模：</p>
+$$
+(o_t, g) \rightarrow (z_{t+1:t+k}, a_{t:t+k})
+$$<p>其中：</p>
+<ul>
+<li>$z_{t+1:t+k}$：未来视觉状态或未来视觉 latent；</li>
+<li>$a_{t:t+k}$：未来动作序列。</li>
+</ul>
+<p>也就是说，WAM 不只是预测动作，还同时预测世界接下来会怎样变化，把动作生成和未来状态预测绑定在一起。</p>
+<p>例如任务是“把杯子放进托盘”。</p>
+<p>VLA 直接学习：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">当前图像 + 指令 → 机器人动作
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>WAM 会同时学习：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">当前图像 + 指令 → 杯子未来应该进入托盘
+</span></span><span class="line"><span class="cl">当前图像 + 指令 → 为了实现这个未来状态，机器人应该执行什么动作
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>本文使用的 WAM backbone 是 <strong>LDA</strong>，即 Latent Dynamics Action Model。
+LDA 的核心结构包括：</p>
+<ul>
+<li><strong>video expert</strong>：处理视觉 latent token，用于未来视觉状态预测；</li>
+<li><strong>action expert</strong>：处理机器人 action token，用于动作生成；</li>
+<li><strong>joint attention / shared visual-action dynamics</strong>：让视觉动态和动作生成通过cross-attention相互影响；</li>
+<li><strong>多任务训练目标</strong>：包括动作预测、未来视觉预测、正向动力学、逆向动力学等。</li>
+</ul>
+<hr>
+<h3 id="研究动机">研究动机
+</h3><p>人类示范为机器人动作模型提供了良好的训练与微调素材，但面临以下两个问题：</p>
+<ol>
+<li>
+<p>人类视频很容易获得，但难以直接用于机器人控制，依赖额外监督</p>
+</li>
+<li>
+<p>人和机器人之间存在动作与结构的gap</p>
+</li>
+</ol>
+<hr>
+<h3 id="方法">方法
+</h3><p>本文方法包含三个阶段：</p>
+<ol>
+<li>WAM 预训练；</li>
+<li>人类-机器人元训练；</li>
+<li>测试时从人类视频更新 fast weights。</li>
+</ol>
+<h4 id="wam-预训练">WAM 预训练
+</h4><p>首先预训练一个 WAM backbone，使其可以同时预测：</p>
+$$
+z_{t+1:t+k}, a_{t:t+k}
+$$<p>其中：</p>
+<ul>
+<li>$z_{t+1:t+k}$ 是未来视觉 latent；</li>
+<li>$a_{t:t+k}$ 是未来动作 chunk。</li>
+</ul>
+<p>预训练后的 WAM 已经具有基本的视觉-动作建模能力和一定的泛化能力。
+<img alt="方法示意" class="gallery-image" data-flex-basis="557px" data-flex-grow="232" height="742" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783844586062.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783844586062_hu_a4869d5ad9c30508.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783844586062_hu_45a7897973aadab.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783844586062.png 1723w" width="1723"></p>
+<hr>
+<h4 id="ttt-层结构">TTT 层结构
+</h4><p>WAM-TTT 在 WAM 的 <strong>video expert</strong> 侧加入 TTT 分支。每个第 $l$ 层 TTT 层包含慢速投影参数和快速权重网络。</p>
+<p>每层有四个慢速投影参数：</p>
+$$
+\theta_K^{(l)},\theta_V^{(l)},\theta_Q^{(l)},\theta_O^{(l)}
+$$<p>它们的作用是：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>$\theta_K^{(l)}$</td>
+					<td>把人类视频 token 投影成 key，作为记忆地址</td>
+			</tr>
+			<tr>
+					<td>$\theta_V^{(l)}$</td>
+					<td>把人类视频 token 投影成 value，作为记忆内容</td>
+			</tr>
+			<tr>
+					<td>$\theta_Q^{(l)}$</td>
+					<td>把机器人当前 video token 投影成 query，用于读取记忆</td>
+			</tr>
+			<tr>
+					<td>$\theta_O^{(l)}$</td>
+					<td>把读取出的记忆投影回 WAM hidden space</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>给定人类视频 token：</p>
+$$
+X_h^{(l)}
+$$<p>构造：</p>
+$$
+K_h^{(l)}=X_h^{(l)}\theta_K^{(l)}
+$$$$
+V_h^{(l)}=X_h^{(l)}\theta_V^{(l)}
+$$<p>给定机器人视频 token：</p>
+$$
+X_r^{(l)}
+$$<p>构造：</p>
+$$
+Q_r^{(l)}=X_r^{(l)}\theta_Q^{(l)}
+$$<p>每层还有一个 fast-weight小网络：</p>
+$$
+f_W^{(l)}
+$$<p>它学习从 key 到 value 的映射：</p>
+$$
+f_{W^{(l)}}(K_h^{(l)}) \approx V_h^{(l)}
+$$<p>因此，fast weights 可以理解为一种参数化 Key-Value memory。</p>
+<p>机器人执行时，通过 query 读取这份记忆：</p>
+$$
+R^{(l)}=f_{W_N^{(l)}}(Q_r^{(l)})\theta_O^{(l)}
+$$<p>其中 $R^{(l)}$ 通过类似残差链接加回 video stream，通过改变 video expert 的视觉动态隐变量，间接影响 action expert 的动作生成。</p>
+$$
+X_v^{(l+1)}=\hat{X}_v^{(l+1)}+R^{(l)}
+$$<hr>
+<h4 id="人类-机器人元训练">人类-机器人元训练
+</h4><p>元训练阶段使用配对的人类和机器人 episode，它的目标是学习如何从人类视频中更新 fast weights，使更新后的 fast weights 能帮助机器人更好地生成动作和未来视觉状态。</p>
+<p><strong>内循环：用人类视频更新 fast weights</strong></p>
+<p>每个训练样本开始时：</p>
+$$
+W_0^{(l)}=W_{\text{init}}^{(l)}
+$$<p>然后用人类视频更新 fast weights：</p>
+$$
+W_{i+1}^{(l)}=
+W_i^{(l)}-
+\eta
+\nabla_{W_i^{(l)}}\mathcal{L}_{\text{inner}}(W_i)
+$$<p>inner loss 包括视频生成损失和 Key-Value memory 重构损失：</p>
+$$
+\mathcal{L}_{\text{inner}}(W_i)=
+\mathcal{L}_{\text{vg}}^{\text{human}}(W_i)+
+\lambda
+\sum_l
+\mathcal{L}_{\text{KVM}}^{(l)}(W_i)
+$$<p>其中：</p>
+$$
+\mathcal{L}_{\text{KVM}}^{(l)}=
+\frac{1}{Nd_m}
+\left\|
+f_{W^{(l)}}(K_h^{(l)})-V_h^{(l)}
+\right\|_F^2
+$$<p>经过 $N$ 步后得到$W_N$，作为当前样本对应的临时任务记忆。</p>
+<p><strong>外循环：用机器人数据计算 meta loss</strong></p>
+<p>得到 $W_N$ 后，模型在机器人侧预测动作和未来视觉 latent，并计算机器人监督损失：</p>
+$$
+\mathcal{L}_{\text{meta}}=
+\mathcal{L}_{\text{WAM}}^{\text{robot}}(W_N)
+$$<p>外层 loss 的梯度会穿过：</p>
+$$
+\mathcal{L}_{\text{meta}}
+\rightarrow
+W_N
+\rightarrow
+W_{N-1}
+\rightarrow
+\cdots
+\rightarrow
+W_0=W_{\text{init}}
+$$<p>因此，外循环更新的是：</p>
+$$
+\Theta_{\text{WAM}},\theta_{\text{TTT}},W_{\text{init}}
+$$<p>其中：</p>
+<ul>
+<li>$\Theta_{\text{WAM}}$：WAM 主体参数；</li>
+<li>$\theta_{\text{TTT}}$：TTT slow projections；</li>
+<li>$W_{\text{init}}$：fast weights 的可学习初始化。</li>
+</ul>
+<p>每个训练样本结束后，adapted fast weights $W_N$ 会被丢弃；下一个样本重新从 $W_{\text{init}}$ 开始。</p>
+<hr>
+<h4 id="测试时训练">测试时训练
+</h4><p>部署时，在每类任务开始前，先输入一小批目标任务的无标注人类视频$B_h$</p>
+<p>测试时只优化fast weights：</p>
+$$
+\mathcal{L}_{\text{TTT}}(W_i)=
+\frac{1}{|B_h|}
+\sum_{u\in B_h}
+\left[
+\mathcal{L}_{\text{vg}}(u;\Theta_{\text{WAM}},\theta_{\text{TTT}},W_i)+
+\lambda
+\sum_l
+\mathcal{L}_{\text{KVM}}^{(l)}(u;W_i)
+\right]
+$$$$
+W_{i+1}^{(l)}=
+W_i^{(l)}-
+\eta
+\nabla_{W_i^{(l)}}\mathcal{L}_{\text{TTT}}(W_i)
+$$<p>经过 $N$ 步更新后得到 $W_N$。机器人 rollout 时，$W_N$ 固定：</p>
+$$
+a_{t:t+k}
+\sim
+p_{\Theta_{\text{WAM}},\theta_{\text{TTT}},W_N}
+(a_{t:t+k}\mid o_t,g)
+$$<hr>
+<h3 id="实验">实验
+</h3><p>论文在三种真实机器人形态上评估 WAM-TTT：</p>
+<ol>
+<li><strong>Unitree G1</strong>：人形机器人；</li>
+<li><strong>Galbot gripper</strong>：双臂双指夹爪机器人；</li>
+<li><strong>Galbot sharpa</strong>：双臂灵巧手机器人。</li>
+</ol>
+<p>总共评估 9 个任务：</p>
+<ul>
+<li>Transfer Bottle；</li>
+<li>Table Bussing；</li>
+<li>Deliver Drink；</li>
+<li>Swap Place；</li>
+<li>Pour Water；</li>
+<li>Stamp Paper；</li>
+<li>Flip Steak；</li>
+<li>Pyramid Stacking；</li>
+<li>Multi-step Steak。</li>
+</ul>
+<p>每个任务在两种设置下评估：</p>
+<ul>
+<li><strong>Orig.</strong>：标准机器人隔间内，光照、桌面高度和物体实例与训练时匹配；</li>
+<li><strong>New</strong>：未见家庭环境，光照、桌面高度和物体同时变化，是组合式分布外扰动。</li>
+</ul>
+<p>指标是 progress percentage。每个 task-setting 组合进行 25 次试验。完整完成任务得 1.0，只完成部分子目标则按子目标完成比例给分。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">训练时是否用人类视频</th>
+					<th style="text-align: right">测试时是否用人类视频</th>
+					<th style="text-align: right">是否更新 fast weights</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>LDA</td>
+					<td style="text-align: right">否</td>
+					<td style="text-align: right">否</td>
+					<td style="text-align: right">否</td>
+			</tr>
+			<tr>
+					<td>WAM-COTRAIN</td>
+					<td style="text-align: right">是</td>
+					<td style="text-align: right">否</td>
+					<td style="text-align: right">否</td>
+			</tr>
+			<tr>
+					<td>WAM-ICL</td>
+					<td style="text-align: right">否 / 不通过 TTT 学</td>
+					<td style="text-align: right">是，作为上下文</td>
+					<td style="text-align: right">否</td>
+			</tr>
+			<tr>
+					<td>EGOSCALE</td>
+					<td style="text-align: right">使用大规模第一视角人类数据</td>
+					<td style="text-align: right">否</td>
+					<td style="text-align: right">否</td>
+			</tr>
+			<tr>
+					<td>$\pi0.5$</td>
+					<td style="text-align: right">开放世界泛化 VLA</td>
+					<td style="text-align: right">否</td>
+					<td style="text-align: right">否</td>
+			</tr>
+			<tr>
+					<td>WAM-TTT</td>
+					<td style="text-align: right">是</td>
+					<td style="text-align: right">是</td>
+					<td style="text-align: right">是</td>
+			</tr>
+	</tbody>
+</table></div>
+<ul>
+<li>WAM-ICL：把人类视频作为 in-context demonstration；</li>
+</ul>
+<p><img alt="1主表" class="gallery-image" data-flex-basis="847px" data-flex-grow="352" height="478" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783844645764.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783844645764_hu_8c24d856f2b86145.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783844645764_hu_bcaa42466eea3aee.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783844645764.png 1687w" width="1687"></p>
+<h2 id="conga">CONGA
+</h2><h3 id="研究动机-1">研究动机
+</h3><p>测试时自适应允许模型在推理过程中，仅利用连续到来的无标签测试数据更新自身，从而适应未知目标域。然而，这一过程存在几个突出问题：</p>
+<ul>
+<li>测试数据没有真实标签，只能依赖熵最小化、伪标签或一致性目标；</li>
+<li>错误伪标签和异常样本可能产生噪声梯度；</li>
+<li>一次过于激进的错误更新就可能造成性能骤降或灾难性遗忘；</li>
+<li>更新过于保守又会使模型无法充分学习目标域信息。</li>
+</ul>
+<p>因此，作者从学习率调度这一新角度，提出了为TTA服务的学习率调度。</p>
+<p>作者通过分析 TTA 的跟踪误差，在理想损失下，将下一步误差分解为三类因素：</p>
+\[
+\mathbb{E}\left[\|e_{t+1}\|^2\right]
+\leq
+(1-\eta_t)\mathbb{E}\left[\|e_t\|^2\right]
++\eta_t^2\sigma_t^2
++O\left(\eta_tB^2+\frac{\delta^2}{\eta_t}\right)
+\]<p>其中：</p>
+<ul>
+<li>第一项表示当前更新带来的<strong>误差收缩</strong>；</li>
+<li>第二项表示随机梯度噪声引入的<strong>噪声方差</strong>（噪声方差项）；</li>
+<li>第三项表示目标分布漂移和梯度偏差造成的<strong>结构性漂移</strong>（噪声偏差项）。</li>
+</ul>
+<p>这一分析揭示了 TTA 中的稳定性—可塑性权衡：</p>
+<ul>
+<li>早期阶段： 初始领域偏移较大，应使用较大学习率快速对齐；</li>
+<li>后期阶段： 跟踪误差逐渐减小，梯度噪声开始主导，应降低学习率；</li>
+<li>长期适应： 单纯衰减无法消除结构性漂移，需要周期性重启恢复可塑性。</li>
+</ul>
+<hr>
+<h3 id="方法-1">方法
+</h3><p>CONGA 将第 \(t\) 步学习率限制在动态区间：</p>
+\[
+\eta_t\in[\eta_{\min,t},\eta_{\max,t}]
+\]<p>最终学习率由以下公式确定：</p>
+\[
+\eta_t=
+\eta_{\min,t}+
+\frac{1}{2}
+\left(
+\eta_{\max,t}-\eta_{\min,t}
+\right)\Phi(t)
+\]<p>文章采用了循环学习率调节器，使用带周期性重启的余弦衰减：</p>
+\[
+\Phi(t)=
+1+\cos\left(\frac{\pi t}{T_i}\right)
+\]<p>其中，\(T_i\) 表示第 \(i\) 个周期的长度，\(t\) 表示当前周期内的步数，T实际取为100.</p>
+<p>LARS 的参数—梯度信赖比率：</p>
+\[
+\frac{\|\theta\|}{\|g\|}
+\]<p>使用以下安全门控定义学习率上界：</p>
+\[
+\eta_{\max,t}=
+\eta_{\text{base}}
+\cdot
+\frac{1}{2}
+\ln\left(
+1+
+\frac{\|\bar{\theta}_t\|}
+{\|\bar{g}_t\|+\varepsilon}
+\right)
+\]<p>其中\(\|\bar{\theta}_t\|\) 是参数范数的指数移动平均；\(\|\bar{g}_t\|\) 是梯度范数的指数移动平均</p>
+<p>理论分析表明，使期望误差下降量最大化的最优学习率满足：</p>
+\[
+\eta_t^*
+\propto
+\frac{1}{\sigma_t^2}
+\]<p>其中 \(\sigma_t^2\) 是随机梯度噪声方差。</p>
+<p>但实际 TTA 中无法直接观测 \(\sigma_t^2\)。因此，作者用预测置信度作为梯度可靠性的代理变量。</p>
+<p>首先计算可靠样本密度：</p>
+\[
+\bar{C}_t=
+\frac{1}{B}
+\sum_{i=1}^{B}
+\mathbb{I}
+\left(
+\max p(y\mid x_i)>\tau_C
+\right)
+\]<p>学习率下界定义为：</p>
+\[
+\eta_{\min,t}=
+\eta_{\text{base}}\bar C_t^2
+\]<p>当以下条件同时成立时：</p>
+\[
+\eta_{\max,t}>3\eta_{\text{base}}
+\]<p>且</p>
+\[
+\rho_t>0.75
+\]<p>其中 \(\rho_t\) 为当前批次最大 Softmax 概率的均值，CONGA 会将当前学习率重置为 \(\eta_{\min,t}\)。</p>
+<p>这一状态意味着模型已经具有较高置信度，继续进行大步更新可能引起过度适应或灾难性遗忘，因此算法转向保守更新。</p>
+<h3 id="实验-1">实验
+</h3><p><img alt="标准TTA" class="gallery-image" data-flex-basis="464px" data-flex-grow="193" height="1036" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845487364.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845487364_hu_95533eba4be0c5d5.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845487364_hu_4c3bb39304b30394.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845487364.png 2007w" width="2007"></p>
+<p><img alt="CTTA" class="gallery-image" data-flex-basis="683px" data-flex-grow="284" height="693" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845524639.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845524639_hu_307003ac06fce8c9.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845524639_hu_58b769f1ab04e456.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845524639.png 1975w" width="1975"></p>
+<p><img alt="T消融" class="gallery-image" data-flex-basis="395px" data-flex-grow="164" height="619" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845601717.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845601717_hu_b7c907514ea96cc6.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/image/index/1783845601717.png 1021w" width="1021"></p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ttt/">TTT</a>
+        
+            <a href="/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/">具身智能</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读9" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_dbe10ebf6cc59157.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #392e1f80 0%, #392e1fC0 100%);">
+            <h2 class="article-title">论文阅读9</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读8" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_b3142fb8ae7cd5f6.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #bebcbf80 0%, #53383bC0 100%);">
+            <h2 class="article-title">论文阅读8</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读7" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_157b6711eb9ae79e.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #49423880 0%, #b8b7b3C0 100%);">
+            <h2 class="article-title">论文阅读7</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读5</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读6" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_bb0e2e06f704f4bf.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #4b4c5980 0%, #cdd0ddC0 100%);">
+            <h2 class="article-title">论文阅读6</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
