@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读11</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读11">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTT' /><meta property='article:tag' content='3D Seg' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-07-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-07-17T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="论文阅读11">
+<meta name="twitter:description" content="论文阅读">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#robottt-context-scaling-for-robot-policies">RoboTTT: Context Scaling for Robot Policies</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍">背景介绍</a>
+          <ol>
+            <li><a href="#机器人序列策略">机器人序列策略</a></li>
+            <li><a href="#基础模型">基础模型</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#ttt模块">TTT模块</a></li>
+            <li><a href="#register-tokens">Register Tokens</a></li>
+            <li><a href="#训练">训练</a></li>
+            <li><a href="#tbptt固定显存训练超长上下文">TBPTT：固定显存训练超长上下文</a></li>
+            <li><a href="#人类视频模仿">人类视频模仿</a></li>
+            <li><a href="#dagger-distillation">DAgger Distillation</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#实验平台与任务">实验平台与任务</a></li>
+            <li><a href="#比较方法">比较方法</a></li>
+            <li><a href="#主实验结果">主实验结果</a></li>
+            <li><a href="#单纯增加历史并不可靠">单纯增加历史并不可靠</a></li>
+            <li><a href="#上下文长度扩展实验">上下文长度扩展实验</a></li>
+            <li><a href="#单样本人类视频模仿">单样本人类视频模仿</a></li>
+            <li><a href="#外部扰动恢复">外部扰动恢复</a></li>
+            <li><a href="#dagger-distillation-1">DAgger Distillation</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#s2am3d-scale-controllable-part-segmentation-of-3d-point-clouds">S2AM3D: Scale-controllable Part Segmentation of 3D Point Clouds</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#背景介绍-1">背景介绍</a></li>
+        <li><a href="#三维点云部件分割">三维点云部件分割</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#点一致性部件编码器">点一致性部件编码器</a></li>
+            <li><a href="#尺度感知提示解码器">尺度感知提示解码器</a></li>
+            <li><a href="#训练目标">训练目标</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#训练设置">训练设置</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/">论文阅读11</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-07-17T00:00:00Z'>2026-07-17</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#robottt-context-scaling-for-robot-policies">RoboTTT: Context Scaling for Robot Policies</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍">背景介绍</a>
+          <ol>
+            <li><a href="#机器人序列策略">机器人序列策略</a></li>
+            <li><a href="#基础模型">基础模型</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#ttt模块">TTT模块</a></li>
+            <li><a href="#register-tokens">Register Tokens</a></li>
+            <li><a href="#训练">训练</a></li>
+            <li><a href="#tbptt固定显存训练超长上下文">TBPTT：固定显存训练超长上下文</a></li>
+            <li><a href="#人类视频模仿">人类视频模仿</a></li>
+            <li><a href="#dagger-distillation">DAgger Distillation</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#实验平台与任务">实验平台与任务</a></li>
+            <li><a href="#比较方法">比较方法</a></li>
+            <li><a href="#主实验结果">主实验结果</a></li>
+            <li><a href="#单纯增加历史并不可靠">单纯增加历史并不可靠</a></li>
+            <li><a href="#上下文长度扩展实验">上下文长度扩展实验</a></li>
+            <li><a href="#单样本人类视频模仿">单样本人类视频模仿</a></li>
+            <li><a href="#外部扰动恢复">外部扰动恢复</a></li>
+            <li><a href="#dagger-distillation-1">DAgger Distillation</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#s2am3d-scale-controllable-part-segmentation-of-3d-point-clouds">S2AM3D: Scale-controllable Part Segmentation of 3D Point Clouds</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#背景介绍-1">背景介绍</a></li>
+        <li><a href="#三维点云部件分割">三维点云部件分割</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#点一致性部件编码器">点一致性部件编码器</a></li>
+            <li><a href="#尺度感知提示解码器">尺度感知提示解码器</a></li>
+            <li><a href="#训练目标">训练目标</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#训练设置">训练设置</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><p>1.<a class="link" href="https://arxiv.org/pdf/2607.15275"  target="_blank" rel="noopener"
+    >RoboTTT: Context Scaling for Robot Policies 【preprint】</a>，NVIDIA，Linxi “Jim” Fan组</p>
+<p>2.<a class="link" href="https://arxiv.org/pdf/2512.00995"  target="_blank" rel="noopener"
+    >S2AM3D: Scale-controllable Part Segmentation of 3D Point Clouds 【CVPR 2026 Oral】</a>哈工大，Wangmeng Zuo组</p>
+<h2 id="robottt-context-scaling-for-robot-policies">RoboTTT: Context Scaling for Robot Policies
+</h2><h3 id="研究动机">研究动机
+</h3><p>当前机器人模型面临以下问题：</p>
+<ol>
+<li>基础模型的上下文太短</li>
+</ol>
+<p>当前多数VLA只根据当前观测，或极少量历史帧生成动作。</p>
+<ol start="2">
+<li>直接扩展 Transformer 上下文代价较高</li>
+</ol>
+<p>标准全注意力需要保存过去的 Key/Value，并在后续步骤中访问历史。即使使用 KV cache，存储和计算开销也会随历史长度增长。</p>
+<p>论文希望构建一种策略，使其能够：</p>
+<ul>
+<li>将视觉—运动上下文扩展至数千时间步；</li>
+<li>自动决定哪些历史信息值得保留；</li>
+<li>在部署过程中继续根据历史调整内部状态；</li>
+<li>不让单步推理成本随历史长度增长；</li>
+<li>支持长任务、视频上下文模仿、扰动恢复和在线策略改进。</li>
+</ul>
+<p>这正是TTT快权重的用武之地。</p>
+<hr>
+<h3 id="背景介绍">背景介绍
+</h3><h4 id="机器人序列策略">机器人序列策略
+</h4><p>机器人轨迹表示为：</p>
+\[
+\xi=\{(l,o_t,q_t,A_t)\}_{t=1}^{T},
+\]<p>其中每个时间步包含：</p>
+<ul>
+<li>任务语言 \(l\)；</li>
+<li>图像观测 \(o_t\)；</li>
+<li>本体感觉状态 \(q_t\)；</li>
+<li>动作块 \(A_t\)。</li>
+</ul>
+<p>长上下文策略的目标是学习：</p>
+\[
+\pi(A_t\mid \xi_{<t},o_t,q_t),
+\]<p>即在生成当前动作时，不仅利用当前观测，也利用此前的完整执行历史 \(\xi_{<t}\)。</p>
+<h4 id="基础模型">基础模型
+</h4><p>RoboTTT 构建在预训练机器人基础模型 <strong>GR00T N1.7</strong> 上，主要包括两部分：</p>
+<ol>
+<li>VLM主干</li>
+</ol>
+<p>VLM 接收：</p>
+<ul>
+<li>多视角 RGB 图像；</li>
+<li>语言任务指令。</li>
+</ul>
+<p>它输出一组视觉—语言 token：</p>
+\[
+\Phi_t=[\phi_{t,1},\ldots,\phi_{t,L}],
+\]<p>这些 token 是场景、物体、语言目标及其关系的高维表示（经过encoder）。后续动作模型通过交叉注意力查询这些表示。</p>
+<ol start="2">
+<li>Diffusion Transformer 动作头</li>
+</ol>
+<p>DiT 根据视觉—语言表示、机器人状态和当前加噪动作，生成一个长度为 \(H\) 的动作块：</p>
+\[
+A_t=[a_t,\ldots,a_{t+H-1}].
+\]<p>模型采用流匹配式生成过程：从随机噪声动作块开始，经过 \(k\) 次迭代逐渐得到可执行动作。</p>
+<p>部署时，初始动作块由噪声直接采样：</p>
+\[
+A_t^0\sim\mathcal N(0,I).
+\]<ol start="3">
+<li>State Encoder</li>
+</ol>
+<p>输入机器人关节、夹爪、末端位姿等本体状态，将不同机器人的状态向量映射为统一维度的状态 token：</p>
+\[
+s_t=E_{\text{state}}(q_t).
+\]<p>
+<img alt="模型架构" class="gallery-image" data-flex-basis="574px" data-flex-grow="239" height="600" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784379502978.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784379502978_hu_85a22e395259adf7.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784379502978.png 1437w" width="1437"></p>
+<hr>
+<h3 id="方法">方法
+</h3><h4 id="ttt模块">TTT模块
+</h4><p>TTT 引入一组在训练和推理期间都会更新的<strong>快速权重</strong> \(W\)。一个小型快速模型 \(f_W\) 在时间步 \(t\) 先执行更新：</p>
+\[
+W_t=
+W_{t-1}
+-\eta\nabla_W
+\mathcal L_{\mathrm{FW}}
+\left(f_{W_{t-1}}(K_t),V_t\right),
+\]<p>随后使用更新后的权重处理查询：</p>
+\[
+O_t=f_{W_t}(Q_t).
+\]<p>RoboTTT 在 GR00T N1.7 的每个 DiT 层中，将 TTT 层放在自注意力和交叉注意力之后。</p>
+<p>单个时间步的处理分为：</p>
+<ol>
+<li>自注意力处理 register token、状态 token 和动作 token；</li>
+<li>交叉注意力从当前视觉—语言 token \(\Phi_t\) 中读取信息；</li>
+<li>不同真实时间步的注意力输出沿时间维度排列；</li>
+<li>TTT 层跨时间更新快速权重并读取历史。</li>
+</ol>
+<h4 id="register-tokens">Register Tokens
+</h4><p>VLM 每个时间步可能输出大量视觉—语言 token。若全部送入 TTT，长序列计算成本很高。</p>
+<p>论文在每个时间步加入 \(N=16\) 个可学习的 register tokens：</p>
+\[
+R_t=[r_{t,1},\ldots,r_{t,16}].
+\]<p>它们通过注意力读取当前视觉—语言信息，再进入 TTT，在跨时间传递中承担摘要的作用。</p>
+<p>TTT 实际处理的序列近似为：</p>
+\[
+X=[R_1,q_1,\widetilde A_1,\ldots,R_T,q_T,\widetilde A_T].
+\]<h4 id="训练">训练
+</h4><p>训练数据由完整轨迹或连续子轨迹构成。每个时间步具有真实动作块 \(A_t\)。</p>
+<p>DiT 学习预测从噪声指向真实动作的向量场：</p>
+\[
+v_\theta(\Phi_t,A_t^{\tau_t},q_t;W_{t-1})
+\approx A_t-\epsilon_t.
+\]<p>整条序列的损失为各时间步流匹配损失的平均值：</p>
+\[
+\mathcal L_{\mathrm{fm}}=
+\frac{1}{T}
+\sum_{t=1}^{T}
+\mathbb E_{\tau_t,\epsilon_t}
+\left[
+\left\|
+v_\theta(\Phi_t,A_t^{\tau_t},q_t;W_{t-1})
+-(A_t-\epsilon_t)
+\right\|_2^2
+\right].
+\]<p>训练同时学习：</p>
+<ul>
+<li>原始模型的慢速参数；</li>
+<li>TTT 投影矩阵 \(\theta_Q,\theta_K,\theta_V\)；</li>
+<li>快速权重初始化 \(W_0\)，即与此前相同的内循环+外循环</li>
+<li>快速权重的更新动态；</li>
+</ul>
+<p>如果整条训练序列共享同一个噪声水平，则整条序列会同时非常简单或非常困难，容易导致训练不稳定。</p>
+<p>RoboTTT 为序列中的每个动作块独立采样噪声时间：</p>
+\[
+\tau_t=s(1-u_t),\qquad
+u_t\sim\operatorname{Beta}(1.5,1),\quad s=0.999.
+\]<h4 id="tbptt固定显存训练超长上下文">TBPTT：固定显存训练超长上下文
+</h4><p>完整时间反向传播需要保存所有时间步的激活，显存占用随序列长度增长。</p>
+<p>RoboTTT 使用截断时间反向传播（TBPTT）：</p>
+<ol>
+<li>将长轨迹分成多个片段；</li>
+<li>梯度只在当前片段内传播；</li>
+<li>片段边界处对快速权重执行 detach；</li>
+<li>快速权重的数值继续传入下一片段。</li>
+</ol>
+<p>可表示为：</p>
+\[
+W_m^{\mathrm{next}}=
+\operatorname{stopgrad}(W_m).
+\]<p>\(W_0\) 只接收第一片段的直接梯度；后续片段仍可训练共享的写入、读取、门控和动作生成参数。</p>
+<h4 id="人类视频模仿">人类视频模仿
+</h4><p>训练时，将相同任务配置的人类视频和机器人轨迹拼接：</p>
+\[
+\xi_{\mathrm{video}}\Vert\xi_{\mathrm{robot}}.
+\]<ul>
+<li>人类视频部分只更新快速权重，不计算动作损失；</li>
+<li>机器人轨迹部分在视频形成的快速权重条件下计算动作损失。</li>
+</ul>
+<p>测试时，RoboTTT对于未见任务，支持从<strong>单样本</strong>人类视频模仿。
+模型先观看一段新配置的人类视频，快速权重吸收目标配置；场景重置后，机器人从该快速权重状态继续执行。</p>
+<p>人类视频不需要逐帧机器人动作标注。</p>
+<h4 id="dagger-distillation">DAgger Distillation
+</h4><p>DAgger 轨迹包含机器人次优动作和人类纠正动作：</p>
+\[
+A_t\in\{A_t^R,A_t^H\}.
+\]<p>RoboTTT 的处理方式是：</p>
+<ul>
+<li>所有动作和观测都作为上下文更新快速权重；</li>
+<li>只在人类纠正时间步计算模仿损失。</li>
+</ul>
+<p>这样，模型学习的不是孤立的纠正动作，而是：</p>
+\[
+\text{失败历史}\longrightarrow\text{相应纠正}.
+\]<p>具体的快速权重在任务结束后会被丢弃，但慢速参数学会了如何把失败写入临时记忆，以及如何根据这种记忆生成恢复动作。</p>
+<hr>
+<h3 id="实验">实验
+</h3><h4 id="实验平台与任务">实验平台与任务
+</h4><p>所有实验使用 YAM 双臂机器人和四个 RGB 相机：</p>
+<ul>
+<li>顶部相机；</li>
+<li>底部相机；</li>
+<li>左腕相机；</li>
+<li>右腕相机。</li>
+</ul>
+<p>评估包含三项长时程、多阶段装配任务：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>任务</th>
+					<th>内容</th>
+					<th style="text-align: right">平均时长</th>
+					<th style="text-align: right">真实机器人数据</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Pup Go Car</td>
+					<td>玩具车辆装配</td>
+					<td style="text-align: right">2 分钟</td>
+					<td style="text-align: right">8 小时</td>
+			</tr>
+			<tr>
+					<td>Circuit</td>
+					<td>根据语言或视频指定电路装配配置</td>
+					<td style="text-align: right">1 分钟</td>
+					<td style="text-align: right">6 小时</td>
+			</tr>
+			<tr>
+					<td>Gear Bot</td>
+					<td>十阶段复杂装配</td>
+					<td style="text-align: right">5 分钟</td>
+					<td style="text-align: right">5 小时</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>Circuit 有 80 种配置，变化包括零件类型、数量和装配顺序。模型在 20 种配置上训练，在剩余 60 种未见配置上测试。</p>
+<h4 id="比较方法">比较方法
+</h4><ul>
+<li><strong>GR00T N1.7</strong>：只使用当前单步观测；</li>
+<li><strong>GR00T N1.7 Hist.</strong>：额外使用一帧历史；</li>
+<li><strong>GDN</strong>：以 Gated DeltaNet 替换 TTT，维护固定大小循环状态，但部署时不进行梯度下降；</li>
+<li><strong>RoboTTT</strong>：通过测试时梯度下降更新快速权重。</li>
+</ul>
+<p>所有方法使用相同的下游任务数据。序列模型后训练时使用 1K 时间步上下文，非序列模型匹配计算预算。</p>
+<p>每个策略通常测试 20 次；Gear Bot 因任务时长较长，测试 10 次。</p>
+<p>评估指标包括：</p>
+<ul>
+<li>基于任务阶段评分的完成度；</li>
+<li>完全成功的 rollout 数量。</li>
+</ul>
+<h4 id="主实验结果">主实验结果
+</h4><p>RoboTTT 的三项任务平均完成度为 <strong>79%</strong>：</p>
+<ul>
+<li>GR00T N1.7：42%；</li>
+<li>GDN：56%；</li>
+<li>RoboTTT 相比单步基线相对提高 <strong>87%</strong>；</li>
+<li>相比最佳基线 GDN 相对提高 <strong>41%</strong>。</li>
+</ul>
+<p>完全成功次数如下：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">Pup Go Car</th>
+					<th style="text-align: right">Circuit</th>
+					<th style="text-align: right">Gear Bot</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>RoboTTT</td>
+					<td style="text-align: right">9/20</td>
+					<td style="text-align: right">13/20</td>
+					<td style="text-align: right">2/10</td>
+			</tr>
+			<tr>
+					<td>GR00T N1.7</td>
+					<td style="text-align: right">3/20</td>
+					<td style="text-align: right">3/20</td>
+					<td style="text-align: right">0/10</td>
+			</tr>
+			<tr>
+					<td>GR00T N1.7 Hist.</td>
+					<td style="text-align: right">0/20</td>
+					<td style="text-align: right">8/20</td>
+					<td style="text-align: right">0/10</td>
+			</tr>
+			<tr>
+					<td>GDN</td>
+					<td style="text-align: right">3/20</td>
+					<td style="text-align: right">8/20</td>
+					<td style="text-align: right">0/10</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>RoboTTT 是唯一能够完整完成五分钟、十阶段 Gear Bot 任务的方法。</p>
+<p>定性上，它主要表现出三类优势：</p>
+<ol>
+<li>**任务阶段跟踪：**避免因视觉相似而重复或跳过阶段；</li>
+<li>**策略性恢复：**失败后抬臂、重新对齐并再次尝试；</li>
+<li>**精细操作更准确：**利用过去观测缓解当前遮挡导致的部分可观测性。</li>
+</ol>
+<h4 id="单纯增加历史并不可靠">单纯增加历史并不可靠
+</h4><p>GR00T N1.7 Hist. 直接拼接一帧历史，在 Pup Go Car 上反而低于无历史模型。这说明：</p>
+<ul>
+<li>历史可能引入虚假相关；</li>
+<li>模型在推理时可能遇到训练中未覆盖的时间关系；</li>
+<li>“有历史”不等于“能有效压缩和利用历史”。</li>
+</ul>
+<p>GDN 和 RoboTTT 都维护固定大小状态，但 RoboTTT 使用非线性快速模型和测试时梯度下降，历史压缩能力更强。</p>
+<h4 id="上下文长度扩展实验">上下文长度扩展实验
+</h4><p>作者将 RoboTTT 和 GDN 的预训练上下文从 128 时间步逐步增加到 8K。</p>
+<p>RoboTTT 的闭环性能随上下文长度稳定提升：</p>
+<ul>
+<li>1K 上下文预训练：43.9%；</li>
+<li>8K 上下文预训练：71.5%；</li>
+<li>相对提升约 <strong>63%</strong>；</li>
+<li>比最佳短上下文基线 45.6% 高约 <strong>57%</strong>；</li>
+<li>在 8K 时仍未出现明显饱和。</li>
+</ul>
+<p>GDN 没有表现出类似的稳定扩展趋势。</p>
+<p>论文认为，长训练序列能够在更多次快速权重更新中塑造 \(W_0\) 和更新动态，而 GDN 的线性关联更新缺少这种测试时梯度和元学习机制。</p>
+<h4 id="单样本人类视频模仿">单样本人类视频模仿
+</h4><p>Circuit 的所有配置使用相同语言提示“assemble circuit”，因此具体目标只能从视频中判断。</p>
+<p>训练时，每种训练配置收集 5–20 段不同初始布局的人类视频，并与同配置机器人轨迹拼接。测试时给模型一段未见配置的人类视频。</p>
+<p>结果：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">任务完成度</th>
+					<th style="text-align: right">完全成功</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>RoboTTT</td>
+					<td style="text-align: right">65%</td>
+					<td style="text-align: right">6/10</td>
+			</tr>
+			<tr>
+					<td>GDN</td>
+					<td style="text-align: right">33%</td>
+					<td style="text-align: right">0/10</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>结果表明，仅能编码上下文并不够；策略还必须能够在动作生成时有效检索和利用其中的任务配置。</p>
+<h4 id="外部扰动恢复">外部扰动恢复
+</h4><p>在 Pup Go Car 中，研究者在机器人完成部分装配后人为：</p>
+<ul>
+<li>移除黄色车顶；</li>
+<li>拔出已经安装的轮胎。</li>
+</ul>
+<p>模型需要根据自身历史回到扰动前的阶段并重新安装。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">车顶恢复</th>
+					<th style="text-align: right">轮胎恢复</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>RoboTTT</td>
+					<td style="text-align: right">15/20</td>
+					<td style="text-align: right">18/20</td>
+			</tr>
+			<tr>
+					<td>GR00T N1.7</td>
+					<td style="text-align: right">10/20</td>
+					<td style="text-align: right">11/20</td>
+			</tr>
+			<tr>
+					<td>GR00T N1.7 Hist.</td>
+					<td style="text-align: right">3/20</td>
+					<td style="text-align: right">5/20</td>
+			</tr>
+			<tr>
+					<td>GDN</td>
+					<td style="text-align: right">13/20</td>
+					<td style="text-align: right">18/20</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>长上下文模型在 episode 内的状态恢复上更有优势。</p>
+<h4 id="dagger-distillation-1">DAgger Distillation
+</h4><p>作者分别以 RoboTTT 和 GR00T N1.7 为基础策略，各收集 50 条 DAgger 轨迹，共 100 条。</p>
+<p>实验比较：</p>
+<ul>
+<li>标准 DAgger：只在人类纠正动作上训练；</li>
+<li>完整轨迹直接模仿：同时模仿机器人动作和人类纠正；</li>
+<li>DAgger Distillation：完整轨迹作为上下文，只在人类纠正处计算损失。</li>
+</ul>
+<p>标准 DAgger 平均提高约 9%；DAgger Distillation 对序列模型平均提高约 33%：</p>
+<ul>
+<li>RoboTTT：提高 36%；</li>
+<li>GDN：提高 29%。</li>
+</ul>
+<p>次优机器人动作作为模仿目标没有明显价值，但作为“失败上下文”价值很大。这说明性能提升主要来自模型学会在执行错误后在线恢复。</p>
+<h2 id="s2am3d-scale-controllable-part-segmentation-of-3d-point-clouds">S2AM3D: Scale-controllable Part Segmentation of 3D Point Clouds
+</h2><h3 id="研究动机-1">研究动机
+</h3><p>在交互式3D部件分割中，现有聚类方法通常依赖后处理控制粒度，操作不连续，也不适合实时交互；点提示方法虽然允许用户点击目标部件，但通常无法通过连续参数准确控制分割范围。</p>
+<p>基于上述问题，论文提出 <strong>S2AM3D</strong>：一种同时利用二维分割先验、原生三维监督、点提示和连续尺度提示的三维点云部件分割框架。其核心目标是，在保持全局三维一致性的同时，使用户能够通过一个提示点和一个<strong>尺度参数</strong>，灵活控制分割结果的细粒度或粗粒度。</p>
+<hr>
+<h3 id="背景介绍-1">背景介绍
+</h3><h3 id="三维点云部件分割">三维点云部件分割
+</h3><p>输入点云表示为：</p>
+\[
+P\in\mathbb{R}^{N\times 3},
+\]<p>其中 \(N\) 是点的数量，每个点由三维坐标 \((x,y,z)\) 表示。</p>
+<p>模型需要对每个点预测其是否属于目标部件，最终输出一个逐点概率掩码：</p>
+\[
+\hat m\in[0,1]^N.
+\]<p>当某个点的预测概率高于设定阈值时，该点被划分到目标部件中。</p>
+<p>S2AM3D 与传统固定类别分割不同。它不是只输出预先定义好的“椅腿”“椅背”等类别，而是接收：</p>
+<ul>
+<li>一个点提示 \(p\)，表示用户点击的位置；</li>
+<li>一个可选的尺度提示 \(s\in[0,1]\)，表示希望分割出的区域相对于整个物体的大小。</li>
+</ul>
+<p>例如，用户在办公椅滚轮上点击同一个点：</p>
+<ul>
+<li>小尺度可以分割单个滚轮；</li>
+<li>中尺度可以分割整根椅脚；</li>
+<li>大尺度可以分割整个椅子底座。</li>
+</ul>
+<hr>
+<h3 id="方法-1">方法
+</h3><p>S2AM3D 主要由两个部分组成：</p>
+<ol>
+<li>点一致性部件编码器；</li>
+<li>尺度感知提示解码器。</li>
+</ol>
+<p><img class="gallery-image" data-flex-basis="696px" data-flex-grow="290" height="603" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784385173210.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784385173210_hu_37d09c2ca26d72ce.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784385173210_hu_b218ae4556adb9c9.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784385173210.png 1750w" width="1750"></p>
+<h4 id="点一致性部件编码器">点一致性部件编码器
+</h4><p>编码器首先使用 PVCNN 提取点云的潜在特征，再通过正交投影将点特征转换为三平面表示。三平面特征经过 Transformer 模块聚合后，从多个随机视角渲染为二维特征，并利用 SAM 的预训练知识进行蒸馏。</p>
+<p>对于同一个物体，随机采样 \(\hat N\) 个点。对于锚点 \(i\)，与其标签相同的点被视为正样本，不同标签的点被视为负样本。使用带温度参数的余弦相似度：</p>
+\[
+s_{ij}=\frac{f_i^\top f_j}{\tau},
+\]<p>并通过对比损失使：</p>
+<ul>
+<li>同一部件的点在特征空间中更加紧密；</li>
+<li>不同部件的点之间间隔更大。</li>
+</ul>
+<h4 id="尺度感知提示解码器">尺度感知提示解码器
+</h4><p>解码器接收：</p>
+<ul>
+<li>点特征 \(F\)；</li>
+<li>三维坐标 \(P\)；</li>
+<li>点提示 \(p\)；</li>
+<li>可选尺度提示 \(s\)。</li>
+</ul>
+<p>首先，将点特征与三维位置编码融合，得到基础表示：</p>
+\[
+X^{(0)}=\operatorname{FFN}(F+\operatorname{PE}(P)).
+\]<p>随后，通过<strong>尺度调制器</strong>和<strong>双向交叉注意力</strong>完成目标部件分割。</p>
+<p>尺度 \(s\) 表示目标部件点数占整个物体点数的比例。论文将连续尺度映射为可学习的正弦嵌入：</p>
+\[
+e(s)=\left[
+\sin(\omega_k s+\phi_k),
+\cos(\omega_k s+\phi_k)
+\right]_{k=1}^{M}.
+\]<p>然后，通过 FiLM 对全局特征进行逐通道调制：</p>
+\[
+\operatorname{FiLM}(X;s)=
+X\odot(1+\alpha\gamma)+\alpha\beta.
+\]<p>其中，\(\gamma\) 和 \(\beta\) 由尺度嵌入生成，\(\alpha\) 是可学习门控参数。</p>
+<p>FiLM 与 Transformer 模块交替堆叠，使尺度信息能够持续影响不同语义层级的特征。尺度越小，模型越倾向于选择局部精细结构；尺度越大，模型越倾向于选择更完整的上层部件。</p>
+<p>为了支持没有尺度输入的推理，训练时以一定概率将尺度嵌入置零，使 FiLM 退化为近似恒等映射。</p>
+<p>点提示对应的特征记为：</p>
+\[
+q^{(0)}=\tilde F_p,
+\]<p>全部尺度增强后的点特征记为：</p>
+\[
+Y^{(0)}=\tilde F.
+\]<p>每一层执行两个方向的交叉注意力：</p>
+<ol>
+<li>点提示从全部点云特征中聚合上下文；</li>
+<li>全部点云特征根据更新后的点提示重新判断与目标的相关性。</li>
+</ol>
+<p>其更新过程可概括为：</p>
+\[
+q^{(\ell+1)}=
+q^{(\ell)}+
+\operatorname{CAttn}(q^{(\ell)};Y^{(\ell)}),
+\]\[
+Y^{(\ell+1)}=
+\operatorname{FFN}
+\left(
+Y^{(\ell)}+
+\operatorname{CAttn}(Y^{(\ell)};q^{(\ell+1)})
+\right).
+\]<p>经过多层交互后，轻量级 MLP 为每个点输出属于目标部件的概率。</p>
+<h4 id="训练目标">训练目标
+</h4><p>模型采用两阶段训练：</p>
+<ol>
+<li>使用二维 SAM 蒸馏和原生三维对比学习，得到具有全局一致性的点特征。</li>
+<li>冻结编码器，每个物体随机选择一个目标部件，用其点提示和尺度训练解码器。</li>
+</ol>
+<p>由于目标部件通常只占点云的一小部分，正样本数量远少于背景点，故使用动态加权 BCE：</p>
+\[
+\operatorname{BCE}_{\mathrm{dyn}}=
+-\frac{1}{N}
+\left[
+\beta
+\sum_{j\in\mathcal J^+}\log\hat m_j+
+\sum_{j\in\mathcal J^-}\log(1-\hat m_j)
+\right],
+\]<p>其中：</p>
+\[
+\beta=\frac{1-\pi}{\pi+\varepsilon},\qquad
+\pi=\frac{1}{N}\sum_{j=1}^{N}m_j.
+\]<p>最终损失由动态 BCE 和 Dice 损失组成：</p>
+\[
+\mathcal L_{\mathrm{seg}}=
+\lambda_{\mathrm{bce}}
+\operatorname{BCE}_{\mathrm{dyn}}+
+\lambda_{\mathrm{dice}}
+\mathcal L_{\mathrm{dice}}.
+\]<p>动态 BCE 负责逐点概率校准，Dice 损失负责优化预测区域与真实区域的整体重叠。</p>
+<hr>
+<h3 id="实验-1">实验
+</h3><h4 id="训练设置">训练设置
+</h4><p>论文主要从 Objaverse 中筛选三维资产，并结合 PartNet 进行训练。构建的数据集包含：</p>
+<p>部件数量呈长尾分布，既包含结构简单、部件较少的物体，也包含复杂机械等细粒度部件较多的物体。</p>
+<p>论文在多个评测设置下，将 S2AM3D 与 Point-SAM、P³-SAM、SAMPart3D、PartField 等方法进行比较。</p>
+<p><img class="gallery-image" data-flex-basis="733px" data-flex-grow="305" height="288" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784384924854.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784384924854_hu_ebc7655e0d10820e.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/image/index/1784384924854.png 880w" width="880"></p>
+<p>实验结果表明：</p>
+<ol>
+<li>
+<p><strong>分割精度更高。</strong><br>
+S2AM3D 能更准确地响应点提示，减少将相邻部件误分到目标区域中的情况。</p>
+</li>
+<li>
+<p><strong>边界更加清晰。</strong><br>
+原生三维对比监督增强了同一部件内部的一致性，并拉大了不同部件的特征距离，因此预测边界更干净。</p>
+</li>
+<li>
+<p><strong>拓扑更加完整。</strong><br>
+面对遮挡、细长结构和复杂部件时，S2AM3D 比依赖二维多视角结果的方法更容易恢复完整的三维结构。</p>
+</li>
+<li>
+<p><strong>尺度控制更加灵活。</strong><br>
+同一个提示点可以通过连续尺度参数输出不同粒度的分割结果，从局部子部件逐渐扩展到完整部件或更高层级结构。</p>
+</li>
+<li>
+<p><strong>数据效率较高。</strong><br>
+论文指出，S2AM3D 使用明显少于 P3-SAM 的训练数据即可获得相近性能，并在相似数据规模下显著优于 SAMPart3D 和 PartField。</p>
+</li>
+<li>
+<p><strong>对复杂结构和部件尺寸变化更鲁棒。</strong><br>
+动态加权 BCE、Dice 损失和尺度调制机制共同提升了模型对小型部件、长尾部件和稀疏掩码的召回能力。</p>
+</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ttt/">TTT</a>
+        
+            <a href="/tags/3d-seg/">3D Seg</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读10" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a44509446d840c31.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a44509446d840c31.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a979e8c55bb3c75d.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #c9b05180 0%, #191614C0 100%);">
+            <h2 class="article-title">论文阅读10</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读9" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_dbe10ebf6cc59157.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #392e1f80 0%, #392e1fC0 100%);">
+            <h2 class="article-title">论文阅读9</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读8" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_b3142fb8ae7cd5f6.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #bebcbf80 0%, #53383bC0 100%);">
+            <h2 class="article-title">论文阅读8</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读7" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_157b6711eb9ae79e.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #49423880 0%, #b8b7b3C0 100%);">
+            <h2 class="article-title">论文阅读7</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读5</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
