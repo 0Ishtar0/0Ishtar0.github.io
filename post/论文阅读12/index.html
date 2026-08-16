@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读12</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读12">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTA' /><meta property='article:tag' content='位姿估计' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-08-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-08-16T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover.jpg' />
+<meta name="twitter:title" content="论文阅读12">
+<meta name="twitter:description" content="论文阅读"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#event6d-event-based-novel-object-6d-pose-tracking">Event6D: Event-based Novel Object 6D Pose Tracking</a>
+      <ol>
+        <li><a href="#背景介绍">背景介绍</a>
+          <ol>
+            <li><a href="#事件相机">事件相机</a></li>
+            <li><a href="#render-and-compare-位姿跟踪">render-and-compare 位姿跟踪</a></li>
+            <li><a href="#事件图像重建与事件深度估计">事件图像重建与事件深度估计</a></li>
+          </ol>
+        </li>
+        <li><a href="#动机">动机</a>
+          <ol>
+            <li><a href="#单帧位姿估计的不足">单帧位姿估计的不足</a></li>
+            <li><a href="#事件相机的帧率优势">事件相机的帧率优势</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#问题定义">问题定义</a></li>
+            <li><a href="#强度图重建">强度图重建</a></li>
+            <li><a href="#深度重建">深度重建</a></li>
+            <li><a href="#6d-位姿细化">6D 位姿细化</a></li>
+            <li><a href="#损失函数">损失函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#120-fps-高速跟踪">120 FPS 高速跟踪</a></li>
+            <li><a href="#30-fps-对比-rgb-d-方法">30 FPS 对比 RGB-D 方法</a></li>
+            <li><a href="#eventho3d跨数据集泛化">EventHO3D：跨数据集泛化</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#self-geometry-gt-free-and-plug-and-playtest-time-adaptationfor-geometrically-consistent-3d-vision-foundation-models">Self-Geometry: GT-Free and Plug-and-Play Test-Time Adaptation for Geometrically Consistent 3D Vision Foundation Models</a>
+      <ol>
+        <li><a href="#动机-1">动机</a>
+          <ol>
+            <li><a href="#前馈式-3d-vfm-的速度优势与几何缺口">前馈式 3D VFM 的速度优势与几何缺口</a></li>
+            <li><a href="#现有tta的局限">现有TTA的局限</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#总体流程">总体流程</a></li>
+            <li><a href="#gdogeometric-disentanglement-optimization">GDO：Geometric Disentanglement Optimization</a></li>
+            <li><a href="#fanframe-angular-neighbor">FAN：Frame Angular-Neighbor</a></li>
+            <li><a href="#lora-式-tta">LoRA 式 TTA</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#数据集">数据集</a></li>
+            <li><a href="#模型与对比方法">模型与对比方法</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">
+            <img alt="Featured image of post 论文阅读12" height="1844" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_fdd766310384f9f7.jpg 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_e0c98c04f2cf0498.jpg 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_83240d083350976b.jpg 2400w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover.jpg 4096w" width="4096">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">论文阅读12</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-08-16T00:00:00Z'>2026-08-16</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#event6d-event-based-novel-object-6d-pose-tracking">Event6D: Event-based Novel Object 6D Pose Tracking</a>
+      <ol>
+        <li><a href="#背景介绍">背景介绍</a>
+          <ol>
+            <li><a href="#事件相机">事件相机</a></li>
+            <li><a href="#render-and-compare-位姿跟踪">render-and-compare 位姿跟踪</a></li>
+            <li><a href="#事件图像重建与事件深度估计">事件图像重建与事件深度估计</a></li>
+          </ol>
+        </li>
+        <li><a href="#动机">动机</a>
+          <ol>
+            <li><a href="#单帧位姿估计的不足">单帧位姿估计的不足</a></li>
+            <li><a href="#事件相机的帧率优势">事件相机的帧率优势</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#问题定义">问题定义</a></li>
+            <li><a href="#强度图重建">强度图重建</a></li>
+            <li><a href="#深度重建">深度重建</a></li>
+            <li><a href="#6d-位姿细化">6D 位姿细化</a></li>
+            <li><a href="#损失函数">损失函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#120-fps-高速跟踪">120 FPS 高速跟踪</a></li>
+            <li><a href="#30-fps-对比-rgb-d-方法">30 FPS 对比 RGB-D 方法</a></li>
+            <li><a href="#eventho3d跨数据集泛化">EventHO3D：跨数据集泛化</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#self-geometry-gt-free-and-plug-and-playtest-time-adaptationfor-geometrically-consistent-3d-vision-foundation-models">Self-Geometry: GT-Free and Plug-and-Play Test-Time Adaptation for Geometrically Consistent 3D Vision Foundation Models</a>
+      <ol>
+        <li><a href="#动机-1">动机</a>
+          <ol>
+            <li><a href="#前馈式-3d-vfm-的速度优势与几何缺口">前馈式 3D VFM 的速度优势与几何缺口</a></li>
+            <li><a href="#现有tta的局限">现有TTA的局限</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#总体流程">总体流程</a></li>
+            <li><a href="#gdogeometric-disentanglement-optimization">GDO：Geometric Disentanglement Optimization</a></li>
+            <li><a href="#fanframe-angular-neighbor">FAN：Frame Angular-Neighbor</a></li>
+            <li><a href="#lora-式-tta">LoRA 式 TTA</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#数据集">数据集</a></li>
+            <li><a href="#模型与对比方法">模型与对比方法</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><p>1.<a class="link" href="https://arxiv.org/pdf/2603.28045"  target="_blank" rel="noopener"
+    >Event6D: Event-based Novel Object 6D Pose Tracking【CVPR 2026】</a>，KAIST，Kuk-Jin Yoon组</p>
+<p>2.<a class="link" href="https://arxiv.org/pdf/2608.10708"  target="_blank" rel="noopener"
+    >Self-Geometry:GT-FreeandPlug-and-Play Test-Time Adaptation for Geometrically Consistent 3D Vision Foundation Models 【preprint】</a>韩国CMLab，Jihyong Oh组</p>
+<h2 id="event6d-event-based-novel-object-6d-pose-tracking">Event6D: Event-based Novel Object 6D Pose Tracking
+</h2><p>利用事件相机在相邻的低频深度帧之间，重建任意时刻的强度图和深度图，再将它们送入基于 CAD 模型的 render-and-compare 位姿细化器，从而以超过 120 FPS 的帧率持续跟踪训练阶段未见的刚性物体。</p>
+<h3 id="背景介绍">背景介绍
+</h3><h4 id="事件相机">事件相机
+</h4><p>持续关注每个像素处亮度的变化，当变化超出一定阈值时，记录一个事件。具有微秒级的时间分辨率，适合记录物体的高速移动。其输出为：$ei=(x_i,y_i,t_i,p_i)$
+其中：$(x_i,y_i)$为坐标，$t_i$为时间，$p_i$为亮度变化方向，一般取正负1</p>
+<h4 id="render-and-compare-位姿跟踪">render-and-compare 位姿跟踪
+</h4><p>给定 CAD 模型和上一时刻位姿，可以从当前估计位姿渲染物体的图像/深度，再与传感器观测比较，预测相对旋转和平移修正。FoundationPose、MegaPose 等方法采用了类似思想，具备较好的新物体泛化能力，但通常受 RGB-D 帧率限制。</p>
+<h4 id="事件图像重建与事件深度估计">事件图像重建与事件深度估计
+</h4><p>事件图像重建方法，如E2VID，已经能够将稀疏事件恢复为稠密强度图，EventTrack6D采取的是深度外推：以最近一次真实深度为尺度锚点，使用之后发生的事件推断物体如何运动，并把旧深度传播到当前时刻；它不使用未来深度帧，因此可在线运行。</p>
+<h3 id="动机">动机
+</h3><h4 id="单帧位姿估计的不足">单帧位姿估计的不足
+</h4><p>机器人操作、抓取与增强现实等应用不仅需要某一帧的位姿，还需要在视频中连续、稳定地更新位姿。传统 RGB-D 方法通常只以约 30 FPS 工作；物体或相机快速运动时，会出现： RGB 图像运动模糊；相邻帧像素位移过大；深度帧之间的时间空洞；跟踪误差逐帧累积，甚至直接丢失目标等问题。</p>
+<h4 id="事件相机的帧率优势">事件相机的帧率优势
+</h4><p>事件相机异步记录每个像素的亮度变化，时间分辨率可达微秒级，具有低延迟、低运动模糊和高动态范围等优势，很适合高速场景。然而，原始事件流是稀疏、边缘化的变化信号，与 CAD 模型渲染得到的 RGB/深度图存在明显的模态差异。</p>
+<p>因此，简单地把事件表示直接输入传统 RGB-D 位姿网络，或只把事件转成图像，会面临深度缺失和几何对齐问题。</p>
+<p>作者认为，事件流最有价值的用途不是直接替代 RGB-D，而是作为低频深度帧之间的时间桥梁：</p>
+<ol>
+<li>用短时间事件恢复当前强度信息；</li>
+<li>用从最近深度帧累计至当前时刻的事件，传播并修正深度；</li>
+<li>将恢复出的稠密光度与几何线索用于成熟的 CAD render-and-compare 位姿细化框架。</li>
+</ol>
+<p>这样既利用事件相机的高时间分辨率，又保留 CAD 对齐所需的稠密观测，达到以超高帧率跟踪物体位姿的任务目的。</p>
+<h3 id="方法">方法
+</h3><h4 id="问题定义">问题定义
+</h4><p>已知：</p>
+<ul>
+<li>刚性物体 CAD 模型；</li>
+<li>相机内参；</li>
+<li>最近深度帧时刻的初始位姿 \(T_0=[R_0\mid t_0]\)；</li>
+<li>最近深度图 \(D_0\)；</li>
+<li>从该深度时刻到当前任意时刻 \(t\) 的事件流。</li>
+</ul>
+<p>目标是在两个深度帧之间的任意归一化时间 \(t\in[0,1)\) 估计当前位姿</p>
+\[
+\mathbf T_t=[\mathbf R_t\mid\mathbf t_t],\qquad
+\mathbf R_t\in SO(3),\quad \mathbf t_t\in\mathbb R^3.
+\]<p>其中，\(t=0\) 对应最近深度帧，\(t=1\) 对应下一张尚未到来的深度帧。长时事件流被定义为</p>
+\[
+E_{0,t}=\left\{e_i=(\mathbf x_i,p_i,\tau_i)\mid 0\le \tau_i<t\right\},
+\qquad
+\mathbf x_i=(x_i,y_i)^\top,\quad p_i\in\{-1,1\},
+\]<p>其中 \(\mathbf x_i\)、\(\tau_i\) 和 \(p_i\) 分别表示事件的像素位置、时间戳和亮度变化。测试时只提供第一帧位姿，后续不重新初始化。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>符号</th>
+					<th>含义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>\(D_0\)</td>
+					<td>最近一次传感器测得的深度图</td>
+			</tr>
+			<tr>
+					<td>\(E_{0,t}\)</td>
+					<td>从最近深度帧累计到当前时刻的长时事件，用于深度重建</td>
+			</tr>
+			<tr>
+					<td>\(E_{t-\Delta t,t}\)</td>
+					<td>最近一个短时间窗的事件，用于强度重建</td>
+			</tr>
+			<tr>
+					<td>\(I_t,D_t\)</td>
+					<td>当前时刻重建的强度图和深度图</td>
+			</tr>
+			<tr>
+					<td>\(F\)、\(\widetilde F\)</td>
+					<td>编码器产生的特征及融合后的特征</td>
+			</tr>
+			<tr>
+					<td>\(M^D_{0,t}\)、\(\widetilde M^D_{0,t}\)</td>
+					<td>粗深度运动场及其残差精化结果</td>
+			</tr>
+	</tbody>
+</table></div>
+<pre class="mermaid" style="visibility:hidden">flowchart LR
+    A["最近深度 D0 + 长时事件 E(0,t)"] --> B["深度重建分支"]
+    C["短时事件 E(t-Δt,t)"] --> D["强度重建分支"]
+    D --> E["当前强度 It"]
+    D --> B
+    B --> F["当前深度 Dt"]
+    G["CAD 模型 + 上一时刻位姿"] --> H["ROI 渲染与对比"]
+    E --> H
+    F --> H
+    H --> I["相对位姿更新 ΔR, Δt"]
+    I --> J["当前位姿 Tt"]</pre><p><img alt="主图" class="gallery-image" data-flex-basis="483px" data-flex-grow="201" height="1008" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/image/index/1786872461030.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/image/index/1786872461030_hu_e5b671a1e7a8f97c.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/image/index/1786872461030_hu_3b33e30cc30ef2df.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/image/index/1786872461030.png 2030w" width="2030"></p>
+<h4 id="强度图重建">强度图重建
+</h4><p>强度分支使用最近一个短时间窗的事件 \(E_{t-\Delta t,t}\)：</p>
+<ol>
+<li>事件编码器提取时空特征；</li>
+<li>ConvLSTM 融合当前特征与上一时刻隐状态，保留时间记忆；</li>
+<li>图像解码器输出当前强度图 \(I_t\)。</li>
+</ol>
+<p>对应公式为</p>
+\[
+F^E_{t-\Delta t,t}=\phi_E^I\!\left(E_{t-\Delta t,t}\right),
+\]\[
+\widetilde F^E_{t-\Delta t,t},h_t
+=\operatorname{ConvLSTM}\!\left(F^E_{t-\Delta t,t},h_{t-\Delta t}\right),
+\]\[
+I_t=\psi_E^I\!\left(\widetilde F^E_{t-\Delta t,t}\right).
+\]<p>这里，\(\phi_E^I\) 是强度分支的事件编码器，\(\psi_E^I\) 是图像解码器，\(h_{t-\Delta t}\) 是从上一时间步传来的隐状态，这一部分模型从已有的E2VID ckpt初始化。</p>
+<h4 id="深度重建">深度重建
+</h4><p>深度分支使用最近真实深度 \(D_0\) 和长时间事件 \(E_{0,t}\)，分为“运动传播”和“几何修正”两部分。</p>
+<p><strong>A. 运动传播</strong></p>
+<ol>
+<li>分别编码长时事件和旧深度；</li>
+<li>融合二者并预测粗运动场 \(M^D_{0,t}\)；</li>
+<li>用粗运动场将旧深度特征 warp 到当前时刻；</li>
+<li>在 warped 深度特征与融合运动特征之间构造相关性 cost volume；</li>
+<li>预测残差运动，得到精化运动场 \(\widetilde M^D_{0,t}\)。</li>
+</ol>
+<p>首先编码事件和深度运动特征，并预测粗运动场：</p>
+\[
+F^{E,M}_{0,t}=\phi_E^M(E_{0,t}),\qquad
+F^{D,M}_0=\phi_D^M(D_0),
+\]\[
+\widetilde F^M_{0,t}
+=\operatorname{Conv}\!\left(\operatorname{Concat}(F^{E,M}_{0,t},F^{D,M}_0)\right),
+\qquad
+M^D_{0,t}=\psi^M(\widetilde F^M_{0,t}).
+\]<p>随后用粗运动场传播旧深度特征：</p>
+\[
+F^{D,M}_{0\rightarrow t}
+=\operatorname{Warp}\!\left(F^{D,M}_0,M^D_{0,t}\right).
+\]<p>再通过相关层构造 cost volume：</p>
+\[
+\mathcal C_{0,t}
+=\operatorname{Corr}\!\left(F^{D,M}_{0\rightarrow t},\widetilde F^M_{0,t}\right).
+\]<p>最后以残差方式精化运动场：</p>
+\[
+\begin{aligned}
+\Delta M^D_{0,t}
+&=\operatorname{Conv}\!\left(
+\operatorname{Concat}(\mathcal C_{0,t},M^D_{0,t},\widetilde F^M_{0,t})
+\right),\\
+\widetilde M^D_{0,t}
+&=M^D_{0,t}+\Delta M^D_{0,t}.
+\end{aligned}
+\]<p>这一过程负责解析上一帧深度图中结构的运动。</p>
+<p><strong>B. 几何修正</strong></p>
+<p>只做 warp 无法处理遮挡、显露、轮廓变化及三维结构变化。因此模型进一步融合：</p>
+<ul>
+<li>warp 后的深度几何特征；</li>
+<li>原始深度特征；</li>
+<li>长时事件几何特征；</li>
+<li>强度重建分支的时序图像特征。</li>
+</ul>
+<p>事件与深度的几何特征分别为</p>
+\[
+F^{E,G}_{0,t}=\phi_E^G(E_{0,t}),\qquad
+F^{D,G}_0=\phi_D^G(D_0).
+\]<p>使用精化运动场传播旧深度的几何特征：</p>
+\[
+F^{D,G}_{0\rightarrow t}
+=\operatorname{Warp}\!\left(F^{D,G}_0,\widetilde M^D_{0,t}\right).
+\]<p>最后，几何模块融合 warped 深度、原始深度、长时事件和短时强度特征，输出当前重建深度：</p>
+\[
+D_t=\psi^G\!\left(
+\operatorname{Concat}\!\left(
+\widetilde F^{D,G}_{0\rightarrow t},
+F^{D,G}_0,
+F^{E,G}_{0,t},
+\widetilde F^E_{t-\Delta t,t}
+\right)
+\right).
+\]<h4 id="6d-位姿细化">6D 位姿细化
+</h4><p>模型依据上一时刻位姿投影物体原点，并裁剪能覆盖物体及其邻域的 \(160\times160\) ROI；重建和对齐只在 ROI 内进行，以降低计算量。</p>
+<p>在每次迭代中：</p>
+<ol>
+<li>从当前位姿估计渲染 CAD 模型；</li>
+<li>将渲染结果与重建的 \(I_t,D_t\) 比较；</li>
+<li>预测相对旋转 \(\Delta R\) 与平移 \(\Delta t\)；</li>
+<li>更新 \(R_t^+=\Delta R R_t\)、\(t_t^+=t_t+\Delta t\)。</li>
+</ol>
+<p>多个小时间步的相对变换按顺序复合：</p>
+\[
+\mathbf T_t
+=\left(\prod_{k=1}^{N}\mathbf T_{k-1\rightarrow k}\right)\mathbf T_0,
+\qquad N=\frac{t}{\Delta t}.
+\]<p>单次细化由算子 \(\mathcal R\) 预测相对旋转和平移：</p>
+\[
+\begin{aligned}
+\mathbf R_t^+&=\Delta\mathbf R\,\mathbf R_t,\\
+\mathbf t_t^+&=\mathbf t_t+\Delta\mathbf t,
+\end{aligned}
+\qquad
+(\Delta\mathbf R,\Delta\mathbf t)
+=\mathcal R(\mathbf T_t,I_t,D_t).
+\]<p>这样便把一次高速大运动拆成一系列更容易求解的小运动。这一部分的模型从已有的Foundation Pose ckpt初始化。</p>
+<h4 id="损失函数">损失函数
+</h4><p><strong>A. 双模态重建损失</strong></p>
+<p>强度图使用 LPIPS 感知损失，使重建结果与真值图像 \(I_t^{gt}\) 在感知特征上保持一致：</p>
+\[
+\mathcal L_{\mathrm{img}}
+=\operatorname{LPIPS}(I_t,I_t^{gt}).
+\]<p>深度图使用逐像素 \(L_1\) 损失：</p>
+\[
+\mathcal L_{\mathrm{depth}}
+=\left\|D_t-D_t^{gt}\right\|_1.
+\]\[
+\mathcal L_{\mathrm{recon}}
+=\lambda_I\mathcal L_{\mathrm{img}}
++\lambda_D\mathcal L_{\mathrm{depth}}.
+\]<p><strong>B. 6D 位姿细化损失</strong></p>
+<p>位姿细化器对预测的相对旋转、平移与对应真值进行加权 \(L_2\) 约束：</p>
+\[
+\mathcal L_{\mathrm{pose}}
+=\lambda_r\left\|\Delta\mathbf R-\Delta\mathbf R^\star\right\|_2
++\lambda_t\left\|\Delta\mathbf t-\Delta\mathbf t^\star\right\|_2.
+\]<p>其中，\((\Delta\mathbf R^\star,\Delta\mathbf t^\star)\) 是真值相对位姿更新。</p>
+<h3 id="实验">实验
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>数据集</th>
+					<th>用途</th>
+					<th style="text-align: right">事件类型</th>
+					<th style="text-align: right">样本数</th>
+					<th style="text-align: right">物体数</th>
+					<th style="text-align: right">分辨率</th>
+					<th style="text-align: right">位姿标注频率</th>
+					<th>运动</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>EventBlender6D</td>
+					<td>合成训练</td>
+					<td style="text-align: right">模拟</td>
+					<td style="text-align: right">495,840</td>
+					<td style="text-align: right">1,033</td>
+					<td style="text-align: right">640×480</td>
+					<td style="text-align: right">60 Hz</td>
+					<td>动态</td>
+			</tr>
+			<tr>
+					<td>EventHO3D</td>
+					<td>跨域测试</td>
+					<td style="text-align: right">基于 HO3D 模拟</td>
+					<td style="text-align: right">103,462</td>
+					<td style="text-align: right">5</td>
+					<td style="text-align: right">640×480</td>
+					<td style="text-align: right">论文未给出</td>
+					<td>中等</td>
+			</tr>
+			<tr>
+					<td>Event6D</td>
+					<td>真实测试</td>
+					<td style="text-align: right">真实</td>
+					<td style="text-align: right">54,556</td>
+					<td style="text-align: right">14</td>
+					<td style="text-align: right">1280×720</td>
+					<td style="text-align: right">120 Hz</td>
+					<td>动态</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>Event6D 使用 RealSense D435i RGB-D 相机、Prophesee IMX636 事件相机和 6 台 OptiTrack Primex 13。RGB/深度为 30 FPS，运动捕捉真值为 120 FPS；各传感器采用硬件触发同步。</p>
+<h4 id="120-fps-高速跟踪">120 FPS 高速跟踪
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>输入</th>
+					<th style="text-align: right">ADD-S ↑</th>
+					<th style="text-align: right">ADD ↑</th>
+					<th style="text-align: right">AR ↑</th>
+					<th style="text-align: right">FPS</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>E2VID + MegaPose</td>
+					<td>事件 + 深度</td>
+					<td style="text-align: right">6.78</td>
+					<td style="text-align: right">2.12</td>
+					<td style="text-align: right">9.02</td>
+					<td style="text-align: right">10.92</td>
+			</tr>
+			<tr>
+					<td>E2VID + FoundationPose</td>
+					<td>事件 + 深度</td>
+					<td style="text-align: right">37.24</td>
+					<td style="text-align: right">16.97</td>
+					<td style="text-align: right">48.72</td>
+					<td style="text-align: right">79.37</td>
+			</tr>
+			<tr>
+					<td>ETAP</td>
+					<td>事件 + 深度</td>
+					<td style="text-align: right">7.77</td>
+					<td style="text-align: right">2.22</td>
+					<td style="text-align: right">11.42</td>
+					<td style="text-align: right">1.56</td>
+			</tr>
+			<tr>
+					<td>FoundationPose†</td>
+					<td>事件 + 深度</td>
+					<td style="text-align: right">22.93</td>
+					<td style="text-align: right">4.31</td>
+					<td style="text-align: right">25.72</td>
+					<td style="text-align: right">108.70</td>
+			</tr>
+			<tr>
+					<td><strong>EventTrack6D</strong></td>
+					<td><strong>事件 + 深度</strong></td>
+					<td style="text-align: right"><strong>52.79</strong></td>
+					<td style="text-align: right"><strong>25.26</strong></td>
+					<td style="text-align: right"><strong>64.38</strong></td>
+					<td style="text-align: right"><strong>50.19 / 128.04††</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>† FoundationPose 被专门改造并训练为接收事件输入。<br>
+†† 50.19 FPS 为普通推理；128.04 FPS 为 TensorRT 优化后速度。</p>
+<p>相较最强的 E2VID + FoundationPose 基线，EventTrack6D 的平均 ADD-S、ADD、AR 分别提高 <strong>15.55、8.29、15.66 %</strong>。结果说明，只重建强度图仍无法填补 30 FPS 深度之间的几何差距；同时重建深度是高速跟踪稳定性的关键。</p>
+<h4 id="30-fps-对比-rgb-d-方法">30 FPS 对比 RGB-D 方法
+</h4><p>事件方法仍以 120 FPS 运行，但在 RGB/深度帧时刻以 30 FPS 采样评测，从而与传统 RGB-D 跟踪器比较。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>输入</th>
+					<th style="text-align: right">ADD-S ↑</th>
+					<th style="text-align: right">ADD ↑</th>
+					<th style="text-align: right">AR ↑</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>MegaPose</td>
+					<td>RGB + 深度</td>
+					<td style="text-align: right">11.08</td>
+					<td style="text-align: right">5.59</td>
+					<td style="text-align: right">10.49</td>
+			</tr>
+			<tr>
+					<td>FoundationPose</td>
+					<td>RGB + 深度</td>
+					<td style="text-align: right">16.63</td>
+					<td style="text-align: right">7.98</td>
+					<td style="text-align: right">19.25</td>
+			</tr>
+			<tr>
+					<td>E2VID + MegaPose</td>
+					<td>事件 + 深度</td>
+					<td style="text-align: right">2.05</td>
+					<td style="text-align: right">0.19</td>
+					<td style="text-align: right">5.24</td>
+			</tr>
+			<tr>
+					<td>E2VID + FoundationPose</td>
+					<td>事件 + 深度</td>
+					<td style="text-align: right">35.45</td>
+					<td style="text-align: right">16.03</td>
+					<td style="text-align: right">44.92</td>
+			</tr>
+			<tr>
+					<td>FoundationPose†</td>
+					<td>事件 + 深度</td>
+					<td style="text-align: right">26.21</td>
+					<td style="text-align: right">5.87</td>
+					<td style="text-align: right">27.53</td>
+			</tr>
+			<tr>
+					<td><strong>EventTrack6D</strong></td>
+					<td><strong>事件 + 深度</strong></td>
+					<td style="text-align: right"><strong>56.08</strong></td>
+					<td style="text-align: right"><strong>29.40</strong></td>
+					<td style="text-align: right"><strong>63.71</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>EventTrack6D 不仅优于所有事件基线，也明显超过原始 RGB-D FoundationPose。作者认为传统 RGB-D 方法在快速运动中受大位移和运动模糊影响，而更高频的中间位姿更新能够降低每一步的对齐难度。</p>
+<h4 id="eventho3d跨数据集泛化">EventHO3D：跨数据集泛化
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">ADD-S ↑</th>
+					<th style="text-align: right">ADD ↑</th>
+					<th style="text-align: right">AR ↑</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>E2VID + FoundationPose</td>
+					<td style="text-align: right">57.10</td>
+					<td style="text-align: right">41.13</td>
+					<td style="text-align: right">56.77</td>
+			</tr>
+			<tr>
+					<td>FoundationPose†</td>
+					<td style="text-align: right">35.31</td>
+					<td style="text-align: right">8.83</td>
+					<td style="text-align: right">27.64</td>
+			</tr>
+			<tr>
+					<td><strong>EventTrack6D</strong></td>
+					<td style="text-align: right"><strong>64.75</strong></td>
+					<td style="text-align: right"><strong>50.95</strong></td>
+					<td style="text-align: right"><strong>66.27</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>EventTrack6D 在不同运动分布和传感器设定的 EventHO3D 上仍取得最高均值；相较 E2VID + FoundationPose，三项指标分别提升 <strong>7.65、9.82、9.50 %</strong>。这支持了“仅用合成数据训练，也可跨域泛化到不同新物体和场景”的主要论点。</p>
+<h2 id="self-geometry-gt-free-and-plug-and-playtest-time-adaptationfor-geometrically-consistent-3d-vision-foundation-models">Self-Geometry: GT-Free and Plug-and-Play Test-Time Adaptation for Geometrically Consistent 3D Vision Foundation Models
+</h2><h3 id="动机-1">动机
+</h3><h4 id="前馈式-3d-vfm-的速度优势与几何缺口">前馈式 3D VFM 的速度优势与几何缺口
+</h4><p>传统多视图 3D 重建通常包含特征匹配、相机估计、三角化和束调整等步骤。它们能显式地联合优化相机和 3D 结构，但每个新场景都要重新迭代，计算开销较大。</p>
+<p>VGGT、π³ 和 Depth Anything 3（DA3）等视觉基础模型代表了另一条路线：模型在大规模数据上预训练后，对一个新场景做一次前向传播，就能预测深度、相机位姿和点图。这种模式速度快、跨数据集零样本能力强，却有一个结构性问题：</p>
+<ul>
+<li>位姿和深度往往分别对 GT 做回归；</li>
+<li>预训练阶段通常不执行代价高昂的显式全局多视图优化；</li>
+<li>因而同一 3D 点在不同视角下的预测不一定满足严格的重投影与极线关系；</li>
+<li>位姿误差和深度误差会叠加到最终点图中。</li>
+</ul>
+<h4 id="现有tta的局限">现有TTA的局限
+</h4><p>已有测试时适应（Test-Time Adaptation, TTA）方法主要使用模型自身产生的隐式信号，例如教师-学生特征一致性、点图一致性、熵最小化等。如果原模型在某个场景上已经明显错误，教师特征或点图本身就不可靠，适应过程的上限也会受到限制，缺乏对场景自身几何信息的利用。</p>
+<hr>
+<h3 id="方法-1">方法
+</h3><h4 id="总体流程">总体流程
+</h4><p>输入是一个场景的多张 RGB 图像。冻结 VFM 首先预测：</p>
+<ul>
+<li>每个视图的相机内参 $K_i$、旋转 $R_i$ 和平移 $t_i$；</li>
+<li>每像素深度图 $D_i$；</li>
+<li>对应的 3D 点图 $X_i$。</li>
+</ul>
+<p>完整流程分三阶段：</p>
+<ol>
+<li><strong>场景初始化</strong>：运行冻结 VFM；用 LightGlue 对输入视图两两匹配；得到 2D 伪对应点；估计鲁棒损失阈值。</li>
+<li><strong>目标视图选择</strong>：FAN 根据预测旋转选择几何覆盖较好的目标视图。</li>
+<li><strong>测试时优化</strong>：迭代执行视图采样、对应点过滤、几何损失与辅助正则计算、梯度解耦和 AdamW 更新，最终保留 LoRA 参数。</li>
+</ol>
+<h4 id="gdogeometric-disentanglement-optimization">GDO：Geometric Disentanglement Optimization
+</h4><p>LightGlue可以根据视图特征，给出不同视图之间的对应点关系，在场景初始化时对所有视图对运行一次，得到匹配集合：</p>
+$$
+\mathcal{M}=\{(\mathbf{x}_i^m,\mathbf{x}_j^m)\}_{m=1}^{M}.
+$$<p>匹配器不可避免地会产生错配。每次 TTA 迭代前，依次应用：</p>
+<ol>
+<li>基于 EC Loss 的过滤，粗略去除与当前相机位姿明显不符的匹配；</li>
+<li>基于 MVC Loss 的过滤，进一步去除剩余的高重投影误差匹配。</li>
+</ol>
+<p><strong>MVC Loss：多视图一致性损失</strong></p>
+<p>将源视图匹配像素 $x_j^m$ 依据预测深度和相机参数重投影到目标视图，得到 $x_hat_i^m$，然后最小化欧氏距离：</p>
+$$
+\mathcal{L}_{\mathrm{mvc}}^{i}
+=\frac{1}{|\mathcal{M}|}
+\sum_{(\mathbf{x}_i^m,\mathbf{x}_j^m)\in\mathcal{M}}
+\|\hat{\mathbf{x}}_i^m-\mathbf{x}_i^m\|_2.
+$$<p>同时监督位姿和深度，给出像素级的点到点约束。</p>
+<p><strong>EC Loss：极线一致性损失</strong></p>
+<p>作者根据预测相机参数构造从源视图到目标视图的基础矩阵 $F_{i<-j}$，用匹配点对基础矩阵的 Sampson 距离定义损失：</p>
+$$
+\mathcal{L}_{\mathrm{ec}}^{i}
+=\frac{1}{|\mathcal{M}|}
+\sum_{(\mathbf{x}_i^m,\mathbf{x}_j^m)\in\mathcal{M}}
+\sqrt{d_{\mathrm{Sampson}}(\tilde{\mathbf{x}}_i^m,
+\tilde{\mathbf{x}}_j^m;\mathbf{F}_{i\leftarrow j})}.
+$$<p>EC Loss 与深度无关，只监督相机位姿。它用点到极线关系削弱 MVC 的位姿-深度歧义。</p>
+<p>MVC 和 EC 都会更新影响相机位姿的参数，因此梯度可能互相冲突。固定保留 EC 梯度方向，并从 MVC 梯度中减去其在 EC 梯度方向上的分量：</p>
+$$
+\nabla\mathcal{L}_{\mathrm{mvc}} \leftarrow
+\nabla\mathcal{L}_{\mathrm{mvc}}
+-\frac{\langle\nabla\mathcal{L}_{\mathrm{mvc}},\nabla\mathcal{L}_{\mathrm{ec}}\rangle}
+{\|\nabla\mathcal{L}_{\mathrm{ec}}\|_2^2}
+\nabla\mathcal{L}_{\mathrm{ec}}.
+$$<p>EC 主要承担深度无关的位姿校正，MVC 则在与 EC 不冲突的方向上继续细化位姿和深度。</p>
+<h4 id="fanframe-angular-neighbor">FAN：Frame Angular-Neighbor
+</h4><p>把所有视图直接输入带全局注意力的 VFM 会产生较高的二次复杂度。FAN 试图用少量、角度分布均匀的视图提供足够的几何监督。</p>
+<p>两个相机旋转的 SO(3) 测地距离为：</p>
+$$
+\theta_{ij}=\cos^{-1}\left(\frac{\mathrm{tr}(R_iR_j^\top)-1}{2}\right).
+$$<p>FAN 包含两步：</p>
+<ol>
+<li><strong>Geometry-Rich View Selection</strong>：把每个视图临时当作目标视图，根据其他视图与它的旋转夹角划分 SO(3) bins；先最大化非空 bin 数，再在候选中最大化 bin 分布熵，选出覆盖最均匀的目标视图。</li>
+<li><strong>Angular-Neighbor Sampling</strong>：以该目标视图为中心，从各个角度 bin 中采样源视图，避免样本集中在某个方向。</li>
+</ol>
+<p>目标视图只用基线模型的初始预测选择一次。</p>
+<h4 id="lora-式-tta">LoRA 式 TTA
+</h4><p>论文对每个场景单独执行若干次TTA迭代，在遇到新场景时，重置模型参数。采用将LoRA模块插入到视觉基础模型的Attention层的设计，LoRA模块的秩为64</p>
+<hr>
+<h3 id="实验-1">实验
+</h3><h4 id="数据集">数据集
+</h4><ul>
+<li><strong>7Scenes</strong>：室内场景；</li>
+<li><strong>ETH3D</strong>：包含宽基线室外场景，匹配点能提供较强几何约束；</li>
+<li><strong>ScanNet++</strong>：高保真室内场景；</li>
+<li><strong>HiRoom</strong>：具有多样光照和丰富细结构的困难合成室内场景。</li>
+</ul>
+<p>作者遵循 DA3 的评估协议，每个场景最多采样 100 帧；对象中心的 DTU 不在本文面向室内/室外场景重建的范围内。</p>
+<h4 id="模型与对比方法">模型与对比方法
+</h4><p>共测试 6 个冻结 VFM：</p>
+<ul>
+<li>VGGT；</li>
+<li>π³；</li>
+<li>DA3-Giant、DA3-Large、DA3-Base、DA3-Small。</li>
+</ul>
+<p>对比方法包括：</p>
+<ul>
+<li>原始冻结模型；</li>
+<li>TCO；在本文无 GT 设置中，其位姿先验来自 VFM 自己的预测；</li>
+<li>Free-Geometry；代表基于隐式特征自一致性的 TTA；</li>
+<li>Self-Geometry。</li>
+</ul>
+<p><img alt="位姿估计改进结果" class="gallery-image" data-flex-basis="733px" data-flex-grow="305" height="598" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/image/index/1786877801076.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/image/index/1786877801076_hu_e5b81b885b77594d.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/image/index/1786877801076_hu_a2e4983123c25ff0.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/image/index/1786877801076.png 1828w" width="1828"></p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tta/">TTA</a>
+        
+            <a href="/tags/%E4%BD%8D%E5%A7%BF%E4%BC%B0%E8%AE%A1/">位姿估计</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读9" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_dbe10ebf6cc59157.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #392e1f80 0%, #392e1fC0 100%);">
+            <h2 class="article-title">论文阅读9</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读8" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_b3142fb8ae7cd5f6.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #bebcbf80 0%, #53383bC0 100%);">
+            <h2 class="article-title">论文阅读8</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读7" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_157b6711eb9ae79e.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #49423880 0%, #b8b7b3C0 100%);">
+            <h2 class="article-title">论文阅读7</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读5</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读6" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_e1fe44f227052846.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB6/cover_hu_bb0e2e06f704f4bf.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #4b4c5980 0%, #cdd0ddC0 100%);">
+            <h2 class="article-title">论文阅读6</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    <div class="mermaid-modal" id="mermaid-modal">
+    <div class="mermaid-modal-header">
+        <div class="mermaid-modal-controls">
+            <button data-zoom="-1">− Zoom Out</button>
+            <button data-zoom="0">Reset (100%)</button>
+            <button data-zoom="1">+ Zoom In</button>
+            <button data-zoom="fit">Fit to Screen</button>
+        </div>
+        <button class="mermaid-modal-close" id="mermaid-modal-close">✕ Close (Esc)</button>
+    </div>
+    <div class="mermaid-modal-body" id="mermaid-modal-body">
+        <div class="mermaid-modal-content" id="mermaid-modal-content"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script><script type="module">
+import { initMermaidPage } from '\/ts\/mermaid.js';
+initMermaidPage({"darkTheme":"dark","darkThemeVariables":{},"htmlLabels":true,"lightTheme":"default","lightThemeVariables":{},"look":"classic","securityLevel":"strict","transparentBackground":false});
+</script>
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
