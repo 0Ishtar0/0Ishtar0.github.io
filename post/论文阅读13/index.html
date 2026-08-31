@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读13</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读13">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='TTA' /><meta property='article:tag' content='6D姿态估计' /><meta property='article:tag' content='Multi-Agent' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-08-30T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-08-30T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/cover.jpg' />
+<meta name="twitter:title" content="论文阅读13">
+<meta name="twitter:description" content="论文阅读"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#ttapose">TTAPose</a>
+      <ol>
+        <li><a href="#背景介绍">背景介绍</a></li>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#合成数据预训练">合成数据预训练</a></li>
+            <li><a href="#对应关系的熵最小化">对应关系的熵最小化</a></li>
+            <li><a href="#teacher-student-自适应">Teacher-Student 自适应</a></li>
+            <li><a href="#伪标签增强">伪标签增强</a></li>
+            <li><a href="#在线与离线适配">在线与离线适配</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#数据集与评价指标">数据集与评价指标</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#主实验"><img src="image/index/1788147735244.png" alt="主实验"></a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#消融实验">消融实验</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#evomas">EvoMAS</a>
+      <ol>
+        <li><a href="#背景介绍-1">背景介绍</a></li>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#问题定义">问题定义</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#配置池初始化">配置池初始化</a></li>
+            <li><a href="#select选择初始配置">Select：选择初始配置</a></li>
+            <li><a href="#mutate反馈驱动的局部变异">Mutate：反馈驱动的局部变异</a></li>
+            <li><a href="#crossover配置交叉">Crossover：配置交叉</a></li>
+            <li><a href="#执行评价与选择">执行、评价与选择</a></li>
+            <li><a href="#pool-与-experience-memory-更新">Pool 与 Experience Memory 更新</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#数据集与指标">数据集与指标</a></li>
+            <li><a href="#主结果">主结果</a></li>
+            <li><a href="#执行可靠性">执行可靠性</a></li>
+            <li><a href="#更强模型下的结果">更强模型下的结果</a></li>
+            <li><a href="#初始配置池与演化深度">初始配置池与演化深度</a></li>
+            <li><a href="#meta-model-与奖励信号">Meta-model 与奖励信号</a></li>
+            <li><a href="#演化出的结构规律">演化出的结构规律</a></li>
+            <li><a href="#测试时计算量">测试时计算量</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/">
+            <img alt="Featured image of post 论文阅读13" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="cover.jpg">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/">论文阅读13</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-08-30T00:00:00Z'>2026-08-30</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#ttapose">TTAPose</a>
+      <ol>
+        <li><a href="#背景介绍">背景介绍</a></li>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#合成数据预训练">合成数据预训练</a></li>
+            <li><a href="#对应关系的熵最小化">对应关系的熵最小化</a></li>
+            <li><a href="#teacher-student-自适应">Teacher-Student 自适应</a></li>
+            <li><a href="#伪标签增强">伪标签增强</a></li>
+            <li><a href="#在线与离线适配">在线与离线适配</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#数据集与评价指标">数据集与评价指标</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#主实验"><img src="image/index/1788147735244.png" alt="主实验"></a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#消融实验">消融实验</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#evomas">EvoMAS</a>
+      <ol>
+        <li><a href="#背景介绍-1">背景介绍</a></li>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#问题定义">问题定义</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#配置池初始化">配置池初始化</a></li>
+            <li><a href="#select选择初始配置">Select：选择初始配置</a></li>
+            <li><a href="#mutate反馈驱动的局部变异">Mutate：反馈驱动的局部变异</a></li>
+            <li><a href="#crossover配置交叉">Crossover：配置交叉</a></li>
+            <li><a href="#执行评价与选择">执行、评价与选择</a></li>
+            <li><a href="#pool-与-experience-memory-更新">Pool 与 Experience Memory 更新</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#数据集与指标">数据集与指标</a></li>
+            <li><a href="#主结果">主结果</a></li>
+            <li><a href="#执行可靠性">执行可靠性</a></li>
+            <li><a href="#更强模型下的结果">更强模型下的结果</a></li>
+            <li><a href="#初始配置池与演化深度">初始配置池与演化深度</a></li>
+            <li><a href="#meta-model-与奖励信号">Meta-model 与奖励信号</a></li>
+            <li><a href="#演化出的结构规律">演化出的结构规律</a></li>
+            <li><a href="#测试时计算量">测试时计算量</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><p>1.<a class="link" href="https://doi.org/10.1109/LRA.2025.3564218"  target="_blank" rel="noopener"
+    >TTAPose: Test-Time Adaptation for Unseen Object Pose Estimation【IEEE RA-L 2025】</a>，XYZ Robotics、Benjamin Busam组</p>
+<p>2.<a class="link" href="https://arxiv.org/pdf/2602.06511"  target="_blank" rel="noopener"
+    >EvoMAS: Evolutionary Generation of Multi-Agent Systems【ICML 2026】</a>，Emory University、AWS</p>
+<h2 id="ttapose">TTAPose
+</h2><h3 id="背景介绍">背景介绍
+</h3><p>TTAPose 研究的是未见物体位姿估计，训练阶段未见过目标物体，但测试时给出该物体的 CAD 模型和 RGB-D 图像，要求估计物体相对于相机的 6D 位姿：</p>
+$$
+T=[R\mid t]\in SE(3)
+$$<p>其中：</p>
+<ul>
+<li>$R\in SO(3)$：物体的三维旋转；</li>
+<li>$t\in\mathbb{R}^3$：物体的三维平移。</li>
+</ul>
+<p>本文使用的基础模型是 <strong>MatchU</strong>。它先在 CAD 模型点云和观测点云之间预测 3D-3D 对应关系，再根据对应点求解位姿。</p>
+<p>设 CAD 模型点云为：</p>
+$$
+\mathcal{P}=\{p_i\in\mathbb{R}^3\mid 1\le i\le n\}
+$$<p>从深度图得到的局部观测点云为：</p>
+$$
+\mathcal{Q}=\{q_j\in\mathbb{R}^3\mid 1\le j\le m\}
+$$<p>MatchU 使用旋转不变的特征提取与融合，将 CAD 点云特征与 RGB-D 观测特征对齐。模型预测对应点集合：</p>
+$$
+\mathcal{C}=\{(p_i,q_j)\}
+$$<p>最终位姿通过点云配准得到：</p>
+$$
+T^*=\arg\min_{T\in SE(3)}
+\sum_{(p_i,q_j)\in\mathcal{C}}
+\|Tp_i-q_j\|_2^2
+$$<hr>
+<h3 id="研究动机">研究动机
+</h3><p>针对6D位姿估计设计的TTA方法很少，且此前TTA-COPE为类别级方法。</p>
+<p>核心困难是：</p>
+<ul>
+<li>无标签目标图像没有可靠的真实对应关系；</li>
+<li>直接最小化预测熵可能放大错误匹配；</li>
+<li>teacher 生成的初始伪标签也会受到遮挡、形状差异和传感器噪声影响；</li>
+<li>位姿估计是几何问题，仅在输出概率上做置信度优化并不足以保证几何一致性。</li>
+</ul>
+<p>TTAPose 的核心思路是：<strong>用 teacher-student 网络完成测试时自适应，再通过几何位姿优化增强 teacher 的伪对应标签。</strong></p>
+<p><img alt="TTAPose" class="gallery-image" data-flex-basis="551px" data-flex-grow="229" height="532" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/image/index/1788147680104.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/image/index/1788147680104_hu_c06c80bc9add7be5.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/image/index/1788147680104.png 1222w" width="1222"></p>
+<hr>
+<h3 id="方法">方法
+</h3><h4 id="合成数据预训练">合成数据预训练
+</h4><h4 id="对应关系的熵最小化">对应关系的熵最小化
+</h4><p>TTAPose 首先将分类任务中的 TENT 思想迁移到点云对应关系预测。</p>
+<p>对每个 CAD 点 $p_i$，模型预测它与观测点 $q_j$ 构成对应关系的条件概率：</p>
+$$
+P(\mathcal{C}(p_i,q_j)\mid p_i)
+$$<p>测试时通过最小化对应分布的熵，让模型对点匹配作出更加确定的预测：</p>
+$$
+\mathcal{L}_{E}=-\sum_{i=1}^{n}P(\mathcal{C}(p_i,q_j)\mid p_i)\log P(\mathcal{C}(p_i,q_j)\mid p_i)
+$$<hr>
+<h4 id="teacher-student-自适应">Teacher-Student 自适应
+</h4><p>teacher 和 student 使用相同的网络结构，并都由合成数据上的预训练权重初始化：</p>
+$$
+\theta_T^{(0)}=\theta_S^{(0)}=\theta_{\text{pre}}
+$$<p>给定无标签目标图像 $x_t$，teacher 和 student 分别输出对应关系：</p>
+$$
+\mathcal{C}_T=\theta_T(x_t),\qquad\mathcal{C}_S=\theta_S(x_t)
+$$<p>teacher 的预测被作为 student 的伪标签，student 使用与预训练阶段相同的匹配损失学习：</p>
+$$
+\mathcal{L}_{\text{pl}}^S=\mathcal{L}(\theta_S(x_t),\mathcal{C}_T)
+$$<p>student 的完整测试时损失为：</p>
+$$
+\mathcal{L}_{\text{TTA}}=\lambda\mathcal{L}_{\text{pl}}^S+(1-\lambda)\mathcal{L}_{E}
+$$<p>其中实验中取 $\lambda=0.5$。</p>
+<p>student 通过反向传播正常更新，teacher 则通过EMA方式从 student 中吸收信息。实验中动量系数取：</p>
+$$
+\mu=0.99
+$$<hr>
+<h4 id="伪标签增强">伪标签增强
+</h4><p>TTAPose 先将teacher提出的位姿进行优化，随后再映射回对应关系进行监督。</p>
+<p>完整过程如下：</p>
+<ol>
+<li>teacher 从 CAD 点云和观测点云中预测初始对应关系 $\mathcal{C}_I^T$；</li>
+<li>从对应关系中采样并计算多个 6D 位姿假设；</li>
+<li>使用 ICP 根据三维几何继续优化位姿；</li>
+<li>（可选）使用 MegaPose 结合 RGB 图像和三维点云对候选位姿进一步优化；</li>
+<li>选择置信度最高的位姿作为增强后的伪位姿；</li>
+<li>将增强位姿重新投影为对应关系 $\mathcal{C}_R^T$，用于监督 student。</li>
+</ol>
+<p>可以把这个过程写成：</p>
+$$
+\mathcal{C}_I^T
+\rightarrow
+\{T_1,T_2,\ldots,T_h\}
+\rightarrow
+T_R
+\rightarrow
+\mathcal{C}_R^T
+$$<p>其中 $T_R$ 是经过 ICP 和 MegaPose 优化、重排后的最终伪位姿。</p>
+<hr>
+<h4 id="在线与离线适配">在线与离线适配
+</h4><p>TTAPose 支持两种部署方式：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>设置</th>
+					<th>使用的数据</th>
+					<th>参数更新方式</th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Offline TTA</td>
+					<td>测试前收集的一批目标物体无标签 RGB-D 图像</td>
+					<td>先适配，再固定模型测试</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>Online TTA</td>
+					<td>测试流中连续到来的真实 RGB-D 图像</td>
+					<td>推理与参数更新同步进行</td>
+					<td></td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h3 id="实验">实验
+</h3><h4 id="数据集与评价指标">数据集与评价指标
+</h4><p>源域预训练使用 GSO 数据集，约 80 万张 RGB-D 合成训练图像；</p>
+<p>目标域测试使用三个真实 6D 姿态估计基准：</p>
+<ul>
+<li><strong>LM-O</strong>：遮挡较严重的场景；</li>
+<li><strong>T-LESS</strong>：大量弱纹理且存在对称性的工业物体；</li>
+<li><strong>YCB-V</strong>：真实杂乱环境中的日常物体。</li>
+</ul>
+<p>论文采用 BOP 的 Average Recall：</p>
+$$
+AR=
+\frac{
+AR_{\text{VSD}}
++AR_{\text{MSSD}}
++AR_{\text{MSPD}}
+}{3}
+$$<p>其中：</p>
+<ul>
+<li>VSD：可见表面差异；</li>
+<li>MSSD：考虑对称性的最大三维表面距离；</li>
+<li>MSPD：考虑对称性的最大二维投影距离。</li>
+</ul>
+<p>为了和 seen-object 方法比较，论文还报告 ADD(-S)。当平均模型点误差小于物体直径的 10% 时，预测被认为正确；对称物体使用最近点距离。</p>
+<h2 id="主实验"><img alt="主实验" class="gallery-image" data-flex-basis="391px" data-flex-grow="163" height="361" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/image/index/1788147735244.png" width="589">
+</h2><h4 id="消融实验">消融实验
+</h4><p>论文在 LM-O 上验证各组件的作用：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>删除或替换的组件</th>
+					<th style="text-align: right">ADD(-S) 下降</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>删除 entropy minimization</td>
+					<td style="text-align: right">0.3</td>
+					<td>熵损失提供辅助正则，但不是主要增益来源</td>
+			</tr>
+			<tr>
+					<td>删除 pseudo-label enhancement</td>
+					<td style="text-align: right">1.8</td>
+					<td>下降最大，几何增强是核心组件</td>
+			</tr>
+			<tr>
+					<td>删除最终 pose refinement</td>
+					<td style="text-align: right">1.1</td>
+					<td>refinement 有效，但弱于将增强伪标签用于持续训练</td>
+			</tr>
+			<tr>
+					<td>动量 teacher 改为直接更新</td>
+					<td style="text-align: right">1.4</td>
+					<td>直接同步更新容易造成训练不稳定</td>
+			</tr>
+			<tr>
+					<td>删除全部 TTA 组件</td>
+					<td style="text-align: right">2.9</td>
+					<td>各组件存在互补作用</td>
+			</tr>
+	</tbody>
+</table></div>
+<h2 id="evomas">EvoMAS
+</h2><h3 id="背景介绍-1">背景介绍
+</h3><p>EvoMAS 研究的是如何自动生成一个 LLM-based Multi-Agent System（MAS）。</p>
+<p>一个多智能体系统不仅包含若干 agent，还需要同时确定：</p>
+<ul>
+<li>每个 agent 的角色和 system prompt；</li>
+<li>每个 agent 使用的 backbone LLM；</li>
+<li>每个 agent 可以调用哪些工具；</li>
+<li>agent 之间如何通信；</li>
+<li>哪些 agent 接收原始任务，哪些 agent 输出最终答案；</li>
+<li>整个系统如何执行和终止。</li>
+</ul>
+<p>传统方法通常由人手工设计固定的组织形式，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Planner → Worker → Reviewer → Finalizer
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">多个 agent 独立解题 → Debate / Majority Vote → 输出答案
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这些系统在某类任务上有效，但很难保证同一种拓扑、prompt 和模型分配在推理、软件工程、工具调用等任务上都合适。</p>
+<hr>
+<h3 id="研究动机-1">研究动机
+</h3><p>自动生成 MAS 的已有方法主要存在两类问题。</p>
+<p><strong>第一类：直接生成可执行代码。</strong></p>
+<p>例如让 LLM 直接生成一个完整的 multi-agent program。它具有较大的结构搜索空间，但容易产生：</p>
+<ul>
+<li>语法错误；</li>
+<li>缺失依赖或接口不匹配；</li>
+<li>agent 间消息格式不一致；</li>
+<li>运行时异常；</li>
+<li>针对某个 benchmark 的脆弱代码。</li>
+</ul>
+<p><strong>第二类：限制在固定模板内搜索。</strong></p>
+<p>这种方式执行更稳定，但通常只能修改 prompt、角色或少量连接关系，表达能力不足，也难以针对不同任务改变模型、工具和拓扑。</p>
+<p>EvoMAS 的认为多智能体系统（MAS）应该针对每个任务由结构化配置生成，再在执行时实例化。</p>
+<hr>
+<h3 id="问题定义">问题定义
+</h3><p>论文将一个 MAS 配置定义为：</p>
+$$
+C=(G,\{A_i\}_{i=1}^{k},V_{\text{in}},V_{\text{out}})
+$$<p>其中通信图为：</p>
+$$
+G=(V,E)
+$$<ul>
+<li>$V=\{v_1,\ldots,v_k\}$：agent 节点集合；</li>
+<li>$E\subseteq V\times V$：有向通信边；</li>
+<li>$(v_i,v_j)\in E$ 表示 $v_i$ 的输出会成为 $v_j$ 的部分输入；</li>
+<li>图被限制为无环图，从而保证执行过程可以稳定调度。</li>
+</ul>
+<p>每个 agent 的配置为：</p>
+$$
+A_i=(b_i,p_i,\Gamma_i)
+$$<p>其中：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>含义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>$b_i$</td>
+					<td>agent 使用的 backbone model</td>
+			</tr>
+			<tr>
+					<td>$p_i$</td>
+					<td>agent 的 system prompt 模板</td>
+			</tr>
+			<tr>
+					<td>$\Gamma_i$</td>
+					<td>agent 可以访问的工具集合</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>$V_{\text{in}}$ 表示接收原始任务的输入 agent，$V_{\text{out}}$ 表示产生最终答案的输出 agent。</p>
+<p>给定任务 $q$，执行过程记为：</p>
+$$
+\operatorname{Exec}(C,q)
+$$<p>EvoMAS 的目标是为每个任务找到使奖励最大的配置：</p>
+$$
+C_q^*=\arg\max_{C}R(q,C)
+$$<hr>
+<h3 id="方法-1">方法
+</h3><p>EvoMAS 维护两个可以跨任务积累的状态：</p>
+<ol>
+<li><strong>candidate configuration pool</strong>：保存已有 MAS 配置；</li>
+<li><strong>experience memory</strong>：保存过去任务中的演化轨迹总结。</li>
+</ol>
+<p>对于每个新任务，系统先从配置池选择若干起点，然后执行、评价并进行多轮进化，最后把最优配置和经验写回系统。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>操作</th>
+					<th>作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Select</td>
+					<td>从配置池检索与当前任务最相关、能力互补的候选配置</td>
+			</tr>
+			<tr>
+					<td>Mutate</td>
+					<td>根据执行反馈，局部修改一个配置</td>
+			</tr>
+			<tr>
+					<td>Crossover</td>
+					<td>组合两个父配置中的有效结构和 agent 属性</td>
+			</tr>
+			<tr>
+					<td>Consolidate</td>
+					<td>将演化过程压缩为可复用经验并写入 memory</td>
+			</tr>
+	</tbody>
+</table></div>
+<p><img alt="EvoMAS" class="gallery-image" data-flex-basis="605px" data-flex-grow="252" height="528" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/image/index/1788147792512.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/image/index/1788147792512_hu_1f6fff6d6fa8870b.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/image/index/1788147792512.png 1333w" width="1333"></p>
+<hr>
+<h4 id="配置池初始化">配置池初始化
+</h4><p>初始 pool 由已有的人类设计 MAS 作为种子，包括：</p>
+<ul>
+<li>Peer Review；</li>
+<li>Cross-team Orchestration；</li>
+<li>Multi-Agent Debate；</li>
+<li>Majority Vote；等</li>
+</ul>
+<p>这些配置包含不同协作结构，使进化从可执行且具有基本协作能力的系统开始。</p>
+<hr>
+<h4 id="select选择初始配置">Select：选择初始配置
+</h4><p>设当前配置池为 $\mathbb{C}$。给定任务 $q$，Select 选出 $k$ 个初始候选：</p>
+$$
+\{C_1,\ldots,C_k\}=
+\operatorname{Select}(q,\mathbb{C})
+$$<p>选择过程会参考：</p>
+<ul>
+<li>配置的任务描述；</li>
+<li>域标签；</li>
+<li>在相似历史任务上的表现；</li>
+<li>当前任务需要的能力。</li>
+</ul>
+<p>meta-model 不只选择最相似的一个配置，还会尽量保留互补性。例如一个候选擅长任务分解，另一个候选擅长验证。选出后，meta-model 会针对当前任务改写 agent 角色和 prompt，形成 任务特点的初始种群。</p>
+<hr>
+<h4 id="mutate反馈驱动的局部变异">Mutate：反馈驱动的局部变异
+</h4><p>设配置 $C_i$ 在任务 $q$ 上的执行轨迹与反馈为：</p>
+$$
+\tau_q(C_i)
+$$<p>经验记忆为 $\mathbb{E}$，则变异操作为：</p>
+$$
+C_i'=
+\operatorname{Mutate}
+(C_i,\tau_q(C_i),\mathbb{E})
+$$<p>meta-model 首先从执行轨迹中诊断主要瓶颈，然后每次只修改一种组件：</p>
+<ul>
+<li>agent prompt；</li>
+<li>backbone model；</li>
+<li>tool list；</li>
+<li>communication topology。</li>
+</ul>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">执行反馈：最终答案经常遗漏边界条件
+</span></span><span class="line"><span class="cl">变异：新增 verifier，或强化 reviewer prompt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>又例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">执行反馈：工具调用正确，但推理步骤质量不足
+</span></span><span class="line"><span class="cl">变异：把 verification agent 从较小模型替换为更强的推理模型
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h4 id="crossover配置交叉">Crossover：配置交叉
+</h4><p>给定两个父配置 $C_i$ 和 $C_j$：</p>
+$$
+C_{ij}'=
+\operatorname{Crossover}
+(C_i,C_j,\tau_q(C_i),\tau_q(C_j),\mathbb{E})
+$$<p>具体操作为：</p>
+<ol>
+<li>从一个父配置完整继承通信拓扑；</li>
+<li>在该拓扑的各个位置上，重新组合两个父配置的 prompt、model 和 tool；</li>
+<li>根据两个父配置的执行轨迹，优先继承已经被证明有效的 agent 属性。</li>
+</ol>
+<hr>
+<h4 id="执行评价与选择">执行、评价与选择
+</h4><p>从 $k$ 个初始配置开始，EvoMAS 最多进行 $n$ 次演化。每一步执行：</p>
+<ol>
+<li>从当前候选集合选择表现较好的父配置；</li>
+<li>执行 mutation 或 crossover 得到后代；</li>
+<li>在当前任务上运行新配置；</li>
+<li>使用奖励函数评价；</li>
+<li>将后代加入候选集合。</li>
+</ol>
+<p>最终候选集合包含 $k+n$ 个配置，并返回奖励最高的一个。</p>
+<p>配置的奖励定义为：</p>
+$$
+R(q,C)=\operatorname{Metrics}(q,C)-\beta\operatorname{Cost}(C)
+$$<p>其中 $\operatorname{Metrics}(q,C)$ 由 LLM-as-a-judge 根据任务类型，从正确性、完整性和推理质量等维度评价。</p>
+<p>单次 MAS 执行成本定义为：</p>
+$$
+\operatorname{Cost}(C)=T+\alpha L
+$$<p>其中：</p>
+<ul>
+<li>$T$：总 token 使用量；</li>
+<li>$L$：wall-clock latency，单位为秒；</li>
+<li>$\alpha=1000$：将延迟换算到统一成本尺度；</li>
+<li>$\beta$：性能与成本之间的权衡系数。</li>
+</ul>
+<hr>
+<h4 id="pool-与-experience-memory-更新">Pool 与 Experience Memory 更新
+</h4><p>任务按顺序到来。第 $t$ 个任务完成后，最优配置 $C_q$ 被加入配置池。并且使用 LLM 将演化轨迹压缩成经验摘要并保存进memory。</p>
+<p>后续每次演化检索 3 至多条与当前任务描述最相似的经验。</p>
+<hr>
+<h3 id="实验-1">实验
+</h3><p>本工作不需要模型训练，所有Agent通过api调用实现，agent之间的通信方式为把上一个 agent 的文本输出放进下一个 agent 的 上下文。</p>
+<h4 id="数据集与指标">数据集与指标
+</h4><p>论文覆盖三种类型的 agentic benchmark：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>Benchmark</th>
+					<th>任务类型</th>
+					<th>指标</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>BBEH</td>
+					<td>多步推理与工具增强问题求解</td>
+					<td>Accuracy</td>
+			</tr>
+			<tr>
+					<td>SWE-Bench-Lite / Verified</td>
+					<td>真实软件工程 issue 修复</td>
+					<td>Resolved Rate</td>
+			</tr>
+			<tr>
+					<td>WorkBench</td>
+					<td>办公规划、工具调用与多步执行</td>
+					<td>Accuracy</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>此外，作者使用 <strong>Execution Rate（ER）</strong> 衡量生成的 MAS 能否在没有结构错误和运行时错误的情况下成功执行：</p>
+$$
+ER=
+\frac{\text{成功执行的生成系统数}}
+{\text{生成系统总数}}
+$$<p>每个任务运行 3 次并取平均结果。</p>
+<p>默认使用 Claude-4-Sonnet 作为生成配置的 meta-model。agent backbone 候选池包括：</p>
+<ul>
+<li>Claude-3.5-Sonnet；</li>
+<li>Qwen3-235B-A22B；</li>
+<li>Qwen3-Coder-480B-A35B。</li>
+</ul>
+<p>在 BBEH 和 WorkBench 上，single-agent baseline 使用 SmolAgent 的 CodeAgent；在 SWE-Bench 上使用 SWE-Agent。</p>
+<hr>
+<h4 id="主结果">主结果
+</h4><p>EvoMAS 使用自动 LLM selection 时的主要结果为：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>Benchmark</th>
+					<th style="text-align: right">EvoMAS</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>BBEH</td>
+					<td style="text-align: right">58.7%</td>
+			</tr>
+			<tr>
+					<td>WorkBench</td>
+					<td style="text-align: right">48.9%</td>
+			</tr>
+			<tr>
+					<td>SWE-Bench-Lite</td>
+					<td style="text-align: right">52.9%</td>
+			</tr>
+			<tr>
+					<td>SWE-Bench-Verified</td>
+					<td style="text-align: right">63.8%</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>在 BBEH 上，最佳固定单模型 EvoMAS 为 Qwen3-235B 的 52.8%，自动 model-role assignment 进一步提高 5.9 个百分点。与 EvoAgent 的最佳结果 48.2% 相比，EvoMAS 提高 10.5 个百分点。</p>
+<p>在 WorkBench 上，EvoMAS 达到 48.9%，比 EvoAgent 的最佳结果高 7.1 个百分点。</p>
+<p>在 SWE-Bench-Verified 上，EvoMAS 达到 63.8%，比最佳固定单模型 EvoMAS 的 60.4% 高 3.4 个百分点，也比 Qwen3-480B single agent 的 56.4% 高 7.4 个百分点。</p>
+<!-- 图片占位：EvoMAS 各基准主结果，对应原论文 Table 1 -->
+<hr>
+<h4 id="执行可靠性">执行可靠性
+</h4><p>EvoMAS 的配置生成方式保持了很高的执行率：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>Benchmark</th>
+					<th style="text-align: right">Execution Rate</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>BBEH</td>
+					<td style="text-align: right">98.9%</td>
+			</tr>
+			<tr>
+					<td>BBEH-Mini</td>
+					<td style="text-align: right">98.2%</td>
+			</tr>
+			<tr>
+					<td>WorkBench</td>
+					<td style="text-align: right">98.5%</td>
+			</tr>
+			<tr>
+					<td>SWE-Bench-Lite</td>
+					<td style="text-align: right">96.8%</td>
+			</tr>
+			<tr>
+					<td>SWE-Bench-Verified</td>
+					<td style="text-align: right">98.4%</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>作为对比，直接生成代码的 MAS-GPT 在 BBEH 上执行率为 71.5%，在 SWE-Bench-Lite 上仅为 1.2%。</p>
+<p>这验证了 configuration generation 的核心优势：生成器只负责声明 agent、prompt、model、tool 和 topology，运行时解释器负责保证执行，因此不会频繁出现代码语法和框架接口错误。</p>
+<!-- 图片占位：执行率与任务性能的关系，对应原论文 Fig. 2 -->
+<hr>
+<h4 id="更强模型下的结果">更强模型下的结果
+</h4><p>使用 Claude-4.5-Sonnet 同时作为 generator 和 agent backbone 时，EvoMAS 在 SWE-Bench-Verified 上达到：</p>
+$$
+79.1\%
+$$<p>论文指出，该结果略高于写作时公开榜单最高的 78.8%。更重要的是，在 Claude-3.5、Claude-4 和 Claude-4.5 三代模型上，EvoMAS 相对 single agent 和固定 MAS 的提升仍然存在，说明 evolutionary MAS generation 与底层模型能力是互补关系。</p>
+<!-- 图片占位：Claude-4.5-Sonnet 结果，对应原论文 Fig. 3 -->
+<hr>
+<h4 id="初始配置池与演化深度">初始配置池与演化深度
+</h4><p>在 BBEH-Mini 和 WorkBench 上的消融如下：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>配置</th>
+					<th style="text-align: right">BBEH-Mini</th>
+					<th style="text-align: right">WorkBench</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Empty pool，$T=5$</td>
+					<td style="text-align: right">33.5</td>
+					<td style="text-align: right">—</td>
+			</tr>
+			<tr>
+					<td>Default pool，$T=1$</td>
+					<td style="text-align: right">44.4</td>
+					<td style="text-align: right">45.4</td>
+			</tr>
+			<tr>
+					<td>Default pool，$T=3$</td>
+					<td style="text-align: right"><strong>49.1</strong></td>
+					<td style="text-align: right"><strong>48.9</strong></td>
+			</tr>
+			<tr>
+					<td>Default pool，$T=5$</td>
+					<td style="text-align: right">47.6</td>
+					<td style="text-align: right">48.3</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>高质量初始配置池在 BBEH-Mini 上带来 15.6 个百分点的提升。演化深度也不是越大越好，$T=3$ 优于 $T=5$，说明过多迭代存在收益递减，并可能引入不必要的结构变化。</p>
+<p>即使禁止跨任务累积，仅在当前任务内部做演化，EvoMAS 也能从 single agent 的 36.6% 提升到 40.4%，说明增益不完全依赖历史 memory。</p>
+<hr>
+<h4 id="meta-model-与奖励信号">Meta-model 与奖励信号
+</h4><p>固定 agent backbone pool，仅替换生成配置的 meta-model，在 SWE-Bench-Verified 上得到：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>Meta-model</th>
+					<th style="text-align: right">Resolved Rate</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Qwen3-235B</td>
+					<td style="text-align: right">58.2%</td>
+			</tr>
+			<tr>
+					<td>Claude-3.5-Sonnet</td>
+					<td style="text-align: right">56.4%</td>
+			</tr>
+			<tr>
+					<td>Claude-4-Sonnet</td>
+					<td style="text-align: right">63.8%</td>
+			</tr>
+			<tr>
+					<td>Claude-4.5-Sonnet</td>
+					<td style="text-align: right">67.4%</td>
+			</tr>
+			<tr>
+					<td>最佳非 EvoMAS baseline</td>
+					<td style="text-align: right">50.2%</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>即使使用较弱 meta-model，EvoMAS 仍然超过非 EvoMAS baseline，说明主要收益来自演化框架，而不是绑定某个特定 generator。</p>
+<p>LLM-as-a-judge 与使用真实标签的 oracle reward 对比如下：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>Reward</th>
+					<th style="text-align: right">BBEH-Mini</th>
+					<th style="text-align: right">WorkBench</th>
+					<th style="text-align: right">SWE-Bench</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>LLM-as-a-Judge</td>
+					<td style="text-align: right">44.4</td>
+					<td style="text-align: right">48.9</td>
+					<td style="text-align: right">63.8</td>
+			</tr>
+			<tr>
+					<td>Oracle Ground Truth</td>
+					<td style="text-align: right">47.8</td>
+					<td style="text-align: right">50.4</td>
+					<td style="text-align: right">66.9</td>
+			</tr>
+			<tr>
+					<td>差值</td>
+					<td style="text-align: right">+3.4</td>
+					<td style="text-align: right">+1.5</td>
+					<td style="text-align: right">+3.1</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>oracle reward 更好，但提升幅度有限，说明不访问真实答案时，LLM judge 已经可以提供有效的进化方向。</p>
+<hr>
+<h4 id="演化出的结构规律">演化出的结构规律
+</h4><p>作者观察到若干不在初始配置池中显式定义的 emergent pattern：</p>
+<ul>
+<li><strong>model-role affinity</strong>：更强的推理模型常被分配给 verification 角色，而不是平均分配到所有 agent；</li>
+<li><strong>functional specialization</strong>：系统会自然形成专门的 decomposer、solver 和 verifier；</li>
+<li><strong>novel topology</strong>：进化会产生不同于任何种子家族的新拓扑，部分任务中 agent 数量减少约 70%；</li>
+<li><strong>阶段性修改</strong>：早期主要优化 prompt，中期更换 model，后期才修改 topology；</li>
+<li><strong>mutation 与 crossover 分工</strong>：mutation 适合早期针对单一错误局部修复，crossover 则在不同配置形成互补能力后更有效。</li>
+</ul>
+<p>不同任务也会触发不同的变异偏好：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>任务类型</th>
+					<th style="text-align: right">Prompt</th>
+					<th style="text-align: right">Model</th>
+					<th style="text-align: right">Topology</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>一般推理任务</td>
+					<td style="text-align: right">50.6%</td>
+					<td style="text-align: right">28.1%</td>
+					<td style="text-align: right">21.3%</td>
+			</tr>
+			<tr>
+					<td>对模型容量敏感的任务</td>
+					<td style="text-align: right">32.7%</td>
+					<td style="text-align: right">44.6%</td>
+					<td style="text-align: right">22.7%</td>
+			</tr>
+			<tr>
+					<td>需要任务分解的任务</td>
+					<td style="text-align: right">35.2%</td>
+					<td style="text-align: right">23.1%</td>
+					<td style="text-align: right">41.7%</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>这一结果支持联合优化 prompt、model 和 topology 的设计：不同任务的主要瓶颈并不相同，只搜索其中一个维度会限制最终性能。</p>
+<hr>
+<h4 id="测试时计算量">测试时计算量
+</h4><p>EvoMAS 的提升不是简单来自重复调用更多 token。论文在 SWE-Bench-Verified 上进行了 budget-matched comparison：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">Tokens</th>
+					<th style="text-align: right">Accuracy</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Claude-3.5-Sonnet Single Agent</td>
+					<td style="text-align: right">2.3M</td>
+					<td style="text-align: right">33.6%</td>
+			</tr>
+			<tr>
+					<td>Loop，匹配 EvoMAS 预算</td>
+					<td style="text-align: right">29M</td>
+					<td style="text-align: right">33.6%</td>
+			</tr>
+			<tr>
+					<td>Best-of-6 + selection</td>
+					<td style="text-align: right">24M</td>
+					<td style="text-align: right">37.0%</td>
+			</tr>
+			<tr>
+					<td>Best-of-10 + selection</td>
+					<td style="text-align: right">40M</td>
+					<td style="text-align: right">37.8%</td>
+			</tr>
+			<tr>
+					<td>EvoMAS</td>
+					<td style="text-align: right">29M</td>
+					<td style="text-align: right"><strong>42.7%</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>在 Claude-4.5-Sonnet 下，相同的 31M token 预算中：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">Accuracy</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Loop</td>
+					<td style="text-align: right">71.4%</td>
+			</tr>
+			<tr>
+					<td>EvoMAS</td>
+					<td style="text-align: right"><strong>79.1%</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>说明关键并不是 token 数量本身，而是如何把计算分配到分解、执行、验证和聚合等不同角色中。</p>
+<p>另一方面，EvoMAS 的绝对成本仍然很高。meta-model 占总 token 的 7.7%、总时间的 10.6%；主要成本来自多次 MAS 实际执行。作者发现配置池大约在处理 300—400 个 query 后趋于稳定，此后可以减少演化，仅执行 configuration selection 和一次最终 MAS，从而摊薄前期搜索成本。</p>
+<!-- 图片占位：测试时计算扩展曲线，对应原论文 Fig. 4 / Table 6 -->
+<hr>
+<h3 id="总结">总结
+</h3><p>EvoMAS 的核心贡献可以概括为三个层次：</p>
+<ol>
+<li><strong>表示层</strong>：用结构化配置表示 MAS，而不是直接生成可执行代码；</li>
+<li><strong>搜索层</strong>：用执行反馈驱动 selection、mutation 和 crossover；</li>
+<li><strong>记忆层</strong>：通过配置池与经验 memory 跨任务复用成功结构。</li>
+</ol>
+<p>它的主要优点是：</p>
+<ul>
+<li>配置生成比代码生成具有更高的 executability；</li>
+<li>可以同时搜索角色、prompt、model、tool 和 topology；</li>
+<li>能根据具体任务动态决定多智能体结构；</li>
+<li>能积累跨任务经验，并随着任务流逐渐改进；</li>
+<li>与更强的基础模型和更多 test-time compute 具有互补性。</li>
+</ul>
+<p>它的局限包括：</p>
+<ul>
+<li>前期需要多次完整执行候选 MAS，token 与时间成本较高；</li>
+<li>演化依赖 LLM-as-a-judge，judge 的偏差可能影响搜索方向；</li>
+<li>默认配置是有向无环协作图，不覆盖持续循环、长期状态或对抗式 agent；</li>
+<li>顺序处理任务并不断扩充 pool 和 memory，会增加长期检索和维护成本；</li>
+<li>benchmark 上找到的结构能否稳定迁移到开放、动态的真实环境，仍需要进一步验证。</li>
+</ul>
+<p>总体来看，EvoMAS 并不是简单地“让多个 agent 多讨论几轮”，而是把多智能体系统本身当成测试时可优化的对象。论文最有价值的观点是：随着 LLM 推理能力增强，test-time scaling 不只可以发生在单个模型的思维链或采样次数上，也可以发生在整个 agent organization 的结构搜索上。</p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tta/">TTA</a>
+        
+            <a href="/tags/6d%E5%A7%BF%E6%80%81%E4%BC%B0%E8%AE%A1/">6D姿态估计</a>
+        
+            <a href="/tags/multi-agent/">Multi-Agent</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读12" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_3b8652b4e02b0f7a.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #5a565380 0%, #bcb7aeC0 100%);">
+            <h2 class="article-title">论文阅读12</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读9" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_dbe10ebf6cc59157.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #392e1f80 0%, #392e1fC0 100%);">
+            <h2 class="article-title">论文阅读9</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读8" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_b3142fb8ae7cd5f6.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #bebcbf80 0%, #53383bC0 100%);">
+            <h2 class="article-title">论文阅读8</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读7" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_9a6bdf61d904f7d7.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB7/cover_hu_157b6711eb9ae79e.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #49423880 0%, #b8b7b3C0 100%);">
+            <h2 class="article-title">论文阅读7</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB5/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读5</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>

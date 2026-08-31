@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文阅读">
+<title>论文阅读EX</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读EX">
+<meta property='og:description' content="论文阅读">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='位姿估计' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-08-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-08-28T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover.jpg' />
+<meta name="twitter:title" content="论文阅读EX">
+<meta name="twitter:description" content="论文阅读"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#1-概要">1. 概要</a></li>
+    <li><a href="#2-共同任务与研究背景">2. 共同任务与研究背景</a>
+      <ol>
+        <li><a href="#21-为什么要做新物体位姿估计">2.1 为什么要做“新物体”位姿估计</a></li>
+        <li><a href="#22-单张无位姿参考为什么困难">2.2 单张无位姿参考为什么困难</a></li>
+      </ol>
+    </li>
+    <li><a href="#3-unopose">3. UNOPose</a>
+      <ol>
+        <li><a href="#31-论文信息">3.1 论文信息</a></li>
+        <li><a href="#32-研究动机">3.2 研究动机</a></li>
+        <li><a href="#33-方法">3.3 方法</a>
+          <ol>
+            <li><a href="#331-unoseg用单张参考图定位查询物体">3.3.1 UNOSeg：用单张参考图定位查询物体</a></li>
+            <li><a href="#332-grf构造-se3-不变的全局参考系">3.3.2 GRF：构造 SE(3) 不变的全局参考系</a></li>
+            <li><a href="#333-粗阶段稀疏特征匹配与姿态假设选择">3.3.3 粗阶段：稀疏特征匹配与姿态假设选择</a></li>
+            <li><a href="#334-细阶段lrf稠密匹配与加权-svd">3.3.4 细阶段：LRF、稠密匹配与加权 SVD</a></li>
+          </ol>
+        </li>
+        <li><a href="#34-实验">3.4 实验</a>
+          <ol>
+            <li><a href="#341-设置">3.4.1 设置</a></li>
+            <li><a href="#342-主结果">3.4.2 主结果</a></li>
+            <li><a href="#343-消融与鲁棒性">3.4.3 消融与鲁棒性</a></li>
+          </ol>
+        </li>
+        <li><a href="#35-优势与局限">3.5 优势与局限</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-cog">4. COG</a>
+      <ol>
+        <li><a href="#41-论文信息">4.1 论文信息</a></li>
+        <li><a href="#42-研究动机">4.2 研究动机</a></li>
+        <li><a href="#43-方法">4.3 方法</a>
+          <ol>
+            <li><a href="#431-延续-unopose-的粗到细骨架">4.3.1 延续 UNOPose 的粗到细骨架</a></li>
+            <li><a href="#432-置信度作为-ot-的边缘分布">4.3.2 置信度作为 OT 的边缘分布</a></li>
+            <li><a href="#433-几何-affinity-与语义先验">4.3.3 几何 affinity 与语义先验</a></li>
+            <li><a href="#434-soft-correspondence-与可微位姿求解">4.3.4 Soft correspondence 与可微位姿求解</a></li>
+            <li><a href="#435-无监督损失与伪置信度">4.3.5 无监督损失与伪置信度</a></li>
+          </ol>
+        </li>
+        <li><a href="#44-实验">4.4 实验</a>
+          <ol>
+            <li><a href="#441-设置">4.4.1 设置</a></li>
+            <li><a href="#442-主结果">4.4.2 主结果</a></li>
+            <li><a href="#443-重叠预测与消融">4.4.3 重叠预测与消融</a></li>
+          </ol>
+        </li>
+        <li><a href="#45-优势与局限">4.5 优势与局限</a></li>
+      </ol>
+    </li>
+    <li><a href="#5-两种方法的相同点">5. 两种方法的相同点</a></li>
+    <li><a href="#6-两种方法的不同点">6. 两种方法的不同点</a></li>
+    <li><a href="#7-如何理解-unopose--cog-的方法演进">7. 如何理解 UNOPose → COG 的方法演进</a></li>
+    <li><a href="#10-参考资料">10. 参考资料</a></li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/">
+            <img alt="Featured image of post 论文阅读EX" height="1844" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_f8513026e3182fc7.jpg 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_265eb75a261b6067.jpg 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_d23174220302e66e.jpg 2400w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover.jpg 4096w" width="4096">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/">论文阅读EX</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            论文阅读
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-08-28T00:00:00Z'>2026-08-28</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#1-概要">1. 概要</a></li>
+    <li><a href="#2-共同任务与研究背景">2. 共同任务与研究背景</a>
+      <ol>
+        <li><a href="#21-为什么要做新物体位姿估计">2.1 为什么要做“新物体”位姿估计</a></li>
+        <li><a href="#22-单张无位姿参考为什么困难">2.2 单张无位姿参考为什么困难</a></li>
+      </ol>
+    </li>
+    <li><a href="#3-unopose">3. UNOPose</a>
+      <ol>
+        <li><a href="#31-论文信息">3.1 论文信息</a></li>
+        <li><a href="#32-研究动机">3.2 研究动机</a></li>
+        <li><a href="#33-方法">3.3 方法</a>
+          <ol>
+            <li><a href="#331-unoseg用单张参考图定位查询物体">3.3.1 UNOSeg：用单张参考图定位查询物体</a></li>
+            <li><a href="#332-grf构造-se3-不变的全局参考系">3.3.2 GRF：构造 SE(3) 不变的全局参考系</a></li>
+            <li><a href="#333-粗阶段稀疏特征匹配与姿态假设选择">3.3.3 粗阶段：稀疏特征匹配与姿态假设选择</a></li>
+            <li><a href="#334-细阶段lrf稠密匹配与加权-svd">3.3.4 细阶段：LRF、稠密匹配与加权 SVD</a></li>
+          </ol>
+        </li>
+        <li><a href="#34-实验">3.4 实验</a>
+          <ol>
+            <li><a href="#341-设置">3.4.1 设置</a></li>
+            <li><a href="#342-主结果">3.4.2 主结果</a></li>
+            <li><a href="#343-消融与鲁棒性">3.4.3 消融与鲁棒性</a></li>
+          </ol>
+        </li>
+        <li><a href="#35-优势与局限">3.5 优势与局限</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-cog">4. COG</a>
+      <ol>
+        <li><a href="#41-论文信息">4.1 论文信息</a></li>
+        <li><a href="#42-研究动机">4.2 研究动机</a></li>
+        <li><a href="#43-方法">4.3 方法</a>
+          <ol>
+            <li><a href="#431-延续-unopose-的粗到细骨架">4.3.1 延续 UNOPose 的粗到细骨架</a></li>
+            <li><a href="#432-置信度作为-ot-的边缘分布">4.3.2 置信度作为 OT 的边缘分布</a></li>
+            <li><a href="#433-几何-affinity-与语义先验">4.3.3 几何 affinity 与语义先验</a></li>
+            <li><a href="#434-soft-correspondence-与可微位姿求解">4.3.4 Soft correspondence 与可微位姿求解</a></li>
+            <li><a href="#435-无监督损失与伪置信度">4.3.5 无监督损失与伪置信度</a></li>
+          </ol>
+        </li>
+        <li><a href="#44-实验">4.4 实验</a>
+          <ol>
+            <li><a href="#441-设置">4.4.1 设置</a></li>
+            <li><a href="#442-主结果">4.4.2 主结果</a></li>
+            <li><a href="#443-重叠预测与消融">4.4.3 重叠预测与消融</a></li>
+          </ol>
+        </li>
+        <li><a href="#45-优势与局限">4.5 优势与局限</a></li>
+      </ol>
+    </li>
+    <li><a href="#5-两种方法的相同点">5. 两种方法的相同点</a></li>
+    <li><a href="#6-两种方法的不同点">6. 两种方法的不同点</a></li>
+    <li><a href="#7-如何理解-unopose--cog-的方法演进">7. 如何理解 UNOPose → COG 的方法演进</a></li>
+    <li><a href="#10-参考资料">10. 参考资料</a></li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h1 id="unopose-与-cog-论文总结">UNOPose 与 COG 论文总结
+</h1>
+    <blockquote>
+        <p>主题：基于单张、无位姿 RGB-D 参考图像的新物体 6DoF 位姿估计<br>
+论文：UNOPose（CVPR 2025）与 COG（CVPR 2026）</p>
+
+    </blockquote>
+<h2 id="1-概要">1. 概要
+</h2><p>两篇论文研究的是同一个设定：测试时只给一张查询（query）RGB-D 图像和一张同一未知物体的参考（reference）RGB-D 图像；参考图不带位姿标注，也没有目标物体的 CAD 模型，需要估计两次观测之间的相对 6DoF 位姿。</p>
+<ul>
+<li><strong>UNOPose 的核心贡献是“先把问题变容易”</strong>：通过全局参考系（GRF）把任意 SE(3) 输入规范化，再以局部参考系（LRF）补充细粒度几何，并显式预测重叠区域，在监督训练下完成由粗到细的配准。</li>
+<li><strong>COG 的核心贡献是“重新定义对应关系”</strong>：沿用 UNOPose 的单参考、RGB-D、粗到细骨架，但把离散的一对一匹配改成置信度感知的最优传输（OT）。点置信度直接充当 OT 的边缘分布，DINOv2 语义特征充当先验，使对应、置信度和位姿求解形成可微闭环，从而不使用真实位姿或真实重叠标签也能训练。</li>
+<li>因此，两者更像一条连续的技术路线，而不是互不相关的竞争方案：<strong>UNOPose 主要解决任意初始位姿与低重叠；COG 主要解决离散匹配不可微、匹配质量不均衡以及训练依赖姿态标签。</strong></li>
+</ul>
+<h2 id="2-共同任务与研究背景">2. 共同任务与研究背景
+</h2><h3 id="21-为什么要做新物体位姿估计">2.1 为什么要做“新物体”位姿估计
+</h3><p>6DoF 物体位姿包含三维旋转和三维平移，是机器人抓取、增强现实和三维场景理解的基础。传统方法通常属于以下两类：</p>
+<ol>
+<li><strong>实例级方法</strong>：训练和测试物体相同，常依赖每个物体的 CAD 模型与位姿标注。</li>
+<li><strong>类别级方法</strong>：可处理预定义类别中的新实例，但类别范围固定，仍不是真正的开放世界泛化。</li>
+</ol>
+<p>新物体位姿估计希望模型在训练时没见过目标物体，测试时只进行轻量的物体“接入”（onboarding）。然而，很多现有方法仍要求 CAD 模型、提前渲染的模板库、多张带位姿参考图，或通过 SfM 重建目标物体。这些准备过程限制了实际扩展能力。</p>
+<h3 id="22-单张无位姿参考为什么困难">2.2 单张无位姿参考为什么困难
+</h3><p>只使用一张无位姿 RGB-D 参考图虽然接入成本最低，却带来三个直接问题：</p>
+<ul>
+<li><strong>变换范围大</strong>：参考位姿不再是已知锚点，query 与 reference 的相对变换可能覆盖整个 SE(3)。</li>
+<li><strong>观测是 partial-to-partial</strong>：两张深度图都只看到物体的一部分；大视角差、遮挡和深度噪声会使真实重叠区域很小。</li>
+<li><strong>对应易歧义</strong>：对称结构、重复部件、纹理缺失及外点会让几何或语义匹配集中到少数“强点”，进而产生错误姿态。</li>
+</ul>
+<p>任务可写为：给定 query 点云 $P$ 与 reference 点云 $Q$，寻找旋转 $R\in SO(3)$ 和平移 $t\in\mathbb{R}^3$，使二者的有效重叠部分满足</p>
+$$
+Q_{\mathrm{val}} \approx P_{\mathrm{val}}R + \mathbf{1}t^\top.
+$$<p>由于没有统一的物体规范坐标系，论文估计的是两张图之间定义良好的<strong>相对位姿</strong>，而不是物体在某个先验 CAD 坐标系中的绝对位姿。</p>
+<hr>
+<h2 id="3-unopose">3. UNOPose
+</h2><h3 id="31-论文信息">3.1 论文信息
+</h3><ul>
+<li>标题：<em>UNOPose: Unseen Object Pose Estimation with an Unposed RGB-D Reference Image</em></li>
+<li>作者：Xingyu Liu、Gu Wang、Ruida Zhang、Chenyangguang Zhang、Federico Tombari、Xiangyang Ji</li>
+<li>会议：CVPR 2025</li>
+<li>关键词：单张无位姿参考、SE(3) 规范化、GRF/LRF、重叠预测、粗到细配准</li>
+</ul>
+<h3 id="32-研究动机">3.2 研究动机
+</h3><p>此前的新物体位姿方法往往用 CAD 模型或多张带位姿图像把搜索范围限制在参考附近。UNOPose 希望把物体接入简化为“拍一张 RGB-D 照片”，但这样会失去已知参考坐标系，并使相对姿态的范围扩大到整个 SE(3)。作者据此提出两个关键问题：</p>
+<ol>
+<li>如何让网络在任意旋转、平移和物体尺度下仍获得一致的表示？</li>
+<li>如何在两张仅部分重叠的点云之间找到可靠、足够稠密的对应？</li>
+</ol>
+<h3 id="33-方法">3.3 方法
+</h3><p>UNOPose 包含查询物体分割和相对位姿估计两个部分。</p>
+<h4 id="331-unoseg用单张参考图定位查询物体">3.3.1 UNOSeg：用单张参考图定位查询物体
+</h4><ol>
+<li>使用 SAM 或 FastSAM 在 query 图像中生成候选分割掩码。</li>
+<li>使用 DINOv2 提取 query 候选区域和 reference 物体的视觉描述子。</li>
+<li>通过余弦相似度选择与 reference 最相似的 query 候选掩码。</li>
+</ol>
+<p>该设计不需要目标物体 CAD 模型；reference 本身同时承担目标身份提示和相对位姿坐标来源。</p>
+<h4 id="332-grf构造-se3-不变的全局参考系">3.3.2 GRF：构造 SE(3) 不变的全局参考系
+</h4><p>UNOPose 分别从 query/reference 的观测点云自身构造 Global Reference Frame（GRF）。对点云中的点 $x$，规范化形式可概括为</p>
+$$
+x_G=R_G^\top(x-c)/s,
+$$<p>其中：</p>
+<ul>
+<li>$c$ 是点云中心，使表示对平移不敏感；</li>
+<li>$s=\max_x\|x-c\|_2$，把物体半径归一化为 1；</li>
+<li>$R_G$ 由点云的中心法向、协方差 SVD 和主投影方向确定，给出可重复的规范方向。</li>
+</ul>
+<p>GRF 将原本覆盖整个 SE(3) 的输入转换到近似一致的表示空间，主要帮助获得可靠的粗位姿初始化。它本质上是一个由当前可见点云决定的 7DoF 规范化（旋转、平移和尺度）。</p>
+<h4 id="333-粗阶段稀疏特征匹配与姿态假设选择">3.3.3 粗阶段：稀疏特征匹配与姿态假设选择
+</h4><ol>
+<li>对 GRF 中的 query/reference 点云做稀疏采样。</li>
+<li>几何编码器提取点云特征，DINOv2 提供 RGB 颜色/语义特征；二者拼接后进入 3 层 Geometric Transformer。</li>
+<li>加入可学习的 background token，吸收无对应的非重叠点。</li>
+<li>网络预测每个点位于重叠区域的概率，并用 query/reference 两侧的 overlap confidence 重标定相关矩阵。</li>
+<li>按对应概率采样三点组，生成多个刚体位姿假设；再按对齐后的点云距离评分，选择最佳粗位姿。</li>
+</ol>
+<h4 id="334-细阶段lrf稠密匹配与加权-svd">3.3.4 细阶段：LRF、稠密匹配与加权 SVD
+</h4><p>先用粗位姿对齐 query，再对更稠密的点集进行细化：</p>
+<ul>
+<li>**位置编码（FPE 中的 positional encoding）**提供全局位置上下文；</li>
+<li>**局部参考系（LRF）**在每个点的邻域内以类似 GRF 的方式构造局部规范坐标，提取对姿态不敏感的细粒度结构；</li>
+<li>细阶段再次进行 overlap-aware 稠密相关性计算；</li>
+<li>最后利用高置信对应，通过 weighted SVD 求得最终相对旋转与平移。</li>
+</ul>
+<p>GRF 与 LRF 的分工很清楚：前者解决大范围初始位姿变化，后者在粗对齐后辨别局部几何细节。</p>
+<h3 id="34-实验">3.4 实验
+</h3><h4 id="341-设置">3.4.1 设置
+</h4><ul>
+<li>训练数据：MegaPose 合成训练集，约 200 万张 RGB-D 图像、约 5 万个 GSO/ShapeNet 物体。</li>
+<li>训练：3 个 epoch，batch size 32，4 张 RTX 3090；DINOv2 ViT-B 提取颜色特征。</li>
+<li>测试集：LM-O、TUD-L、YCB-V。</li>
+<li>reference 选择：默认 query 与 reference 最大旋转差为 $50^\circ$，reference 遮挡率低于 30%，且参考物体样本来自测试图像之外。</li>
+<li>分割指标：跨 IoU 0.50–0.95 的 mAP。</li>
+<li>位姿指标：BOP AR，即 VSD、MSSD、MSPD 三种 Average Recall 的均值；时间按每张图统计。</li>
+</ul>
+<h4 id="342-主结果">3.4.2 主结果
+</h4><p><strong>分割结果（mAP）</strong></p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">LM-O</th>
+					<th style="text-align: right">TUD-L</th>
+					<th style="text-align: right">YCB-V</th>
+					<th style="text-align: right">平均</th>
+					<th style="text-align: right">时间/s</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>UNOSeg-FastSAM</td>
+					<td style="text-align: right">37.3</td>
+					<td style="text-align: right">50.3</td>
+					<td style="text-align: right">67.3</td>
+					<td style="text-align: right">51.6</td>
+					<td style="text-align: right">0.24</td>
+			</tr>
+			<tr>
+					<td>UNOSeg-SAM</td>
+					<td style="text-align: right">39.7</td>
+					<td style="text-align: right">56.2</td>
+					<td style="text-align: right">66.8</td>
+					<td style="text-align: right">54.2</td>
+					<td style="text-align: right">2.68</td>
+			</tr>
+			<tr>
+					<td>SAM-6D-SAM（需要 CAD）</td>
+					<td style="text-align: right">46.0</td>
+					<td style="text-align: right">56.9</td>
+					<td style="text-align: right">60.5</td>
+					<td style="text-align: right">54.5</td>
+					<td style="text-align: right">4.53</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>只用单张参考图的 UNOSeg-SAM 平均 mAP 为 54.2，与需要 CAD 的 SAM-6D-SAM（54.5）接近，同时分割更快。</p>
+<p><strong>位姿结果（BOP AR，%）</strong></p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>参考类型</th>
+					<th style="text-align: right">LM-O</th>
+					<th style="text-align: right">TUD-L</th>
+					<th style="text-align: right">YCB-V</th>
+					<th style="text-align: right">平均</th>
+					<th style="text-align: right">时间/s</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>FreeZe</td>
+					<td>图像</td>
+					<td style="text-align: right">45.5</td>
+					<td style="text-align: right">68.3</td>
+					<td style="text-align: right">65.5</td>
+					<td style="text-align: right">59.8</td>
+					<td style="text-align: right">52.96</td>
+			</tr>
+			<tr>
+					<td>UNOPose-FastSAM</td>
+					<td>图像</td>
+					<td style="text-align: right">55.8</td>
+					<td style="text-align: right">66.5</td>
+					<td style="text-align: right">81.9</td>
+					<td style="text-align: right">68.1</td>
+					<td style="text-align: right">1.11</td>
+			</tr>
+			<tr>
+					<td>UNOPose-SAM</td>
+					<td>图像</td>
+					<td style="text-align: right">58.7</td>
+					<td style="text-align: right">71.0</td>
+					<td style="text-align: right">83.1</td>
+					<td style="text-align: right"><strong>70.9</strong></td>
+					<td style="text-align: right">3.70</td>
+			</tr>
+			<tr>
+					<td>ZTE-PPF</td>
+					<td>CAD 模型</td>
+					<td style="text-align: right">66.3</td>
+					<td style="text-align: right">90.4</td>
+					<td style="text-align: right">50.2</td>
+					<td style="text-align: right">69.0</td>
+					<td style="text-align: right">0.74</td>
+			</tr>
+			<tr>
+					<td>Koenig-PPF</td>
+					<td>CAD 模型</td>
+					<td style="text-align: right">63.1</td>
+					<td style="text-align: right">92.0</td>
+					<td style="text-align: right">70.1</td>
+					<td style="text-align: right">75.1</td>
+					<td style="text-align: right">0.99</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>UNOPose-SAM 相比当时最强的图像参考基线 FreeZe，平均提升 <strong>11.1 个百分点</strong>；在不使用 CAD 的情况下达到 70.9，已接近部分 CAD-based 方法。</p>
+<h4 id="343-消融与鲁棒性">3.4.3 消融与鲁棒性
+</h4><ul>
+<li><strong>GRF/LRF/FPE</strong>（YCB-V）：不使用三者时 AR 为 63.9；仅 GRF 为 67.5，仅 LRF 为 65.4，GRF+LRF 为 67.9；加入 fine pose estimation 后，完整模型达到 81.5。说明 GRF 对粗阶段贡献更明显，LRF 主要改善细阶段。</li>
+<li><strong>重叠预测</strong>：soft correspondence 方案为 77.2，使用 overlap predictor 后为 83.1，提升 5.9。</li>
+<li><strong>分割上限</strong>：换成 GT segmentation 后 AR 从 83.1 升至 86.0，说明分割误差会向位姿阶段传播。</li>
+<li><strong>参考质量</strong>：使用位姿相同的渲染 reference 可达 85.5，但这重新引入了 CAD 模型需求。</li>
+<li><strong>每类仅一个 reference</strong>：在 TUD-L 上平均 AR 为 60.7，说明极少量参考仍可工作，但明显低于逐查询选择较合适 reference 的设置。</li>
+<li><strong>视角差</strong>：当旋转差超过 $50^\circ$ 后性能明显下降；$80^\circ$–$90^\circ$ 组的平均重叠率为 45.4%，AR 为 54.8。</li>
+</ul>
+<h3 id="35-优势与局限">3.5 优势与局限
+</h3><p><strong>优势</strong>：接入成本低；GRF/LRF 对任意姿态提供结构化归一化；融合 RGB 语义与深度几何；重叠预测适合 partial-to-partial 注册；速度显著快于部分传统配准基线。</p>
+<p><strong>局限</strong>：方法仍依赖 query/reference 之间存在足够稠密且可靠的对应。极大视角差、极低重叠、严重深度噪声或极端双视图几何会直接削弱性能。作者建议未来从单张图重建不可见区域，再联合估计位姿。</p>
+<hr>
+<h2 id="4-cog">4. COG
+</h2><h3 id="41-论文信息">4.1 论文信息
+</h3><ul>
+<li>标题：<em>COG: Confidence-aware Optimal Geometric Correspondence for Unsupervised Single-reference Novel Object Pose Estimation</em></li>
+<li>作者：Yuchen Che、Jingtu Wu、Hao Zheng、Asako Kanezaki</li>
+<li>会议：CVPR 2026</li>
+<li>关键词：无监督学习、置信度感知最优传输、soft correspondence、语义先验、可微 SVD</li>
+</ul>
+<h3 id="42-研究动机">4.2 研究动机
+</h3><p>UNOPose 已证明“单张无位姿 RGB-D reference”可行，但其对应构造及同类方法常使用 argmax 等离散一对一分配，并依赖 GT pose/GT correspondence 或 GT overlap 监督。COG 认为这有三项根本问题：</p>
+<ol>
+<li><strong>离散分配不可微</strong>，对应模块与位姿目标难以端到端联合优化；</li>
+<li><strong>匹配容易坍缩到少量显著关键点</strong>，很多有效点得不到利用；</li>
+<li><strong>低重叠和外点下不平衡</strong>，后处理式置信度无法从对应生成阶段就控制运输质量。</li>
+</ol>
+<p>COG 的目标是在与 UNOPose 相同的输入设定下，不使用 CAD、真实位姿或真实重叠分数，联合学习点有效性、跨视图对应和相对位姿。</p>
+<p><img alt="1788082156163" class="gallery-image" data-flex-basis="621px" data-flex-grow="258" height="466" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/image/index/1788082156163.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/image/index/1788082156163_hu_936112a564787605.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/image/index/1788082156163.png 1206w" width="1206"></p>
+<h3 id="43-方法">4.3 方法
+</h3><h4 id="431-延续-unopose-的粗到细骨架">4.3.1 延续 UNOPose 的粗到细骨架
+</h4><p>COG 使用 UnoSeg 获得物体掩码，将深度反投影为点云，并提取 DINOv2 特征。其主干与直接基线 UNOPose 保持一致：</p>
+<ul>
+<li>粗阶段以最远点采样得到 256 个稀疏点，使用 SE(3)-invariant 几何编码与 Geometric Transformer；</li>
+<li>细阶段使用 1024 个点和位置编码进行稀疏到稠密细化；</li>
+<li>query/reference 两个方向对称地估计 soft correspondence；</li>
+<li>推理时默认执行一次 iterative refinement。</li>
+</ul>
+<p>真正的变化集中在<strong>对应表示、置信度的作用方式和训练目标</strong>。</p>
+<h4 id="432-置信度作为-ot-的边缘分布">4.3.2 置信度作为 OT 的边缘分布
+</h4><p>网络用一个轻量 MLP+Sigmoid 为两侧每个点预测置信度 $c_p,c_q\in[0,1]^n$，并按均值归一化为</p>
+$$
+w_p=c_p/\bar c_p,\qquad w_q=c_q/\bar c_q.
+$$<p>$w_p,w_q$ 不是在匹配后乘上的分数，而是直接成为最优传输的行、列目标边缘分布。直观上：</p>
+<ul>
+<li>高置信、可能位于重叠区域的点获得更多运输质量；</li>
+<li>非重叠点和外点的运输质量被压低；</li>
+<li>全局边缘约束避免所有点都挤向少量显著关键点；</li>
+<li>many-to-many 的 soft transport 允许稀疏高置信区域对应另一侧更密集的区域。</li>
+</ul>
+<h4 id="433-几何-affinity-与语义先验">4.3.3 几何 affinity 与语义先验
+</h4><p>几何特征 $G_p,G_q$ 的余弦相似度构成基础 affinity。DINOv2 特征先经 STEGO 风格的语义去噪头得到 $S_p,S_q$，再以非线性调制形式注入 OT kernel：</p>
+$$
+K_{ij}=\exp\!\left(\frac{\langle G_{p,i},G_{q,j}\rangle_{\cos}}{\tau}\right)
+\left(1+\langle S_{p,i},S_{q,j}\rangle_{\cos}\right)^{\lambda/\tau}.
+$$<p>其中语义先验权重 $\lambda=3$。论文采用 log-domain Sinkhorn 求解运输矩阵 $\Pi$，默认 2 次迭代。语义先验不是硬性部件标签，而是软约束：它抑制跨语义部件的错误匹配，同时避免完全覆盖几何证据。</p>
+<h4 id="434-soft-correspondence-与可微位姿求解">4.3.4 Soft correspondence 与可微位姿求解
+</h4><p>对 $\Pi$ 分别做行归一化，得到双向对应矩阵 $M_{pq}$ 和 $M_{qp}$。例如 $M_{pq}Q$ 表示 $P$ 中每个点在 $Q$ 上的凸组合对应，而不是单个 argmax 点。随后把两侧原始点与双向软对应拼接，以置信度为权重，通过 Umeyama/weighted SVD 得到相对位姿。</p>
+<p>这条路径从 affinity、Sinkhorn、soft correspondence 到 SVD 都可微，使姿态误差能够反向影响对应与置信度学习。</p>
+<h4 id="435-无监督损失与伪置信度">4.3.5 无监督损失与伪置信度
+</h4><p>粗、细阶段都使用以下自监督信号：</p>
+<ul>
+<li><strong>Cycle consistency loss</strong>：点从一侧软投影到另一侧再投影回来，应接近原位置；</li>
+<li><strong>Confidence-weighted Chamfer pose loss</strong>：预测位姿变换后的高置信点应贴近另一侧点云；</li>
+<li><strong>Semantic consistency loss</strong>：运输质量不应分配给语义不一致的点；</li>
+<li><strong>Confidence BCE loss</strong>：监督点置信度分支；</li>
+<li><strong>STEGO-style feature consistency</strong>：去噪并对齐跨视图 DINO 语义特征。</li>
+</ul>
+<p>由于没有真实置信度标签，COG 以 cycle、Chamfer 和 semantic 三种高斯 RBF 一致性生成软伪标签。论文公式用三者乘积表示；发布实现进一步使用 0.35、0.35、0.30 作为乘积指数，并对伪标签 stop-gradient，再用 BCE 训练置信度头。归一化置信度还避免训练初期所有置信度接近零时出现退化梯度。</p>
+<p>监督版 COG 仅把无监督的 Chamfer pose 目标替换为利用 GT pose 的点级变换误差，用于展示该对应框架在有监督条件下的上限。</p>
+<h3 id="44-实验">4.4 实验
+</h3><h4 id="441-设置">4.4.1 设置
+</h4><ul>
+<li>训练数据与 UNOPose 一致：GSO + ShapeNet，共约 200 万张 RGB-D 图像、超过 5 万个物体。</li>
+<li>训练：Adam，初始学习率 $10^{-4}$，3 个 epoch，batch size 32。</li>
+<li>测试：LM-O（200 张、8 个物体）、TUD-L（600 张、3 个物体）、YCB-V（900 张、21 个物体）。</li>
+<li>为公平对比，COG 对各方法使用与 UNOPose 相同的 query-reference 对和分割掩码。</li>
+<li>位姿指标：论文称为 BOP mAP，由 VSD、MSSD、MSPD 聚合；另报告重叠区域 IoU 与包含分割、DINO 特征和位姿估计的总推理时间。</li>
+</ul>
+<h4 id="442-主结果">4.4.2 主结果
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>监督</th>
+					<th style="text-align: right">LM-O</th>
+					<th style="text-align: right">TUD-L</th>
+					<th style="text-align: right">YCB-V</th>
+					<th style="text-align: right">平均</th>
+					<th style="text-align: right">时间/s</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Robust OT</td>
+					<td>无</td>
+					<td style="text-align: right">45.5</td>
+					<td style="text-align: right">66.3</td>
+					<td style="text-align: right">66.0</td>
+					<td style="text-align: right">59.3</td>
+					<td style="text-align: right">4.0</td>
+			</tr>
+			<tr>
+					<td>Dustbin OT</td>
+					<td>无</td>
+					<td style="text-align: right">50.2</td>
+					<td style="text-align: right">67.6</td>
+					<td style="text-align: right">65.4</td>
+					<td style="text-align: right">61.1</td>
+					<td style="text-align: right">4.2</td>
+			</tr>
+			<tr>
+					<td>COG（Unsupervised）</td>
+					<td>无</td>
+					<td style="text-align: right">56.7</td>
+					<td style="text-align: right">73.8</td>
+					<td style="text-align: right">75.9</td>
+					<td style="text-align: right"><strong>68.8</strong></td>
+					<td style="text-align: right">4.0</td>
+			</tr>
+			<tr>
+					<td>UNOPose</td>
+					<td>GT Pose</td>
+					<td style="text-align: right">58.7</td>
+					<td style="text-align: right">71.0</td>
+					<td style="text-align: right">83.1</td>
+					<td style="text-align: right"><strong>70.9</strong></td>
+					<td style="text-align: right">3.7</td>
+			</tr>
+			<tr>
+					<td>COG（Supervised）</td>
+					<td>GT Pose</td>
+					<td style="text-align: right">60.8</td>
+					<td style="text-align: right">80.0</td>
+					<td style="text-align: right">80.5</td>
+					<td style="text-align: right"><strong>73.8</strong></td>
+					<td style="text-align: right">4.0</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>主要观察：</p>
+<ul>
+<li>无监督 COG 比监督 UNOPose 平均只低 <strong>2.1 个百分点</strong>，且在几何结构较复杂的 TUD-L 上高 <strong>2.8 个百分点</strong>。</li>
+<li>在遮挡/杂乱更严重的 LM-O 和 YCB-V 上，无监督 COG 分别落后 UNOPose 2.0 和 7.2，说明无监督几何目标在复杂场景仍有明显改进空间。</li>
+<li>监督 COG 的平均结果为 73.8，高于 UNOPose 2.9；优势主要来自 TUD-L（+9.0）。但它在 YCB-V 为 80.5，低于 UNOPose 的 83.1，因此不能概括为在每个数据集上都更强。</li>
+<li>相比统一主干上的 Robust OT 和 Dustbin OT，无监督 COG 在三个数据集上均更好，支持“置信度应进入 OT 边缘分布，而非只做后处理”的主张。</li>
+</ul>
+<h4 id="443-重叠预测与消融">4.4.3 重叠预测与消融
+</h4><p><strong>TUD-L 重叠区域 IoU</strong></p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">Dragon</th>
+					<th style="text-align: right">Frog</th>
+					<th style="text-align: right">Watering Can</th>
+					<th style="text-align: right">平均</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>UNOPose</td>
+					<td style="text-align: right">70.0</td>
+					<td style="text-align: right">72.2</td>
+					<td style="text-align: right">59.1</td>
+					<td style="text-align: right">67.1</td>
+			</tr>
+			<tr>
+					<td>COG（Supervised）</td>
+					<td style="text-align: right">72.9</td>
+					<td style="text-align: right">68.3</td>
+					<td style="text-align: right">83.9</td>
+					<td style="text-align: right">75.0</td>
+			</tr>
+			<tr>
+					<td>COG（Unsupervised）</td>
+					<td style="text-align: right">71.2</td>
+					<td style="text-align: right">64.4</td>
+					<td style="text-align: right">81.2</td>
+					<td style="text-align: right">72.3</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>置信度虽没有使用真实 overlap 标签训练，仍能识别重叠点并显著改善 Watering Can 这类复杂形状。</p>
+<p><strong>对应形式与损失（YCB-V）</strong></p>
+<ul>
+<li>Argmax/Softmax 的最佳平均结果约为 73.1/73.0。</li>
+<li>Uniform-marginal OT 加入语义与 cycle loss 后为 75.2。</li>
+<li>Confidence-marginal OT 加入两种损失后达到 <strong>75.9</strong>。</li>
+<li>说明全局平衡的 OT 比离散或逐行归一化匹配约高 2–3 点；非均匀置信度边缘又进一步优于 uniform OT。</li>
+</ul>
+<p><strong>OT 参数</strong></p>
+<ul>
+<li>不使用语义先验、2 次 Sinkhorn 时 mAP 为 73.2；加入语义先验后为 75.9，同时对应熵显著降低，匹配更集中。</li>
+<li>增加 Sinkhorn 迭代能更贴近目标边缘分布，却会使 soft correspondence 更弥散，超过 2 次后精度不再提升，因此默认取 2。</li>
+<li>一次迭代细化可使监督和无监督版本都提升超过 1 点；超过两次后收益很小，默认取一次以平衡速度。</li>
+</ul>
+<p><strong>数据效率</strong></p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: right">训练数据比例</th>
+					<th style="text-align: right">LM-O</th>
+					<th style="text-align: right">TUD-L</th>
+					<th style="text-align: right">YCB-V</th>
+					<th style="text-align: right">平均</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">DINO+PHS（training-free）</td>
+					<td style="text-align: right">24.7</td>
+					<td style="text-align: right">16.2</td>
+					<td style="text-align: right">45.2</td>
+					<td style="text-align: right">28.7</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">COG 1%（约 2 万张）</td>
+					<td style="text-align: right">52.9</td>
+					<td style="text-align: right">66.9</td>
+					<td style="text-align: right">73.6</td>
+					<td style="text-align: right">64.5</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">COG 5%</td>
+					<td style="text-align: right">55.7</td>
+					<td style="text-align: right">70.5</td>
+					<td style="text-align: right">75.7</td>
+					<td style="text-align: right">67.3</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">COG 100%</td>
+					<td style="text-align: right">56.7</td>
+					<td style="text-align: right">73.8</td>
+					<td style="text-align: right">75.9</td>
+					<td style="text-align: right">68.8</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>仅使用 1% 数据时已经明显超过纯 DINO+PHS，5% 后 LM-O/YCB-V 的提升趋缓；TUD-L 的复杂几何则继续从更多训练数据中获益。</p>
+<h3 id="45-优势与局限">4.5 优势与局限
+</h3><p><strong>优势</strong>：无需真实姿态、真实对应或真实重叠分数；soft OT 保持端到端可微；置信度从对应生成阶段就抑制非重叠点；几何与语义互补；在少量训练数据下仍有较强泛化。</p>
+<p><strong>局限</strong>：</p>
+<ol>
+<li>COG 依赖前置分割；掩码把其他物体或背景包含进来时，错误几何会直接传播到位姿阶段。</li>
+<li>无监督位姿主要由置信度加权 Chamfer 间接优化，它倾向于降低高置信点距离，并不显式保证全局位姿正确。稀疏、细小但有判别力的部件可能被忽略，例如杯柄点数少时，模型可能只对齐杯身。</li>
+<li>DINO 语义先验只是软约束，不能完全消除上述局部最优。作者建议引入混合监督或语义部件级结构硬约束。</li>
+</ol>
+<hr>
+<h2 id="5-两种方法的相同点">5. 两种方法的相同点
+</h2><ol>
+<li><strong>任务完全一致</strong>：都估计 query 与单张无位姿 RGB-D reference 之间的新物体相对 6DoF 位姿，不要求测试物体 CAD。</li>
+<li><strong>输入与前处理相近</strong>：都先分割物体，再把深度反投影成 partial point cloud，同时利用 RGB 和深度。</li>
+<li><strong>使用视觉基础模型</strong>：都以 DINOv2 提供跨视图颜色/语义特征。</li>
+<li><strong>粗到细框架</strong>：都先稀疏点求粗位姿，再以稠密点和位置编码细化。</li>
+<li><strong>融合几何与语义</strong>：两者都不把纯 RGB 或纯点云作为唯一证据。</li>
+<li><strong>显式处理低重叠</strong>：UNOPose 预测 overlap probability；COG 预测 point confidence 并将其作为 OT marginals。</li>
+<li><strong>同一评测生态</strong>：都用 MegaPose/GSO/ShapeNet 训练数据，并在 LM-O、TUD-L、YCB-V 上按 BOP 指标评估。</li>
+<li><strong>共同瓶颈</strong>：前置分割错误、极低重叠、大视角差、对称或稀疏部件都会降低最终位姿精度。</li>
+</ol>
+<h2 id="6-两种方法的不同点">6. 两种方法的不同点
+</h2><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>UNOPose</th>
+					<th>COG</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>首要问题</td>
+					<td>任意 SE(3) 初始差异与 partial-to-partial 配准</td>
+					<td>离散匹配不可微、匹配坍缩与监督依赖</td>
+			</tr>
+			<tr>
+					<td>核心创新</td>
+					<td>GRF + LRF + overlap predictor</td>
+					<td>Confidence-marginal OT + semantic prior + 无监督闭环</td>
+			</tr>
+			<tr>
+					<td>对应表示</td>
+					<td>相关矩阵上的离散/采样对应，粗阶段生成三点姿态假设</td>
+					<td>Sinkhorn 得到 many-to-many soft transport，直接形成凸组合对应</td>
+			</tr>
+			<tr>
+					<td>置信度含义</td>
+					<td>点属于真实重叠区域的概率</td>
+					<td>点能找到可靠对应的有效性概率</td>
+			</tr>
+			<tr>
+					<td>置信度使用位置</td>
+					<td>重标定相关矩阵，辅助姿态假设与加权 SVD</td>
+					<td>直接规定 OT 行列边缘，并继续作为 SVD/损失权重</td>
+			</tr>
+			<tr>
+					<td>非重叠点处理</td>
+					<td>background token + overlap predictor</td>
+					<td>低置信边缘质量 + 全局平衡 OT</td>
+			</tr>
+			<tr>
+					<td>位姿求解</td>
+					<td>粗阶段采样三点组并评分；细阶段 weighted SVD</td>
+					<td>粗、细阶段均由双向 soft correspondence + weighted Umeyama/SVD 求解</td>
+			</tr>
+			<tr>
+					<td>训练监督</td>
+					<td>依赖 GT pose/correspondence/overlap 相关监督</td>
+					<td>主版本不使用 GT pose、GT correspondence、GT overlap；用 cycle/Chamfer/semantic 伪监督</td>
+			</tr>
+			<tr>
+					<td>语义特征作用</td>
+					<td>与几何特征拼接形成匹配描述子</td>
+					<td>除编码外，还经去噪后直接调制 OT kernel，并进入 semantic loss/伪置信度</td>
+			</tr>
+			<tr>
+					<td>规范坐标思想</td>
+					<td>明确提出并重点验证 GRF、LRF</td>
+					<td>继承同类 SE(3)-invariant 编码与粗到细主干，创新重点转向对应优化</td>
+			</tr>
+			<tr>
+					<td>推理机制</td>
+					<td>单次粗到细估计</td>
+					<td>粗到细后可迭代 refinement，默认 1 次</td>
+			</tr>
+			<tr>
+					<td>平均主结果</td>
+					<td>70.9，3.7 s</td>
+					<td>无监督 68.8；监督 73.8；均约 4.0 s</td>
+			</tr>
+			<tr>
+					<td>主要失败模式</td>
+					<td>视角差过大导致重叠和稠密对应不足</td>
+					<td>分割级联错误；无监督 Chamfer 可能牺牲稀疏但关键的语义部件</td>
+			</tr>
+	</tbody>
+</table></div>
+<h2 id="7-如何理解-unopose--cog-的方法演进">7. 如何理解 UNOPose → COG 的方法演进
+</h2><p>可以把两篇论文放在同一条处理链上理解：</p>
+$$
+\text{RGB-D 分割与反投影}
+\rightarrow \text{SE(3) 不变表示}
+\rightarrow \text{跨视图对应}
+\rightarrow \text{刚体位姿求解}.
+$$<ul>
+<li>UNOPose 的重点落在第二和第三环节：利用 GRF/LRF 提高表示的一致性，再显式预测重叠区域以筛选对应。</li>
+<li>COG 保留上述前端与粗到细结构，把第三和第四环节改造成可微的概率运输与 SVD，并用闭环一致性反过来训练点置信度。</li>
+</ul>
+<p>因此，COG 并没有否定 UNOPose 的规范化思想，而是把 UNOPose 中“预测重叠分数、选择离散对应、再求姿态”的流程，升级为“学习置信边缘、求全局平衡 soft correspondence、可微求姿态、用几何/语义一致性自监督”的闭环。</p>
+<h2 id="10-参考资料">10. 参考资料
+</h2><ul>
+<li>UNOPose 论文：<a class="link" href="https://arxiv.org/abs/2411.16106"  target="_blank" rel="noopener"
+    >arXiv:2411.16106</a></li>
+<li>UNOPose 官方实现：<a class="link" href="https://github.com/shanice-l/UNOPose"  target="_blank" rel="noopener"
+    >shanice-l/UNOPose</a></li>
+<li>COG 论文：<a class="link" href="https://arxiv.org/abs/2603.00493"  target="_blank" rel="noopener"
+    >arXiv:2603.00493</a></li>
+<li>COG 官方实现：<a class="link" href="https://github.com/YC-Che/COG"  target="_blank" rel="noopener"
+    >YC-Che/COG</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E4%BD%8D%E5%A7%BF%E4%BC%B0%E8%AE%A1/">位姿估计</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读12" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_3b8652b4e02b0f7a.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #5a565380 0%, #bcb7aeC0 100%);">
+            <h2 class="article-title">论文阅读12</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读11</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读10" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a44509446d840c31.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a44509446d840c31.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a979e8c55bb3c75d.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #c9b05180 0%, #191614C0 100%);">
+            <h2 class="article-title">论文阅读10</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读9" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_40d198eca9825810.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB9/cover_hu_dbe10ebf6cc59157.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #392e1f80 0%, #392e1fC0 100%);">
+            <h2 class="article-title">论文阅读9</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读8" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_ce5c2c92bc82add9.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB8/cover_hu_b3142fb8ae7cd5f6.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #bebcbf80 0%, #53383bC0 100%);">
+            <h2 class="article-title">论文阅读8</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
