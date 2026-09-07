@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="BUFFER-X 与 HeMoRa：跨场景点云配准与无监督共识采样">
+<title>论文阅读14</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读14">
+<meta property='og:description' content="BUFFER-X 与 HeMoRa：跨场景点云配准与无监督共识采样">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='点云配准' /><meta property='article:tag' content='Zero-Shot' /><meta property='article:tag' content='无监督学习' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-09-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-09-06T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover.jpg' />
+<meta name="twitter:title" content="论文阅读14">
+<meta name="twitter:description" content="BUFFER-X 与 HeMoRa：跨场景点云配准与无监督共识采样"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#buffer-x">BUFFER-X</a>
+      <ol>
+        <li><a href="#背景介绍">背景介绍</a></li>
+        <li><a href="#研究动机">研究动机</a>
+          <ol>
+            <li><a href="#体素大小与搜索半径依赖场景">体素大小与搜索半径依赖场景</a></li>
+            <li><a href="#原始坐标的数值范围存在域差异">原始坐标的数值范围存在域差异</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#基于球形度的体素大小估计">基于球形度的体素大小估计</a></li>
+            <li><a href="#基于密度的多尺度半径估计">基于密度的多尺度半径估计</a></li>
+            <li><a href="#独立多尺度采样与局部归一化">独立多尺度采样与局部归一化</a></li>
+            <li><a href="#mini-spinnet-特征提取">Mini-SpinNet 特征提取</a></li>
+            <li><a href="#尺度内匹配与单对-patch-位姿假设">尺度内匹配与单对 patch 位姿假设</a></li>
+            <li><a href="#跨尺度共识最大化">跨尺度共识最大化</a></li>
+            <li><a href="#训练目标与数据增强">训练目标与数据增强</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验结果">实验结果</a>
+          <ol>
+            <li><a href="#跨场景评测设置">跨场景评测设置</a></li>
+            <li><a href="#多尺度消融">多尺度消融</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结与思考">总结与思考</a></li>
+      </ol>
+    </li>
+    <li><a href="#hemora">HeMoRa</a>
+      <ol>
+        <li><a href="#背景介绍-1">背景介绍</a></li>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#hegen生成采样概率与对应特征">HeGen：生成采样概率与对应特征</a></li>
+            <li><a href="#几何共识如何提供无监督奖励">几何共识如何提供无监督奖励</a></li>
+            <li><a href="#从稀疏奖励到一致性传播">从稀疏奖励到一致性传播</a></li>
+            <li><a href="#最大池化奖励聚合">最大池化奖励聚合</a></li>
+            <li><a href="#一阶-mora学习单个对应的采样价值">一阶 MoRa：学习单个对应的采样价值</a></li>
+            <li><a href="#二阶-mora学习对应之间的联合一致性">二阶 MoRa：学习对应之间的联合一致性</a></li>
+            <li><a href="#奖励归一化与训练设置">奖励归一化与训练设置</a></li>
+            <li><a href="#推理时如何接入现有采样器">推理时如何接入现有采样器</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验结果-1">实验结果</a>
+          <ol>
+            <li><a href="#数据集与指标">数据集与指标</a></li>
+            <li><a href="#实验结果-2">实验结果</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/">
+            <img alt="Featured image of post 论文阅读14" height="1844" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_7a67ddb13e28b41a.jpg 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_7fa76806e092a67a.jpg 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_72bcf0c380b5133b.jpg 2400w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover.jpg 4096w" width="4096">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/">论文阅读14</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            BUFFER-X 与 HeMoRa：跨场景点云配准与无监督共识采样
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-09-06T00:00:00Z'>2026-09-06</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#buffer-x">BUFFER-X</a>
+      <ol>
+        <li><a href="#背景介绍">背景介绍</a></li>
+        <li><a href="#研究动机">研究动机</a>
+          <ol>
+            <li><a href="#体素大小与搜索半径依赖场景">体素大小与搜索半径依赖场景</a></li>
+            <li><a href="#原始坐标的数值范围存在域差异">原始坐标的数值范围存在域差异</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#基于球形度的体素大小估计">基于球形度的体素大小估计</a></li>
+            <li><a href="#基于密度的多尺度半径估计">基于密度的多尺度半径估计</a></li>
+            <li><a href="#独立多尺度采样与局部归一化">独立多尺度采样与局部归一化</a></li>
+            <li><a href="#mini-spinnet-特征提取">Mini-SpinNet 特征提取</a></li>
+            <li><a href="#尺度内匹配与单对-patch-位姿假设">尺度内匹配与单对 patch 位姿假设</a></li>
+            <li><a href="#跨尺度共识最大化">跨尺度共识最大化</a></li>
+            <li><a href="#训练目标与数据增强">训练目标与数据增强</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验结果">实验结果</a>
+          <ol>
+            <li><a href="#跨场景评测设置">跨场景评测设置</a></li>
+            <li><a href="#多尺度消融">多尺度消融</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结与思考">总结与思考</a></li>
+      </ol>
+    </li>
+    <li><a href="#hemora">HeMoRa</a>
+      <ol>
+        <li><a href="#背景介绍-1">背景介绍</a></li>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#hegen生成采样概率与对应特征">HeGen：生成采样概率与对应特征</a></li>
+            <li><a href="#几何共识如何提供无监督奖励">几何共识如何提供无监督奖励</a></li>
+            <li><a href="#从稀疏奖励到一致性传播">从稀疏奖励到一致性传播</a></li>
+            <li><a href="#最大池化奖励聚合">最大池化奖励聚合</a></li>
+            <li><a href="#一阶-mora学习单个对应的采样价值">一阶 MoRa：学习单个对应的采样价值</a></li>
+            <li><a href="#二阶-mora学习对应之间的联合一致性">二阶 MoRa：学习对应之间的联合一致性</a></li>
+            <li><a href="#奖励归一化与训练设置">奖励归一化与训练设置</a></li>
+            <li><a href="#推理时如何接入现有采样器">推理时如何接入现有采样器</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验结果-1">实验结果</a>
+          <ol>
+            <li><a href="#数据集与指标">数据集与指标</a></li>
+            <li><a href="#实验结果-2">实验结果</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><ol>
+<li><a class="link" href="https://openaccess.thecvf.com/content/ICCV2025/html/Seo_BUFFER-X_Towards_Zero-Shot_Point_Cloud_Registration_in_Diverse_Scenes_ICCV_2025_paper.html"  target="_blank" rel="noopener"
+    >BUFFER-X: Towards Zero-Shot Point Cloud Registration in Diverse Scenes【ICCV 2025】</a>，首尔大学，Jaesik Park 组</li>
+<li><a class="link" href="https://openaccess.thecvf.com/content/CVPR2025/html/Yan_HeMoRa_Unsupervised_Heuristic_Consensus_Sampling_for_Robust_Point_Cloud_Registration_CVPR_2025_paper.html"  target="_blank" rel="noopener"
+    >HeMoRa: Unsupervised Heuristic Consensus Sampling for Robust Point Cloud Registration【CVPR 2025】</a>，武汉大学，Jiayuan Li组</li>
+</ol>
+<h2 id="buffer-x">BUFFER-X
+</h2><h3 id="背景介绍">背景介绍
+</h3><p>BUFFER-X 研究跨场景的刚性点云配准。给定两片具有部分重叠区域的点云：</p>
+$$
+\mathcal P=\{p_i\in\mathbb R^3\}_{i=1}^{N_P},\qquad
+\mathcal Q=\{q_j\in\mathbb R^3\}_{j=1}^{N_Q},
+$$<p>目标是估计源点云到目标点云的旋转与平移：</p>
+$$
+\hat R\in SO(3),\qquad \hat t\in\mathbb R^3.
+$$<p>对于对应点集合 $\mathcal A$，配准问题可以写为：</p>
+$$
+(\hat R,\hat t)
+=\arg\min_{R\in SO(3),\,t\in\mathbb R^3}
+\sum_{(i,j)\in\mathcal A}
+\rho\!\left(\|q_j-Rp_i-t\|_2\right),
+$$<p>其中 $\rho$ 是降低错误对应影响的鲁棒核函数。配准质量同时取决于对应关系的可靠性与后端位姿估计器的鲁棒性。</p>
+<p>近年来，学习式描述子和几何匹配网络在常用数据集上取得了较高精度。部署到新的传感器或环境后，点云的尺度、密度、视场和扫描模式发生变化，原有模型的表现容易下降。</p>
+<p>例如，室内 RGB-D 点云通常覆盖数米范围，室外 LiDAR 点云可能覆盖数十米甚至更大区域；同样位于室内，RGB-D 相机与全向 LiDAR 产生的点云分布也有明显差异。</p>
+<hr>
+<h3 id="研究动机">研究动机
+</h3><p>作者从已有的 BUFFER 框架出发，分析了限制跨场景泛化的三个因素。</p>
+<h4 id="体素大小与搜索半径依赖场景">体素大小与搜索半径依赖场景
+</h4><p>体素大小 $v$ 控制下采样后的点数与几何细节，搜索半径 $r$ 控制局部描述子覆盖的范围。</p>
+<p>室内参数直接应用于室外点云时，过小的体素可能保留大量点，增加显存和计算开销；不合适的邻域半径则影响局部结构的辨识度。论文将针对测试数据集人工选择这些参数的操作称为 oracle tuning。</p>
+<p>因此，仅将训练好的网络迁移到新数据集，仍然可能隐藏着较多人工调参需求。</p>
+<h4 id="原始坐标的数值范围存在域差异">原始坐标的数值范围存在域差异
+</h4><p>网络直接接收原始坐标时，输入数值范围与训练环境紧密相关。训练中常见的局部尺度与测试点云相差较大时，特征分布随之偏移。</p>
+<p>作者由此强调局部 patch 的尺度归一化：将不同物理尺寸的邻域映射到一致的坐标范围，再提取几何特征。</p>
+<hr>
+<h3 id="方法">方法
+</h3><p><img alt="1788708409587" class="gallery-image" data-flex-basis="745px" data-flex-grow="310" height="483" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788708409587.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788708409587_hu_f0adcc1d3f7e303b.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788708409587.png 1501w" width="1501"></p>
+<p>BUFFER-X 包含三个主要模块：</p>
+<ol>
+<li>Geometric bootstrapping：估计体素大小和多尺度邻域半径；</li>
+<li>Multi-scale patch embedder：提取经过归一化的局部几何特征；</li>
+<li>Hierarchical inlier search：建立尺度内匹配，生成位姿假设，并筛选跨尺度一致的对应。</li>
+</ol>
+<h4 id="基于球形度的体素大小估计">基于球形度的体素大小估计
+</h4><p>首先，在源点云与目标点云中选择点数较多的一片，并采样其中一部分点用于统计。设采样点的协方差矩阵为 $C$，进行特征分解：</p>
+$$
+Cv_a=\lambda_a v_a,\qquad a\in\{1,2,3\},
+$$<p>其中 $\lambda_1\geq\lambda_2\geq\lambda_3$，$v_a$ 为对应的单位特征向量。</p>
+<p>球形度定义为：</p>
+$$
+\eta=\frac{\lambda_3}{\lambda_1}.
+$$<p>当点云沿三个主方向的分布较均衡时，$\eta$ 较大；当点云主要沿一个平面展开时，最小特征值相对较小，$\eta$ 接近零。全向 LiDAR 的扫描形态常呈现较明显的盘状分布。</p>
+<p>接着，计算点云沿最小特征值对应方向的跨度：</p>
+$$
+s=\max_{p\in\mathcal P_{\mathrm{sampled}}}p^\top v_3
+-\min_{p\in\mathcal P_{\mathrm{sampled}}}p^\top v_3.
+$$<p>体素大小由以下经验规则给出：</p>
+$$
+v=
+\begin{cases}
+\kappa_{\mathrm{spheric}}\sqrt{s},&\eta\geq\tau_v,\\
+\kappa_{\mathrm{disc}}\sqrt{s},&\eta<\tau_v.
+\end{cases}
+$$<p>其中 $\kappa_{\mathrm{spheric}}<\kappa_{\mathrm{disc}}$。论文附录采用：</p>
+$$
+\kappa_{\mathrm{spheric}}=0.10,\qquad
+\kappa_{\mathrm{disc}}=0.15,\qquad
+\tau_v=0.05.
+$$<p>该设计同时利用点云的形状分布与空间跨度。对于更接近盘状的输入，它使用较大的系数，适当增大下采样体素。</p>
+<h4 id="基于密度的多尺度半径估计">基于密度的多尺度半径估计
+</h4><p><img alt="1788708457420" class="gallery-image" data-flex-basis="677px" data-flex-grow="282" height="268" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788708457420.png" width="756"></p>
+<p>给定查询点 $p_q$ 和搜索半径 $r$，邻域定义为：</p>
+$$
+\mathcal N(p_q,\mathcal P,r)
+=\{p\in\mathcal P:\|p-p_q\|_2\leq r\}.
+$$<p>BUFFER-X 根据邻域内点数占整片点云的平均比例，分别确定局部、中间和全局三个尺度的半径：</p>
+$$
+r_l\leq r_m\leq r_g.
+$$<p>为便于理解，将这一目标整理为归一化的密度形式。设 $\mathcal U$ 为用于统计的点集，$\mathcal K$ 为查询点集，则：</p>
+$$
+\mathcal D(r)
+=\frac{1}{|\mathcal K|}
+\sum_{p_q\in\mathcal K}
+\frac{|\mathcal N(p_q,\mathcal U,r)|}{|\mathcal U|},
+$$$$
+r_\xi=\arg\min_r|\mathcal D(r)-\tau_\xi|,
+\qquad \xi\in\{l,m,g\}.
+$$<p>论文采用的目标比例分别为：</p>
+$$
+\tau_l=0.005,\qquad \tau_m=0.02,\qquad \tau_g=0.05.
+$$<p>也就是平均覆盖约 $0.5\%$、$2\%$ 和 $5\%$ 的点。作者公开实现利用半径与邻域覆盖比例之间的单调关系进行二分搜索。</p>
+<p>这一设计将邻域尺度与输入点云分布联系起来。密集区域达到相同覆盖比例所需的半径较小，稀疏或空间跨度较大的点云通常需要更大的半径。这里的半径用于整对点云在相应尺度上的特征提取，并非为每个关键点单独学习一个半径。</p>
+<h4 id="独立多尺度采样与局部归一化">独立多尺度采样与局部归一化
+</h4><p>完成体素下采样后，BUFFER-X 在三个尺度上分别执行 FPS。每个尺度独立选择关键点，因此各尺度可以覆盖不同的空间位置。</p>
+<p>FPS 每次选择距已有采样集合最远的点，逐步提高空间覆盖度。它依赖几何距离，省去了关键点检测网络的跨域适配问题。作者的实验也验证了其在多个数据集上的有效性。</p>
+<p>对于尺度 $\xi$ 上的关键点 $p$，以 $r_\xi$ 提取局部 patch。对邻域点 $x$ 进行中心化与尺度归一化，可写为：</p>
+$$
+\bar x=\frac{x-p}{r_\xi}.
+$$<p>由于 $\|x-p\|_2\leq r_\xi$，归一化后各坐标分量位于 $[-1,1]$ 范围内。这样，物理尺寸不同的局部结构可以进入相近的输入数值范围。</p>
+<p>随后对每个 patch 进行 PCA，以最小特征值对应的特征向量作为局部 $z$ 轴。各 patch 使用固定数量的输入点，点数超出上限时随机采样。附录设置 $N_{\mathrm{patch}}=512$，每个尺度的 FPS 采样点数为 $1500$。</p>
+<h4 id="mini-spinnet-特征提取">Mini-SpinNet 特征提取
+</h4><p>BUFFER-X 使用轻量化的 Mini-SpinNet 编码局部 patch。对于每个尺度，网络输出两类特征：</p>
+<ul>
+<li>向量描述子 $F_\xi$：用于跨点云最近邻匹配；</li>
+<li>柱状特征图 $C_\xi$：保留绕局部轴旋转时的结构信息，用于估计局部相对旋转。</li>
+</ul>
+<p>柱状特征图的尺寸为：</p>
+$$
+C_\xi\in\mathbb R^{H\times W\times D},
+$$<p>其中 $H$ 是高度方向的离散数量，$W$ 是绕局部 $z$ 轴的角度扇区数，$D$ 是特征通道数。附录设置为 $H=7$、$W=20$、$D=32$。</p>
+<p>向量描述子适合搜索相似的局部结构，柱状特征图则保留角度方向上的等变关系。两类输出分别承担对应搜索与位姿假设生成。</p>
+<h4 id="尺度内匹配与单对-patch-位姿假设">尺度内匹配与单对 patch 位姿假设
+</h4><p>在每个尺度内，首先对源点云与目标点云的向量描述子执行双向最近邻匹配，得到对应集合 $\mathcal A_\xi$。</p>
+<p>对于一对匹配 patch，其 PCA 参考方向已经提供部分朝向信息。设 $R^p$、$R^q$ 分别将两个 patch 的局部 $z$ 方向对齐到标准 $z$ 轴，剩余的相对旋转可以表示为绕该轴的 yaw 旋转。</p>
+<p>由于柱状特征具有离散的 $SO(2)$ 等变结构，绕轴旋转对应于角度扇区上的循环移动。作者构建柱状特征之间的匹配代价体，并利用 3D cylindrical convolutional network（3DCCN）预测不同角度偏移的得分 $\beta$。</p>
+<p>经过 softmax 后，离散角度偏移的期望为：</p>
+$$
+d=\sum_{w=1}^{W}\operatorname{softmax}(\beta)_w\,w.
+$$<p>对应的旋转角为 $\theta=2\pi d/W$，进而得到：</p>
+$$
+R_{\mathrm{yaw}}=
+\begin{bmatrix}
+\cos\theta&-\sin\theta&0\\
+\sin\theta&\cos\theta&0\\
+0&0&1
+\end{bmatrix}.
+$$<p>将旋转还原到原始坐标系：</p>
+$$
+R=(R^q)^\top R_{\mathrm{yaw}}R^p.
+$$<p>对于匹配的关键点中心 $(p,q)$，平移直接由下式得到：</p>
+$$
+t=q-Rp.
+$$<p>因此，一对匹配 patch 就能生成一个完整的位姿假设。这里提供约束的是 patch 内的空间结构、参考轴与柱状特征；孤立的一对三维点仅提供位置对应，缺少唯一确定三维旋转所需的信息。</p>
+<h4 id="跨尺度共识最大化">跨尺度共识最大化
+</h4><p>三个尺度分别产生对应点和候选变换。将它们汇总为：</p>
+$$
+\mathcal D=\bigcup_{\xi\in\{l,m,g\}}\mathcal A_\xi,
+\qquad
+\mathcal T=\bigcup_{\xi\in\{l,m,g\}}\mathcal T_\xi.
+$$<p>对候选变换 $(R,t)$，若对应点满足：</p>
+$$
+\|Rp_n+t-q_n\|_2<\epsilon,
+$$<p>则将其计入该候选变换的共识集合。最终选择支持对应数最多的候选变换及其内点集合：</p>
+$$
+\max_{(R,t)\in\mathcal T,\,\mathcal I\subseteq\mathcal D}|\mathcal I|
+\quad
+\text{s.t.}\quad
+\|Rp_n+t-q_n\|_2<\epsilon,
+\ \forall(p_n,q_n)\in\mathcal I.
+$$<p>其作用是让不同尺度的匹配相互验证。局部 patch 描述细节，中大尺度 patch 提供更丰富的上下文；来自不同尺度的对应如果共同支持同一个变换，就形成更强的几何证据。</p>
+<p>筛选后的 $\mathcal I$ 再交给后端求解器计算最终位姿。论文实验使用 RANSAC，最大迭代次数为 $50\mathrm K$</p>
+<h4 id="训练目标与数据增强">训练目标与数据增强
+</h4><p>BUFFER-X 采用两阶段训练：</p>
+<ol>
+<li>通过对比学习训练 Mini-SpinNet，使正确对应的 patch 描述子更接近；</li>
+<li>训练角度偏移预测模块，提高局部相对旋转估计的精度。</li>
+</ol>
+<p>第二阶段采用 Huber 损失。设预测角度偏移为 $d_\gamma$，真实偏移为 $d_\gamma^*$，则：</p>
+$$
+\mathcal L_d
+=\frac{1}{N_d}\sum_{\gamma=1}^{N_d}
+\rho_{\mathrm{Huber}}(d_\gamma-d_\gamma^*),
+$$$$
+\rho_{\mathrm{Huber}}(e)=
+\begin{cases}
+\frac12e^2,&|e|\leq\delta,\\
+\delta\left(|e|-\frac12\delta\right),&|e|>\delta.
+\end{cases}
+$$<p>训练时还对邻域半径进行随机扰动：</p>
+$$
+\tilde r\sim\mathcal U\!\left(\frac23r,\frac43r\right).
+$$<p>改变半径后，从邻域中重新采样固定数量的点，可以产生更丰富的局部点分布。</p>
+<p>模型训练只使用单一尺度。局部归一化使同一个特征网络可以在推理时复用于多个尺度。主实验在 3DMatch 上训练，并直接测试其他场景</p>
+<hr>
+<h3 id="实验结果">实验结果
+</h3><h4 id="跨场景评测设置">跨场景评测设置
+</h4><p>作者构建了包含 11 个测试项的泛化评测：3DMatch、3DLoMatch、ScanNet++i、ScanNet++F、TIERS、KITTI、WOD、KAIST、MIT、ETH 和 Oxford。</p>
+<p>这些数据覆盖室内外环境、不同空间尺度、RGB-D 与多类 LiDAR，以及手持、车载、三脚架和移动机器人等采集方式。ScanNet++i 来自 iPhone 深度数据，ScanNet++F 则根据 FARO 扫描场景及扫描器位姿构建测试点云。</p>
+<p>论文报告配准成功率，并在成功配准的样本上统计平均相对平移误差（RTE）与平均相对旋转误差（RRE）。
+<img alt="1788753004307" class="gallery-image" data-flex-basis="282px" data-flex-grow="117" height="411" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788753004307.png" width="484">
+<img alt="1788753040521" class="gallery-image" data-flex-basis="540px" data-flex-grow="225" height="445" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788753040521.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788753040521_hu_d1f7ef9a68e5a88e.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788753040521.png 1003w" width="1003"></p>
+<h4 id="多尺度消融">多尺度消融
+</h4><p>在 3DMatch 上比较了不同尺度组合：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>尺度组合</th>
+					<th style="text-align: right">RTE / cm ↓</th>
+					<th style="text-align: right">RRE / ° ↓</th>
+					<th style="text-align: right">成功率 / % ↑</th>
+					<th style="text-align: right">频率 / Hz ↑</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>局部</td>
+					<td style="text-align: right">6.57</td>
+					<td style="text-align: right">2.15</td>
+					<td style="text-align: right">84.06</td>
+					<td style="text-align: right">5.61</td>
+			</tr>
+			<tr>
+					<td>中间</td>
+					<td style="text-align: right">5.87</td>
+					<td style="text-align: right">1.85</td>
+					<td style="text-align: right">93.38</td>
+					<td style="text-align: right">5.47</td>
+			</tr>
+			<tr>
+					<td>全局</td>
+					<td style="text-align: right">6.06</td>
+					<td style="text-align: right">1.91</td>
+					<td style="text-align: right">93.57</td>
+					<td style="text-align: right">5.49</td>
+			</tr>
+			<tr>
+					<td>局部 + 中间</td>
+					<td style="text-align: right">5.73</td>
+					<td style="text-align: right">1.81</td>
+					<td style="text-align: right">94.31</td>
+					<td style="text-align: right">2.35</td>
+			</tr>
+			<tr>
+					<td>中间 + 全局</td>
+					<td style="text-align: right">5.78</td>
+					<td style="text-align: right">1.81</td>
+					<td style="text-align: right">94.62</td>
+					<td style="text-align: right">2.33</td>
+			</tr>
+			<tr>
+					<td>局部 + 中间 + 全局</td>
+					<td style="text-align: right">5.78</td>
+					<td style="text-align: right">1.79</td>
+					<td style="text-align: right">95.58</td>
+					<td style="text-align: right">1.81</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>局部尺度单独使用时，描述子容易受局部结构歧义影响；加入更大范围的上下文后，成功率明显提高。三尺度方案取得最高成功率，同时增加了采样和特征提取成本。</p>
+<hr>
+<h3 id="总结与思考">总结与思考
+</h3><p>BUFFER-X 的主要贡献可以归纳为三点：</p>
+<ol>
+<li>将体素大小和邻域半径的选择纳入配准流程，利用输入几何统计减少测试域人工调参；</li>
+<li>通过 FPS、PCA 参考方向和局部尺度归一化，降低关键点选择与特征提取对训练域的依赖；</li>
+<li>在多个尺度上生成匹配和位姿假设，利用跨尺度共识提高对应关系的可靠性。</li>
+</ol>
+<p>论文的启发在于，点云配准的泛化能力受到整个处理流程共同影响。输入尺度、邻域选择和关键点策略同样值得设计。</p>
+<p>实践中仍需关注三个边界：模型需要源域训练；多个尺度增加计算成本；共识数量只是几何一致性的代理指标，在低重叠和重复结构下仍有失效风险。</p>
+<hr>
+<h2 id="hemora">HeMoRa
+</h2><h3 id="背景介绍-1">背景介绍
+</h3><p>HeMoRa 研究点云配准中对应点采样技术。它接收前端已经建立的对应关系，学习哪些对应更适合参与位姿假设生成。</p>
+<p>设初始对应集合为：</p>
+$$
+\mathcal C=\{c_i=(x_i,y_i)\}_{i=1}^{N},
+$$<p>其中 $x_i$ 与 $y_i$ 分别来自源点云和目标点云。对于刚性变换 $h=(R,t)$，对应残差为：</p>
+$$
+r(c_i,h)=\|Rx_i+t-y_i\|_2.
+$$<p>传统 RANSAC 类方法从 $\mathcal C$ 中采样小规模子集，根据子集计算位姿假设，再用全部对应进行验证。前端匹配包含大量外点时，随机采样得到可靠子集的概率很低。</p>
+<p>在独立采样近似下，如果内点比例为 $\omega$，每次采样 $K$ 个对应，则全内点子集的概率约为 $\omega^K$。例如，$\omega=1\%$、$K=3$ 时，该概率仅为 $10^{-6}$。</p>
+<hr>
+<h3 id="研究动机-1">研究动机
+</h3><p>一次采样得到的位姿假设，可以通过整组对应关系进行验证。如果较多对应在该变换下满足几何约束，这次采样就提供了较强的自监督信号。</p>
+<p>由此，作者类比强化学习，将采样学习组织为三个环节：</p>
+<ol>
+<li>探索：根据当前采样分布生成多个对应子集和位姿假设；</li>
+<li>汇总：根据各假设的共识程度，为对应关系分配奖励；</li>
+<li>优化：用汇总后的奖励训练网络的采样概率与特征表示。</li>
+</ol>
+<hr>
+<p><img alt="1788708485273" class="gallery-image" data-flex-basis="738px" data-flex-grow="307" height="597" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788708485273.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788708485273_hu_1b5f10b3539d1649.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788708485273_hu_baa81350f3e6f0e4.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788708485273.png 1836w" width="1836"></p>
+<h3 id="方法-1">方法
+</h3><h4 id="hegen生成采样概率与对应特征">HeGen：生成采样概率与对应特征
+</h4><p>Heuristic information Generator（HeGen）以对应集合 $\mathcal C$ 为输入，输出：</p>
+$$
+(P,F)=\operatorname{HeGen}_\Theta(\mathcal C),
+$$<p>其中：</p>
+<ul>
+<li>$P\in[0,1]^N$：各对应的采样概率；</li>
+<li>$F\in\mathbb R^{N\times D}$：各对应的特征嵌入；</li>
+<li>$\Theta$：网络参数。</li>
+</ul>
+<p>网络采用 PointDSC 中的 non-local 模块提取对应间的上下文关系，再通过 MLP 预测采样概率。</p>
+<p>这里 $F_i$ 描述的是对应 $c_i=(x_i,y_i)$ 的特征。它用于判断对应之间的几何一致性，与前端为单个三维点提取的匹配描述子处于不同环节。</p>
+<p>根据 $P$，从全部对应中采样 $Q$ 个子集：</p>
+$$
+\mathcal C^q\subseteq\mathcal C,\qquad
+|\mathcal C^q|=K,\qquad q=1,\ldots,Q.
+$$<p>每个子集通过刚性最小二乘求解生成假设：</p>
+$$
+h^q=\arg\min_{h\in SE(3)}
+\sum_{c_i\in\mathcal C^q}r(c_i,h)^2.
+$$<p>子集内部采用无放回采样。由于 $K\ll N$，论文使用以下近似描述子集采样概率：</p>
+$$
+\hat P^q\approx\prod_{c_i\in\mathcal C^q}P_i.
+$$<h4 id="几何共识如何提供无监督奖励">几何共识如何提供无监督奖励
+</h4><p>对于假设 $h^q$，计算全部对应的残差，并统计满足内点阈值 $\tau$ 的比例：</p>
+$$
+R^q=\frac{1}{N}\sum_{i=1}^{N}
+\mathbf 1\!\left[r(c_i,h^q)\leq\tau\right].
+$$<p>$R^q$ 衡量该假设得到多少对应关系的支持。例如，一组数据含 $1000$ 个对应，其中 $200$ 个在某个候选变换下残差小于阈值，则该候选的原始奖励为 $0.2$。</p>
+<p>评价过程只使用输入点坐标、候选变换和残差阈值，因此无需真实位姿或人工内点标签。</p>
+<p>这里的内点是相对于当前假设定义的几何一致对应。高奖励表示较强的共识支持，真实配准的正确性仍受点云重叠程度、重复结构和初始匹配质量影响。</p>
+<p>网络的优化目标是提高采样产生的期望奖励：</p>
+$$
+J(\Theta)=\mathbb E_{\mathcal C^q\sim P_\Theta}[R^q],
+\qquad
+\Theta^*=\arg\max_\Theta J(\Theta).
+$$<p>通过对数导数技巧与 $Q$ 次采样近似，得到：</p>
+$$
+\nabla_\Theta J
+\approx\frac1Q\sum_{q=1}^{Q}
+R^q\nabla_\Theta\log\hat P^q.
+$$<h4 id="从稀疏奖励到一致性传播">从稀疏奖励到一致性传播
+</h4><p>在朴素策略梯度中，令 $I_{i,\mathrm{sample}}^q$ 表示对应 $c_i$ 是否被第 $q$ 次采样选中，则对应的平均奖励权重为：</p>
+$$
+E_i^{\mathrm{naive}}
+=\frac1Q\sum_{q=1}^{Q}I_{i,\mathrm{sample}}^qR^q.
+$$<p>每次仅有 $K$ 个被采样对应得到奖励。即使某个高质量假设得到大量其他对应的支持，这些未采样对应仍无法直接利用这次反馈。</p>
+<p>MRP （最大化奖励传播）的第一步将奖励接收条件改为与当前假设几何一致：</p>
+$$
+I_i^q=\mathbf 1\!\left[r(c_i,h^q)\leq\tau\right].
+$$<p>沿用前面的示例：从 $1000$ 个对应中采样 $3$ 个，得到一个支持 $200$ 个对应的变换。根据一致性传播，这 $200$ 个对应都能接收该假设的奖励，包括其中未被本次采样选中的对应。</p>
+<p>这样，一次成功探索产生的反馈可以覆盖更大范围的有效对应，提高奖励利用率。</p>
+<h4 id="最大池化奖励聚合">最大池化奖励聚合
+</h4><p>MRP 的第二步对多个假设提供的奖励取最大值：</p>
+$$
+E_i=\max_{q=1,\ldots,Q}\left(I_i^qR^q\right).
+$$<p>$E_i$ 表示：在所有支持对应 $c_i$ 的候选变换中，最强的共识奖励是多少。</p>
+<p>例如，一个可靠对应在某次探索中参与了高奖励共识，同时出现在许多低质量假设附近。最大池化可以保留它得到过的最强支持，减少低奖励探索结果的稀释作用。</p>
+<h4 id="一阶-mora学习单个对应的采样价值">一阶 MoRa：学习单个对应的采样价值
+</h4><p>利用 $E_i$，一阶损失写为：</p>
+$$
+\mathcal L^{(1)}=-\sum_{i=1}^{N}E_i\log P_i.
+$$<p>获得较高共识支持的对应具有较大的损失权重，训练由此引导采样分布更多关注这些对应。</p>
+<p>在实现层面，采样、位姿求解、残差判定和奖励聚合用于构造训练权重，梯度通过 $\log P_i$ 返回 HeGen。该学习路径无需对硬采样或阈值判定直接求导。</p>
+<h4 id="二阶-mora学习对应之间的联合一致性">二阶 MoRa：学习对应之间的联合一致性
+</h4><p>一阶目标关注单个对应的价值，但一个有效的位姿假设需要多条对应共同满足同一刚性变换。因此，作者进一步定义对应对 $(c_i,c_j)$ 的联合奖励：</p>
+$$
+E_{ij}^{(2)}
+=\max_q\left(I_i^qI_j^qR^q\right).
+$$<p>只有当 $c_i$ 和 $c_j$ 同时支持同一个假设 $h^q$ 时，该假设的奖励才能分配给这对对应。</p>
+<p>这一条件比两个单点奖励相乘更严格。$E_i$ 和 $E_j$ 可能分别来自两个不同的变换，$E_iE_j$ 无法表达它们是否兼容；$I_i^qI_j^q$ 则显式要求同一次探索中的联合支持。</p>
+<p>利用 HeGen 输出的对应特征构建相似度矩阵：</p>
+$$
+S=FF^\top.
+$$<p>随后沿两个维度进行 dual-softmax 归一化。按元素写为：</p>
+$$
+P_{ij}^{(2)}
+=\frac{\exp(S_{ij})}{\sum_k\exp(S_{ik})}
+\cdot
+\frac{\exp(S_{ij})}{\sum_k\exp(S_{kj})}.
+$$<p>论文以该值建模对应对的联合采样偏好，并定义二阶损失：</p>
+$$
+\mathcal L^{(2)}
+=-\sum_{i=1}^{N}\sum_{j=1}^{N}
+E_{ij}^{(2)}\log P_{ij}^{(2)}.
+$$<p>通过这一目标，共同支持高质量位姿的对应在特征空间中建立更强的关联，有利于后续围绕种子对应扩展一致性集合。</p>
+<p>最终损失为：</p>
+$$
+\mathcal L=(1-w)\mathcal L^{(1)}+w\mathcal L^{(2)},
+\qquad w=0.1.
+$$<h4 id="奖励归一化与训练设置">奖励归一化与训练设置
+</h4><p>不同点云对的初始匹配质量差异较大。高内点率样本天然产生更高的原始奖励，可能在训练中占据过大的权重。</p>
+<p>补充材料对奖励进行阈值过滤与归一化。在该组探索的最大原始奖励大于阈值 $\tau^{\mathrm{IR}}$ 时，表达式为：</p>
+$$
+\hat R^q=
+\begin{cases}
+\left(
+\dfrac{R^q-\tau^{\mathrm{IR}}}
+{\max_\ell R^\ell-\tau^{\mathrm{IR}}}
+\right)^\alpha,
+&R^q\geq\tau^{\mathrm{IR}},\\
+0,&R^q<\tau^{\mathrm{IR}}.
+\end{cases}
+$$<p>其中 $\tau^{\mathrm{IR}}$ 过滤低奖励假设，$\alpha$ 控制奖励曲线的锐化程度，分母对当前点云对的探索奖励进行缩放。</p>
+<p>主文的训练设置包括：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>训练数据与描述子</th>
+					<th style="text-align: right">每组探索的采样数 $Q$</th>
+					<th style="text-align: right">几何内点阈值 $\tau$</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>3DMatch + FCGF</td>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">10 cm</td>
+			</tr>
+			<tr>
+					<td>3DMatch + FPFH</td>
+					<td style="text-align: right">8192</td>
+					<td style="text-align: right">10 cm</td>
+			</tr>
+			<tr>
+					<td>KITTI</td>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">60 cm</td>
+			</tr>
+	</tbody>
+</table></div>
+<h4 id="推理时如何接入现有采样器">推理时如何接入现有采样器
+</h4><p>训练完成后，HeGen 对输入对应生成 $P$ 和 $F$，无需在每组测试点云上重新训练。作者实现了三种接入方式：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>变体</th>
+					<th>接入方式</th>
+					<th>使用的启发信息</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>HeMoRa + PSAC</td>
+					<td>按预测概率选择对应子集，计算并验证候选变换</td>
+					<td>采样概率 $P$</td>
+			</tr>
+			<tr>
+					<td>HeMoRa + SM</td>
+					<td>使用 PointDSC 的种子机制，选择可靠种子并扩展一致对应集合</td>
+					<td>概率 $P$ 与特征 $F$</td>
+			</tr>
+			<tr>
+					<td>HeMoRa + SC²</td>
+					<td>用 HeGen 概率替换 SC²-PCR 的种子选择环节，保留其几何共识搜索</td>
+					<td>概率 $P$</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h3 id="实验结果-1">实验结果
+</h3><h4 id="数据集与指标">数据集与指标
+</h4><p>室内实验使用 3DMatch 和低重叠的 3DLoMatch。室外实验使用 KITTI，并根据两帧之间约 $10\,\mathrm m$、$20\,\mathrm m$ 和 $30\,\mathrm m$ 的平移间隔构建不同难度的测试设置。</p>
+<p>平移误差与旋转误差分别为：</p>
+$$
+\mathrm{TE}=\|\hat t-t^*\|_2,
+$$$$
+\mathrm{RE}
+=\arccos\left(\frac{\operatorname{Tr}(\hat R^\top R^*)-1}{2}\right).
+$$<p>Registration Recall（RR）表示满足位姿误差阈值的配准比例。HeMoRa 的成功判定条件为：</p>
+<ul>
+<li>3DMatch / 3DLoMatch：$\mathrm{RE}\leq15^\circ$ 且 $\mathrm{TE}\leq30\,\mathrm{cm}$；</li>
+<li>KITTI：$\mathrm{RE}\leq5^\circ$ 且 $\mathrm{TE}\leq60\,\mathrm{cm}$。</li>
+</ul>
+<h4 id="实验结果-2">实验结果
+</h4><p><img alt="1788753874854" class="gallery-image" data-flex-basis="272px" data-flex-grow="113" height="805" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788753874854.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788753874854_hu_20d5760b3a5acbcb.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/image/index/1788753874854.png 915w" width="915"></p>
+<hr>
+<h3 id="总结">总结
+</h3><p>HeMoRa 将位姿假设的几何验证结果转化为采样学习信号，核心在于奖励的构造、传播和聚合。</p>
+<p>一阶目标学习各对应的采样价值，二阶目标学习对应之间的共同支持关系；MRP 则扩大高质量假设的反馈范围，并保留每个对应获得过的最强奖励。</p>
+<p>这项工作表明，鲁棒变换估计器可以利用自身的几何验证机制获得训练信号，从而减少真实位姿与内外点标签的使用。</p>
+<p>其主要限制包括：奖励依赖残差阈值，错误结构也可能产生较强共识；最大池化可能保留偶然的高分错误假设；初始匹配质量、探索预算和采样器结构共同影响最终性能。这些因素决定了无监督共识学习的适用边界。</p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/">点云配准</a>
+        
+            <a href="/tags/zero-shot/">Zero-Shot</a>
+        
+            <a href="/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">无监督学习</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读13" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_ab5903c07e8cca7b.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_ab5903c07e8cca7b.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_bb61a31521dd77c9.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #3b5c9380 0%, #313645C0 100%);">
+            <h2 class="article-title">论文阅读13</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读EX" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_be5ce1758b233118.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_be5ce1758b233118.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_23518cd0b7dfd209.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #48454380 0%, #b6b8b8C0 100%);">
+            <h2 class="article-title">论文阅读EX</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读12" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_3b8652b4e02b0f7a.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #5a565380 0%, #bcb7aeC0 100%);">
+            <h2 class="article-title">论文阅读12</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读11</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读10" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a44509446d840c31.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a44509446d840c31.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB10/cover_hu_a979e8c55bb3c75d.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #c9b05180 0%, #191614C0 100%);">
+            <h2 class="article-title">论文阅读10</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
