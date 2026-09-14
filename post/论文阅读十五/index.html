@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="点云配准">
+<title>论文阅读十五</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读十五">
+<meta property='og:description' content="点云配准">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='点云配准' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-09-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-09-13T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover.jpg' />
+<meta name="twitter:title" content="论文阅读十五">
+<meta name="twitter:description" content="点云配准"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#cloudfixer">CloudFixer</a>
+      <ol>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#几何变换参数化">几何变换参数化</a></li>
+            <li><a href="#扩散模型提供优化目标">扩散模型提供优化目标</a></li>
+            <li><a href="#密度相关的位移正则">密度相关的位移正则</a></li>
+            <li><a href="#多次适应与cloudfixer-o">多次适应与CloudFixer-O</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+    <li><a href="#rare-refine-any-registration-of-pairwise-point-clouds-via-zero-shot-learning">RARE: Refine Any Registration of Pairwise Point Clouds via Zero-Shot Learning</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#利用初始变换构造两组深度图">利用初始变换构造两组深度图</a></li>
+            <li><a href="#提取深度扩散特征">提取深度扩散特征</a></li>
+            <li><a href="#pixel-to-point-feature-transfer">Pixel-to-point Feature Transfer</a></li>
+            <li><a href="#inlier-aggregation">Inlier Aggregation</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a></li>
+      </ol>
+    </li>
+    <li><a href="#两篇文章的联系">两篇文章的联系</a></li>
+    <li><a href="#sup-sub-cloud-driven-point-cloud-registration">SuP: Sub-cloud Driven Point Cloud Registration</a>
+      <ol>
+        <li><a href="#研究动机-2">研究动机</a></li>
+        <li><a href="#方法-2">方法</a>
+          <ol>
+            <li><a href="#多尺度特征提取与聚合">多尺度特征提取与聚合</a></li>
+            <li><a href="#子云划分">子云划分</a></li>
+            <li><a href="#第一阶段overlap-guided-prior-weighting-scheme">第一阶段：Overlap-guided Prior-weighting Scheme</a></li>
+            <li><a href="#preliminary-sub-cloud-matching">Preliminary Sub-cloud Matching</a></li>
+            <li><a href="#第二阶段multi-scale-post-weighting-network">第二阶段：Multi-scale Post-weighting Network</a></li>
+            <li><a href="#merge-to-match">Merge-to-match</a></li>
+            <li><a href="#训练目标">训练目标</a></li>
+            <li><a href="#alignment-aware-weighting-loss">Alignment-aware Weighting Loss</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-2">实验</a>
+          <ol>
+            <li><a href="#数据集与评价指标">数据集与评价指标</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+    <div class="article-image">
+        <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/">
+            <img alt="Featured image of post 论文阅读十五" height="1280" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_325c6ebaeeb3a80e.jpg 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_f90ec25a7525dde4.jpg 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_467bf26338d98411.jpg 2400w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover.jpg 2843w" width="2843">
+        </a>
+    </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/">论文阅读十五</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            点云配准
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-09-13T00:00:00Z'>2026-09-13</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#cloudfixer">CloudFixer</a>
+      <ol>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#几何变换参数化">几何变换参数化</a></li>
+            <li><a href="#扩散模型提供优化目标">扩散模型提供优化目标</a></li>
+            <li><a href="#密度相关的位移正则">密度相关的位移正则</a></li>
+            <li><a href="#多次适应与cloudfixer-o">多次适应与CloudFixer-O</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a></li>
+      </ol>
+    </li>
+    <li><a href="#rare-refine-any-registration-of-pairwise-point-clouds-via-zero-shot-learning">RARE: Refine Any Registration of Pairwise Point Clouds via Zero-Shot Learning</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#利用初始变换构造两组深度图">利用初始变换构造两组深度图</a></li>
+            <li><a href="#提取深度扩散特征">提取深度扩散特征</a></li>
+            <li><a href="#pixel-to-point-feature-transfer">Pixel-to-point Feature Transfer</a></li>
+            <li><a href="#inlier-aggregation">Inlier Aggregation</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a></li>
+      </ol>
+    </li>
+    <li><a href="#两篇文章的联系">两篇文章的联系</a></li>
+    <li><a href="#sup-sub-cloud-driven-point-cloud-registration">SuP: Sub-cloud Driven Point Cloud Registration</a>
+      <ol>
+        <li><a href="#研究动机-2">研究动机</a></li>
+        <li><a href="#方法-2">方法</a>
+          <ol>
+            <li><a href="#多尺度特征提取与聚合">多尺度特征提取与聚合</a></li>
+            <li><a href="#子云划分">子云划分</a></li>
+            <li><a href="#第一阶段overlap-guided-prior-weighting-scheme">第一阶段：Overlap-guided Prior-weighting Scheme</a></li>
+            <li><a href="#preliminary-sub-cloud-matching">Preliminary Sub-cloud Matching</a></li>
+            <li><a href="#第二阶段multi-scale-post-weighting-network">第二阶段：Multi-scale Post-weighting Network</a></li>
+            <li><a href="#merge-to-match">Merge-to-match</a></li>
+            <li><a href="#训练目标">训练目标</a></li>
+            <li><a href="#alignment-aware-weighting-loss">Alignment-aware Weighting Loss</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-2">实验</a>
+          <ol>
+            <li><a href="#数据集与评价指标">数据集与评价指标</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><ol>
+<li>
+<p><a class="link" href="https://arxiv.org/pdf/2407.16193"  target="_blank" rel="noopener"
+    >CloudFixer: Test-Time Adaptation for 3D Point Clouds via Diffusion-Guided Geometric Transformation【ECCV 2024】</a>，南京大学，Eunho Yang组。</p>
+</li>
+<li>
+<p><a class="link" href="https://arxiv.org/pdf/2507.19950"  target="_blank" rel="noopener"
+    >RARE: Refine Any Registration of Pairwise Point Clouds via Zero-Shot Learning【ICCV 2025】</a>，南京大学，Mingqiang Wei组。</p>
+</li>
+<li>
+<p><a class="link" href="https://openaccess.thecvf.com/content/CVPR2026/papers/Fung_SuP_Sub-cloud_Driven_Point_Cloud_Registration_CVPR_2026_paper.pdf"  target="_blank" rel="noopener"
+    >SuP: Sub-cloud Driven Point Cloud Registration【CVPR 2026 Highlight】</a>，西澳大学，Sheldon Fung等，</p>
+</li>
+</ol>
+<h2 id="cloudfixer">CloudFixer
+</h2><h3 id="背景">背景
+</h3><p>设干净样本为 \(x_0\)，扩散过程在时间步 \(t\) 加入高斯噪声：</p>
+\[
+x_t=\alpha_t x_0+\sigma_t\epsilon,
+\qquad
+\epsilon\sim\mathcal N(0,I),
+\qquad
+\alpha_t^2+\sigma_t^2=1
+\]<p>其中 \(\alpha_t\) 和 \(\sigma_t\) 控制信号与噪声的比例。</p>
+<p>扩散模型学习预测加入的噪声：</p>
+\[
+\mathcal L_{\mathrm{diff}}
+=\mathbb E_{x_0,t,\epsilon}
+\left[w(t)\left\|\epsilon_\theta(x_t,t)-\epsilon\right\|_2^2\right]
+\]<p>通过预测噪声，可以得到干净样本的估计：</p>
+\[
+\hat x_0
+=\frac{x_t-\sigma_t\epsilon_\theta(x_t,t)}{\alpha_t}
+\]<p>这个模型中有两类可以复用的信息：</p>
+<ol>
+<li><strong>去噪输出</strong>：\(\hat x_0\) 包含训练数据的形状先验，可以给当前输入提供修正方向。CloudFixer使用这部分信息。</li>
+<li><strong>中间特征</strong>：去噪网络的不同层包含空间结构与语义信息，可以用于建立对应关系。RARE使用这部分信息。</li>
+</ol>
+<p>CloudFixer需要在源域点云上训练的3D扩散模型；RARE复用预训练的Stable Diffusion与深度条件ControlNet，在2D特征空间中提取与点云有关的信息。</p>
+<hr>
+<h3 id="研究动机">研究动机
+</h3><p>点云分类模型通常在较干净的数据上训练。真实传感器采集的点云包含噪声、遮挡、密度变化、旋转以及形状畸变，输入与训练分布之间的差异导致分类性能下降。</p>
+<p>已有TTA方法经常依赖预测熵、伪标签或batch统计量更新模型。在逐样本输入、连续同类样本、类别比例失衡等场景中，这些信号的可靠性受到影响。</p>
+<p><strong>Test-Time Input Adaptation</strong> 提供了一种处理方式：对每个测试点云进行适应，把输入调整到源域模型更熟悉的分布，再交给分类器预测。</p>
+<p>直接通过扩散采样完成域转换，还需要处理三个问题：</p>
+<ol>
+<li><strong>形状信息保留</strong>：加噪强度过大容易破坏类别相关结构，加噪强度过小则限制域转换幅度。</li>
+<li><strong>点云的无序性</strong>：同一个形状可以由不同排列、不同采样位置的点集表示，逐点距离依赖固定对应关系。</li>
+<li><strong>推理开销</strong>：多步生成与经过扩散模型的反向传播带来较高计算成本。</li>
+</ol>
+<p>本文目标：利用扩散模型提供的源域先验，在测试时优化一组几何变换参数，逐步修正输入点云。</p>
+<hr>
+<h3 id="方法">方法
+</h3><p><img alt="CloudFixer整体流程，原论文Figure 2" class="gallery-image" data-flex-basis="579px" data-flex-grow="241" height="789" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/cloudfixer-framework.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/cloudfixer-framework_hu_d05923c605a362f4.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/cloudfixer-framework_hu_81c6656cf1cd7d63.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/cloudfixer-framework.png 1905w" width="1905"></p>
+<h4 id="几何变换参数化">几何变换参数化
+</h4><p>给定测试点云：</p>
+\[
+x\in\mathbb R^{N\times3}
+\]<p>定义变换后的点云为：</p>
+\[
+y_\phi(x)=(x+\Delta)R^\top,
+\qquad
+\phi=(R,\Delta)
+\]<p>其中：</p>
+<ul>
+<li>\(R\in SO(3)\)：整体旋转，用于处理姿态偏移；</li>
+<li>\(\Delta\in\mathbb R^{N\times3}\)：逐点位移，用于调整噪声点和局部形状。</li>
+</ul>
+<p>初始化时 \(R=I\)、\(\Delta=0\)，因此 \(y_\phi(x)=x\)。</p>
+<h4 id="扩散模型提供优化目标">扩散模型提供优化目标
+</h4><p>在每次迭代中，先对当前点云加入噪声：</p>
+\[
+y_t=\alpha_t y_\phi(x)+\sigma_t\epsilon
+\]<p>再用预训练扩散模型估计去噪后的点云：</p>
+\[
+\hat y
+=\frac{y_t-\sigma_t\epsilon_\theta(y_t,t)}{\alpha_t}
+\]<p>由于扩散模型在源域点云上训练，\(\hat y\) 提供了朝源域形状分布调整的参考。</p>
+<p>将论文中的更新过程写成带停止梯度的损失：</p>
+\[
+\mathcal L(\phi)
+=D_{\mathrm{CD}}\left(y_\phi(x),\operatorname{sg}(\hat y)\right)
++\lambda\operatorname{Reg}(\Delta)
+\]\[
+\phi\leftarrow\phi-\eta\nabla_\phi\mathcal L(\phi)
+\]<p>其中 \(\operatorname{sg}\) 表示停止梯度。</p>
+
+    <blockquote>
+        <p>扩散模型负责给出参考点云，几何优化负责让当前点云逐步靠近这个参考。</p>
+
+    </blockquote>
+<p>文章采用双向Chamfer Distance：</p>
+\[
+D_{\mathrm{CD}}(A,B)
+=\frac{1}{|A|}\sum_{a\in A}\min_{b\in B}\|a-b\|_2^2
++\frac{1}{|B|}\sum_{b\in B}\min_{a\in A}\|b-a\|_2^2
+\]<p>第一项让 \(A\) 中每个点在 \(B\) 中找到邻近位置，第二项约束 \(B\) 中的点也得到覆盖。点集内的排列变化保持距离值不变。</p>
+<h4 id="密度相关的位移正则">密度相关的位移正则
+</h4><p>仅依赖扩散参考容易导致点云过度变形，因此文章对逐点位移加入约束：</p>
+\[
+\operatorname{Reg}(\Delta)
+=\sum_{j=1}^{N}w_j\|\delta_j\|_2^2
+\]<p>其中 \(\delta_j\) 是第 \(j\) 个点的位移，\(w_j\) 根据该点到 \(k\) 个最近邻的平均距离取倒数得到。其关系可以写为：</p>
+\[
+d_j=\frac1k\sum_{x_l\in\mathcal N_k(x_j)}\|x_j-x_l\|_2,
+\qquad
+w_j\propto d_j^{-1}
+\]<p>密集区域中的点通常属于物体主体，较大的权重限制其移动幅度。孤立点与邻居距离较大，较小的权重为位置修正保留更多自由度。</p>
+<h4 id="多次适应与cloudfixer-o">多次适应与CloudFixer-O
+</h4><p>时间步和噪声的随机性使同一个输入产生多个适应结果。文章对 \(K\) 次结果进行概率平均：</p>
+\[
+\bar p(x)=\frac1K\sum_{j=1}^{K}f_\psi\left(y_{\phi_j^*}(x)\right)
+\]<p>基础CloudFixer保持分类器参数 \(\psi\) 固定。扩展版本 <strong>CloudFixer-O</strong> 进一步更新分类器的特征编码器，分类头保持固定，目标是对齐原始输入与适应输入的类别分布：</p>
+\[
+\min_\psi\sum_{j=1}^{K}
+D_{\mathrm{KL}}\left(
+f_\psi(x)\;\|\;f_\psi(y_{\phi_j^*}(x))
+\right)
+\]<p>输入适应先建立原始点云与源域风格点云之间的联系，预测一致性再把这种联系用于更新分类特征。</p>
+<hr>
+<h3 id="实验">实验
+</h3><p>文章在 <strong>ModelNet40-C</strong> 上测试密度、噪声、几何变换三类共15种腐蚀，在 <strong>PointDA-10</strong> 上测试ModelNet、ShapeNet与ScanNet之间的自然分布偏移。</p>
+<p><img alt="1789377034279" class="gallery-image" data-flex-basis="728px" data-flex-grow="303" height="433" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/1789377034279.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/1789377034279_hu_cd60300860a5e257.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/1789377034279.png 1315w" width="1315"></p>
+<hr>
+<h2 id="rare-refine-any-registration-of-pairwise-point-clouds-via-zero-shot-learning">RARE: Refine Any Registration of Pairwise Point Clouds via Zero-Shot Learning
+</h2><h3 id="研究动机-1">研究动机
+</h3><p>典型配准流程包含特征提取、对应点匹配和刚体变换估计。局部几何重复、重叠区域较少时，特征匹配容易出现歧义。提高描述子的区分能力，有助于提供更准确的对应关系。</p>
+<p>预训练图像扩散模型具有丰富的内部表示。点云可以投影为深度图，再借助ControlNet提取扩散特征。这里的一个关键问题是：<strong>两幅深度图的视角差异影响特征匹配质量。</strong></p>
+<p>同一结构从不同视角观察时，在图像中的位置、形状和可见范围都可能发生较大变化。</p>
+<p>本文目标：利用已有配准方法提供的初始位姿统一观察视角，再通过深度扩散特征细化对应关系和最终位姿。</p>
+<hr>
+<h3 id="方法-1">方法
+</h3><p><img alt="RARE整体流程，原论文Figure 3" class="gallery-image" data-flex-basis="443px" data-flex-grow="184" height="1103" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/rare-framework.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/rare-framework_hu_eb3708ba35d5d36.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/rare-framework_hu_e6d4dfaeaa0b3b69.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/rare-framework.png 2036w" width="2036"></p>
+<h4 id="利用初始变换构造两组深度图">利用初始变换构造两组深度图
+</h4><p>首先运行已有点云配准方法，得到3D特征 \(F_P,F_Q\) 和初始变换：</p>
+\[
+T_{\mathrm{init}}=(R_{\mathrm{init}},t_{\mathrm{init}})
+\]<p>文章以GeoTransformer作为主要基础方法，并测试了其他特征与配准方法。</p>
+<p>设 \(\Pi_{\mathrm{ref}}\)、\(\Pi_{\mathrm{src}}\) 分别表示两个视角下的深度投影。按统一的变换方向，投影过程可以整理为：</p>
+\[
+D_P^{\mathrm{ref}}=\Pi_{\mathrm{ref}}(P),
+\qquad
+D_Q^{\mathrm{ref}}=\Pi_{\mathrm{ref}}(T_{\mathrm{init}}Q)
+\]\[
+D_P^{\mathrm{src}}=\Pi_{\mathrm{src}}(T_{\mathrm{init}}^{-1}P),
+\qquad
+D_Q^{\mathrm{src}}=\Pi_{\mathrm{src}}(Q)
+\]<p>得到参考视角和源视角下的两对深度图。每一对深度图采用相同观察视角，初始变换的质量决定剩余错位的程度。</p>
+<p><img alt="统一视角对深度图匹配的影响，原论文Figure 2" class="gallery-image" data-flex-basis="318px" data-flex-grow="132" height="612" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/rare-view-alignment.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/rare-view-alignment_hu_48b29d9e8cf01216.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/rare-view-alignment.png 812w" width="812"></p>
+<h4 id="提取深度扩散特征">提取深度扩散特征
+</h4><p>点云投影得到的深度图通常比较稀疏。文章先通过腐蚀、膨胀等形态学操作进行稠密化，再把深度图输入ControlNet，作为Stable Diffusion反向去噪过程的条件。</p>
+<p>从U-Net解码器的第 \(0,3,6\) 层提取特征，对各层特征分别进行PCA降维，上采样到统一分辨率后组合，得到深度扩散特征图。</p>
+<p>这些层提供不同尺度的空间结构与语义信息。</p>
+<p>这里复用的是预训练网络的中间表示。RARE的细化模块无需针对目标点云数据集额外训练，整个流程仍依赖已经训练好的图像扩散模型和基础3D特征模型。</p>
+<h4 id="pixel-to-point-feature-transfer">Pixel-to-point Feature Transfer
+</h4><p>扩散特征对应深度图像素，3D特征对应点云中的采样点。投影、可见性和采样方式的差异，使两套特征的空间位置需要进一步对齐。</p>
+<p>文章根据像素对应的3D坐标，在3D特征点中进行最近邻查找，并通过距离阈值确定可以关联的点。这些点记为 <strong>common points</strong>。</p>
+<p>对关联成功的点，将3D特征和扩散特征分别进行L2归一化，再拼接：</p>
+\[
+\widetilde F^v(p)
+=\operatorname{Concat}\left(
+\frac{F^{3D}(p)}{\|F^{3D}(p)\|_2},
+\frac{F^{v}_{\mathrm{diff}}(p)}{\|F^{v}_{\mathrm{diff}}(p)\|_2}
+\right),
+\quad v\in\{\mathrm{ref},\mathrm{src}\}
+\]<p>3D特征提供局部几何信息，扩散特征补充更大范围的上下文信息。</p>
+<h4 id="inlier-aggregation">Inlier Aggregation
+</h4><p>仅使用common points，匹配数量受到投影可见性和坐标关联的限制。因此文章同时保留五组对应关系：</p>
+\[
+\mathcal C_{\mathrm{common}}^{\mathrm{ref}},\quad
+\mathcal C_{\mathrm{common}}^{\mathrm{src}},\quad
+\mathcal C_{\mathrm{diff}}^{\mathrm{ref}},\quad
+\mathcal C_{\mathrm{diff}}^{\mathrm{src}},\quad
+\mathcal C_{3D}
+\]<p>分别来自两个视角的融合特征、两个视角的扩散特征，以及原始3D特征。</p>
+<p>对每一组对应关系 \(\mathcal C_i\)，使用带置信度权重的最小二乘估计位姿：</p>
+\[
+(R_i,t_i)
+=\operatorname*{arg\,min}_{R\in SO(3),t}
+\sum_{(p_j,q_j)\in\mathcal C_i}
+w_j^i\|Rq_j+t-p_j\|_2^2
+\]<p>该问题可以通过weighted SVD求解。</p>
+<p>再让每个候选变换在汇总的对应关系 \(\mathcal C\) 上接受检验。用距离阈值 \(\tau\) 表示内点判断：</p>
+\[
+i^*=\operatorname*{arg\,max}_i
+\sum_{(p,q)\in\mathcal C}
+\mathbf1\left[\|R_iq+t_i-p\|_2<\tau\right]
+\]<p>这一步选择支持内点最多的候选。</p>
+<hr>
+<h3 id="实验-1">实验
+</h3><p>文章在室内 <strong>3DMatch、3DLoMatch</strong> 和室外 <strong>KITTI</strong> 上验证方法。3DMatch采用重叠率大于30%的点云对，3DLoMatch关注10%到30%的低重叠场景。</p>
+<p>主要指标是配准召回率RR、旋转误差RE和平移误差TE。
+<img alt="1789377937936" class="gallery-image" data-flex-basis="185px" data-flex-grow="77" height="622" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/1789377937936.png" width="481"></p>
+<hr>
+<h2 id="两篇文章的联系">两篇文章的联系
+</h2><p>两篇文章都把预训练扩散模型作为附加知识来源，接入已有的点云处理流程。它们的连接位置和求解方式可以整理为：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>CloudFixer</th>
+					<th>RARE</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>下游任务</td>
+					<td>分布偏移下的点云分类</td>
+					<td>两个点云的刚体配准</td>
+			</tr>
+			<tr>
+					<td>扩散模型</td>
+					<td>源域3D点云扩散模型</td>
+					<td>Stable Diffusion与深度条件ControlNet</td>
+			</tr>
+			<tr>
+					<td>复用的信息</td>
+					<td>去噪后的点云估计</td>
+					<td>U-Net中间扩散特征</td>
+			</tr>
+			<tr>
+					<td>接入位置</td>
+					<td>分类器之前的输入适应</td>
+					<td>初始配准之后的特征增强与位姿细化</td>
+			</tr>
+			<tr>
+					<td>主要调整对象</td>
+					<td>整体旋转与逐点位移</td>
+					<td>对应关系、置信度和刚体位姿</td>
+			</tr>
+			<tr>
+					<td>几何约束</td>
+					<td>Chamfer Distance、密度相关位移正则</td>
+					<td>同视角投影、坐标关联、内点一致性</td>
+			</tr>
+			<tr>
+					<td>测试阶段求解</td>
+					<td>对几何参数进行梯度优化</td>
+					<td>特征匹配、候选选择与weighted SVD迭代</td>
+			</tr>
+	</tbody>
+</table></div>
+<h2 id="sup-sub-cloud-driven-point-cloud-registration">SuP: Sub-cloud Driven Point Cloud Registration
+</h2><h3 id="研究动机-2">研究动机
+</h3><p>点云配准需要从两次扫描中找到对应位置，再估计旋转和平移。当两片点云的重叠区域较大时，已有方法可以获得较稳定的结果。重叠率下降到30%以下时，有效对应点减少，非重叠区域中的重复结构带来大量匹配歧义。</p>
+<p>例如，两次扫描分别包含不同位置的墙面、柜子和桌椅。这些区域可能具有相似的局部几何或颜色，即使点特征已经具有较强的表达能力，非重叠区域之间依然可能产生高相似度匹配。</p>
+<p>已有方法通过重叠率预测、几何编码、语义特征或颜色融合改善匹配质量。SuP进一步关注<strong>匹配的空间范围</strong>：在整片点云中搜索时，大量非重叠区域参与竞争，真实对应关系容易被错误匹配掩盖。</p>
+<p>文章的关键观察是：<strong>整片点云的重叠率较低，其中仍然可能存在重叠率较高的局部子云对。</strong></p>
+<p>例如，两片大场景点云仅共同观测到一张桌子。以桌子附近的区域构造子云，可以提高共享结构在局部输入中的占比，使局部匹配更容易建立可靠对应关系。</p>
+<p>本文目标：将低重叠配准转化为高重叠子云对的挖掘问题，找到可靠的 <strong>anchor pairs，锚点对</strong>，再利用这些局部区域中的对应关系估计全局变换。</p>
+<hr>
+<h3 id="方法-2">方法
+</h3><p><img alt="SuP整体流程与DSAM模块，原论文Figure 2" class="gallery-image" data-flex-basis="426px" data-flex-grow="177" height="990" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/sup-framework.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/sup-framework_hu_1e940a4ba05b67d6.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/sup-framework_hu_32f2019b4e21d4bc.png 1600w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/sup-framework.png 1760w" width="1760"></p>
+<p>整体流程为：</p>
+\[
+\text{多尺度特征提取}
+\rightarrow\text{注意力聚合}
+\rightarrow\text{子云划分}
+\rightarrow\text{重叠先验筛选}
+\rightarrow\text{初步配准}
+\rightarrow\text{多尺度一致性评分}
+\rightarrow\text{合并匹配}
+\]<h4 id="多尺度特征提取与聚合">多尺度特征提取与聚合
+</h4><p>文章使用KPConv风格的主干网络，对完整点云进行分层下采样和特征提取：</p>
+\[
+\Phi_X=\kappa(X)
+=\left\{(\hat X^s,F_X^s)\mid s=1,2,3,4\right\}
+\]<p>其中 \(\hat X^1\) 最密集，\(\hat X^4\) 最稀疏。目标点云 \(Y\) 采用相同处理。</p>
+<p>粗尺度特征先经过self-attention聚合同一片点云内的信息，再经过cross-attention引入另一片点云的信息：</p>
+\[
+F_X^c=\operatorname{CrossAttn}(F_X^s,F_Y^s,F_Y^s)
+\]<p>这里 \(F_X^s,F_Y^s\) 表示自注意力输出，\(F_X^c\) 表示以另一片点云为条件的聚合特征。</p>
+<h4 id="子云划分">子云划分
+</h4><p>在最粗尺度 \(\hat X^4\) 上，通过FPS选取 \(k\) 个分散的中心：</p>
+\[
+C_X=\{c_i^X\}_{i=1}^{k}
+\]<p>对每个中心，结合K近邻与半径约束构造子云：</p>
+\[
+\hat S_i^X=
+\left\{x\in\operatorname{KNN}_{K}(c_i^X;\hat X^4)
+\mid\|x-c_i^X\|_2<\tau\right\}
+\]<p>目标点云同样得到 \(k\) 个子云，两侧组合产生 \(k^2\) 个候选子云对。</p>
+<p>这些子云以局部邻域构造，彼此允许共享点。高重叠锚点对隐藏在这些组合中。</p>
+<p>默认 \(k=6\)，因此共有36个子云对。后续OPS保留24个初步候选，MPN再从中选取最多8个满足置信度条件的锚点对。</p>
+<h4 id="第一阶段overlap-guided-prior-weighting-scheme">第一阶段：Overlap-guided Prior-weighting Scheme
+</h4><p><strong>OPS</strong> 利用特征相关性，为候选子云对快速计算先验分数。</p>
+<p>给定 \((\hat S_l^X,\hat S_m^Y)\)，使用归一化后的条件特征构造Gaussian correlation矩阵：</p>
+\[
+s_{ij}=\exp\left(
+-\left\|\operatorname{norm}(F_{X,i}^c)
+-\operatorname{norm}(F_{Y,j}^c)\right\|_2^2
+\right)
+\]<p>特征越相似，\(s_{ij}\) 越大。</p>
+<p>同时考虑位于所在行、所在列top-\(\hat k\)中的相关性：</p>
+\[
+\mathcal M_{lm}=\left\{
+s_{ij}\mid
+s_{ij}\in\operatorname{Top}_{\hat k}(S_{i,:}),
+\quad
+s_{ij}\in\operatorname{Top}_{\hat k}(S_{:,j})
+\right\}
+\]<p>然后取平均，得到子云对的先验权重：</p>
+\[
+w_{lm}^{o}=
+\frac1{|\mathcal M_{lm}|}
+\sum_{s\in\mathcal M_{lm}}s
+\]<p>一个点在另一片子云中找到相似位置后，对方也应当把它视为较好的候选。双向top-\(\hat k\)约束用于提高相关性的可靠性。</p>
+<p>根据 \(w^o\) 排序，选出前 \(\bar k\) 个子云对形成候选集合 \(\mathcal C^p\)。这里的分数是特征相关性构造的重叠先验，真实几何对齐质量由后续阶段继续判断。</p>
+<h4 id="preliminary-sub-cloud-matching">Preliminary Sub-cloud Matching
+</h4><p><strong>PSM</strong> 为每个候选子云对估计一个初步变换 \(\hat T_i\)。</p>
+<p>它复用OPS中的相关性矩阵，对行、列进行dual-normalization以抑制不明确的匹配，再通过weighted SVD估计局部位姿。</p>
+<h4 id="第二阶段multi-scale-post-weighting-network">第二阶段：Multi-scale Post-weighting Network
+</h4><p><strong>MPN</strong> 的出发点是：较好的位姿假设应当使重叠区域中的点在空间上接近，同时具有较强的特征一致性。</p>
+<p>首先，把候选变换应用于第3层点云，根据距离阈值收集潜在重叠点对。为保持本文的 \(X\rightarrow Y\) 方向一致，写为：</p>
+\[
+\mathcal O_i^3=
+\left\{(x,y)\mid
+x\in\hat X^3,\ y\in\hat Y^3,
+\quad\|\hat T_i(x)-y\|_2<\hat\tau
+\right\}
+\]<p>这里使用完整点云的中间尺度点来检查候选变换。默认重叠距离阈值 \(\hat\tau=0.04\)。</p>
+<p>再通过跨尺度1-NN查找，在更密集的第2层找到相应位置：</p>
+\[
+\mathcal O_i^2=
+\left\{
+\left(\operatorname{NN}_{\hat X^2}(x),
+\operatorname{NN}_{\hat Y^2}(y)\right)
+\mid(x,y)\in\mathcal O_i^3
+\right\}
+\]<p>这一步保留了两种尺度上点对的对应顺序，方便将细粒度信息与较大邻域信息组合起来。</p>
+<p>假设构造了 \(L\) 个点对，对每一侧拼接第2、3层特征，再做Hadamard逐元素乘积：</p>
+\[
+Z_i=
+\left[F_X^{\mathcal O_i^2},F_X^{\mathcal O_i^3}\right]
+\odot
+\left[F_Y^{\mathcal O_i^2},F_Y^{\mathcal O_i^3}\right]
+\in\mathbb R^{L\times d_a}
+\]<p>其中 \([\cdot,\cdot]\) 表示通道拼接，\(d_a\) 为两层特征通道数之和。</p>
+<p>直观理解：\(Z_i\) 把对齐后两侧特征在各通道上的共同响应显式提供给评分网络。</p>
+<p>文章随后使用轻量多头自注意力与残差连接，建模这些点对之间的上下文：</p>
+\[
+\hat Z_i=Z_i+
+\operatorname{LayerNorm}\left(\Lambda_s^l(Z_i)\right)
+\]<p>经过投影、GELU与全局最大池化，得到候选级描述子：</p>
+\[
+\hat F_i=
+\operatorname{MaxPool}\left(
+\operatorname{GELU}(\hat Z_iW_p^\top+b)
+\right)
+\]<p>最后，经过MLP和Softmax输出特征一致性权重\(w_i^c\)。文章选择top-k锚点对。</p>
+
+    <blockquote>
+        <p>OPS通过特征相关性缩小候选范围，MPN通过对齐后的多尺度特征一致性评价候选质量。两阶段分别承担快速筛选与进一步验证。</p>
+
+    </blockquote>
+<h4 id="merge-to-match">Merge-to-match
+</h4><p>得到锚点对后，文章从每个锚点对中保留满足其局部变换的粗对应关系：</p>
+\[
+\mathcal C_i=
+\left\{(x,y)\mid
+x\in\hat S_l^X,\ y\in\hat S_m^Y,
+\quad\|\hat T_i(x)-y\|_2<\tau_m
+\right\}
+\]<p>将各锚点对提供的粗对应关系合并：</p>
+\[
+\mathcal C=\bigcup_{i=1}^{N_a}\mathcal C_i
+\]<p>其中 \(N_a\) 是最终选出的锚点对数量。</p>
+<p>随后沿用coarse-to-fine匹配方式，在这些粗对应关系覆盖的区域内进一步建立稠密对应点，使用RANSAC或LGR，估计最终刚体变换。</p>
+<h4 id="训练目标">训练目标
+</h4><p>总损失由三部分组成：</p>
+\[
+\mathcal L=
+\mathcal L_{\mathrm{oc}}
++\alpha\mathcal L_p
++\beta\mathcal L_a
+\]<p>其中：</p>
+<ul>
+<li>\(\mathcal L_{\mathrm{oc}}\)：overlap-aware circle loss，用于学习粗尺度特征；</li>
+<li>\(\mathcal L_p\)：point matching loss，监督点级匹配；</li>
+<li>\(\mathcal L_a\)：本文设计的alignment-aware weighting loss，监督MPN输出的候选权重。</li>
+</ul>
+<h4 id="alignment-aware-weighting-loss">Alignment-aware Weighting Loss
+</h4><p>对每个候选子云对，训练时根据真实变换计算其初步配准的对齐误差 \(E_i\)。</p>
+<p>按照误差阈值 \(\tau_e\) 划分正负候选：</p>
+\[
+\mathcal P=\{i\mid E_i<\tau_e\},
+\qquad
+\mathcal N=\{i\mid E_i\ge\tau_e\}
+\]<p>权重学习损失写为：</p>
+\[
+\mathcal L_a=
+-\frac1{|\mathcal P|}\sum_{i\in\mathcal P}
+\lambda_i^a\log w_i^c
+-\frac1{|\mathcal N|}\sum_{i\in\mathcal N}
+\lambda_i^a\log(1-w_i^c)
+\]<p>定义对齐相关权重：</p>
+\[
+\lambda_i^a=
+\begin{cases}
+1-E_i,&\tau_e<E_i<\tau_e+\delta,\\
+1,&\text{其他情况}.
+\end{cases}
+\]<p>在论文使用的误差范围内，刚超过成功阈值的候选受到较轻的负样本惩罚。这些候选已经具有一定对齐质量，对应区域仍然可能提供有用信息。</p>
+<hr>
+<h3 id="实验-2">实验
+</h3><h4 id="数据集与评价指标">数据集与评价指标
+</h4><p>文章主要在 <strong>Color3DMatch</strong> 和 <strong>Color3DLoMatch</strong> 上验证。这两个数据集为3DMatch系列加入颜色信息：</p>
+<ul>
+<li>C3DM：重叠率大于30%的点云对；</li>
+<li>C3DLM：重叠率在10%到30%之间的点云对。</li>
+</ul>
+<p>默认SuP使用颜色增强主干，实验数值需要结合该输入条件理解。</p>
+<p>主要指标包括：IR，正确对应关系占比；FMR，IR超过5%的点云对比例；RR，对齐误差低于0.2 m的点云对比例；以及旋转误差RRE和平移误差RTE。IR的内点距离阈值为0.1 m。</p>
+<p><img alt="1789385980139" class="gallery-image" data-flex-basis="178px" data-flex-grow="74" height="1260" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/1789385980139.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/1789385980139_hu_cc6be15877f6c31d.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/image/index/1789385980139.png 936w" width="936"></p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/">点云配准</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读14" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_bb75b1b267b62144.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_bb75b1b267b62144.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_60b485cb7bdeb561.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #c0c1cc80 0%, #403238C0 100%);">
+            <h2 class="article-title">论文阅读14</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读13" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_ab5903c07e8cca7b.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_ab5903c07e8cca7b.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_bb61a31521dd77c9.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #3b5c9380 0%, #313645C0 100%);">
+            <h2 class="article-title">论文阅读13</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读EX" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_be5ce1758b233118.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_be5ce1758b233118.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_23518cd0b7dfd209.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #48454380 0%, #b6b8b8C0 100%);">
+            <h2 class="article-title">论文阅读EX</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读12" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_3b8652b4e02b0f7a.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #5a565380 0%, #bcb7aeC0 100%);">
+            <h2 class="article-title">论文阅读12</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB11/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读11</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
