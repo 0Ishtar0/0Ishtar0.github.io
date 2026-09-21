@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="利用图信号、局部属性图与稀疏对应先验实现概率点云配准">
+<title>论文阅读：GraphCPD</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读：GraphCPD">
+<meta property='og:description' content="利用图信号、局部属性图与稀疏对应先验实现概率点云配准">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='点云' /><meta property='article:tag' content='点云配准' /><meta property='article:tag' content='图信号处理' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-09-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-09-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="论文阅读：GraphCPD">
+<meta name="twitter:description" content="利用图信号、局部属性图与稀疏对应先验实现概率点云配准">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#graphcpd-coherent-point-drift-for-point-cloud-registration-via-graph-signal-processing">GraphCPD: Coherent Point Drift for Point Cloud Registration via Graph Signal Processing</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍cpd与图信号处理">背景介绍：CPD与图信号处理</a>
+          <ol>
+            <li><a href="#cpd中的软对应关系">CPD中的软对应关系</a></li>
+            <li><a href="#点云如何成为图信号">点云如何成为图信号</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#构造全局点云图">构造全局点云图</a></li>
+            <li><a href="#提取三个高频分量">提取三个高频分量</a></li>
+            <li><a href="#高频描述的刚体变换不变性">高频描述的刚体变换不变性</a></li>
+            <li><a href="#从三维点构造九维图信号">从三维点构造九维图信号</a></li>
+            <li><a href="#构造每个点的局部属性图">构造每个点的局部属性图</a></li>
+            <li><a href="#图拉普拉斯定义概率密度">图拉普拉斯定义概率密度</a></li>
+            <li><a href="#利用高频描述构造稀疏先验">利用高频描述构造稀疏先验</a></li>
+            <li><a href="#e步更新对应概率">E步：更新对应概率</a></li>
+            <li><a href="#m步更新刚体位姿">M步：更新刚体位姿</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#实验设置">实验设置</a></li>
+            <li><a href="#dragon与armadillo精度和运行时间">Dragon与Armadillo：精度和运行时间</a></li>
+            <li><a href="#候选数量与局部图参数">候选数量与局部图参数</a></li>
+            <li><a href="#消融实验">消融实验</a></li>
+            <li><a href="#离群点与部分结构配准">离群点与部分结构配准</a></li>
+            <li><a href="#多视图配准">多视图配准</a></li>
+            <li><a href="#低重叠室内与kitti">低重叠室内与KITTI</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考">阅读思考</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/">论文阅读：GraphCPD</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            利用图信号、局部属性图与稀疏对应先验实现概率点云配准
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-09-20T00:00:00Z'>2026-09-20</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#graphcpd-coherent-point-drift-for-point-cloud-registration-via-graph-signal-processing">GraphCPD: Coherent Point Drift for Point Cloud Registration via Graph Signal Processing</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍cpd与图信号处理">背景介绍：CPD与图信号处理</a>
+          <ol>
+            <li><a href="#cpd中的软对应关系">CPD中的软对应关系</a></li>
+            <li><a href="#点云如何成为图信号">点云如何成为图信号</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#构造全局点云图">构造全局点云图</a></li>
+            <li><a href="#提取三个高频分量">提取三个高频分量</a></li>
+            <li><a href="#高频描述的刚体变换不变性">高频描述的刚体变换不变性</a></li>
+            <li><a href="#从三维点构造九维图信号">从三维点构造九维图信号</a></li>
+            <li><a href="#构造每个点的局部属性图">构造每个点的局部属性图</a></li>
+            <li><a href="#图拉普拉斯定义概率密度">图拉普拉斯定义概率密度</a></li>
+            <li><a href="#利用高频描述构造稀疏先验">利用高频描述构造稀疏先验</a></li>
+            <li><a href="#e步更新对应概率">E步：更新对应概率</a></li>
+            <li><a href="#m步更新刚体位姿">M步：更新刚体位姿</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#实验设置">实验设置</a></li>
+            <li><a href="#dragon与armadillo精度和运行时间">Dragon与Armadillo：精度和运行时间</a></li>
+            <li><a href="#候选数量与局部图参数">候选数量与局部图参数</a></li>
+            <li><a href="#消融实验">消融实验</a></li>
+            <li><a href="#离群点与部分结构配准">离群点与部分结构配准</a></li>
+            <li><a href="#多视图配准">多视图配准</a></li>
+            <li><a href="#低重叠室内与kitti">低重叠室内与KITTI</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考">阅读思考</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><ol>
+<li><strong>GraphCPD: Coherent Point Drift for Point Cloud Registration via Graph Signal Processing</strong>，Li Chai组，浙江大学。<a class="link" href="https://github.com/YCLai1997/GraphCPD"  target="_blank" rel="noopener"
+    >ECCV 2026</a>。</li>
+</ol>
+<h2 id="graphcpd-coherent-point-drift-for-point-cloud-registration-via-graph-signal-processing">GraphCPD: Coherent Point Drift for Point Cloud Registration via Graph Signal Processing
+</h2><h3 id="研究动机">研究动机
+</h3><p>概率点云配准将点之间的对应关系表示为概率，通过迭代更新对应概率和空间变换完成对齐。CPD是其中具有代表性的方法，在噪声、离群点和部分重叠条件下具有较好的鲁棒性。</p>
+<p>这类方法主要存在两个问题：</p>
+<ol>
+<li><strong>对应搜索开销较大</strong>：传统CPD需要计算大量源点与目标点之间的匹配概率，点数增加后，时间与显存开销迅速增长。</li>
+<li><strong>几何描述较简单</strong>：常见的各向同性高斯模型主要依赖点间欧氏距离，对法向、局部结构以及不同属性之间的关系利用有限。</li>
+</ol>
+<p>GraphCPD引入 <strong>Graph Signal Processing，图信号处理</strong>。文章希望通过图高通滤波提取具有刚体变换不变性的局部描述，用于筛选候选对应点；同时，将坐标、法向与高频描述组合起来，构造具有局部几何信息的概率模型。</p>
+<p>本文目标：在概率配准框架中，同时改善匹配的几何区分能力和大规模点云的计算效率。</p>
+<p>文章定位于<strong>刚体精配准</strong>，采用迭代优化求解位姿，无需训练特征网络。</p>
+<hr>
+<h3 id="背景介绍cpd与图信号处理">背景介绍：CPD与图信号处理
+</h3><h4 id="cpd中的软对应关系">CPD中的软对应关系
+</h4><p>设源点云为 \(X=\{x_n\}_{n=1}^{N}\)，目标点云为 \(Y=\{y_m\}_{m=1}^{M}\)，待估计变换为：</p>
+\[
+T(x_n)=Rx_n+t,
+\qquad R\in SO(3),\quad t\in\mathbb R^3
+\]<p>为便于和后文统一，可以将坐标层面的高斯匹配模型写成：</p>
+\[
+p(T(x_n)\mid m)
+\propto
+\exp\left(-\frac{\|Rx_n+t-y_m\|_2^2}{2\sigma^2}\right)
+\]<p>一个源点可以同时对多个目标点具有非零对应概率。EM算法交替完成两步：</p>
+<ul>
+<li><strong>E步</strong>：固定当前位姿，计算各点对的后验对应概率；</li>
+<li><strong>M步</strong>：固定对应概率，更新位姿和分布尺度。</li>
+</ul>
+<p>对应概率越大，该点对在位姿估计中的影响越大。模型还通过离群点分量吸收难以解释的观测。</p>
+<h4 id="点云如何成为图信号">点云如何成为图信号
+</h4><p>将点视为图节点，将邻近点连接起来，可以得到点云图。坐标、法向等数值作为定义在节点上的信号。</p>
+<p>例如，使用普通图拉普拉斯 \(L=D-W\) 时，坐标信号的滤波结果为：</p>
+\[
+(Ly)_i=\sum_jW_{ij}(y_i-y_j)
+\]<p>这一步计算当前点与邻域之间的加权差异。局部变化明显的区域通常产生较强响应。</p>
+<p>从频域理解，若 \(L=U\Lambda U^\top\)，则：</p>
+\[
+Ly=U\Lambda U^\top y
+\]<p>图拉普拉斯特征值较大的分量对应图上的较快变化，乘以 \(\Lambda\) 可以突出这些高频分量。这里用普通拉普拉斯解释基本概念，论文的高频构造采用其记号 \(\mathcal L\)。</p>
+<hr>
+<h3 id="方法">方法
+</h3><p><img alt="GraphCPD的全局图、九维图信号与局部属性图，原论文Figure 1" class="gallery-image" data-flex-basis="387px" data-flex-grow="161" height="800" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/image/index/graphcpd-framework.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/image/index/graphcpd-framework_hu_1fc3b737f3caaa8b.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/image/index/graphcpd-framework.png 1290w" width="1290"></p>
+<p>整体流程可以写为：</p>
+\[
+\text{点云邻域图}
+\rightarrow\text{高频描述与九维信号}
+\rightarrow\text{局部属性图和对应先验}
+\rightarrow\text{E步概率匹配}
+\rightarrow\text{M步位姿更新}
+\]<h4 id="构造全局点云图">构造全局点云图
+</h4><p>以目标点云 \(Y\) 为例，首先构造加权K近邻图。相邻点之间的权重同时考虑空间距离和法向差异：</p>
+\[
+W_{ij}=
+\exp\left(
+-\frac{\|y_i-y_j\|_2^2}{\sigma_p^2}
+-\frac{\|n_i-n_j\|_2^2}{\sigma_n^2}
+\right)
+\]<p>其中 \(n_i,n_j\) 为表面法向，\(\sigma_p,\sigma_n\) 控制两类差异的尺度。非邻接点之间的权重为零。</p>
+<p>空间接近、法向一致的点具有较大连接权重。法向差异较大的边界位置，其连接权重相应减小。</p>
+<p>这里的“全局图”表示图覆盖整片点云，连接方式仍然采用稀疏近邻结构。</p>
+<h4 id="提取三个高频分量">提取三个高频分量
+</h4><p>记 \(y\in\mathbb R^{M\times3}\) 为坐标矩阵，\(\bar n\) 为缩放后的法向矩阵。文章通过图滤波构造三个标量描述：</p>
+\[
+h_m^1=\|[\mathcal Ly]_{m,:}\|_2
+\]\[
+h_m^2=\|[\mathcal L\bar n]_{m,:}\|_2
+\]\[
+h_m^3=\|[(\mathcal L+\mathcal L^2)y]_{m,:}\|_2
+\]<p>其中 \([\cdot]_{m,:}\) 表示取第 \(m\) 行。</p>
+<p>三个分量分别描述坐标的局部变化、法向的局部变化，以及加入二阶图传播后的坐标变化。每个滤波响应原本是三维向量，取范数后得到一个标量，因此：</p>
+\[
+h_m=(h_m^1,h_m^2,h_m^3)^\top\in\mathbb R^3
+\]<p>高频响应有助于区分局部结构，例如曲面弯曲、边缘和几何细节。实现中通过近邻索引和加权求和完成计算，减少显式构造稠密矩阵的开销。</p>
+<h4 id="高频描述的刚体变换不变性">高频描述的刚体变换不变性
+</h4><p><img alt="刚体变换前后的高频响应，原论文Figure 2" class="gallery-image" data-flex-basis="591px" data-flex-grow="246" height="420" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/image/index/graphcpd-invariance.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/image/index/graphcpd-invariance_hu_8034c773f83cd9b5.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/image/index/graphcpd-invariance.png 1035w" width="1035"></p>
+<p>论文Theorem 1给出上述高频分量在刚体变换下保持不变的结论。其核心直觉是：图滤波提取局部差异，向量范数消除旋转方向的影响。</p>
+<p>以坐标的一阶响应为例，若图结构保持一致，且算子满足 \(\mathcal L\mathbf1=0\)，对于：</p>
+\[
+y=xR^\top+\mathbf1t^\top
+\]<p>有：</p>
+\[
+\mathcal Ly=(\mathcal Lx)R^\top
+\]<p>由于旋转保持欧氏范数：</p>
+\[
+\|[\mathcal Ly]_{m,:}\|_2
+=\|[\mathcal Lx]_{m,:}\|_2
+\]<p>这说明同一局部结构经过旋转和平移后，仍然可以利用高频描述进行检索。</p>
+<p>这段推导需要保留适用条件。论文正文将全局算子称为归一化拉普拉斯；不同归一化形式的零空间有所区别，平移消除需要结合具体算子或预处理确认。法向的缩放也需要保持一致。本文所提供的PDF没有附上文中引用的补充证明，复现时应进一步核对这些细节。</p>
+<p>真实扫描还包含采样、遮挡和法向估计差异，因此对应点的高频描述通常具有近似一致性。</p>
+<h4 id="从三维点构造九维图信号">从三维点构造九维图信号
+</h4><p>将坐标、缩放法向和高频描述拼接：</p>
+\[
+s_m=
+\begin{bmatrix}
+y_m\\\bar n_m\\h_m
+\end{bmatrix}
+\in\mathbb R^9
+\]<p>法向缩放用于协调坐标与法向的数值尺度，论文根据两类数据的幅值范围确定缩放比例。</p>
+<p>源点的信号在刚体变换下写为：</p>
+\[
+\mathcal T(s_n)=
+\operatorname{diag}(R,R,I_3)s_n
++\begin{bmatrix}t\\0\\0\end{bmatrix}
+\]<p>坐标参与旋转和平移，法向参与旋转，高频标量描述按照论文的不变性假设保持固定。</p>
+<h4 id="构造每个点的局部属性图">构造每个点的局部属性图
+</h4><p>这是文章中需要特别区分的一步：<strong>局部图的9个节点分别对应九维信号中的9种属性。</strong></p>
+<p>对目标点 \(y_m\)，取其自身和 \(k\) 个近邻的信号，组成：</p>
+\[
+Z_m=[s_m,s_{m_1},\ldots,s_{m_k}]
+\in\mathbb R^{9\times(k+1)}
+\]<p>每一列是一个点的九维信号，每一行是某个属性在局部邻域中的取值。例如，第1行是这些点的横坐标，第4行是缩放法向的第1个分量。</p>
+<p>记第 \(p\) 行为 \(f_p\in\mathbb R^{k+1}\)，根据两种属性在邻域中的数值接近程度计算边权：</p>
+\[
+W_m^{pq}=
+\exp\left(-\frac{\|f_p-f_q\|_2^2}{2\sigma_f^2}\right)
+\]<p>然后构造归一化拉普拉斯，并加入稳定项：</p>
+\[
+\widetilde L_m=
+I-D_m^{-1/2}W_mD_m^{-1/2}+\varepsilon I
+\]<p>其中 \(\varepsilon>0\)，论文取0.01。每个目标点对应一个 \(9\times9\) 的正则化矩阵。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>图结构</th>
+					<th>节点代表什么</th>
+					<th>作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>全局点云图</td>
+					<td>三维点</td>
+					<td>提取坐标与法向的高频响应</td>
+			</tr>
+			<tr>
+					<td>局部属性图</td>
+					<td>九维信号的属性通道</td>
+					<td>描述局部属性关系，定义匹配误差的度量</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>局部近邻参与属性图的构造，为每个点提供不同的几何统计信息。</p>
+<h4 id="图拉普拉斯定义概率密度">图拉普拉斯定义概率密度
+</h4><p>对于源点 \(x_n\) 与目标点 \(y_m\)，定义九维残差：</p>
+\[
+r_{mn}=s_m-\mathcal T(s_n)
+\]<p>文章的分量概率密度为：</p>
+\[
+p(\mathcal T(s_n)\mid m)
+=c_m\exp\left(
+-\frac{r_{mn}^{\top}\widetilde L_mr_{mn}}{2\sigma^2}
+\right)
+\]<p>其中 \(c_m\) 为归一化系数，\(\sigma^2\) 为尺度参数。</p>
+<p><strong>\(\widetilde L_m\) 在这里充当精度矩阵的一部分，即逆协方差的角色。</strong> 按上述密度表达，对应协方差为 \(\sigma^2\widetilde L_m^{-1}\)。加入 \(\varepsilon I\) 后，矩阵可逆。</p>
+<p>普通欧氏距离对各通道独立求平方和。图度量包含非对角项，因此能够反映属性残差之间的关联。对归一化拉普拉斯，二次型还可以展开为：</p>
+\[
+r^\top\widetilde L_mr
+=\frac12\sum_{p,q}W_m^{pq}
+\left(\frac{r_p}{\sqrt{d_p}}-\frac{r_q}{\sqrt{d_q}}\right)^2
++\varepsilon\|r\|_2^2
+\]<p>其中 \(d_p\) 是属性节点的度。连接紧密的属性对，其归一化残差需要保持相近。这样，概率模型同时考虑整体残差和残差在属性图上的变化。</p>
+<h4 id="利用高频描述构造稀疏先验">利用高频描述构造稀疏先验
+</h4><p>在目标点的三维高频描述 \(h_m\) 上建立KD-tree。对每个源点 \(x_n\)，检索 \(k_{\mathrm{match}}\) 个高频描述最接近的目标点，组成候选集合 \(\mathcal C_n\)。</p>
+<p>定义先验概率：</p>
+\[
+\pi_{mn}=
+\begin{cases}
+1/k_{\mathrm{match}},&y_m\in\mathcal C_n,\\
+0,&y_m\notin\mathcal C_n.
+\end{cases}
+\]<p>候选集合内采用均匀先验，各候选最终获得多少权重由概率密度进一步决定。</p>
+<p>这一步将对应概率计算的点对数量从 \(MN\) 缩减到约 \(Nk_{\mathrm{match}}\)。这个数量描述的是候选点对计算量，完整运行时间还包括建图、特征计算、检索和位姿迭代。</p>
+<p>直观理解：先用高频描述限制搜索范围，再利用坐标、法向和属性图在候选范围内进行软匹配。</p>
+<h4 id="e步更新对应概率">E步：更新对应概率
+</h4><p>给定上一轮变换，后验对应概率为：</p>
+\[
+P_{mn}=
+\frac{\pi_{mn}\,p(\mathcal T_{\mathrm{old}}(s_n)\mid m)}
+{\pi_o+\sum_{j=1}^{M}\pi_{jn}\,
+p(\mathcal T_{\mathrm{old}}(s_n)\mid j)}
+\]<p>其中 \(\pi_o\) 是离群点密度项。</p>
+<p>候选集合外的 \(\pi_{mn}=0\)，对应后验为零；候选集合内，图信号残差较小的点对获得较高概率。由于分母包含离群点项，一个源点也可以主要由离群点分量解释。</p>
+<p>实现通过GPU并行计算候选概率，并使用自定义CUDA核加速索引重排。</p>
+<h4 id="m步更新刚体位姿">M步：更新刚体位姿
+</h4><p>法向和高频描述依赖局部邻域。离群点、部分重叠或采样变化可能引入描述误差，因此文章在M步使用坐标残差更新位姿。</p>
+<p>取 \(\widetilde L_m\) 左上角的坐标块：</p>
+\[
+A_m=\widetilde L_m[1\!:\!3,1\!:\!3]
+\in\mathbb R^{3\times3}
+\]<p>固定当前对应概率与尺度后，忽略与位姿无关的常数，优化目标可整理为：</p>
+\[
+\min_{R\in SO(3),t}
+\sum_{n=1}^{N}\sum_{m=1}^{M}
+P_{mn}\,
+(y_m-Rx_n-t)^\top A_m(y_m-Rx_n-t)
+\]<p>每个目标点具有自己的方向性度量 \(A_m\)。文章在刚体变换的李群上采用Newton方法，计算6维位姿增量并通过指数映射更新变换；之后更新 \(\sigma^2\)，继续E步与M步迭代。</p>
+
+    <blockquote>
+        <p>九维信息用于判断对应关系，三维坐标用于直接估计刚体变换。法向和高频描述通过后验权重及图度量间接影响位姿更新。</p>
+
+    </blockquote>
+<p>这里的M步采用了坐标子目标，理解算法时应保留这一具体设计。论文将整体过程表述为EM框架，九维概率模型与坐标更新之间的严格似然关系需要结合补充推导进一步核对。</p>
+<hr>
+<h3 id="实验">实验
+</h3><h4 id="实验设置">实验设置
+</h4><p>论文在MATLAB环境、NVIDIA Titan Xp工作站上评估。全局图近邻数 \(K=10\)，局部属性统计使用的近邻数 \(k=10\)，\(\sigma_p,\sigma_n,\sigma_f\) 根据相应距离的中位数设置。</p>
+<p>\(k_{\mathrm{match}}\) 随实验设置变化：精度实验为100，鲁棒性和不变性实验为50，多视图与LiDAR实验为200。</p>
+<p>主要旋转精度指标为估计旋转与真实旋转之间的角度误差AngErr，越小越好。</p>
+<h4 id="dragon与armadillo精度和运行时间">Dragon与Armadillo：精度和运行时间
+</h4><p>文章使用不同视角下的部分重叠扫描，Dragon与Armadillo的视角差异约为24°与30°。大部分方法使用约20,000个点，LSG-CPD与ECMPR因内存限制使用约8,000个点。</p>
+<p>论文Table 1结果如下：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">Dragon角误差（°）</th>
+					<th style="text-align: right">Dragon时间（s）</th>
+					<th style="text-align: right">Armadillo角误差（°）</th>
+					<th style="text-align: right">Armadillo时间（s）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>GraphReg</td>
+					<td style="text-align: right">0.403</td>
+					<td style="text-align: right">4.30</td>
+					<td style="text-align: right">0.284</td>
+					<td style="text-align: right">5.63</td>
+			</tr>
+			<tr>
+					<td>CPD</td>
+					<td style="text-align: right">0.624</td>
+					<td style="text-align: right">96.57</td>
+					<td style="text-align: right">0.597</td>
+					<td style="text-align: right">97.20</td>
+			</tr>
+			<tr>
+					<td>LSG-CPD</td>
+					<td style="text-align: right">0.155</td>
+					<td style="text-align: right">0.862</td>
+					<td style="text-align: right">0.138</td>
+					<td style="text-align: right">0.758</td>
+			</tr>
+			<tr>
+					<td>FilterReg</td>
+					<td style="text-align: right">0.297</td>
+					<td style="text-align: right">20.05</td>
+					<td style="text-align: right">0.171</td>
+					<td style="text-align: right">13.51</td>
+			</tr>
+			<tr>
+					<td>TrICP</td>
+					<td style="text-align: right">0.800</td>
+					<td style="text-align: right"><strong>0.50</strong></td>
+					<td style="text-align: right">0.119</td>
+					<td style="text-align: right"><strong>0.55</strong></td>
+			</tr>
+			<tr>
+					<td>ECMPR</td>
+					<td style="text-align: right">0.203</td>
+					<td style="text-align: right">133.40</td>
+					<td style="text-align: right">0.173</td>
+					<td style="text-align: right">137.86</td>
+			</tr>
+			<tr>
+					<td>GraphCPD</td>
+					<td style="text-align: right"><strong>0.091</strong></td>
+					<td style="text-align: right">2.950</td>
+					<td style="text-align: right"><strong>0.095</strong></td>
+					<td style="text-align: right">2.846</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>GraphCPD在这两个样例上获得最低角误差，运行时间明显低于CPD、FilterReg和ECMPR。TrICP的时间最短，较低输入点数下的LSG-CPD也具有更短运行时间，因此速度结论需要结合处理规模和精度共同理解。</p>
+<h4 id="候选数量与局部图参数">候选数量与局部图参数
+</h4><p>论文Table 2考察了 \(k_{\mathrm{match}}\) 的作用，以Dragon为例：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>候选数</th>
+					<th style="text-align: right">角误差（°）</th>
+					<th style="text-align: right">时间（s）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>50</td>
+					<td style="text-align: right">0.242</td>
+					<td style="text-align: right">2.559</td>
+			</tr>
+			<tr>
+					<td>100</td>
+					<td style="text-align: right">0.091</td>
+					<td style="text-align: right">2.950</td>
+			</tr>
+			<tr>
+					<td>150</td>
+					<td style="text-align: right">0.089</td>
+					<td style="text-align: right">5.951</td>
+			</tr>
+			<tr>
+					<td>200</td>
+					<td style="text-align: right">0.074</td>
+					<td style="text-align: right">7.045</td>
+			</tr>
+			<tr>
+					<td>250</td>
+					<td style="text-align: right">0.073</td>
+					<td style="text-align: right">10.045</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>扩大候选集合有助于保留真实对应，同时增加概率计算量。从100增加到250时，误差进一步下降，时间增加较明显。</p>
+<p>局部近邻数 \(k\) 控制属性图统计范围。Table 3中，\(k=10\) 在两个数据上获得最佳精度；Dragon在 \(k=5,10,15,20\) 时的角误差分别为0.103°、0.091°、0.156°和0.362°。较大邻域可能混合不同局部结构。</p>
+<h4 id="消融实验">消融实验
+</h4><p>论文Table 4分别替换局部概率度量和全局图边权：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>配置</th>
+					<th style="text-align: right">Dragon角误差（°）</th>
+					<th style="text-align: right">Armadillo角误差（°）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>局部拉普拉斯密度模型 + 加权全局图</td>
+					<td style="text-align: right"><strong>0.091</strong></td>
+					<td style="text-align: right"><strong>0.095</strong></td>
+			</tr>
+			<tr>
+					<td>各向同性协方差 + 加权全局图</td>
+					<td style="text-align: right">0.1542</td>
+					<td style="text-align: right">0.3836</td>
+			</tr>
+			<tr>
+					<td>局部拉普拉斯密度模型 + 无权全局图</td>
+					<td style="text-align: right">0.232</td>
+					<td style="text-align: right">0.308</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>结果支持两项设计的作用：局部属性图改善残差度量，空间与法向共同定义的全局边权改善高频描述。</p>
+<h4 id="离群点与部分结构配准">离群点与部分结构配准
+</h4><p>鲁棒性实验使用约25,000点的Bunny，并加入不同数量的高斯离群点。论文将离群比例定义为离群点数量除以原始点数量。图示结果中，GraphCPD、LSG-CPD、FilterReg和GraphReg在所测范围内保持较低角误差。</p>
+<p>Utah Teapot实验将壶盖对齐到完整茶壶，壶身构成额外的非对应结构。Table 5中，GraphCPD的角误差为0.018°、时间为0.370 s；GraphReg为0.067°、2.344 s；CPD为0.657°、56.84 s。该样例体现了高频候选先验和软对应关系在部分结构配准中的作用。</p>
+<h4 id="多视图配准">多视图配准
+</h4><p>多视图实验对每个视角下采样至约15,000点，并在真实位姿附近加入扰动：旋转误差限制在 \(\pm0.05\) rad，平移误差限制在 \(\pm0.02\) m。</p>
+<p>Table 6中，GraphCPD在Dragon、Happy、Armadillo上的平均旋转误差分别为0.236°、0.264°和0.095°。它在Dragon与Armadillo上取得表中最好结果；Happy上FilterReg为0.230°。</p>
+<p>这些结果对应接近真实位姿的精配准设置。GraphCPD通过成对配准处理多视图，链式组合仍然存在误差累积问题。</p>
+<h4 id="低重叠室内与kitti">低重叠室内与KITTI
+</h4><p>室内实验使用<strong>3DMatch中的第一组扫描对</strong>。Table 7中，\(k_{\mathrm{match}}=100\) 时角误差为1.350°、耗时1.543 s；增加到500时，角误差降至0.947°、耗时2.562 s。这个结果属于单扫描对验证，覆盖范围有限。</p>
+<p>KITTI实验使用序列07，构造550组扫描对，每帧约5,000点。下表节选Table 8括号外的报告值：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">相对旋转误差（°）</th>
+					<th style="text-align: right">相对平移误差（m）</th>
+					<th style="text-align: right">绝对旋转误差（°）</th>
+					<th style="text-align: right">绝对平移误差（m）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>CPD</td>
+					<td style="text-align: right">0.388</td>
+					<td style="text-align: right">0.345</td>
+					<td style="text-align: right">19.296</td>
+					<td style="text-align: right">46.089</td>
+			</tr>
+			<tr>
+					<td>GraphReg</td>
+					<td style="text-align: right">0.171</td>
+					<td style="text-align: right">0.183</td>
+					<td style="text-align: right">14.293</td>
+					<td style="text-align: right">6.778</td>
+			</tr>
+			<tr>
+					<td>FilterReg</td>
+					<td style="text-align: right">0.146</td>
+					<td style="text-align: right"><strong>0.074</strong></td>
+					<td style="text-align: right">3.548</td>
+					<td style="text-align: right">9.470</td>
+			</tr>
+			<tr>
+					<td>GraphCPD</td>
+					<td style="text-align: right"><strong>0.0292</strong></td>
+					<td style="text-align: right">0.108</td>
+					<td style="text-align: right"><strong>1.831</strong></td>
+					<td style="text-align: right"><strong>3.744</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>GraphCPD在旋转和绝对轨迹误差上表现较好，FilterReg的相对平移误差更低。结果来自单一序列，应在这一测试范围内理解。</p>
+<hr>
+<h3 id="阅读思考">阅读思考
+</h3><p><strong>GraphCPD把局部几何信息同时用于搜索和概率建模。</strong> 高频描述先缩小候选范围，九维信号与属性图再决定对应关系的可信程度，两部分分别作用于计算量和匹配质量。</p>
+<p>局部属性图的设计值得关注。它把坐标、法向和高频分量视为关联属性，通过邻域统计构造每个点自己的度量。理解这个结构，有助于区分“在点之间建图提取特征”和“在属性之间建图定义残差”两种操作。</p>
+<p>方法中也存在明确的取舍。候选数过少时，真实匹配可能被先验置零，后续概率更新只能在保留的候选内进行；候选数增大时，匹配空间更充分，时间和存储开销相应增加。局部邻域、法向质量与属性尺度共同影响高频描述和图度量的可靠性。</p>
+<p>理论阅读上，需要区分刚体变换下的同一点集与真实的两次扫描。前者适合讨论严格不变性，后者还受到遮挡、离群点和采样变化影响。论文采用多候选软匹配，并在M步直接优化坐标，为这些实际误差保留了一定容忍空间。</p>
+<p>从当前实验看，GraphCPD在所测精配准样例中提供了较好的精度与效率组合。其全局收敛能力、完整低重叠基准表现，以及大范围跨传感器泛化，仍需要更多实验支持。</p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%82%B9%E4%BA%91/">点云</a>
+        
+            <a href="/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/">点云配准</a>
+        
+            <a href="/tags/%E5%9B%BE%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">图信号处理</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读十五" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_3cebe784583ead6e.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_3cebe784583ead6e.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_8491e86c8bc2ef64.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #3a3a2980 0%, #b9bfd5C0 100%);">
+            <h2 class="article-title">论文阅读十五</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读14" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_bb75b1b267b62144.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_bb75b1b267b62144.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_60b485cb7bdeb561.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #c0c1cc80 0%, #403238C0 100%);">
+            <h2 class="article-title">论文阅读14</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读13" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_ab5903c07e8cca7b.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_ab5903c07e8cca7b.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_bb61a31521dd77c9.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #3b5c9380 0%, #313645C0 100%);">
+            <h2 class="article-title">论文阅读13</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读EX" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_be5ce1758b233118.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_be5ce1758b233118.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_23518cd0b7dfd209.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #48454380 0%, #b6b8b8C0 100%);">
+            <h2 class="article-title">论文阅读EX</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读12" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_3b8652b4e02b0f7a.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #5a565380 0%, #bcb7aeC0 100%);">
+            <h2 class="article-title">论文阅读12</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>

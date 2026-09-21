@@ -5,17 +5,29 @@
         <description>Recent content in Tags on 0Ishtar0</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sun, 13 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 20 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>点云</title>
+            <link>http://localhost:1313/tags/%E7%82%B9%E4%BA%91/</link>
+            <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
+            <guid>http://localhost:1313/tags/%E7%82%B9%E4%BA%91/</guid>
+            <description></description>
+        </item><item>
             <title>点云配准</title>
             <link>http://localhost:1313/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</link>
-            <pubDate>Sun, 13 Sep 2026 00:00:00 +0000</pubDate>
+            <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
             <guid>http://localhost:1313/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</guid>
             <description></description>
         </item><item>
             <title>论文阅读</title>
             <link>http://localhost:1313/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</link>
-            <pubDate>Sun, 13 Sep 2026 00:00:00 +0000</pubDate>
+            <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
             <guid>http://localhost:1313/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</guid>
+            <description></description>
+        </item><item>
+            <title>图信号处理</title>
+            <link>http://localhost:1313/tags/%E5%9B%BE%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/</link>
+            <pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate>
+            <guid>http://localhost:1313/tags/%E5%9B%BE%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/</guid>
             <description></description>
         </item><item>
             <title>Zero-Shot</title>
@@ -70,36 +82,6 @@
             <link>http://localhost:1313/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</link>
             <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
             <guid>http://localhost:1313/tags/%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD/</guid>
-            <description></description>
-        </item><item>
-            <title>Css</title>
-            <link>http://localhost:1313/tags/css/</link>
-            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1313/tags/css/</guid>
-            <description></description>
-        </item><item>
-            <title>Example Tag</title>
-            <link>http://localhost:1313/tags/example-tag/</link>
-            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1313/tags/example-tag/</guid>
-            <description></description>
-        </item><item>
-            <title>Html</title>
-            <link>http://localhost:1313/tags/html/</link>
-            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1313/tags/html/</guid>
-            <description></description>
-        </item><item>
-            <title>Markdown</title>
-            <link>http://localhost:1313/tags/markdown/</link>
-            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1313/tags/markdown/</guid>
-            <description></description>
-        </item><item>
-            <title>Themes</title>
-            <link>http://localhost:1313/tags/themes/</link>
-            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1313/tags/themes/</guid>
             <description></description>
         </item></channel>
 </rss>
