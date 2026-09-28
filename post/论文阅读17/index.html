@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="通过参考形状联合学习物体形变与位姿，通过流匹配生成多视图点云的配准结果">
+<title>论文阅读17</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读17">
+<meta property='og:description' content="通过参考形状联合学习物体形变与位姿，通过流匹配生成多视图点云的配准结果">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='位姿估计' /><meta property='article:tag' content='点云配准' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-09-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-09-27T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="论文阅读17">
+<meta name="twitter:description" content="通过参考形状联合学习物体形变与位姿，通过流匹配生成多视图点云的配准结果">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#priorpose-reference-guided-joint-deformation-and-alignment-for-category-level-object-pose-estimation">PriorPose: Reference-Guided Joint Deformation and Alignment for Category-Level Object Pose Estimation</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍">背景介绍</a>
+          <ol>
+            <li><a href="#类别级位姿与nocs">类别级位姿与NOCS</a></li>
+            <li><a href="#类别模板与实例形状">类别模板与实例形状</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#1-将观测与模板编码为两组token">1. 将观测与模板编码为两组token</a></li>
+            <li><a href="#2-参考引导的种子transformer">2. 参考引导的种子Transformer</a></li>
+            <li><a href="#3-用几何质量分数调节信息融合">3. 用几何质量分数调节信息融合</a></li>
+            <li><a href="#4-共享特征下的联合预测">4. 共享特征下的联合预测</a></li>
+          </ol>
+        </li>
+        <li><a href="#训练目标">训练目标</a>
+          <ol>
+            <li><a href="#对应位姿与完整形状">对应、位姿与完整形状</a></li>
+            <li><a href="#标准空间一致性">标准空间一致性</a></li>
+            <li><a href="#相机空间一致性">相机空间一致性</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#设置与指标">设置与指标</a></li>
+            <li><a href="#标准数据集结果">标准数据集结果</a></li>
+            <li><a href="#消融实验">消融实验</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考">阅读思考</a></li>
+      </ol>
+    </li>
+    <li><a href="#register-any-point-scaling-3d-point-cloud-registration-by-flow-matching">Register Any Point: Scaling 3D Point Cloud Registration by Flow Matching</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#背景介绍-1">背景介绍</a>
+          <ol>
+            <li><a href="#多视图配准">多视图配准</a></li>
+            <li><a href="#流匹配">流匹配</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#1-用关键点与局部描述子压缩输入">1. 用关键点与局部描述子压缩输入</a></li>
+            <li><a href="#2-对输入与训练目标进行坐标规范化">2. 对输入与训练目标进行坐标规范化</a></li>
+            <li><a href="#3-联合建模视图内部结构与跨视图关系">3. 联合建模视图内部结构与跨视图关系</a></li>
+            <li><a href="#4-从噪声生成配准后的关键点">4. 从噪声生成配准后的关键点</a></li>
+            <li><a href="#5-在采样中加入刚性约束">5. 在采样中加入刚性约束</a></li>
+            <li><a href="#6-恢复完整点云的位姿">6. 恢复完整点云的位姿</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#数据与训练设置">数据与训练设置</a></li>
+            <li><a href="#两视图配准">两视图配准</a></li>
+            <li><a href="#跨域多视图配准">跨域多视图配准</a></li>
+            <li><a href="#消融实验-1">消融实验</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考-1">阅读思考</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/">论文阅读17</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            通过参考形状联合学习物体形变与位姿，通过流匹配生成多视图点云的配准结果
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-09-27T00:00:00Z'>2026-09-27</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#priorpose-reference-guided-joint-deformation-and-alignment-for-category-level-object-pose-estimation">PriorPose: Reference-Guided Joint Deformation and Alignment for Category-Level Object Pose Estimation</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍">背景介绍</a>
+          <ol>
+            <li><a href="#类别级位姿与nocs">类别级位姿与NOCS</a></li>
+            <li><a href="#类别模板与实例形状">类别模板与实例形状</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#1-将观测与模板编码为两组token">1. 将观测与模板编码为两组token</a></li>
+            <li><a href="#2-参考引导的种子transformer">2. 参考引导的种子Transformer</a></li>
+            <li><a href="#3-用几何质量分数调节信息融合">3. 用几何质量分数调节信息融合</a></li>
+            <li><a href="#4-共享特征下的联合预测">4. 共享特征下的联合预测</a></li>
+          </ol>
+        </li>
+        <li><a href="#训练目标">训练目标</a>
+          <ol>
+            <li><a href="#对应位姿与完整形状">对应、位姿与完整形状</a></li>
+            <li><a href="#标准空间一致性">标准空间一致性</a></li>
+            <li><a href="#相机空间一致性">相机空间一致性</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#设置与指标">设置与指标</a></li>
+            <li><a href="#标准数据集结果">标准数据集结果</a></li>
+            <li><a href="#消融实验">消融实验</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考">阅读思考</a></li>
+      </ol>
+    </li>
+    <li><a href="#register-any-point-scaling-3d-point-cloud-registration-by-flow-matching">Register Any Point: Scaling 3D Point Cloud Registration by Flow Matching</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#背景介绍-1">背景介绍</a>
+          <ol>
+            <li><a href="#多视图配准">多视图配准</a></li>
+            <li><a href="#流匹配">流匹配</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#1-用关键点与局部描述子压缩输入">1. 用关键点与局部描述子压缩输入</a></li>
+            <li><a href="#2-对输入与训练目标进行坐标规范化">2. 对输入与训练目标进行坐标规范化</a></li>
+            <li><a href="#3-联合建模视图内部结构与跨视图关系">3. 联合建模视图内部结构与跨视图关系</a></li>
+            <li><a href="#4-从噪声生成配准后的关键点">4. 从噪声生成配准后的关键点</a></li>
+            <li><a href="#5-在采样中加入刚性约束">5. 在采样中加入刚性约束</a></li>
+            <li><a href="#6-恢复完整点云的位姿">6. 恢复完整点云的位姿</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#数据与训练设置">数据与训练设置</a></li>
+            <li><a href="#两视图配准">两视图配准</a></li>
+            <li><a href="#跨域多视图配准">跨域多视图配准</a></li>
+            <li><a href="#消融实验-1">消融实验</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考-1">阅读思考</a></li>
+      </ol>
+    </li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><ol>
+<li><a class="link" href="https://arxiv.org/abs/2609.16727"  target="_blank" rel="noopener"
+    >PriorPose: Reference-Guided Joint Deformation and Alignment for Category-Level Object Pose Estimation【ECCV 2026】</a>，Feng Wu组，中科大。</li>
+<li><a class="link" href="https://arxiv.org/abs/2512.01850"  target="_blank" rel="noopener"
+    >Register Any Point: Scaling 3D Point Cloud Registration by Flow Matching【ECCV 2026 Oral】</a>，Cyrill Stachniss组，德国波恩大学。</li>
+</ol>
+<hr>
+<h2 id="priorpose-reference-guided-joint-deformation-and-alignment-for-category-level-object-pose-estimation">PriorPose: Reference-Guided Joint Deformation and Alignment for Category-Level Object Pose Estimation
+</h2><h3 id="研究动机">研究动机
+</h3><p>类别级物体位姿估计需要从RGB-D图像中恢复物体的旋转、平移和尺寸，测试对象可以是训练时未见过的同类别实例。</p>
+<p>基于对应关系的方法通常为每个观测点预测标准空间坐标（NOCS），再根据观测点与标准坐标之间的关系估计位姿。直接从局部特征回归标准坐标时，模型需要把类别的标准朝向和典型形状记在参数中。相似局部结构在不同实例中可能对应不同的标准坐标，预测容易受到训练集平均形状的影响。</p>
+<p>引入类别模板后，标准坐标有了明确的参考。已有方法常采用“先形变模板，再建立对应并估计位姿”的串行流程。局部观测中的缺失区域使模板形变具有较大歧义，形变误差随后传递到对应关系和位姿估计。</p>
+<p>文章的关键观察是：<strong>模板形变与位姿对齐都依赖对应关系，两者可以在共享特征中共同学习。</strong> 可见点的标准坐标帮助确定实例的局部结构，完整形状的预测又为这些坐标提供整体约束，解决此前二者相互掣肘的问题</p>
+<p>本文目标：以类别平均形状作为显式参考，在一次前向传播中联合预测标准坐标、模板形变和位姿，并通过形状一致性把这些输出联系起来。</p>
+<hr>
+<h3 id="背景介绍">背景介绍
+</h3><h4 id="类别级位姿与nocs">类别级位姿与NOCS
+</h4><p>NOCS是 <strong>Normalized Object Coordinate Space，归一化物体坐标空间</strong>。它为同一类别的实例提供统一的标准朝向和尺度约定。</p>
+<p>设相机坐标系中的观测点为 \(p_i\)，对应的NOCS坐标为 \(q_i\)。采用列向量记法，本文的坐标变换可以写为：</p>
+\[
+p_i=aRq_i+t,
+\qquad a=\|s\|_2
+\]<p>其中 \(R\in\mathrm{SO}(3)\) 表示旋转，\(t\in\mathbb R^3\) 表示平移，\(s\in\mathbb R^3\) 表示物体三维尺寸。论文使用尺寸向量的模长 \(a\) 作为标准空间到相机空间的整体尺度。</p>
+<p>给定真实位姿，可以反算标准坐标：</p>
+\[
+q_i^{\mathrm{gt}}
+=\frac{1}{\|s_{\mathrm{gt}}\|_2}
+R_{\mathrm{gt}}^\top(p_i-t_{\mathrm{gt}})
+\]<h4 id="类别模板与实例形状">类别模板与实例形状
+</h4><p>类别先验 \(P^{\mathrm{prior}}\) 是标准坐标系中的平均形状，提供大致的部件布局和朝向。当前实例的完整形状由模板加上逐点位移得到：</p>
+\[
+P^{\mathrm{model}}=P^{\mathrm{prior}}+\hat\Delta
+\]<p>这里 \(\hat\Delta\) 描述类别平均形状向当前实例的形变。模板负责提供稳定的坐标参考，形变负责表达实例之间的差异。</p>
+<hr>
+<h3 id="方法">方法
+</h3><p><img alt="PriorPose整体流程" class="gallery-image" data-flex-basis="426px" data-flex-grow="177" height="900" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/image/index/priorpose-framework.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/image/index/priorpose-framework_hu_4e452f5772f25608.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/image/index/priorpose-framework.png 1600w" width="1600"></p>
+<p>整体流程可以概括为：</p>
+\[
+\text{RGB-D观测与类别模板}
+\rightarrow\text{双分支特征提取}
+\rightarrow\text{参考引导的种子注意力融合}
+\rightarrow\text{NOCS与模板形变预测}
+\rightarrow\text{位姿与尺寸回归}
+\]<h4 id="1-将观测与模板编码为两组token">1. 将观测与模板编码为两组token
+</h4><p>首先通过实例分割得到物体区域，将深度反投影为观测点云 \(P^{\mathrm{obs}}\)。观测分支融合三类信息：</p>
+<ul>
+<li><strong>几何特征</strong>：使用PointNet++提取局部与整体点云结构。</li>
+<li><strong>图像特征</strong>：使用DINOv2提取RGB语义特征，再通过相机投影关联到观测点。</li>
+<li><strong>坐标编码</strong>：使用MLP编码点的三维位置。</li>
+</ul>
+<p>观测token写为：</p>
+\[
+T^{\mathrm{obs}}
+=\operatorname{Proj}
+\left([F^{\mathrm{geo}}\|F^{\mathrm{img}}\|F^{\mathrm{pos}}]\right)
+\]<p>其中 \(\|\) 表示通道拼接，\(\operatorname{Proj}\) 将不同来源的特征映射到统一维度。</p>
+<p>模板分支为每个先验点配置可学习的嵌入，并结合模板坐标编码：</p>
+\[
+T^{\mathrm{prior}}
+=\operatorname{Proj}
+\left([E^{\mathrm{learn}}\|\operatorname{MLP}(P^{\mathrm{prior}})]\right)
+\]<p>两组token再加入来源标记，区分观测分支与模板分支。观测提供当前实例的外观和局部几何，模板提供类别的标准结构。</p>
+<h4 id="2-参考引导的种子transformer">2. 参考引导的种子Transformer
+</h4><p>直接让所有点两两计算注意力，计算量随点数平方增长。PriorPose分别在观测和模板上进行最远点采样，选取少量代表点作为种子点，并取出相应token组成种子池。</p>
+<p>每个Transformer块包含两个主要操作：</p>
+<ol>
+<li>种子之间进行自注意力，汇集两组点云的上下文。</li>
+<li>全部token以种子作为键和值，通过token-to-seed注意力更新自身特征。</li>
+</ol>
+<p>设总token数为 \(L\)，种子数为 \(K\)，且 \(K\ll L\)。主要注意力开销约为 \(O(LK+K^2)\)。各层复用同一组种子索引，持续更新种子特征。</p>
+<p>文章使用带加性掩码的注意力：</p>
+\[
+\operatorname{Attn}(Q,K,V;M)
+=\operatorname{softmax}
+\left(\frac{QK^\top}{\sqrt d}+M\right)V
+\]<p>掩码包含局部邻域约束与几何质量偏置。</p>
+<p>对一个观测token，同源连接只保留距离最近的 \(k\) 个观测种子，跨源连接保留全部模板种子。模板token采用对称设置。</p>
+<p>这与两组输入的坐标关系有关：观测点处于相机空间，模板点处于标准空间，位姿未知时，跨分支坐标距离缺乏直接的几何意义。分支内部的距离仍能描述局部结构，因此适合用来限制同源注意力范围。</p>
+<h4 id="3-用几何质量分数调节信息融合">3. 用几何质量分数调节信息融合
+</h4><p>深度离群点可能产生不可靠的特征。文章根据一个点与同源近邻种子之间的平均距离，构造无需学习参数的几何质量分数：</p>
+\[
+d_i=\frac{1}{k}\sum_{u\in\mathcal N_k(i)}\|p_i-z_u\|_2,
+\qquad
+\sigma=\frac{1}{N}\sum_i d_i
+\]\[
+q_i=\exp\left[-\frac12\left(\frac{d_i}{\sigma}\right)^2\right],
+\qquad
+\hat q_i=\operatorname{clip}
+\left(\frac{q_i}{\frac1N\sum_j q_j+\epsilon},0,1\right)
+\]<p>其中 \(z_u\) 是同源种子的坐标。远离周围种子的点得到较低分数，其token先乘以 \(\hat q_i\)，降低对后续融合的影响。注意力logit还加入：</p>
+\[
+M^{\mathrm{geo}}(i,u)=\gamma(\hat q_i+\hat q_u)
+\]<p>最终掩码为 \(M=M^{\mathrm{knn}}+M^{\mathrm{geo}}\)。\(M^{\mathrm{knn}}\) 在允许连接处取0，在禁止连接处取 \(-\infty\)。用于抑制孤立、稀疏区域的影响。</p>
+<h4 id="4-共享特征下的联合预测">4. 共享特征下的联合预测
+</h4><p>融合后的观测特征用于预测每个可见点的NOCS坐标：</p>
+\[
+P^{\mathrm{nocs}}=\operatorname{MLP}_{\mathrm{nocs}}(F^{\mathrm{obs}})
+\]<p>融合后的模板特征用于预测逐点形变：</p>
+\[
+\hat\Delta=\operatorname{MLP}_{\mathrm{def}}(F^{\mathrm{prior}}),
+\qquad
+P^{\mathrm{model}}=P^{\mathrm{prior}}+\hat\Delta
+\]<p>这两个输出位于同一个标准空间：\(P^{\mathrm{nocs}}\) 描述当前可见部分，\(P^{\mathrm{model}}\) 描述补全后的整体实例。</p>
+<p>随后，将观测点、预测NOCS和观测特征拼接，交给深度位姿估计头：</p>
+\[
+f_{\mathrm{pose}}
+=\operatorname{concat}
+[P^{\mathrm{nocs}},P^{\mathrm{obs}},F^{\mathrm{obs}}],
+\qquad
+(R,t,s)=\operatorname{Head}_{\mathrm{pose}}(f_{\mathrm{pose}})
+\]<p>因此，位姿预测利用了显式的观测—标准坐标对应关系，并通过可学习的回归头输出旋转、平移与尺寸。</p>
+<hr>
+<h3 id="训练目标">训练目标
+</h3><p>PriorPose使用五部分损失：</p>
+\[
+\mathcal L
+=\lambda_1\mathcal L_{\mathrm{nocs}}
++\lambda_2\mathcal L_{\mathrm{pose}}
++\lambda_3\mathcal L_{\mathrm{rec}}
++\lambda_4\mathcal L_{\mathrm{can}}
++\lambda_5\mathcal L_{\mathrm{cam}}
+\]<h4 id="对应位姿与完整形状">对应、位姿与完整形状
+</h4><p>\(\mathcal L_{\mathrm{nocs}}\) 使用逐点Smooth-L1监督预测标准坐标，并根据可靠性分数加权。记 \(e_i\) 为第 \(i\) 个点三个坐标的平均Smooth-L1误差，\(r_i\) 为预测可靠性，则：</p>
+\[
+w_i=\frac{\operatorname{sg}(r_i)}
+{\frac1N\sum_j\operatorname{sg}(r_j)+\epsilon},
+\qquad
+\mathcal L_{\mathrm{nocs}}
+=\frac{\sum_iw_ie_i}{\sum_iw_i+\epsilon}
+\]<p>\(\operatorname{sg}\) 表示停止梯度。这使当前损失主要通过坐标误差更新NOCS预测，可靠性分支的校准由另行设计的训练项处理。这里的预测可靠性 \(r_i\) 与前面的几何质量分数 \(\hat q_i\) 分别服务于损失加权和注意力融合。</p>
+<p>位姿损失考虑类别对称性：</p>
+\[
+\mathcal L_{\mathrm{pose}}
+=\lambda_R\min_{R_s\in\mathcal R_s}
+\|R_{\mathrm{gt}}R_s-R\|_F
++\lambda_t\|t-t_{\mathrm{gt}}\|_2
++\lambda_s\|s-s_{\mathrm{gt}}\|_2
+\]<p>其中 \(\mathcal R_s\) 是对称旋转集合。对称等价的朝向通过最小误差进行评价，避免给几何上等价的预测施加矛盾监督。</p>
+<p>完整形状的重建损失为：</p>
+\[
+\mathcal L_{\mathrm{rec}}
+=D_{\mathrm{CD}}(P^{\mathrm{model}},P^{\mathrm{model}}_{\mathrm{gt}})
+\]<p>这里 \(D_{\mathrm{CD}}\) 为平方Chamfer距离，可按双向平均最近邻距离理解：</p>
+\[
+D_{\mathrm{CD}}(A,B)
+=\frac1{|A|}\sum_{a\in A}\min_{b\in B}\|a-b\|_2^2
++\frac1{|B|}\sum_{b\in B}\min_{a\in A}\|b-a\|_2^2
+\]<h4 id="标准空间一致性">标准空间一致性
+</h4><p>\(P^{\mathrm{nocs}}\) 与 \(P^{\mathrm{model}}\) 描述同一实例。文章先在训练时根据真实标准模型过滤明显偏离表面的NOCS预测，再计算：</p>
+\[
+\mathcal L_{\mathrm{can}}
+=\frac1{|P^{\mathrm{nocs}}_{\mathrm{flt}}|}
+\sum_{a\in P^{\mathrm{nocs}}_{\mathrm{flt}}}
+\min_{b\in P^{\mathrm{model}}}\|a-b\|_2^2
+\]<p>这个单向距离要求可见点的标准坐标贴近重建表面。完整模型还包含背面和遮挡区域，采用从局部到完整的距离，可以保留这些区域的补全空间。</p>
+<h4 id="相机空间一致性">相机空间一致性
+</h4><p>将预测标准模型按预测位姿放回相机坐标系。采用点集记法：</p>
+\[
+\mathcal T(P^{\mathrm{model}})
+=\{\|s\|_2Rb+t\mid b\in P^{\mathrm{model}}\}
+\]<p>相机空间一致性损失为：</p>
+\[
+\mathcal L_{\mathrm{cam}}
+=\frac1{|P^{\mathrm{obs}}_{\mathrm{flt}}|}
+\sum_{a\in P^{\mathrm{obs}}_{\mathrm{flt}}}
+\min_{b\in\mathcal T(P^{\mathrm{model}})}\|a-b\|_2^2
+\]<p>其中 \(P^{\mathrm{obs}}_{\mathrm{flt}}\) 是训练时利用真实模型与真实位姿过滤后的观测点集。该损失将形变、旋转、平移和尺度连接起来：预测形状经过预测变换后，应当覆盖当前观测到的物体表面。</p>
+<p>两项一致性约束分别作用于标准空间和相机空间。前者连接对应关系与形状，后者连接形状与位姿，使三个预测分支在几何上相互约束。训练中的过滤使用真实标注，推理流程依赖输入观测、类别模板与训练好的网络。</p>
+<hr>
+<h3 id="实验">实验
+</h3><h4 id="设置与指标">设置与指标
+</h4><p>文章在CAMERA25、REAL275、HouseCat6D上评估，并补充Omni6DPose、PACE的大类别实验及Wild6D跨数据集实验。</p>
+<p>默认输入包含1024个观测点、224×224的RGB裁剪图和512个模板点。融合网络使用6个Transformer块、256维特征和4个注意力头；观测与模板分别选择96、64个种子，局部邻域大小为32。</p>
+<p>位姿指标使用不同旋转与平移阈值下的mAP。例如，\(5^\circ 2\mathrm{cm}\) 要求旋转误差与平移误差同时满足相应阈值。3D IoU mAP评估预测三维包围盒与真实包围盒的重叠情况。</p>
+<h4 id="标准数据集结果">标准数据集结果
+</h4><p>下面摘录原文Table 1、Table 2，数值均为mAP（%）：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>数据集</th>
+					<th>方法</th>
+					<th style="text-align: right">\(5^\circ 2\mathrm{cm}\)</th>
+					<th style="text-align: right">\(5^\circ 5\mathrm{cm}\)</th>
+					<th style="text-align: right">\(10^\circ 5\mathrm{cm}\)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>REAL275</td>
+					<td>AG-Pose</td>
+					<td style="text-align: right">54.7</td>
+					<td style="text-align: right">61.7</td>
+					<td style="text-align: right">83.1</td>
+			</tr>
+			<tr>
+					<td>REAL275</td>
+					<td>SpotPose</td>
+					<td style="text-align: right">59.7</td>
+					<td style="text-align: right">64.8</td>
+					<td style="text-align: right">88.2</td>
+			</tr>
+			<tr>
+					<td>REAL275</td>
+					<td>PriorPose</td>
+					<td style="text-align: right"><strong>61.8</strong></td>
+					<td style="text-align: right"><strong>68.2</strong></td>
+					<td style="text-align: right"><strong>88.9</strong></td>
+			</tr>
+			<tr>
+					<td>CAMERA25</td>
+					<td>SpotPose</td>
+					<td style="text-align: right">80.4</td>
+					<td style="text-align: right">83.8</td>
+					<td style="text-align: right">92.2</td>
+			</tr>
+			<tr>
+					<td>CAMERA25</td>
+					<td>PriorPose</td>
+					<td style="text-align: right"><strong>81.1</strong></td>
+					<td style="text-align: right"><strong>85.0</strong></td>
+					<td style="text-align: right"><strong>92.6</strong></td>
+			</tr>
+			<tr>
+					<td>HouseCat6D</td>
+					<td>GCE-Pose</td>
+					<td style="text-align: right">24.8</td>
+					<td style="text-align: right">25.7</td>
+					<td style="text-align: right"><strong>58.4</strong></td>
+			</tr>
+			<tr>
+					<td>HouseCat6D</td>
+					<td>PriorPose</td>
+					<td style="text-align: right"><strong>26.5</strong></td>
+					<td style="text-align: right"><strong>27.3</strong></td>
+					<td style="text-align: right">58.0</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>PriorPose在REAL275的两个严格阈值下，较SpotPose提高2.1和3.4个百分点。HouseCat6D包含更强的遮挡与类内变化，PriorPose在严格位姿指标上取得提升，较宽松的 \(10^\circ 5\mathrm{cm}\) 指标由GCE-Pose保持小幅优势。不同阈值反映了方法在精细对齐与整体成功率上的具体表现。</p>
+<p>在Wild6D实验中，模型仅使用NOCS训练，直接跨数据集测试。PriorPose的 \(5^\circ 2\mathrm{cm}\) mAP为43.1%，AG-Pose为41.8%；IoU75分别为62.4%和57.0%。这里的零样本指跨数据集测试阶段没有进行微调。</p>
+<h4 id="消融实验">消融实验
+</h4><p>REAL275上的受控消融结果如下，摘自原文Table 5：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>设置</th>
+					<th style="text-align: right">\(5^\circ 2\mathrm{cm}\)</th>
+					<th style="text-align: right">\(5^\circ 5\mathrm{cm}\)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>移除类别先验</td>
+					<td style="text-align: right">57.2</td>
+					<td style="text-align: right">64.4</td>
+			</tr>
+			<tr>
+					<td>串行形变后对齐</td>
+					<td style="text-align: right">58.1</td>
+					<td style="text-align: right">64.5</td>
+			</tr>
+			<tr>
+					<td>用类别高斯分布替代结构化模板</td>
+					<td style="text-align: right">59.9</td>
+					<td style="text-align: right">65.3</td>
+			</tr>
+			<tr>
+					<td>联合预测，移除形状一致性</td>
+					<td style="text-align: right">60.2</td>
+					<td style="text-align: right">65.5</td>
+			</tr>
+			<tr>
+					<td>完整模型</td>
+					<td style="text-align: right"><strong>61.8</strong></td>
+					<td style="text-align: right"><strong>68.2</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>串行与联合设置的比较体现了共享预测的作用；高斯先验与结构化模板的比较体现了部件布局的价值；加入形状一致性后，两个严格指标继续提高。实验支持“显式参考、联合预测、几何一致性”这三个设计共同发挥作用。</p>
+<hr>
+<h3 id="阅读思考">阅读思考
+</h3><p><strong>显式参考让标准坐标具有可感知的几何依据。</strong> 类别模板提供朝向和部件布局，网络可以结合当前观测解释局部特征，从而减轻参数对训练集典型形状的依赖。类别级任务仍需要相应的类别参考，跨类别共享权重的结论也应结合论文评估的RGB-D协议理解。</p>
+<p><strong>单向一致性损失适合局部观测与完整形状之间的关系。</strong> 标准空间中的可见点、相机空间中的深度观测都只覆盖物体的一部分。从这些点出发查询完整模型的最近邻，能够约束观测区域，同时容纳合理的形状补全。</p>
+<p><strong>联合学习的收益来自分支之间的约束。</strong> 模板形变、NOCS与位姿共享特征，并通过两个空间中的一致性连接起来，模型的训练信号因此超出了各分支的独立回归误差。</p>
+<p>方法仍依赖实例分割、深度质量与类别先验。严重遮挡导致关键部件消失时，形状和朝向的歧义依然存在，原文也展示了重度杂乱与遮挡下的失败案例。平均模板与当前实例差异较大时，形变预测的质量同样值得关注。</p>
+<hr>
+<h2 id="register-any-point-scaling-3d-point-cloud-registration-by-flow-matching">Register Any Point: Scaling 3D Point Cloud Registration by Flow Matching
+</h2><h3 id="研究动机-1">研究动机
+</h3><p>多视图点云配准需要将若干片来自不同位置的扫描放入统一坐标系。每片点云只包含场景的一部分，视图之间的重叠关系、密度和初始朝向都可能不同。</p>
+<p>常见流程先完成成对配准，再通过位姿图优化整合各个相对变换。随着视图数量增长，需要处理的候选点云对增多；局部配准产生的错误还可能影响后续全局优化。单独处理一对点云时，其他视图提供的场景信息也难以直接参与当前判断。</p>
+<p>RAP将所有输入视图共同作为条件，学习它们在同一坐标系中的关键点位置。生成结果保留每个点的视图归属和点索引，因此可以从输入关键点与生成关键点之间恢复各视图的刚体变换。</p>
+<p>文章的核心思路是：通过条件生成直接组织多视图的空间布局，再从生成结果中求出每片点云的位姿。</p>
+<hr>
+<h3 id="背景介绍-1">背景介绍
+</h3><h4 id="多视图配准">多视图配准
+</h4><p>给定 \(N\geq2\) 片无初始位姿的点云：</p>
+\[
+\mathcal P=\{P_i\}_{i=1}^N,
+\qquad P_i\in\mathbb R^{3\times M_i}
+\]<p>目标是估计每个视图的刚体变换：</p>
+\[
+P_i^r=R_iP_i+t_i\mathbf1^\top,
+\qquad (R_i,t_i)\in\mathrm{SE}(3)
+\]<p>本文按列存储点，\(\mathbf1\) 用于将平移广播到所有点。所有 \(P_i^r\) 最终位于同一个全局坐标系。</p>
+<p>方法假设这些点云来自同一场景，并可通过重叠关系形成连通整体。例如，视图A与B重叠，B与C重叠，即可通过B把三者联系起来。每一对视图之间都具有直接重叠的要求可以放宽为整体连通。</p>
+<h4 id="流匹配">流匹配
+</h4><p>Flow Matching，流匹配，通过学习随时间变化的速度场，把简单分布中的样本逐步输送到目标数据分布。</p>
+<p>RAP将配准后关键点的集合记为 \(X(0)\)，高斯噪声记为 \(X(1)\)：</p>
+\[
+X(1)\sim\mathcal N(0,I),
+\qquad
+X(t)=(1-t)X(0)+tX(1)
+\]<p>这里 <strong>\(t=0\) 对应干净配准结果，\(t=1\) 对应噪声</strong>。线性路径对时间的导数为：</p>
+\[
+\frac{\mathrm dX(t)}{\mathrm dt}=X(1)-X(0)
+\]<p>网络学习在当前状态与输入条件下预测这个速度，推理时沿时间减小的方向积分，从噪声得到配准后的点云。</p>
+<hr>
+<h3 id="方法-1">方法
+</h3><p><img alt="RAP整体流程，原论文Figure 2" class="gallery-image" data-flex-basis="468px" data-flex-grow="195" height="456" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/image/index/rap-framework.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/image/index/rap-framework_hu_4bf0329b75fdd58a.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/image/index/rap-framework.png 890w" width="890"></p>
+<p>整体流程为：</p>
+\[
+\text{多视图点云}
+\rightarrow\text{关键点与局部描述子}
+\rightarrow\text{坐标规范化}
+\rightarrow\text{条件流匹配生成}
+\rightarrow\text{SVD恢复各视图位姿}
+\rightarrow\text{完整点云配准}
+\]<h4 id="1-用关键点与局部描述子压缩输入">1. 用关键点与局部描述子压缩输入
+</h4><p>直接生成大规模扫描中的全部点，计算开销很高。RAP先进行体素下采样，再用最远点采样选择关键点：</p>
+\[
+Q_i\in\mathbb R^{3\times K_i}
+\]<p>关键点数量根据场景覆盖情况调整，典型每个视图包含约200至5000个关键点。</p>
+<p>对每个关键点，方法通过球邻域查询收集局部点集，再使用预训练MiniSpinNet提取32维局部描述子。该编码器在3DMatch上预训练，提供旋转不变的局部几何表征。</p>
+<p>关键点坐标描述视图内部的空间布局，描述子帮助模型识别局部几何结构。两者共同构成生成过程的条件。</p>
+<h4 id="2-对输入与训练目标进行坐标规范化">2. 对输入与训练目标进行坐标规范化
+</h4><p>物体扫描、室内房间和室外地图的尺度相差很大。RAP对每个输入视图分别去中心化，再使用同一个尺度因子缩放全部视图。</p>
+<p>尺度因子取点数最多的视图包围盒的最长边。随后为各视图施加随机旋转，得到规范化关键点 \(\bar Q_i\)，并记录相应的相似变换 \(\bar T_i\)。</p>
+<p>共同缩放保留了视图之间的相对尺寸关系。去中心化与旋转处理则减少输入原始坐标系对学习的影响。</p>
+<p>训练目标由真实位姿下的配准关键点构成：先合并、整体去中心化，再使用参考视图对应的旋转和同一尺度因子规范化，得到 \(X(0)\)。输入条件与目标因此具有一致的尺度约定。</p>
+<h4 id="3-联合建模视图内部结构与跨视图关系">3. 联合建模视图内部结构与跨视图关系
+</h4><p>网络使用Diffusion Transformer结构，以规范化坐标的位置编码和局部描述子构造条件：</p>
+\[
+C=f_{\mathrm{emb}}(\bar Q,F)
+\]<p>其中 \(\bar Q\) 与 \(F\) 分别汇集所有视图的关键点与描述子。</p>
+<p>Transformer交替执行两种注意力：</p>
+<ul>
+<li><strong>视图内注意力</strong>：聚合单个视图内部的几何结构。</li>
+<li><strong>全局注意力</strong>：让所有视图的点token交换信息，联合推断空间关系。</li>
+</ul>
+<p>默认模型包含10个交替注意力块，隐藏维度为512，使用8个注意力头，总参数量约7300万。</p>
+<p>网络保留点的视图分组，同时省略固定的视图编号条件。这样的组织方式支持可变视图数量，并允许测试时处理超过训练视图数量的输入。</p>
+<h4 id="4-从噪声生成配准后的关键点">4. 从噪声生成配准后的关键点
+</h4><p>网络预测条件速度场：</p>
+\[
+V_\theta(t,X(t)\mid C)
+\]<p>根据前面的线性路径，其条件流匹配目标可以写为：</p>
+\[
+\mathcal L_{\mathrm{FM}}
+=\mathbb E_{X(0),X(1),t}
+\left[
+\left\|
+V_\theta(t,X(t)\mid C)-[X(1)-X(0)]
+\right\|_F^2
+\right]
+\]<p>训练样本提供真实配准关键点；噪声与时间步随机采样。网络学习当前噪声状态应沿什么方向变化，输入点云的几何与跨视图关系则通过条件 \(C\) 持续参与预测。</p>
+<p>基础推理过程使用反向时间的Euler积分：</p>
+\[
+\hat X(t-\Delta t)
+=\hat X(t)-\Delta t\,
+V_\theta(t,\hat X(t)\mid C)
+\]<p>默认使用10个均匀积分步，即 \(\Delta t=0.1\)。论文中的单阶段强调多视图联合求解的整体流程，内部仍包含多次速度场计算。</p>
+<p>生成输出中的每个点都对应一个输入关键点。这里的对应来自token索引，因此最终恢复位姿时，可以直接使用同一视图输入关键点与生成目标位置之间的逐点关系。</p>
+<h4 id="5-在采样中加入刚性约束">5. 在采样中加入刚性约束
+</h4><p>自由预测每个点的位置，可能导致同一视图内部发生拉伸或弯曲。RAP提出Rigidity Forcing，刚性强制约束，在每个采样步中把预测的干净结果投影到原始视图的刚体变换集合上。</p>
+<p>首先，根据当前状态和速度外推干净端点：</p>
+\[
+\hat Y(0)=X(t)-tV_\theta(t,X(t)\mid C)
+\]<p>对第 \(i\) 个视图，寻找最接近该预测的刚体变换：</p>
+\[
+(\hat R_i,\hat t_i)
+=\underset{R\in\mathrm{SO}(3),\,t\in\mathbb R^3}{\arg\min}
+\left\|R\bar Q_i+t\mathbf1^\top-\hat Y_i(0)\right\|_F^2
+\]<p>这个问题通过Kabsch算法与SVD求解。投影后的点集为：</p>
+\[
+\Pi_{\bar Q_i}(\hat Y_i(0))
+=\hat R_i\bar Q_i+\hat t_i\mathbf1^\top
+\]<p>例如，网络预测的一面墙产生了轻微弯曲，刚性投影使用原输入中的墙面结构，在最接近预测位置的旋转和平移下重新放置这些点，从而保留视图内部的距离关系。</p>
+<p>令下一个时间为 \(t'=t-\Delta t\)，使用投影结果与初始噪声重新构造状态：</p>
+\[
+X(t')=(1-t')\Pi_{\bar Q}(\hat Y(0))+t'X(1)
+\]<p>这里 \(\Pi_{\bar Q}\) 表示对所有视图分别投影后拼接，\(X(1)\) 始终复用最初采样的高斯噪声。随着 \(t'\) 减小，噪声权重逐步下降，刚性约束后的预测占比逐步上升。</p>
+<p>这一约束作用于每一步外推的干净端点。中间状态仍包含高斯噪声，最终在 \(t=0\) 得到满足各视图刚性的点集。</p>
+<h4 id="6-恢复完整点云的位姿">6. 恢复完整点云的位姿
+</h4><p>生成结束后，将 \(\hat X(0)\) 按视图拆分，求得每个规范化输入 \(\bar Q_i\) 到生成结果的刚体变换 \(\hat T_i\)。随后与输入规范化变换组合：</p>
+\[
+T_i=\hat T_i\bar T_i
+\]<p>将该变换应用于原始完整点云，并恢复共同尺度，即可得到具有原始度量单位的配准结果。</p>
+<p>网络生成的是压缩关键点集合，最终输出可以覆盖完整扫描。这样，生成开销主要由关键点数量决定，原始稠密点云通过几何变换恢复。</p>
+<hr>
+<h3 id="实验-1">实验
+</h3><h4 id="数据与训练设置">数据与训练设置
+</h4><p>RAP从17个数据集构建超过10万个多视图配准实例，覆盖物体、室内和室外场景。训练实例包含2至16个视图，数据来源包括ModelNet、3DMatch、ScanNet、KITTI、nuScenes等。</p>
+<p>训练依赖各视图在共同坐标系中的准确位姿，由此构造配准关键点监督。方法免去了人工逐点标注对应关系的需求，训练位姿及局部描述子的预训练仍是重要的数据条件。</p>
+<p>论文报告使用32张80GB A100训练约3天。模型效果应结合训练数据覆盖范围、局部几何特征和网络容量共同理解。</p>
+<h4 id="两视图配准">两视图配准
+</h4><p>下面摘录原文Table 1的配准成功率（%）。各数据集沿用相应评估协议，Avg为所列六个数据集结果的平均值：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">ModelNet</th>
+					<th style="text-align: right">3DMatch</th>
+					<th style="text-align: right">3DLoMatch</th>
+					<th style="text-align: right">NSS</th>
+					<th style="text-align: right">ETH</th>
+					<th style="text-align: right">KITTI</th>
+					<th style="text-align: right">Avg</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>GeoTransformer</td>
+					<td style="text-align: right">86.26</td>
+					<td style="text-align: right">92.00</td>
+					<td style="text-align: right">75.00</td>
+					<td style="text-align: right">55.59</td>
+					<td style="text-align: right">71.53</td>
+					<td style="text-align: right">99.82</td>
+					<td style="text-align: right">80.03</td>
+			</tr>
+			<tr>
+					<td>PARENet</td>
+					<td style="text-align: right">66.14</td>
+					<td style="text-align: right">95.00</td>
+					<td style="text-align: right"><strong>80.50</strong></td>
+					<td style="text-align: right">45.07</td>
+					<td style="text-align: right">69.42</td>
+					<td style="text-align: right">99.82</td>
+					<td style="text-align: right">75.99</td>
+			</tr>
+			<tr>
+					<td>BUFFER-X</td>
+					<td style="text-align: right"><strong>99.84</strong></td>
+					<td style="text-align: right">95.58</td>
+					<td style="text-align: right">74.18</td>
+					<td style="text-align: right">85.60</td>
+					<td style="text-align: right"><strong>99.72</strong></td>
+					<td style="text-align: right">99.82</td>
+					<td style="text-align: right">92.46</td>
+			</tr>
+			<tr>
+					<td>RAP</td>
+					<td style="text-align: right">99.13</td>
+					<td style="text-align: right"><strong>95.90</strong></td>
+					<td style="text-align: right">78.78</td>
+					<td style="text-align: right"><strong>96.27</strong></td>
+					<td style="text-align: right">99.44</td>
+					<td style="text-align: right"><strong>100.00</strong></td>
+					<td style="text-align: right"><strong>94.92</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>RAP的平均结果较高，NSS上的提升尤其明显。低重叠3DLoMatch中PARENet取得80.50%，RAP为78.78%。不同数据集上的比较展示了统一模型的覆盖能力，也保留了专门方法在特定条件下的优势。</p>
+<p>这些方法的训练数据范围存在差异，部分基线主要在3DMatch或KITTI上训练。表格反映各方法完整配置下的表现，训练规模的影响需要结合后续重训练基线进一步判断。</p>
+<h4 id="跨域多视图配准">跨域多视图配准
+</h4><p>文章构建了覆盖物体、室内、室外、地面激光扫描和地图配准的多视图测试集，所用数据集与训练数据分离，用于评估零样本跨域泛化。</p>
+<p>评估区分两种成功率：</p>
+<ul>
+<li><strong>Edge Success，边成功率</strong>：评价具有有效重叠的视图对是否正确对齐。</li>
+<li><strong>Graph Success，整图成功率</strong>：要求一个实例中的所有有效边均满足成功条件。</li>
+</ul>
+<p>主实验使用旋转误差小于 \(15^\circ\)、归一化平移误差小于2.5%的条件。平移归一化尺度为真实配准场景包围盒的最长边。因此，该指标主要衡量全局配准能否进入合理位置，精细对齐精度还需要更严格的阈值检验。</p>
+<p>原文Table 2的总体结果如下：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">边成功率（%）</th>
+					<th style="text-align: right">整图成功率（%）</th>
+					<th style="text-align: right">平均耗时（秒）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>KISS-Matcher + PGO</td>
+					<td style="text-align: right">46.2</td>
+					<td style="text-align: right">29.2</td>
+					<td style="text-align: right">18.4</td>
+			</tr>
+			<tr>
+					<td>BUFFER-X + PGO</td>
+					<td style="text-align: right">50.4</td>
+					<td style="text-align: right">32.4</td>
+					<td style="text-align: right">36.0</td>
+			</tr>
+			<tr>
+					<td>BUFFER-X（使用RAP数据重训练）+ PGO</td>
+					<td style="text-align: right">57.7</td>
+					<td style="text-align: right">36.5</td>
+					<td style="text-align: right">36.0</td>
+			</tr>
+			<tr>
+					<td>RAP，移除刚性约束</td>
+					<td style="text-align: right">83.6</td>
+					<td style="text-align: right">72.9</td>
+					<td style="text-align: right">8.9</td>
+			</tr>
+			<tr>
+					<td>RAP</td>
+					<td style="text-align: right"><strong>85.9</strong></td>
+					<td style="text-align: right"><strong>77.3</strong></td>
+					<td style="text-align: right"><strong>8.9</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>PGO表示Pose Graph Optimization，位姿图优化。使用RAP训练数据重新训练BUFFER-X后，基线性能有所提高；RAP在多视图联合配准中仍取得明显提升。耗时为论文在该基准上的平均统计，具体场景的视图数和关键点数量影响实际运行成本。</p>
+<h4 id="消融实验-1">消融实验
+</h4><p>原文Table 3比较了局部描述子、采样步数和刚性约束的影响：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>设置</th>
+					<th style="text-align: right">3DMatch（%）</th>
+					<th style="text-align: right">3DLoMatch（%）</th>
+					<th style="text-align: right">多视图边成功率（%）</th>
+					<th style="text-align: right">多视图整图成功率（%）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>移除局部描述子</td>
+					<td style="text-align: right">83.28</td>
+					<td style="text-align: right">50.05</td>
+					<td style="text-align: right">43.07</td>
+					<td style="text-align: right">26.85</td>
+			</tr>
+			<tr>
+					<td>仅使用1个采样步</td>
+					<td style="text-align: right">90.35</td>
+					<td style="text-align: right">61.05</td>
+					<td style="text-align: right">72.87</td>
+					<td style="text-align: right">50.32</td>
+			</tr>
+			<tr>
+					<td>移除刚性约束</td>
+					<td style="text-align: right">94.65</td>
+					<td style="text-align: right">74.63</td>
+					<td style="text-align: right">83.57</td>
+					<td style="text-align: right">72.88</td>
+			</tr>
+			<tr>
+					<td>完整模型，10步采样</td>
+					<td style="text-align: right"><strong>95.90</strong></td>
+					<td style="text-align: right"><strong>78.78</strong></td>
+					<td style="text-align: right"><strong>85.92</strong></td>
+					<td style="text-align: right"><strong>77.31</strong></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>局部描述子对跨域配准尤为重要，移除后多视图性能大幅下降。10步采样提供了逐步修正布局的机会，刚性约束进一步提高整图成功率。实验表明，几何表征、多步生成和刚性投影分别承担了关键作用。</p>
+<hr>
+<h3 id="阅读思考-1">阅读思考
+</h3><p><strong>在点坐标空间生成，能够直接使用已有的几何求解工具。</strong> 每个关键点保留自身索引，生成结果天然提供“输入点—目标位置”的关系。SVD既用于最终位姿恢复，也用于采样过程中的刚性投影。</p>
+<p><strong>联合生成允许多个视图共同解释局部歧义。</strong> 单对点云中相似的墙面、柱子或平面结构可能产生多种对齐方式，其他视图提供的上下文有助于约束整体布局。全局注意力为这种信息交换提供了通道。</p>
+<p><strong>刚性约束为高维生成加入了明确的结构条件。</strong> 每片点云中的所有点共享同一个旋转和平移，投影因此把自由点位移限制到有几何意义的解空间。模型负责预测布局，几何求解负责保持每个视图的内部结构。</p>
+<p>方法的扩展能力仍受总token数和全局注意力开销影响。省去逐对配准阶段后，视图数量增加带来的计算压力仍需通过采样数量、显存与注意力实现共同控制。</p>
+<p>此外，非刚性场景需要单独分析。RAP的生成表示具有逐点运动的表达能力，本文验证的主要结果建立在刚体配准与刚性投影之上。动态物体、运动畸变和大幅非刚性形变的处理能力需要专门实验支持。</p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E4%BD%8D%E5%A7%BF%E4%BC%B0%E8%AE%A1/">位姿估计</a>
+        
+            <a href="/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/">点云配准</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读：GraphCPD</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读十五" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_3cebe784583ead6e.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_3cebe784583ead6e.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_8491e86c8bc2ef64.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #3a3a2980 0%, #b9bfd5C0 100%);">
+            <h2 class="article-title">论文阅读十五</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读14" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_bb75b1b267b62144.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_bb75b1b267b62144.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_60b485cb7bdeb561.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #c0c1cc80 0%, #403238C0 100%);">
+            <h2 class="article-title">论文阅读14</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读EX" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_be5ce1758b233118.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_be5ce1758b233118.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBex/cover_hu_23518cd0b7dfd209.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #48454380 0%, #b6b8b8C0 100%);">
+            <h2 class="article-title">论文阅读EX</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读12" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_aa49da4ea770b670.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB12/cover_hu_3b8652b4e02b0f7a.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #5a565380 0%, #bcb7aeC0 100%);">
+            <h2 class="article-title">论文阅读12</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
