@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="文章列表 Noise2Self: Blind Denoising by Self-Supervision【ICML 2019】，Joshua Batson、Loic Royer，Chan Zuckerberg Biohub。 UNSURE: Self-Supervised Learning with Unknown Noise Level and Stein&rsquo;s Unbiased Risk Estimate【ICLR 2025】，Julián Tachella、Mike Davies、Laurent Jacques，法国国家科学研究中心。 这两篇文章都从一个实际问题出发：手中只有带噪观测，如何构造能够指导去噪的训练目标？ Noise2Self利用不同测量维度之间的噪声独立性，让一部分观测预测另一部分；UNSURE进一步分析估计器的导数约束，在高斯噪声模型下，将局部的独立预测限制放宽为总体的期望散度约束。\n">
+<title>论文阅读18:分折教师理论来源探索</title>
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.e62e09c60ba428a627e03568fa3df938f6a8224f815b5846f00816c17d4a0be4.css"><meta property='og:title' content="论文阅读18:分折教师理论来源探索">
+<meta property='og:description' content="文章列表 Noise2Self: Blind Denoising by Self-Supervision【ICML 2019】，Joshua Batson、Loic Royer，Chan Zuckerberg Biohub。 UNSURE: Self-Supervised Learning with Unknown Noise Level and Stein&rsquo;s Unbiased Risk Estimate【ICLR 2025】，Julián Tachella、Mike Davies、Laurent Jacques，法国国家科学研究中心。 这两篇文章都从一个实际问题出发：手中只有带噪观测，如何构造能够指导去噪的训练目标？ Noise2Self利用不同测量维度之间的噪声独立性，让一部分观测预测另一部分；UNSURE进一步分析估计器的导数约束，在高斯噪声模型下，将局部的独立预测限制放宽为总体的期望散度约束。\n">
+<meta property='og:url' content='http://localhost:1313/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/'>
+<meta property='og:site_name' content='0Ishtar0'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='自监督学习' /><meta property='article:tag' content='图像去噪' /><meta property='article:tag' content='论文阅读' /><meta property='article:published_time' content='2026-10-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-10-11T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="论文阅读18:分折教师理论来源探索">
+<meta name="twitter:description" content="文章列表 Noise2Self: Blind Denoising by Self-Supervision【ICML 2019】，Joshua Batson、Loic Royer，Chan Zuckerberg Biohub。 UNSURE: Self-Supervised Learning with Unknown Noise Level and Stein&rsquo;s Unbiased Risk Estimate【ICLR 2025】，Julián Tachella、Mike Davies、Laurent Jacques，法国国家科学研究中心。 这两篇文章都从一个实际问题出发：手中只有带噪观测，如何构造能够指导去噪的训练目标？ Noise2Self利用不同测量维度之间的噪声独立性，让一部分观测预测另一部分；UNSURE进一步分析估计器的导数约束，在高斯噪声模型下，将局部的独立预测限制放宽为总体的期望散度约束。\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        <figure class="site-avatar">
+                <a href="/">
+                    <img src="/img/avatar.png" 
+                        width="460"
+                        height="460"
+                        class="site-logo"
+                        loading="lazy"
+                        alt="Avatar">
+                </a>
+                
+                    <span class="emoji">🌙</span>
+                
+            </figure>
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">0Ishtar0</a></h1>
+            <h2 class="site-description">我来自大河</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/0Ishtar0'
+                        
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span></span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title"></h2>
+        
+        <div class="widget--toc">
+            <nav class="toc-nav" id="TableOfContents">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#背景介绍只有带噪数据时训练信号从哪里来">背景介绍：只有带噪数据时，训练信号从哪里来</a></li>
+    <li><a href="#noise2self-blind-denoising-by-self-supervision">Noise2Self: Blind Denoising by Self-Supervision</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍">背景介绍</a>
+          <ol>
+            <li><a href="#条件独立与无偏观测">条件独立与无偏观测</a></li>
+            <li><a href="#-不变性">\(\mathcal J\)-不变性</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#1-用带噪目标评价受约束的去噪器">1. 用带噪目标评价受约束的去噪器</a></li>
+            <li><a href="#2-交叉项为什么消失">2. 交叉项为什么消失</a></li>
+            <li><a href="#3-通过遮挡构造训练样本">3. 通过遮挡构造训练样本</a></li>
+            <li><a href="#4-用同一目标选择传统算法参数">4. 用同一目标选择传统算法参数</a></li>
+            <li><a href="#5-最优解保留了哪些信息">5. 最优解保留了哪些信息</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#图像去噪">图像去噪</a></li>
+            <li><a href="#单图训练与单细胞测量">单图训练与单细胞测量</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考">阅读思考</a></li>
+      </ol>
+    </li>
+    <li><a href="#unsure-self-supervised-learning-with-unknown-noise-level-and-steins-unbiased-risk-estimate">UNSURE: Self-Supervised Learning with Unknown Noise Level and Stein&rsquo;s Unbiased Risk Estimate</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#背景介绍-1">背景介绍</a>
+          <ol>
+            <li><a href="#sure与散度">SURE与散度</a></li>
+            <li><a href="#噪声水平为什么重要">噪声水平为什么重要</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#1-从逐点零导数放宽到期望零散度">1. 从逐点零导数放宽到期望零散度</a></li>
+            <li><a href="#2-将约束写成极小极大训练目标">2. 将约束写成极小极大训练目标</a></li>
+            <li><a href="#3-用随机扰动估计散度">3. 用随机扰动估计散度</a></li>
+            <li><a href="#4-最优估计器与噪声水平的关系">4. 最优估计器与噪声水平的关系</a></li>
+            <li><a href="#5-通过score学习实现unsure">5. 通过score学习实现UNSURE</a></li>
+            <li><a href="#6-扩展到相关噪声与成像逆问题">6. 扩展到相关噪声与成像逆问题</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#未知强度的高斯去噪">未知强度的高斯去噪</a></li>
+            <li><a href="#相关高斯噪声">相关高斯噪声</a></li>
+            <li><a href="#ct与mri重建">CT与MRI重建</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考-1">阅读思考</a></li>
+      </ol>
+    </li>
+    <li><a href="#两篇文章的联系">两篇文章的联系</a></li>
+  </ol>
+
+            </nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/">论文阅读18:分折教师理论来源探索</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-10-11T00:00:00Z'>2026-10-11</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+    <aside class="article-toc">
+        <details>
+            <summary>
+                <div class="article-toc-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                    <span></span>
+                </div>
+            </summary>
+            <nav class="toc-nav">
+                
+  <ol>
+    <li><a href="#文章列表">文章列表</a></li>
+    <li><a href="#背景介绍只有带噪数据时训练信号从哪里来">背景介绍：只有带噪数据时，训练信号从哪里来</a></li>
+    <li><a href="#noise2self-blind-denoising-by-self-supervision">Noise2Self: Blind Denoising by Self-Supervision</a>
+      <ol>
+        <li><a href="#研究动机">研究动机</a></li>
+        <li><a href="#背景介绍">背景介绍</a>
+          <ol>
+            <li><a href="#条件独立与无偏观测">条件独立与无偏观测</a></li>
+            <li><a href="#-不变性">\(\mathcal J\)-不变性</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法">方法</a>
+          <ol>
+            <li><a href="#1-用带噪目标评价受约束的去噪器">1. 用带噪目标评价受约束的去噪器</a></li>
+            <li><a href="#2-交叉项为什么消失">2. 交叉项为什么消失</a></li>
+            <li><a href="#3-通过遮挡构造训练样本">3. 通过遮挡构造训练样本</a></li>
+            <li><a href="#4-用同一目标选择传统算法参数">4. 用同一目标选择传统算法参数</a></li>
+            <li><a href="#5-最优解保留了哪些信息">5. 最优解保留了哪些信息</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验">实验</a>
+          <ol>
+            <li><a href="#图像去噪">图像去噪</a></li>
+            <li><a href="#单图训练与单细胞测量">单图训练与单细胞测量</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考">阅读思考</a></li>
+      </ol>
+    </li>
+    <li><a href="#unsure-self-supervised-learning-with-unknown-noise-level-and-steins-unbiased-risk-estimate">UNSURE: Self-Supervised Learning with Unknown Noise Level and Stein&rsquo;s Unbiased Risk Estimate</a>
+      <ol>
+        <li><a href="#研究动机-1">研究动机</a></li>
+        <li><a href="#背景介绍-1">背景介绍</a>
+          <ol>
+            <li><a href="#sure与散度">SURE与散度</a></li>
+            <li><a href="#噪声水平为什么重要">噪声水平为什么重要</a></li>
+          </ol>
+        </li>
+        <li><a href="#方法-1">方法</a>
+          <ol>
+            <li><a href="#1-从逐点零导数放宽到期望零散度">1. 从逐点零导数放宽到期望零散度</a></li>
+            <li><a href="#2-将约束写成极小极大训练目标">2. 将约束写成极小极大训练目标</a></li>
+            <li><a href="#3-用随机扰动估计散度">3. 用随机扰动估计散度</a></li>
+            <li><a href="#4-最优估计器与噪声水平的关系">4. 最优估计器与噪声水平的关系</a></li>
+            <li><a href="#5-通过score学习实现unsure">5. 通过score学习实现UNSURE</a></li>
+            <li><a href="#6-扩展到相关噪声与成像逆问题">6. 扩展到相关噪声与成像逆问题</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验-1">实验</a>
+          <ol>
+            <li><a href="#未知强度的高斯去噪">未知强度的高斯去噪</a></li>
+            <li><a href="#相关高斯噪声">相关高斯噪声</a></li>
+            <li><a href="#ct与mri重建">CT与MRI重建</a></li>
+          </ol>
+        </li>
+        <li><a href="#阅读思考-1">阅读思考</a></li>
+      </ol>
+    </li>
+    <li><a href="#两篇文章的联系">两篇文章的联系</a></li>
+  </ol>
+
+            </nav>
+        </details>
+    </aside>
+    
+
+    <section class="article-content">
+    
+    
+    <h2 id="文章列表">文章列表
+</h2><ol>
+<li><a class="link" href="https://proceedings.mlr.press/v97/batson19a.html"  target="_blank" rel="noopener"
+    >Noise2Self: Blind Denoising by Self-Supervision【ICML 2019】</a>，Joshua Batson、Loic Royer，Chan Zuckerberg Biohub。</li>
+<li><a class="link" href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/d36dfcdb14473a8526111c221660f2ab-Abstract-Conference.html"  target="_blank" rel="noopener"
+    >UNSURE: Self-Supervised Learning with Unknown Noise Level and Stein&rsquo;s Unbiased Risk Estimate【ICLR 2025】</a>，Julián Tachella、Mike Davies、Laurent Jacques，法国国家科学研究中心。</li>
+</ol>
+<p>这两篇文章都从一个实际问题出发：<strong>手中只有带噪观测，如何构造能够指导去噪的训练目标？</strong> Noise2Self利用不同测量维度之间的噪声独立性，让一部分观测预测另一部分；UNSURE进一步分析估计器的导数约束，在高斯噪声模型下，将局部的独立预测限制放宽为总体的期望散度约束。</p>
+<p>两篇可以沿着“噪声知识—估计器约束—信息利用程度”这条线理解。噪声分布的已知信息决定自监督损失如何构造，估计器受到的约束又影响能够保留多少有效信号。</p>
+<hr>
+<h2 id="背景介绍只有带噪数据时训练信号从哪里来">背景介绍：只有带噪数据时，训练信号从哪里来
+</h2><p>为方便比较，全文统一用 \(x\) 表示干净信号，\(y\) 表示带噪观测，\(f_\theta\) 表示去噪模型。Noise2Self原文中的 \(x,y\) 与这里的约定相反。</p>
+<p>监督去噪通常最小化：</p>
+\[
+\mathcal R(f_\theta)
+=\mathbb E_{x,y}\|f_\theta(y)-x\|_2^2
+\]<p>平方误差下的最优估计器为条件均值：</p>
+\[
+f_{\mathrm{MMSE}}(y)=\mathbb E[x\mid y]
+\]<p>MMSE表示Minimum Mean Squared Error，即最小均方误差。它综合全部观测信息，估计最可能的干净信号平均值。</p>
+<p>缺少干净目标时，直接拟合带噪输入产生的损失为：</p>
+\[
+\mathcal L_{\mathrm{data}}(f_\theta)
+=\mathbb E_y\|f_\theta(y)-y\|_2^2
+\]<p>恒等映射 \(f_\theta(y)=y\) 可以使该损失达到零，同时完整保留噪声。因此，自监督去噪需要额外的统计条件或函数约束，使“接近观测”能够对应“接近干净信号”。</p>
+<p>Noise2Self通过限制预测所使用的信息建立这种联系；SURE通过噪声模型修正观测误差；UNSURE结合SURE恒等式与新的约束，处理噪声强度未知的情况。</p>
+<hr>
+<h2 id="noise2self-blind-denoising-by-self-supervision">Noise2Self: Blind Denoising by Self-Supervision
+</h2><h3 id="研究动机">研究动机
+</h3><p>显微成像、低照度拍摄和单细胞测量经常只能获得一次带噪观测。获取同一对象的干净参考需要更长曝光、更强信号或重复测量，实验成本和样本变化都可能限制这些操作。</p>
+<p>Noise2Noise已经说明，同一信号的两次独立带噪观测可以相互提供监督。Noise2Self进一步把这一思路放到单次高维测量内部：一张图像包含大量像素，一个细胞的测量包含大量分子计数，其中可能存在可利用的独立噪声结构。</p>
+<p>例如，同一条边缘附近的像素具有相关的真实亮度，每个像素的测量噪声又可能在给定真实图像后相互独立。周围像素能够帮助预测中心像素的真实值，中心位置本次采样的随机扰动则缺少可预测性。</p>
+<p>本文目标：利用这种“信号相关、噪声分块独立”的结构，从带噪数据中构造去噪性能的评价准则，既用于训练神经网络，也用于选择传统去噪算法的参数。</p>
+<hr>
+<h3 id="背景介绍">背景介绍
+</h3><h4 id="条件独立与无偏观测">条件独立与无偏观测
+</h4><p>Noise2Self的主要结论依赖两个统计条件。</p>
+<p>首先，观测在给定干净信号后是无偏的：</p>
+\[
+\mathbb E[y\mid x]=x
+\]<p>这意味着重复采样的平均观测等于真实信号。零均值加性噪声满足该条件，适当归一化的Poisson观测也可以满足。</p>
+<p>其次，将测量维度划分为若干块，记分区为：</p>
+\[
+\mathcal J=\{J_1,\ldots,J_K\}
+\]<p>对于每一块 \(J\)，要求它与补集 \(J^c\) 的观测在给定完整干净信号后条件独立：</p>
+\[
+y_J\perp y_{J^c}\mid x
+\]<p>这里独立的是给定信号后的测量随机性。真实信号在不同位置之间的相关性恰好提供了预测所需的信息。</p>
+<p>因此，Noise2Self对噪声类型具有较宽的适用范围：噪声可以随位置和信号强度变化，使用前仍需要核对无偏性与分区对应的条件独立性。</p>
+<h4 id="-不变性">\(\mathcal J\)-不变性
+</h4><p>一个去噪器满足 \(J\)-不变性，表示输出块 \(f(y)_J\) 只依赖补集观测 \(y_{J^c}\)。对分区中的每一块都满足这一条件，就称其为 \(\mathcal J\)-不变函数。</p>
+\[
+f(y)_J=h_J(y_{J^c}),
+\qquad J\in\mathcal J
+\]<p>可以把它理解为：<strong>预测哪一块，就先把这一块的原始观测从预测依据中拿开。</strong> 当每个块只包含一个像素时，模型利用其他像素预测当前位置，这就是常见的盲点预测形式。</p>
+<hr>
+<h3 id="方法">方法
+</h3><p><img alt="Noise2Self的分区与独立测量示意，原论文Figure 1；图中x表示带噪观测" class="gallery-image" data-flex-basis="1174px" data-flex-grow="489" height="188" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/image/index/noise2self-partition.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/image/index/noise2self-partition_hu_e7f453dcb5b8c9ff.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/image/index/noise2self-partition.png 920w" width="920"></p>
+<h4 id="1-用带噪目标评价受约束的去噪器">1. 用带噪目标评价受约束的去噪器
+</h4><p>Noise2Self在 \(\mathcal J\)-不变函数集合中最小化：</p>
+\[
+\mathcal L_{\mathrm{N2S}}(f)
+=\mathbb E_y\|f(y)-y\|_2^2
+\]<p>在无偏性与条件独立性成立时，原文Proposition 1给出：</p>
+\[
+\boxed{
+\mathbb E\|f(y)-y\|_2^2
+=\mathbb E\|f(y)-x\|_2^2
++\mathbb E\|y-x\|_2^2
+}
+\]<p>右侧第一项是真实去噪风险，第二项是观测噪声的总均方误差，与去噪器参数无关。因此，在同一个受约束函数集合中，自监督损失与监督风险具有相同的最优解。</p>
+<p>这个结论直接回答了“为什么带噪像素可以充当训练目标”：目标中的随机噪声给期望损失增加一个常数，模型仍可通过降低可预测的信号误差改善目标函数。</p>
+<h4 id="2-交叉项为什么消失">2. 交叉项为什么消失
+</h4><p>展开平方误差：</p>
+\[
+\begin{aligned}
+\|f(y)-y\|_2^2
+={}&\|f(y)-x\|_2^2+\|y-x\|_2^2\\
+&-2\langle f(y)-x,y-x\rangle
+\end{aligned}
+\]<p>对于某一块 \(J\)，\(f(y)_J\) 由 \(y_{J^c}\) 计算。给定 \(x\) 后，它与目标块噪声 \(y_J-x_J\) 独立，同时：</p>
+\[
+\mathbb E[y_J-x_J\mid x]=0
+\]<p>于是：</p>
+\[
+\begin{aligned}
+&\mathbb E\left[
+\langle f(y)_J-x_J,y_J-x_J\rangle\mid x
+\right]\\
+&\quad=
+\left\langle
+\mathbb E[f(y)_J-x_J\mid x],
+\mathbb E[y_J-x_J\mid x]
+\right\rangle=0
+\end{aligned}
+\]<p>将所有块相加并取期望，就得到上述风险恒等式。理论保证对应的是统计期望，有限样本中的损失曲线仍存在采样波动。</p>
+<h4 id="3-通过遮挡构造训练样本">3. 通过遮挡构造训练样本
+</h4><p>设 \(g_\theta\) 是普通神经网络，\(m_J\) 是目标块的二值掩码。在输入端，用与原始 \(y_J\) 无关的值 \(r_J\) 替换目标块：</p>
+\[
+\tilde y^{(J)}
+=(1-m_J)\odot y+m_J\odot r_J
+\]<p>替换值可以采用独立随机数，也可以仅由补集中的邻居计算。损失只在遮挡位置计算：</p>
+\[
+\mathcal L_{\mathrm{mask}}(\theta)
+=\mathbb E_{y,J,r}
+\left[
+\frac1{|J|}
+\sum_{i\in J}
+\big(g_\theta(\tilde y^{(J)})_i-y_i\big)^2
+\right]
+\]<p>网络接收替换后的输入，训练目标保留这些位置原本的带噪数值。每一步选择不同的目标块，使各个位置都参与自监督训练。</p>
+<p>原文深度学习实验将像素随机划分为25个子集，每个minibatch选取一个子集计算损失，以控制训练开销。</p>
+<p>严格的 \(\mathcal J\)-不变推理可以逐块遮挡、分别预测，再拼接各块输出。原文也实验了直接向训练好的网络输入完整带噪图像，并观察到约0.5 dB的改善。这个直接推理形式重新使用了目标位置的观测，其性能依据来自实验，理论中的独立性保证适用于满足约束的预测函数。</p>
+<h4 id="4-用同一目标选择传统算法参数">4. 用同一目标选择传统算法参数
+</h4><p>Noise2Self也能用于选择滤波半径、阈值或低秩维数。</p>
+<p>例如，去掉中心像素的环形中值滤波器，使用周围像素的中位数预测中心位置。对于逐像素独立噪声，它满足单像素分区下的不变性。扫描不同滤波半径，比较输出与带噪图像之间的平方误差，即可选择合适参数。</p>
+<p>原文示例中，自监督损失与真实风险在相同半径 \(r=3\) 处达到最低值。传统算法由此获得了无需干净参考的参数评价方式。</p>
+<p>对于一般去噪算法，也可以先替换目标块，再运行算法并只保留目标块输出，从而构造相应的 \(\mathcal J\)-不变版本。</p>
+<h4 id="5-最优解保留了哪些信息">5. 最优解保留了哪些信息
+</h4><p>原文Proposition 2给出的最优受约束预测为：</p>
+\[
+f_{\mathcal J}^*(y)_J
+=\mathbb E[x_J\mid y_{J^c}]
+\]<p>监督学习的理想解使用全部观测 \(y\)，Noise2Self的受约束解使用补集 \(y_{J^c}\)。两者的误差差距可以写为：</p>
+\[
+\begin{aligned}
+&\mathbb E\|x_J-\mathbb E[x_J\mid y_{J^c}]\|_2^2
+-\mathbb E\|x_J-\mathbb E[x_J\mid y]\|_2^2\\
+&\quad=
+\mathbb E\|\mathbb E[x_J\mid y]-\mathbb E[x_J\mid y_{J^c}]\|_2^2
+\geq0
+\end{aligned}
+\]<p>这个等式由条件期望的正交分解得到，说明目标块自身观测包含的额外信息决定了性能差距。图像结构越容易由其他位置推断，遮挡带来的信息损失越小；孤立细节和弱相关纹理则更依赖当前位置的测量值。</p>
+<hr>
+<h3 id="实验">实验
+</h3><h4 id="图像去噪">图像去噪
+</h4><p>文章使用Hànzì字符图像、ImageNet自然图像和CellNet显微图像，测试UNet与DnCNN。Hànzì和ImageNet采用混合合成噪声，CellNet模拟sCMOS相机噪声。下表摘录原文Table 2中的PSNR均值，单位为dB，数值越高表示均方误差越低：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">Hànzì</th>
+					<th style="text-align: right">ImageNet</th>
+					<th style="text-align: right">CellNet</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>带噪输入</td>
+					<td style="text-align: right">6.5</td>
+					<td style="text-align: right">9.4</td>
+					<td style="text-align: right">15.1</td>
+			</tr>
+			<tr>
+					<td>NLM</td>
+					<td style="text-align: right">8.4</td>
+					<td style="text-align: right">15.7</td>
+					<td style="text-align: right">29.0</td>
+			</tr>
+			<tr>
+					<td>BM3D</td>
+					<td style="text-align: right">11.8</td>
+					<td style="text-align: right">17.8</td>
+					<td style="text-align: right">31.4</td>
+			</tr>
+			<tr>
+					<td>UNet，Noise2Self</td>
+					<td style="text-align: right">13.8</td>
+					<td style="text-align: right">18.6</td>
+					<td style="text-align: right">32.8</td>
+			</tr>
+			<tr>
+					<td>DnCNN，Noise2Self</td>
+					<td style="text-align: right">13.4</td>
+					<td style="text-align: right">18.7</td>
+					<td style="text-align: right">33.7</td>
+			</tr>
+			<tr>
+					<td>DnCNN，Noise2Noise</td>
+					<td style="text-align: right">13.6</td>
+					<td style="text-align: right">18.8</td>
+					<td style="text-align: right">34.4</td>
+			</tr>
+			<tr>
+					<td>DnCNN，干净目标监督</td>
+					<td style="text-align: right">13.9</td>
+					<td style="text-align: right">22.0</td>
+					<td style="text-align: right">34.4</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>DnCNN的Noise2Self结果在CellNet上接近带配对目标的方法，与干净目标监督相差0.7 dB；ImageNet上的差距为3.3 dB。结果体现了数据结构、噪声条件和预测限制对效果的共同影响。</p>
+<p>表中传统方法采用论文给定的默认参数，Noise2Self训练时使用每张图像的一次带噪观测。实验中的Noise2Noise和干净目标监督分别具有额外的独立观测与干净参考。</p>
+<h4 id="单图训练与单细胞测量">单图训练与单细胞测量
+</h4><p>文章还在一张约26万像素的带噪图像上训练56万参数的DnCNN，达到31.2 dB，展示了从单次测量内部提取训练信号的可能性。</p>
+<p>单细胞实验将检测到的分子随机分成两组，分别统计并归一化基因表达量，利用两组测量相互预测。作者在2730个骨髓细胞上用自监督损失选择主成分回归的维数，示例中的最优维数为17。</p>
+<p>这部分实验体现了框架的通用性：分区既可以对应图像像素，也可以对应独立的分子检测事件，具体选择取决于数据的采集机制。</p>
+<hr>
+<h3 id="阅读思考">阅读思考
+</h3><p><strong>Noise2Self提供了一种评价去噪效果的方法。</strong> 只要候选函数满足相应约束，就能在缺少干净数据时比较参数和模型。因此，它同时连接了传统算法校准与深度网络训练。</p>
+<p><strong>分区选择承载了对噪声结构的假设。</strong> 对具有空间相关性的噪声，逐像素遮挡可能保留可预测的噪声成分。更大的留出区域需要结合真实相关范围设计，同时增加被移除的信号信息。</p>
+<p><strong>受约束最优解与完整观测下的最优解之间存在信息差。</strong> 邻域能够解释的内容越丰富，Noise2Self越接近充分利用全部观测的估计器。这也引出了UNSURE的问题：在已有部分噪声模型知识时，能否通过更弱的约束保留当前位置的信息？</p>
+<hr>
+<h2 id="unsure-self-supervised-learning-with-unknown-noise-level-and-steins-unbiased-risk-estimate">UNSURE: Self-Supervised Learning with Unknown Noise Level and Stein&rsquo;s Unbiased Risk Estimate
+</h2><h3 id="研究动机-1">研究动机
+</h3><p>Noise2Self依靠分块预测避开未知噪声强度，同时对估计器的信息使用方式施加限制。SURE提供另一条路径：已知噪声模型和参数时，可以用观测误差加上导数修正项，估计真实去噪风险。</p>
+<p>实际应用中，传感器噪声的强度常常缺少准确标定，噪声还可能具有空间相关性。SURE中的参数误差直接影响风险修正，从而改变训练目标；盲点方法则可能舍弃对细节恢复有价值的当前观测。</p>
+<p>UNSURE从估计器导数出发分析这种关系。逐像素盲点预测让每个位置对自身输入的偏导数为零，SURE修正项因此消失。作者进一步发现，未知标量噪声方差下，只需让散度的统计期望为零，就能消去期望风险中的相应项。</p>
+<p>本文目标：在保留噪声模型结构的前提下，放宽去噪器约束，通过拉格朗日乘子学习未知噪声水平对应的风险修正强度，并扩展到相关噪声和成像逆问题。</p>
+<hr>
+<h3 id="背景介绍-1">背景介绍
+</h3><h4 id="sure与散度">SURE与散度
+</h4><p>先考虑固定但未知噪声水平的高斯模型：</p>
+\[
+y=x+\sigma\epsilon,
+\qquad
+\epsilon\sim\mathcal N(0,I_n)
+\]<p>其中噪声与信号独立，\(\sigma\) 为标准差，\(\sigma^2\) 为方差。满足相应可微性和可积条件时，Stein恒等式给出：</p>
+\[
+\boxed{
+\mathbb E\|f(y)-x\|_2^2
+=\mathbb E\left[
+\|f(y)-y\|_2^2
++2\sigma^2\operatorname{div}f(y)
+-n\sigma^2
+\right]
+}
+\]<p>右侧就是 <strong>Stein&rsquo;s Unbiased Risk Estimate，Stein无偏风险估计</strong> 对应的期望形式，简称SURE。其中：</p>
+\[
+\operatorname{div}f(y)
+=\operatorname{tr}J_f(y)
+=\sum_{i=1}^n\frac{\partial f_i(y)}{\partial y_i}
+\]<p>\(J_f\) 为Jacobian矩阵。散度汇总了每个输出位置对同位置输入微小变化的响应，反映模型对输入观测的总体敏感程度。</p>
+<p>例如，恒等映射的观测误差为零，散度为 \(n\)，代入SURE后得到风险 \(n\sigma^2\)，准确反映完整保留噪声的代价。</p>
+<h4 id="噪声水平为什么重要">噪声水平为什么重要
+</h4><p>已知 \(\sigma^2\) 时，训练可去掉与模型无关的常数项：</p>
+\[
+\mathcal L_{\mathrm{SURE}}(\theta)
+=\mathbb E\left[
+\|f_\theta(y)-y\|_2^2
++2\sigma^2\operatorname{div}f_\theta(y)
+\right]
+\]<p>观测残差促使输出解释输入，散度项修正拟合输入噪声带来的偏差。错误指定 \(\sigma^2\) 将改变两部分之间的关系，影响最终去噪强度。</p>
+<hr>
+<h3 id="方法-1">方法
+</h3><p><img alt="UNSURE对噪声知识与估计器导数约束的分析，原论文Figure 1" class="gallery-image" data-flex-basis="1046px" data-flex-grow="436" height="188" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/image/index/unsure-constraints.png" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/image/index/unsure-constraints_hu_87b10beb68e4511b.png 800w, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB18%E5%88%86%E6%8A%98%E6%95%99%E5%B8%88%E7%90%86%E8%AE%BA%E6%9D%A5%E6%BA%90%E6%8E%A2%E7%B4%A2/image/index/unsure-constraints.png 820w" width="820"></p>
+<h4 id="1-从逐点零导数放宽到期望零散度">1. 从逐点零导数放宽到期望零散度
+</h4><p>单像素盲点估计器在可微条件下满足：</p>
+\[
+\frac{\partial f_i(y)}{\partial y_i}=0,
+\qquad \forall i
+\]<p>因此，每个输入处的散度都为零。UNSURE引入 <strong>Zero Expected Divergence，期望零散度</strong>，简称ZED，只要求：</p>
+\[
+\boxed{\mathbb E_y[\operatorname{div}f(y)]=0}
+\]<p>这允许单个位置的自响应以及单个样本的散度取非零值，只约束它们在所有位置求和、再对数据分布取平均后的结果。</p>
+<p>于是，允许使用的函数集合具有包含关系：</p>
+\[
+\mathcal S_{\mathrm{blindspot}}
+\subseteq
+\mathcal S_{\mathrm{ZED}}
+\]<p>较大的函数集合允许模型利用当前位置的带噪值，表达能力随之增强。上述联系建立在高斯模型下；Noise2Self本身适用的无偏、条件独立噪声范围更广。</p>
+<p>在ZED约束下，SURE恒等式简化为：</p>
+\[
+\mathbb E\|f(y)-x\|_2^2
+=\mathbb E\|f(y)-y\|_2^2-n\sigma^2
+\]<p>剩余未知项与模型参数无关，因此可以求解：</p>
+\[
+\min_f\ \mathbb E\|f(y)-y\|_2^2
+\quad
+\text{s.t.}\quad
+\mathbb E\operatorname{div}f(y)=0
+\]<p>恒等映射的散度为 \(n\)，自然排除在这一约束集合之外。</p>
+<h4 id="2-将约束写成极小极大训练目标">2. 将约束写成极小极大训练目标
+</h4><p>引入拉格朗日乘子 \(\eta\in\mathbb R\)，得到UNSURE的核心目标：</p>
+\[
+\boxed{
+\min_\theta\max_\eta\ 
+\mathcal L(\theta,\eta)
+=\mathbb E_y\left[
+\|f_\theta(y)-y\|_2^2
++2\eta\operatorname{div}f_\theta(y)
+\right]
+}
+\]<p>网络参数沿损失下降方向更新，乘子沿上升方向更新。忽略动量和随机估计误差，更新形式为：</p>
+\[
+\theta\leftarrow\theta-\alpha\nabla_\theta\mathcal L(\theta,\eta)
+\]\[
+\eta\leftarrow\eta+\beta\nabla_\eta\mathcal L(\theta,\eta)
+=\eta+2\beta\,\mathbb E_y[\operatorname{div}f_\theta(y)]
+\]<p>其中 \(\alpha,\beta\) 是学习率。平均散度偏正时，乘子增大，网络在后续更新中承受更强的散度修正；平均散度偏负时，乘子向相反方向调整。原文实现对乘子的随机梯度使用动量平滑。</p>
+<p>这里的 \(\eta\) 承担约束乘子的角色，其量纲对应方差。两类参数采用相反优化方向，是约束问题的鞍点求解过程。</p>
+<h4 id="3-用随机扰动估计散度">3. 用随机扰动估计散度
+</h4><p>高维图像网络的完整Jacobian计算成本较高。文章使用Monte Carlo有限差分：</p>
+\[
+\widehat{\operatorname{div}}f_\theta(y)
+=\frac1\tau b^\top
+\left[f_\theta(y+\tau b)-f_\theta(y)\right],
+\qquad b\sim\mathcal N(0,I)
+\]<p>其依据是：</p>
+\[
+f_\theta(y+\tau b)-f_\theta(y)
+\approx\tau J_{f_\theta}(y)b,
+\qquad
+\mathbb E_b[b^\top J_{f_\theta}(y)b]
+=\operatorname{tr}J_{f_\theta}(y)
+\]<p>随机方向 \(b\) 探测网络对输入扰动的响应，从而估计Jacobian的迹。论文默认使用 \(\tau=0.01\)。有限的扰动幅度带来近似误差，随机方向则带来估计方差。</p>
+<p>直接训练UNSURE时，通常需要计算 \(f_\theta(y)\) 和 \(f_\theta(y+\tau b)\) 两次前向传播。推理阶段直接使用训练好的去噪网络。</p>
+<h4 id="4-最优估计器与噪声水平的关系">4. 最优估计器与噪声水平的关系
+</h4><p>记带噪数据分布为 \(p_y\)，其score为：</p>
+\[
+s(y)=\nabla_y\log p_y(y)
+\]<p>score指向观测概率密度增大的局部方向。原文Proposition 1给出ZED约束下的最优解：</p>
+\[
+f_{\mathrm{ZED}}(y)=y+\hat\eta s(y),
+\qquad
+\hat\eta=\frac{n}{\mathbb E_y\|s(y)\|_2^2}
+\]<p>在同一高斯模型下，Tweedie公式给出监督最优解：</p>
+\[
+f_{\mathrm{MMSE}}(y)=y+\sigma^2s(y)
+\]<p>二者沿相同score方向修正观测，修正强度分别由 \(\hat\eta\) 与真实方差 \(\sigma^2\) 决定。</p>
+<p>设每维最小均方误差为：</p>
+\[
+m=\frac1n\mathbb E\|f_{\mathrm{MMSE}}(y)-x\|_2^2
+\]<p>原文理论结果可以整理为：</p>
+\[
+\hat\eta=\frac{\sigma^2}{1-m/\sigma^2}\geq\sigma^2
+\]\[
+\frac1n\mathbb E\|f_{\mathrm{ZED}}(y)-x\|_2^2
+=\frac{m}{1-m/\sigma^2}
+\]<p>当 \(m/\sigma^2\) 很小时，两种估计器的风险接近。对最后一式展开：</p>
+\[
+\mathcal R_{\mathrm{ZED}}/n
+=m+\frac{m^2}{\sigma^2}
++\frac{m^3}{\sigma^4}+\cdots
+\]<p>这说明结构充分、容易恢复的信号有利于缩小未知噪声水平带来的额外误差。\(\hat\eta\) 一般偏大于真实方差，应理解为受约束最优解的修正系数，不能直接等同于无偏的物理噪声方差估计。</p>
+<p>一个有代表性的边界情形是 \(x\sim\mathcal N(0,\sigma_x^2I)\)。此时信号与噪声都表现为独立高斯波动，\(\hat\eta=\sigma_x^2+\sigma^2\)，ZED最优解退化为零。仅凭观测分布，信号方差与噪声方差之间存在辨识歧义。</p>
+<h4 id="5-通过score学习实现unsure">5. 通过score学习实现UNSURE
+</h4><p>上述闭式解还提供了另一种实现路径。先学习带噪数据分布的score：</p>
+\[
+\min_\theta\ 
+\mathbb E_{y,b,\tau}
+\|b+\tau s_\theta(y+\tau b)\|_2^2,
+\qquad
+b\sim\mathcal N(0,I)
+\]<p>训练中逐步减小附加扰动的尺度，再用score范数估计 \(\hat\eta\)，最终输出：</p>
+\[
+\hat x=y+\hat\eta s_\theta(y)
+\]<p>原文称其为UNSURE via score。附加扰动 \(\tau b\) 的分布由训练过程控制，原观测中的噪声水平仍可以未知。该方案每个训练步的网络调用较少，论文实验中收敛需要更多epoch，重建效果也略低于直接优化UNSURE损失。</p>
+<h4 id="6-扩展到相关噪声与成像逆问题">6. 扩展到相关噪声与成像逆问题
+</h4><p>对于相关高斯噪声：</p>
+\[
+y\mid x\sim\mathcal N(x,\Sigma)
+\]<p>将可能的协方差写入已选定的矩阵基底张成的空间：</p>
+\[
+\Sigma_\eta=\sum_{k=1}^s\eta_k\Psi_k
+\]<p>相应目标为：</p>
+\[
+\min_\theta\max_{\eta\in\mathbb R^s}
+\mathbb E\left[
+\|f_\theta(y)-y\|_2^2
++2\operatorname{tr}(\Sigma_\eta J_{f_\theta}(y))
+\right]
+\]<p>各乘子对应一个期望约束：</p>
+\[
+\mathbb E\operatorname{tr}(\Psi_kJ_f(y))=0,
+\qquad k=1,\ldots,s
+\]<p>基底描述允许的噪声相关结构，未知系数通过优化处理。基底范围扩大，能够覆盖的噪声模型增多，同时增加估计器受到的约束。真实协方差属于所选空间，是这一推广的重要条件。</p>
+<p>文章还处理Poisson-Gaussian模型：</p>
+\[
+y_i=\gamma z_i+\sigma\epsilon_i,
+\qquad z_i\sim\operatorname{Poisson}(x_i/\gamma)
+\]<p>它满足 \(\operatorname{Var}(y_i\mid x_i)=\gamma x_i+\sigma^2\)，因此需要同时处理随信号变化的噪声项和固定方差项。PG-UNSURE加入普通散度与观测加权导数的期望约束。该版本在附录C中使用Taylor近似并舍去二阶导数项，适用精度需要结合这一近似理解。</p>
+<p>对于 \(y=Ax+\epsilon\) 形式的逆问题，文章使用伪逆加权的风险目标学习可观测部分；存在非平凡零空间时，再结合 <strong>Equivariant Imaging，等变成像</strong> 的旋转等几何一致性约束，为缺失信息提供额外学习信号。</p>
+<hr>
+<h3 id="实验-1">实验
+</h3><h4 id="未知强度的高斯去噪">未知强度的高斯去噪
+</h4><p>MNIST实验测试 \(\sigma\in\{0.05,0.1,0.2,0.3,0.4,0.5\}\)，各方法采用相同UNet结构。原文Figure 3展示了乘子的收敛、直接损失与score方案的训练过程，以及不同噪声水平下的PSNR。</p>
+<p>UNSURE在缺少真实噪声强度输入的条件下接近监督结果；SURE和R2R对指定噪声水平的误差较敏感。直接UNSURE损失取得较好的结果，后续主要实验采用这一实现。</p>
+<h4 id="相关高斯噪声">相关高斯噪声
+</h4><p>DIV2K实验将高斯噪声经过3×3均值模糊核，产生空间相关噪声。训练使用900个128×128带噪图像块，测试使用完整验证图像。原文Table 1报告：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>噪声信息</th>
+					<th style="text-align: right">平均PSNR（dB）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Noise2Void</td>
+					<td>盲点自监督</td>
+					<td style="text-align: right">19.09</td>
+			</tr>
+			<tr>
+					<td>Neighbor2Neighbor</td>
+					<td>邻域构造自监督</td>
+					<td style="text-align: right">23.61</td>
+			</tr>
+			<tr>
+					<td>UNSURE</td>
+					<td>协方差未知，提供相关结构范围</td>
+					<td style="text-align: right">28.72</td>
+			</tr>
+			<tr>
+					<td>SURE</td>
+					<td>协方差已知</td>
+					<td style="text-align: right">29.77</td>
+			</tr>
+			<tr>
+					<td>监督学习</td>
+					<td>干净参考</td>
+					<td style="text-align: right">29.91</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>UNSURE在该相关噪声设置中较Neighbor2Neighbor提高5.11 dB，与已知协方差的SURE相差1.05 dB。表中的盲点基线为Noise2Void，不能将该数值直接当作Noise2Self原文实现的结果。</p>
+<p>原文Table 2进一步比较噪声相关模型的范围：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>采用的核尺寸</th>
+					<th style="text-align: right">1×1</th>
+					<th style="text-align: right">3×3</th>
+					<th style="text-align: right">5×5</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>平均PSNR（dB）</td>
+					<td style="text-align: right">23.62</td>
+					<td style="text-align: right">28.72</td>
+					<td style="text-align: right">27.38</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>忽略相关结构的1×1设置损失明显，扩大到5×5后仍保留较好的性能。准确范围与适度扩大的范围之间存在精度差异，体现了模型覆盖能力与约束数量之间的取舍。</p>
+<h4 id="ct与mri重建">CT与MRI重建
+</h4><p>CT实验使用LIDC数据集中的128×128图像、128个等间隔投影角，并在测量中加入Poisson-Gaussian噪声，参数为 \(\gamma=\sigma=0.005\)。原文Table 3的结果为：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">平均PSNR（dB）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Noise2Inverse</td>
+					<td style="text-align: right">32.54</td>
+			</tr>
+			<tr>
+					<td>PG-UNSURE，未知噪声参数</td>
+					<td style="text-align: right">33.31</td>
+			</tr>
+			<tr>
+					<td>PG-SURE，已知噪声参数</td>
+					<td style="text-align: right">33.76</td>
+			</tr>
+			<tr>
+					<td>监督学习</td>
+					<td style="text-align: right">34.67</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>MRI实验采用FastMRI单线圈2倍加速采样，训练与测试分别使用900和100张图像，在k空间加入 \(\sigma=0.03\) 的高斯噪声。原文Table 4报告：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: right">平均PSNR（dB）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>交叉验证 + EI</td>
+					<td style="text-align: right">33.25</td>
+			</tr>
+			<tr>
+					<td>EI，按无噪声处理</td>
+					<td style="text-align: right">34.32</td>
+			</tr>
+			<tr>
+					<td>UNSURE + EI，未知噪声水平</td>
+					<td style="text-align: right">35.73</td>
+			</tr>
+			<tr>
+					<td>SURE + EI，错误设置 \(\sigma=0.05\)</td>
+					<td style="text-align: right">28.05</td>
+			</tr>
+			<tr>
+					<td>监督学习</td>
+					<td style="text-align: right">36.63</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>UNSURE与EI结合后较交叉验证提高2.48 dB，与监督学习相差0.90 dB。SURE这一行使用了刻意偏离真实值的噪声参数，结果主要展示参数误设的影响。MRI重建中的缺失信息还由EI提供约束，性能应归于这一组合配置。</p>
+<hr>
+<h3 id="阅读思考-1">阅读思考
+</h3><p><strong>UNSURE把不同自监督方法放入了统一的导数约束视角。</strong> 已知噪声方差时，可以直接使用SURE风险修正；未知共享方差时，可以约束总体期望散度；更复杂的未知噪声结构则对应更多期望导数约束。</p>
+<p><strong>期望约束为当前位置的信息保留了使用空间。</strong> 模型可以响应目标像素的输入，同时通过整个分布上的平衡满足自监督条件。这是它相对逐点盲点约束更具表达能力的原因。</p>
+<p><strong>未知噪声水平始终伴随可辨识性问题。</strong> 闭式解中的 \(\hat\eta\) 同时受到观测分布与信号可恢复性的影响。自然图像的结构性有利于获得接近监督估计的结果，独立高斯信号的退化例子则明确了理论边界。</p>
+<p><strong>公式中的期望依赖数据分布。</strong> 有限batch只能近似期望零散度，训练还涉及乘子的上升更新和随机散度估计，因此收敛稳定性值得关注。基础标量模型假设共享的固定噪声水平，样本间噪声变化或复杂空间相关性需要对应的扩展建模。</p>
+<hr>
+<h2 id="两篇文章的联系">两篇文章的联系
+</h2><p>在独立同方差高斯噪声条件下，两篇都可以从SURE风险恒等式理解：</p>
+\[
+\mathcal R(f)
+=\mathcal L_{\mathrm{data}}(f)
++2\sigma^2\mathbb E\operatorname{div}f(y)
+-n\sigma^2
+\]<p>Noise2Self的单像素盲点约束使每个自偏导数为零，UNSURE使总散度的期望为零。这两种约束都消去了期望风险中的未知导数修正项，允许仅用带噪残差指导学习。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>基础噪声条件</th>
+					<th>对估计器的要求</th>
+					<th>目标位置观测的利用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Noise2Self</td>
+					<td>无偏观测，噪声在所选分区间条件独立</td>
+					<td>输出块由补集观测预测</td>
+					<td>严格不变形式留出目标块</td>
+			</tr>
+			<tr>
+					<td>SURE</td>
+					<td>已知高斯噪声方差；相关情形需已知协方差</td>
+					<td>满足Stein恒等式的正则条件</td>
+					<td>可以使用完整观测</td>
+			</tr>
+			<tr>
+					<td>UNSURE，标量版本</td>
+					<td>独立同方差高斯噪声，共享方差未知</td>
+					<td>期望散度为零</td>
+					<td>在总体约束下使用完整观测</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>Noise2Self的优势在于对具体噪声分布要求较少，并提供清晰的分块自监督机制；UNSURE利用更具体的噪声结构知识，放宽估计器限制。选择方法时，需要同时考虑采集噪声的独立性、噪声参数的已知程度，以及信号能够由其他位置预测的程度。</p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">自监督学习</a>
+        
+            <a href="/tags/%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA/">图像去噪</a>
+        
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside>
+    <h2 class="section-title"></h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB17/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读17</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBgraphcpd/">
+        
+
+        <div class="article-details">
+            <h2 class="article-title">论文阅读：GraphCPD</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读十五" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_3cebe784583ead6e.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_3cebe784583ead6e.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E5%8D%81%E4%BA%94/cover_hu_8491e86c8bc2ef64.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #3a3a2980 0%, #b9bfd5C0 100%);">
+            <h2 class="article-title">论文阅读十五</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读14" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_bb75b1b267b62144.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_bb75b1b267b62144.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB14/cover_hu_60b485cb7bdeb561.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #c0c1cc80 0%, #403238C0 100%);">
+            <h2 class="article-title">论文阅读14</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="has-image">
+    <a href="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/">
+        
+        <div class="article-image">
+            <img alt="Featured image of post 论文阅读13" height="150" loading="lazy" src="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_ab5903c07e8cca7b.jpg" srcset="/post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_ab5903c07e8cca7b.jpg 1x, /post/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB13/cover_hu_bb61a31521dd77c9.jpg 2x" width="250">
+
+        </div>
+        
+
+        <div class="article-details"style="background: linear-gradient(0deg, #3b5c9380 0%, #313645C0 100%);">
+            <h2 class="article-title">论文阅读13</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 0Ishtar0
+    </section>
+    
+    <section class="powerby">
+         <br />
+        
+    </section>
+</footer>
+
+
+    
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+    
+
+            </main>
+        </div>
+        
+<script type="text/javascript" src="/ts/main.a09d4331ced29e6748a24e8d263cb98f725b5d6e3f4570f34836e36669e62e09.js" defer></script>
+
+
+    </body>
+</html>
